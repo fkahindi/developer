@@ -112,7 +112,7 @@ header, footer{
 	text-decoration:underline;
 	color:white;
 }
-.settings {
+.settings{
     position: absolute;
     display: inline-block;
 }
@@ -166,7 +166,6 @@ main h1, h2, h3{
 	padding:10px 5px;
 	text-align:left;
 	text-shadow: 3px 6px 2px rgba(0, 0, 0, .3);
-	
 }
 main h1{
 	font-size:100%;
@@ -223,9 +222,7 @@ Extra Small devices (Phones 600px and down)
 	clear:both;
 	*zoom:1;
 } 
-main{
-	padding:0 10px;
-}
+
 /* 
 ===================================================
 Header
@@ -365,6 +362,16 @@ section, aside{
 	padding:5px;
 	
 }
+main{
+	padding:0 10px;
+}
+main h1, h2, h3{
+	font-family: sans-serif;
+	font-weight:bolder;
+	padding:10px 5px;
+	text-align:left;
+	text-shadow: 3px 6px 2px rgba(0, 0, 0, .3);
+}
 /* 
 --------------------------------------------------
 FOOTER SECTION
@@ -372,7 +379,6 @@ FOOTER SECTION
 */
 
 footer{
-	
 	width:100%;
 	min-height:40px;
 	font-size:12px;
@@ -381,13 +387,13 @@ footer{
 }
 footer div span{
 	float:none;
-	display:inline-block;	
+	display:inline-block;
 }
-footer span:first-child{
+footer div span:first-child{
 	padding-bottom:5px;
 }
 footer li{
-	display:inline-table
+	display:inline-table;
 }
 footer a{
 	color:black;
@@ -464,6 +470,7 @@ header{
 }
 .login-bar span{
 	color:rgba(240, 256,40,.3);
+	
 }
 .image-photo{
 	height:25px;
@@ -684,7 +691,7 @@ nav a:hover{
 	color:rgba(200,200,200,0.7);
 }
 footer li{
-	display:inline-table
+	display:inline-table;
 }
 .login-bar span{
 	color:rgba(240, 256,40,.3);
@@ -722,17 +729,10 @@ CLEARFIX
 PAGE GRID
 ==========================================
 */
-.flex-container{
-	display:flex;
-	flex-direction: row;
-	justify-content:center;
-	align-items:center;
-}
 .col-1-5,
 .col-2-5,
 .col-3-5,
 .col-4-5{
-	float:left;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -753,9 +753,8 @@ main{
 }
 
 footer{
-	
 	height:40px;
-	padding:5px ;
+	padding:5px 100px;
 }
 /*
 ===========================================
@@ -880,7 +879,7 @@ nav a:hover{
 	color:rgba(200,200,200,0.7);
 }
 footer li{
-	display:inline-table
+	display:inline-table;
 }
 ul span{
 	color:rgb(200,200,200);
@@ -1066,7 +1065,7 @@ nav a:hover{
 	color:rgba(200,200,200,0.7);
 }
 footer li{
-	display:inline-table
+	display:inline-table;
 }
 ul span{
 	color:rgb(200,200,200);

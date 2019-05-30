@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-
+include __DIR__ . '/../includes/loginStatus.php';
  ?>
 <!doctype html>
 <html lang="en">
@@ -12,20 +12,22 @@ session_start();
 </head>
 <body>
 	<h4 class="errorMsg"><?php echo $_SESSION['fullname']; ?>, you are about to change your password. </h4>
-	<p>Please, fill out this form to reset your password.</p>
+	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
+	<p class="form-p">Passwords must be at least eight characters.</p>
+
 	<div id="reset">
-	<h2>Reset Password</h2>
+	<h2>Change Password</h2>
 	
 		<form method="POST" action="../includes/processFormAuthentication-Test.php">
-			<label for="old_password">Old Password:</label>
+			<label for="old_password">Old Password:<span class="red"> &#42;</span></label>
 			 <input type="password" name="old_password" autocomplete="off" required>
 			<span class="errorMsg"><?php echo (!empty($errors['old_password'])? $errors['old_password'] :'');?></span>
 						 
-			<label for="new_password">New Password:</label>
+			<label for="new_password">New Password:<span class="red"> &#42;</span></label>
 			 <input type="password" name="new_password" autocomplete="off" required>
 			<span class="errorMsg"><?php echo (!empty($errors['new_password'])? $errors['new_password'] :'');?></span>
 			
-			<label for="confirm_new_password">Confirm New Password:</label>
+			<label for="confirm_new_password">Confirm New Password:<span class="red"> &#42;</span></label>
 			 <input type="password" name="confirm_new_password" autocomplete="off" required>
 			<span class="errorMsg"><?php echo (!empty($errors['confirm_new_password'])? $errors['confirm_new_password'] :'');?></span>
 					

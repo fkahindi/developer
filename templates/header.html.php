@@ -26,7 +26,7 @@
 					<ul class="settings-content">
 						<li><a href="/spexproject/templates/change-password.html.php">Change password </a> 
 						</li>
-						<li><a href="/spexproject/templates/imageupload.html.php">Add Photo</a></li>
+						<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
 					</ul>
 				</ul>						
 			</span>':  

@@ -16,17 +16,25 @@ $valid = true;
 
 if(isset($_POST['signup'])){
 	
+	//Assign variables
+	$fullname = $_POST['fullname'];
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	$confirm_password = $_POST['confirm_password'];
 	
 	//Incase any field is left blank
 	if(empty($_POST['fullname'])){
 		$valid = false;
 		$errors['fullname'] = 'Name cannot be blank';
 	}else{
-		$fullname = test_input($_POST['fullname']);
 		
+		$fullname = test_input($_POST['fullname']);
+				
 		//Check if name contain only aphabet and whitespaces
-		if (!preg_match("/^[a-zA-Z ]*$/",$fullname)) {
-		$errors['fullname'] = "Only letters and white space allowed in names";  
+		if (!preg_match("/^[a-zA-Z ]*$/",$fullname)){
+			
+			$valid = false;
+			$errors['fullname'] = "Only letters and white space allowed in names";  
 		} 
 	}
 	
@@ -34,8 +42,11 @@ if(isset($_POST['signup'])){
 		$valid = false;
 		$errors['email'] ='Email cannot be blank';
 	}else{
-		$email=trim($_POST['email']);
-		$email = test_input($_POST['email']);
+		
+		//Remove spaces incase they exist
+		$email = trim($_POST['email']);
+		//Remove illegal characters from email
+		$email = filter_var($email, FILTER_SANITIZE_EMAIL);
 		
 		//Check if email address is well formed
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -44,18 +55,31 @@ if(isset($_POST['signup'])){
 		}	
 	}
 
-	if(empty($_POST['password'])){
+	if(!empty($_POST['password'])){
+		
+		$valid = true;
+		$_POST['password'] = trim($_POST['password']);
+		
+		if(strlen($_POST['password'])<8){
+			$valid = false;
+			$errors['password'] ='Password must be atleast 8 characters.';
+		}
+	}else{
 		$valid = false;
-		$errors['password'] ='Enter Password';
+		$errors['password'] ='Password cannot be blank';
 	}
+	
 	if(empty($_POST['confirm_password'])){
+		
 		$valid = false;
-		$errors['confirm_password'] ='Confirm Password';
-	}
-	if($_POST['password'] != $_POST['confirm_password']){
+		$errors['confirm_password'] ='Must confirm Password';
+		
+	}else if($_POST['password'] != $_POST['confirm_password']){
+		
 		$valid = false;
 		$errors['confirm_password'] = 'Passwords did not match';
 	}
+	
 	if(!empty($errors)){
 	
 		include __DIR__ .'/../templates/signup.html.php';
@@ -63,7 +87,7 @@ if(isset($_POST['signup'])){
 	}else{
 		try{			
 			$membersTable = new DatabaseTable($pdo, 'members', 'email');
-			$query = $membersTable->selectRecords($_POST['email']);
+			$query = $membersTable->selectRecords($email);
 			
 			if($query->rowCount()==1){
 				$valid = false;
@@ -73,7 +97,6 @@ if(isset($_POST['signup'])){
 				
 			}else{
 				$valid = true;
-				$email = $_POST['email'];
 			}
 			
 			if($valid){
@@ -82,7 +105,7 @@ if(isset($_POST['signup'])){
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 			
 			$fields = [
-				'fullname'=> $_POST['fullname'],
+				'fullname'=> $fullname,
 				'email' => $email,
 				'password' => $password,
 				'date_reg' => $date_reg
@@ -110,18 +133,23 @@ if(isset($_POST['login'])){
 	if(empty($_POST['email'])){
 		$valid = false;
 		$errors['email'] = 'You did not enter your email';
-	}else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+	}else{
+		//Remove illegal characters from email
+		$email = filter_var($email, FILTER_SANITIZE_EMAIL);
+	} 
+		
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$valid = false;
 		$errors['email'] = 'Invalid email';
 	}else{
-		$email = test_input($_POST['email']);
-
+		$valid = true;
 	}
 	
 	if(empty($_POST['password'])){
 		$valid = false;
 		$errors['password'] = 'You did not type a password';
 	}else{
+		$valid = true;
 		$password =trim($_POST['password']);
 	}
 	if(!$valid){
@@ -162,7 +190,7 @@ if(isset($_POST['login'])){
 					//Redirect to welcome page
 					header('Location: ../templates/welcome.html.php');	
 				}else{
-					//Display error password
+					//Display password error 
 					
 					$errors['password'] ='Incorrect email or password';
 												
@@ -188,7 +216,7 @@ if(isset($_POST['login'])){
 }
 	
 if(isset($_POST['change_password'])){
-	
+
 	$old_password = $_POST['old_password'];
 	$new_password = $_POST['new_password'];
 	$confirm_new_password = $_POST['confirm_new_password'];
@@ -203,16 +231,20 @@ if(isset($_POST['change_password'])){
 	}else if(empty($confirm_new_password)){
 		$valid = false;
 		$errors['confirm_new_password'] = 'Confirm your new password';
+	}else{
+		$new_password = trim($new_password);
+		$confirm_new_password = trim('confirm_new_password');
+	}
+	if(strlen($new_password)<6){
+		$valid = false;
+		$errors['new_password'] ='Password must be atleast 6 characters.';
 	}else if($_POST['new_password'] !== $_POST['confirm_new_password']){
 		$valid = false;
 		$errors['confirm_new_password'] ='Your new password did not match';
 	}else{
 		$valid = true;
-		$old_password = trim('old_password');
-		$new_password = trim($_POST['new_password']);
-		$confirm_new_password = trim('confirm_new_password');
 	}
-			
+		
 	if(!$valid){
 		include __DIR__ . '/../templates/change-password.html.php';
 	}else{
@@ -293,7 +325,6 @@ if(isset($_POST['recover_password'])){
 				$errors['email'] = 'Invalid email';
 			}else{
 				$valid = true;
-					
 			}
 	}		
 	if(!$valid){
@@ -501,7 +532,7 @@ if(isset($_POST['image-upload'])){
 			$file_pieces = explode('.',$_FILES['fileToUpload']['name']);
 			$extension = $file_pieces[1];
 			
-			//To ensure filename uniqueness combine name with user id, a sufix -0 and the extension name
+			//To ensure filename uniqueness combine name with user id, add sufix -0 and the extension name
 			$target_file = strtolower($name .'-0'. $id .'.'.$extension);
 			
 			if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'],'../resources/photos/'.$target_file)){
@@ -541,7 +572,7 @@ if(isset($_POST['image-upload'])){
 		
 	function test_input($data){
 	
-	$data=stripslashes($data);
-	$data=htmlspecialchars($data, ENT_QUOTES);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data, ENT_QUOTES);
 	return $data;
 	}
