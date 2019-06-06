@@ -7,7 +7,7 @@ if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin']!= true){
 		if(!empty($_SESSION['email'])){
 			include __DIR__ . '/DatabaseConnection.php';
 			
-			$sql = 'SELECT * FROM `members` WHERE email = :email';
+			$sql = 'SELECT * FROM `users` WHERE email = :email';
 			
 			$stmt=$pdo->prepare($sql);
 			$stmt->bindValue(':email', $_SESSION['email']);

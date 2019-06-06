@@ -5,5 +5,5 @@
 	<li><a href="/spexproject/resources/articles/datascience.php"> Data Science</a></li> <span>&#124;</span>
 	<li><a href="/spexproject/resources/articles/developer.php"> Developer</a></li> <span>&#124;</span>
 	<li><a href="#"> Contact Us</a></li> <span>&#124;</span>
-	<li><a href="/spexproject/members.php"> Members</a></li>
+	<li><a href="/spexproject/includes/members.php"> Members</a></li>
 </ul>

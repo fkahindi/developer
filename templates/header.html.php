@@ -7,7 +7,7 @@
 	<div class="nav-bar dropdown">
 	<button class="dropdown-button">|||</button>
 	<nav class="dropdown-content">
-		<?php include  __DIR__ .'/nav.html.php'; ?>	
+		<?php require_once __DIR__ .'/nav.html.php'; ?>	
 
 	</nav>
 	</div>	
@@ -15,11 +15,11 @@
 	<div class="login-bar">
 		<div class="group">
 			<div class="account-photo-box">
-			<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true)? '<span> <img src="' .$_SESSION['photo'].'" alt="" class="image-photo"></span>':'';?>
+			<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true)? '<span> <img src="' .$_SESSION['profile_photo'].'" alt="" class="image-photo"></span>':'';?>
 			</div>
 			<div class="login-signup ">
 			<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true)? 
-			'<a href="/spexproject/includes/logout.php">Log out </a> <span> &#124; </span>
+			'<a href="/spexproject/includes/logout.php">Log out </a> <span> &#124; </span> &nbsp; 
 			<span class="settings">
 				<ul>
 					<li><a href="#">Settings</a></li>
@@ -35,7 +35,15 @@
 			</div>
 		</div>
 		<div class="special">
-		<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true)? $_SESSION['fullname']: ''; ?>			
+		<?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true){
+			if(!empty($_SESSION['username'])){
+				echo $_SESSION['username'];
+			}else{
+				echo $_SESSION['fullname'];
+			}
+		}
+		?>
+			
 		</div>
 	</div>	
 </div>

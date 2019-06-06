@@ -19,18 +19,45 @@ class DatabaseTable
 		return $query;
 	}
 	
-	public function selectRecords($value) {
+	public function selectRecords($value1,$value2) {
 		
 		$sql = 'SELECT * FROM `'.$this->table .'`
-		WHERE `'.$this->keyfield .'` = :value';
+		WHERE `'.$this->keyfield .'` = :value1 OR `'
+		.$this->keyfield .'` = :value2';
 		
-		$parameters =['value'=> $value];
+		$parameters =['value1'=> $value1,
+		'value2'=> $value2
+		];
 
 		$query = $this->query($sql, $parameters);
 		
 		return $query;
 	}
 
+	public function selectMatchRecords($value1, $value2){
+		
+		$sql = 'SELECT * FROM `'.$this->table .'`
+		WHERE `'.$this->keyfield .'` = :value1 AND `'
+		.$this->keyfield .'` = :value2';
+		
+		$parameters =['value1'=> $value1,
+		'value2'=> $value2
+		];
+
+		$query = $this->query($sql, $parameters);
+		
+		return $query;
+		
+	}
+	public function selectCountAllRecords(){
+		
+		$sql = 'SELECT COUNT(*) FROM `'.$this->table .'`';
+		
+		
+		$query = $this->query($sql);
+		
+		return $query;
+	}
 	public function selectPasswordTemp($pdo, $email, $token){
 		$sql= 'SELECT * FROM `password_reset_temp`
 		WHERE `email` = :email $$ `token` =:key';

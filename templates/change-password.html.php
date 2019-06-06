@@ -11,7 +11,7 @@ include __DIR__ . '/../includes/loginStatus.php';
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<h4 class="errorMsg"><?php echo $_SESSION['fullname']; ?>, you are about to change your password. </h4>
+	<h4 class="errorMsg">You are about to change your password. </h4>
 	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
 	<p class="form-p">Passwords must be at least eight characters.</p>
 

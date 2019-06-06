@@ -14,10 +14,17 @@
 		<form action="../includes/processFormAuthentication-Test.php" method ="POST" name="signup" onsubmit ="return validateFormOnSubmit(this)">
 		
 			<div class="group-form">
-				<label for="fullname">Full Name:<span class="red"> &#42;</span></label>
+				<label for="fullname">Full Name:</label>
 				<input  name="fullname" id="fullname" class="form-control" type="text" 
 				value="<?php echo (empty($fullname)? '': $fullname); ?>" autocomplete="off" >
 				<span class="errorMsg"> <?php echo(!empty($errors['fullname']) ? $errors['fullname'] : ''); ?></span>
+			</div>
+			
+			<div class="group-form">
+				<label for="username">Username:<span class="red"> &#42;</span></label>
+				<input  name="username" id="username" class="form-control" type="text" 
+				value="<?php echo (empty($username)? '': $username); ?>" autocomplete="off" >
+				<span class="errorMsg"> <?php echo(!empty($errors['username']) ? $errors['username'] : ''); ?></span>
 			</div>
 			
 			<div class="group-form">
@@ -42,7 +49,7 @@
 		</form>
 	</div>
 	<div class="section">
-		<p>Aready have an account? <a href="/spexproject/templates/login.html.php">Log in here</a>.</p>
+		<p>Aready have an account? <a href="/spexproject/templates/login.html.php">Log in </a>.</p>
 	</div>
 </body>
 </html>

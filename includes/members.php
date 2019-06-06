@@ -1,11 +1,6 @@
 <?php
-session_start();
 
-include __DIR__ . '/includes/loginStatus.php';
-
-include __DIR__ .'/templates/layout.html.php';
-
-include __DIR__ .'/includes/DatabaseConnection.php';
+include __DIR__ .'/DatabaseConnection.php';
 
 
 try{
@@ -14,14 +9,23 @@ try{
 	$result=$pdo->query($sql);
 	
 	
+	while($rows=$result->fetchAll()){
+		$output .= $rows['fullname'];
+		$output .= $rows['photo'];
+		$output .= $rows['email'];
+	}
 	
+	
+
 	$title ='Members List';
 	
 	ob_start();
 	
-	include __DIR__ .'/templates/members.html.php';
+	include __DIR__ .'/../templates/members.html.php';
 	
 	$output = ob_get_clean();
+	
+	
 }
 catch(PDOException $e){
 	$title ='An error has occured';
@@ -30,3 +34,4 @@ catch(PDOException $e){
 }
 
 
+include __DIR__ .'/../templates/layout.html.php';
