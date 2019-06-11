@@ -40,8 +40,7 @@ margin:0 auto;
 	color:red;
 }
 .errorMsg{
-	color: #F87217;
-	
+	color: #D83D5A;	
 	}
 .successMsg{
  color: #6B8E23;
@@ -53,7 +52,32 @@ h3,h4,p{
 .form-p{
 	line-height: 0.5;
 }
-
+.form_error span{
+	width: 80%;
+	height: 35px;
+	margin: 3px 0;
+	font-size: 1.1em;
+	color: #D83D5A;
+}
+.form_error input {
+  border: 1px solid #D83D5A;
+  background:rgba(256,256,0,0.3);
+}
+.form_success span {
+  width: 80%;
+  height: 35px;
+  margin: 3px 0;
+  font-size: 1.1em;
+  color: green;
+}
+.form_success input {
+  border: 1px solid green;
+}
+#error_msg {
+  color: red;
+  text-align: center;
+  margin: 10px auto;
+}
 
 @media only screen and (max-width:600px){
 .section,#register,#login, #recover,#reset, #upload{
@@ -74,6 +98,7 @@ form input[type="submit"]{
 	margin-top:15px;
 	margin-bottom: 10px;
 }
+
 .section{
 	margin:15px auto;
 }
@@ -95,6 +120,7 @@ form input[type="submit"]{
 	font-weight:bold;
 	color:black;
 }
+
  }
 @media only screen and (min-width:600px){
  .section,#register,#login, #recover,#reset, #upload{
@@ -139,4 +165,5 @@ form input[type="submit"]{
 	font-weight:bold;
 	color:black;
 }
+
 }

@@ -1,3 +1,4 @@
+<?php include __DIR__ .'/../includes/form_signup_preprocess.php' ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,11 +8,11 @@
 	<style type="text/javascript" src="../resources/js/form.js"></style>
 </head>
 <body>
-	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. Passwords must be at least eight characters.</p>
-	
-	<div id="register">
+	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. Passwords must be at least <strong>8</strong> characters.</p>
+		<div id="error_msg"></div>
+		<div id="register">
 		<h2>Sign Up Here </h2>
-		<form action="../includes/processFormAuthentication-Test.php" method ="POST" name="signup" onsubmit ="return validateFormOnSubmit(this)">
+		<form  method="POST" onsubmit = "" action="../includes/processFormAuthentication-Test.php" name="signup" id="signup_form" >
 		
 			<div class="group-form">
 				<label for="fullname">Full Name:</label>
@@ -23,29 +24,29 @@
 			<div class="group-form">
 				<label for="username">Username:<span class="red"> &#42;</span></label>
 				<input  name="username" id="username" class="form-control" type="text" 
-				value="<?php echo (empty($username)? '': $username); ?>" autocomplete="off" >
+				value="<?php echo (empty($username)? '': $username); ?>" autocomplete="off" required>
 				<span class="errorMsg"> <?php echo(!empty($errors['username']) ? $errors['username'] : ''); ?></span>
 			</div>
 			
 			<div class="group-form">
 				<label for="email"> Email:<span class="red"> &#42;</span></label>
-				<input name="email" id="email" class="form-control" type="text" 
-				 type="email" value="<?php echo(empty($email)? '': $email); ?>" autocomplete="off" >
+				<input name="email" id="email" class="form-control" type="email" 
+				 type="email" value="<?php echo(empty($email)? '': $email); ?>" autocomplete="off" required>
 				<span class="errorMsg"> <?php echo(!empty($errors['email']) ? $errors['email'] : ''); ?> </span>
 			</div>
 
 			<div class="group-form">
 				<label for="password">Password:<span class="red"> &#42;</span></label>
-				<input name="password" id="password" class="form-control" type="password" autocomplete="off" >
-				<span class="errorMsg" ><?php echo(!empty($errors['password']) ? $errors['password'] : ''); ?></span>
+				<input name="password" id="password" class="form-control" type="password" autocomplete="off" required>
+				<span class="errorMsg"><?php echo(!empty($errors['password']) ? $errors['password'] : ''); ?></span>
 			</div>
 			
 			<div class="group-form">
 			<label for="confirm_password">Confirm Password:<span class="red"> &#42;</span></label>
-			<input name="confirm_password" id="confirm_password" class="form-control" type="password" autocomplete="off" >
+			<input name="confirm_password" id="confirm_password" class="form-control" type="password" autocomplete="off" required>
 			<span class="errorMsg"><?php echo(!empty($errors['confirm_password']) ? $errors['confirm_password'] : ''); ?>	</span>
 			</div>
-			<input name="signup"  type="submit" class="button" value="Sign Up">
+			<input name="signup" type="submit" id="submit_btn" class="button" value="Sign Up">
 		</form>
 	</div>
 	<div class="section">
@@ -53,3 +54,6 @@
 	</div>
 </body>
 </html>
+<!-- Scripts -->
+<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
+<script src="/spexproject/resources/js/form_check.js"></script>

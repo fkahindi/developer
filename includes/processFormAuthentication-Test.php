@@ -102,8 +102,7 @@ if(isset($_POST['signup'])){
 				$row = $query->fetch();
 				if($row['username']=== $username){
 					$errors['username'] ='This username already exists';
-				}
-				if($row['email']=== $email){
+				}else if($row['email']=== $email){
 					$errors['email'] = 'This email already exists';
 				}
 								
@@ -201,6 +200,7 @@ if(isset($_POST['login'])){
 					
 					//Store data in session variables
 					$_SESSION['loggedin'] = true;
+					$_SESSION['user_id'] = $user_id;
 					$_SESSION['email'] = $email;
 					$_SESSION['password']= $hashed_password;
 					$_SESSION['fullname'] = $fullname;
@@ -313,8 +313,8 @@ if(isset($_POST['change_password'])){
 				//Set global variables to display on the login form
 				$successMsg ='Update successful.';
 				$loginMsg ='Please, login with your new password';
-				global $successMsg;
-				global $loginMsg;
+				$GLOBALS['successMsg'];
+				$GLOBALS['loginMsg'];
 				
 				//Redirect to login page
 				header('Location: ../templates/login.html.php');

@@ -17,7 +17,7 @@ session_start();
 			<?php include 'best-statistical-software-package.php'; ?>
 			
 			<!--Comments sections  -->
-			<?php include __DIR__ .'/../../includes/layout/comments-layout.php'; ?>
+			<?php include __DIR__ .'/../../comments/layout/comments-layout.php'; ?>
 		</section><!--
 		--><aside class='col-2-5'>
 			

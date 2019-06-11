@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<h3 class="successMsg"><?php echo(!empty($GLOBALS['successMsg'])? $GLOBALS['success_msg'] :'');?></h3>
+	<h3 class="successMsg"><?php echo(!empty($successMsg)? $successMsg :'');?></h3>
 	<p><?php echo(!empty($loginMsg)? $loginMsg :''); ?></p>
 	
 	<div id="login">
