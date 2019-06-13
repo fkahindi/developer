@@ -3,16 +3,21 @@ $('document').ready(function(){
 	let username_state = false;
 	let email_state = false;
 	let password_state = false;
-	let confirm_password_state = false;	
-
+	let confirm_password_state = false;
+/*	
+	let username = $('#username').val();
+	let email = $('#email').val();
+	let password = $('#password').val();
+	let confirm_password = $('#confirm_password').val();
+*/
  $('#username').on('blur', function(){
 	let illegalChars = /\W/; // allow letters, numbers, and underscores
 	let username = $('#username').val();
 	
-	if (username == '') {
-  	username_state = false;
-  	return;
-  }
+	if(username == ''){
+	
+		return;
+	}
   $.ajax({
     url: '/spexproject/includes/form_signup_preprocess.php',
     type: 'post',
@@ -74,7 +79,7 @@ $('document').ready(function(){
 			email_state = false;
 			$('#email').parent().removeClass();
 			$('#email').parent().addClass("form_error");
-			$('#email').siblings("span").text('Please, enter valid email address');
+			$('#email').siblings("span").text('Please! Enter valid email address');
 		}else if(email.match(illegalChars)){
 			email_state = false;
 			$('#email').parent().removeClass();
@@ -131,9 +136,37 @@ $('document').ready(function(){
  $('#submit_btn').on('click', function(e){
 	
  	if (username_state == false || email_state == false || password_state == false || confirm_password_state == false) {
-		
-		$('#error_msg').text('Fix the errors in the form first');
+		let username = $('#username').val();
+		let email = $('#email').val();
+		let password = $('#password').val();
+		let confirm_password = $('#confirm_password').val();
 		e.preventDefault();
+		$('#error_msg').text('Fix the errors in the form first');
+		if(username == ''){
+			username_state = false;
+			$('#username').parent().removeClass();
+			$('#username').parent().addClass("form_error");
+			$('#username').siblings("span").text('Username is required');
+		}
+		if(email == ''){
+			email_state = false;
+			$('#email').parent().removeClass();
+			$('#email').parent().addClass("form_error");
+			$('#email').siblings("span").text('Email is required');
+		}
+		if(password == ''){
+			password_state = false;
+			$('#password').parent().removeClass();
+			$('#password').parent().addClass("form_error");
+			$('#password').siblings("span").text('Password is required');
+		}
+		if(confirm_password== ''){
+			confirm_password_state = false;
+			$('#confirm_password').parent().removeClass();
+			$('#confirm_password').parent().addClass("form_error");
+			$('#confirm_password').siblings("span").text('Must confirm  password');
+		}
+		
 	}else{
 		return true;
 	}
