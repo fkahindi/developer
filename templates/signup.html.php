@@ -12,7 +12,7 @@
 		<div id="error_msg"></div>
 		<div id="register">
 		<h2>Sign Up Here </h2>
-		<form  method="POST" onsubmit = "" action="../includes/processFormAuthentication-Test.php" name="signup" id="signup_form" >
+		<form  method="POST" action="../includes/processFormAuthentication-Test.php" id="signup_form" >
 		
 			<div class="group-form">
 				<label for="fullname">Full Name:</label>

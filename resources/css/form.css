@@ -54,9 +54,7 @@ h3,h4,p{
 }
 .form_error span{
 	width: 80%;
-	height: 35px;
 	margin: 3px 0;
-	font-size: 1.1em;
 	color: #D83D5A;
 }
 .form_error input {
@@ -65,9 +63,7 @@ h3,h4,p{
 }
 .form_success span {
   width: 80%;
-  height: 35px;
   margin: 3px 0;
-  font-size: 1.1em;
   color: green;
 }
 .form_success input {
@@ -85,7 +81,7 @@ width: 250px;
 padding: 0px 5px; 
 line-height: 16px;
 font-size: 14px; 
-margin: 40px auto 20px auto;
+margin: 30px auto 20px auto;
 
 }
 form input{ 
@@ -120,7 +116,15 @@ form input[type="submit"]{
 	font-weight:bold;
 	color:black;
 }
+.form_error span{
+	height: 20px;
+	font-size: 1em;
+}
 
+.form_success span {
+  height: 20px;
+  font-size: 1em;
+}
  }
 @media only screen and (min-width:600px){
  .section,#register,#login, #recover,#reset, #upload{
@@ -165,5 +169,13 @@ form input[type="submit"]{
 	font-weight:bold;
 	color:black;
 }
+.form_error span{
+	height: 30px;
+	font-size: 1.1em;
+}
 
+.form_success span {
+  height: 30px;
+  font-size: 1.1em;
+}
 }

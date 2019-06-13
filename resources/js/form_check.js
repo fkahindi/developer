@@ -1,12 +1,15 @@
 $('document').ready(function(){
- let username_state = false;
- let email_state = false;
- let password_state = false;
- let confirm_password_state = false;
- 
+	
+	let username_state = false;
+	let email_state = false;
+	let password_state = false;
+	let confirm_password_state = false;	
+
  $('#username').on('blur', function(){
-  let username = $('#username').val();
-  if (username == '') {
+	let illegalChars = /\W/; // allow letters, numbers, and underscores
+	let username = $('#username').val();
+	
+	if (username == '') {
   	username_state = false;
   	return;
   }
@@ -23,12 +26,19 @@ $('document').ready(function(){
       	$('#username').parent().removeClass();
       	$('#username').parent().addClass("form_error");
       	$('#username').siblings("span").text('Sorry... Username already exists');
-      }else if (response == 'not_taken') {
+      }else if(response == 'not_taken') {
       	username_state = true;
       	$('#username').parent().removeClass();
       	$('#username').parent().addClass("form_success");
       	$('#username').siblings("span").text('Username OK');
       }
+	  //---Further username validation---
+		if(username.match(illegalChars)){
+			username_state = false;
+			$('#username').parent().removeClass();
+			$('#username').parent().addClass("form_error");
+			$('#username').siblings("span").text('Sorry...Only letters, number and underscore allowed');
+		}
     }
   });
  });		
@@ -76,7 +86,7 @@ $('document').ready(function(){
  }); 
  
  //----- Validate password
- $('#password').on('blur', function(){
+ $('#password').on('change', function(){
 
  	let password = $('#password').val();
 	let illegalChars = /[\W_]/;  // allow only letters and numbers 
@@ -100,7 +110,7 @@ $('document').ready(function(){
  //--------
  
  //----- Validate comfirm_password
- $('#confirm_password').on('blur', function(){
+ $('#confirm_password').on('change', function(){
 
  	let confirm_password = $('#confirm_password').val();
 	let password = $('#password').val();
@@ -118,17 +128,14 @@ $('document').ready(function(){
  	}
  });
  //--------
- $('#submit_btn').on('click', function(){
- 	let username = $('#username').val();
- 	let email = $('#email').val();
- 	let password = $('#password').val();
-	let confirm_password = $('confirm_password').val();
+ $('#submit_btn').on('click', function(e){
 	
  	if (username_state == false || email_state == false || password_state == false || confirm_password_state == false) {
-	  $('#error_msg').text('Fix the errors in the form first');
-	  form.submit()= false;
+		
+		$('#error_msg').text('Fix the errors in the form first');
+		e.preventDefault();
 	}else{
-		form.submit();
+		return true;
 	}
  });
  //--------
