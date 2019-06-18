@@ -28,6 +28,10 @@ form a,
 	text-decoration:none;
 	color: blue;
 }
+form .form_image{
+	text-align:center;
+	padding:10px;
+}
 .button {
 background-color:#008080;
 border: ridge thin #008080;

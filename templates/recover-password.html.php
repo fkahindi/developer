@@ -11,10 +11,12 @@
 <body>
 	<p>Please fill out this form to recover your password.</p>
 	<div id="recover">
-	<h2>Recover Password</h2>
-	
+		<div class="form_image">
+			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+			<h2>Recover Password</h2>
+		</div>
 		<form method="POST" action="../includes/processFormAuthentication-Test.php">
-			<label for="email">Enter your email:</label>
+			<label for="email">Enter your email address:</label>
 			 <input type="email" name="email" autocomplete="off" required> <span class="errorMsg">
 			 <?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>
 			 

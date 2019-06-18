@@ -4,12 +4,7 @@ $('document').ready(function(){
 	let email_state = false;
 	let password_state = false;
 	let confirm_password_state = false;
-/*	
-	let username = $('#username').val();
-	let email = $('#email').val();
-	let password = $('#password').val();
-	let confirm_password = $('#confirm_password').val();
-*/
+
  $('#username').on('blur', function(){
 	let illegalChars = /\W/; // allow letters, numbers, and underscores
 	let username = $('#username').val();
@@ -94,8 +89,8 @@ $('document').ready(function(){
  $('#password').on('change', function(){
 
  	let password = $('#password').val();
-	let illegalChars = /[\W_]/;  // allow only letters and numbers 
- 	if (password.length<8) {
+	let illegalChars = /\W/;  // allow only letters, numbers or underscore 
+ 	if (password.length<6) {
 		password_state = false;
 		$('#password').parent().removeClass();
 		$('#password').parent().addClass("form_error");
@@ -104,7 +99,7 @@ $('document').ready(function(){
 		password_state = false;
 		$('#password').parent().removeClass();
 		$('#password').parent().addClass("form_error");
-		$('#password').siblings("span").text('Sorry... Only letters and numbers allowed');
+		$('#password').siblings("span").text('Sorry... Only letters, numbers or underscores');
 	}else{
 		password_state = true;
 		$('#password').parent().removeClass();
@@ -120,7 +115,7 @@ $('document').ready(function(){
  	let confirm_password = $('#confirm_password').val();
 	let password = $('#password').val();
 	 
- 	if (confirm_password.length<8 || confirm_password != password) {
+ 	if (confirm_password.length<6 || confirm_password != password) {
 		confirm_password_state = false;
 		$('#confirm_password').parent().removeClass();
 		$('#confirm_password').parent().addClass("form_error");
@@ -140,7 +135,9 @@ $('document').ready(function(){
 		let email = $('#email').val();
 		let password = $('#password').val();
 		let confirm_password = $('#confirm_password').val();
+		
 		e.preventDefault();
+		
 		$('#error_msg').text('Fix the errors in the form first');
 		if(username == ''){
 			username_state = false;
@@ -160,7 +157,7 @@ $('document').ready(function(){
 			$('#password').parent().addClass("form_error");
 			$('#password').siblings("span").text('Password is required');
 		}
-		if(confirm_password== ''){
+		if(confirm_password == ''){
 			confirm_password_state = false;
 			$('#confirm_password').parent().removeClass();
 			$('#confirm_password').parent().addClass("form_error");

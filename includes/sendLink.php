@@ -3,7 +3,7 @@
 
 
 $output='<p>Dear user,</p>';
-$output.='<p>Please click on the following link to reset your password.</p>';
+$output.='<p>Please copy the following link and paste it on a new tab of your browser to reset your password.</p>';
 $output.='<p>---------Spex Solutions----------------------------------------------------</p>';
 $output.='<p><a href="localhost/spexproject/templates/reset-password.html.php?
 key='.$token.'&email='.$email.'&action=reset" target="_blank">

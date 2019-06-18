@@ -16,7 +16,11 @@ include __DIR__ . '/../includes/loginStatus.php';
 	<p class="form-p">Passwords must be at least eight characters.</p>
 
 	<div id="reset">
-	<h2>Change Password</h2>
+		<div class="form_image">
+			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+			<h2>Change Password</h2>
+		</div>
+	
 	
 		<form method="POST" action="../includes/processFormAuthentication-Test.php">
 			<label for="old_password">Old Password:<span class="red"> &#42;</span></label>

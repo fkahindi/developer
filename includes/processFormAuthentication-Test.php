@@ -7,10 +7,11 @@ session_start();
 include __DIR__ .'/../includes/DatabaseConnection.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 
-$fullname = $username = $profile_photo = $email = $password = $confirm_password = $new_password = $old_password ='';
+$fullname = $username = $profile_photo = $email = $password = $confirm_password = $new_password = $old_password = $confirm_new_password ='';
 
 $errors =[];
 $valid = true;
+$pattern = "/^[a-zA-Z_0-9]*$/"; // Matches letters, numbers and the underscore
 
 //This section handles user sign ups (user registration)
 
@@ -38,7 +39,7 @@ if(isset($_POST['signup'])){
 		$username = trim($username);
 				
 		//Check if name contain only aphabet, numbers and underscore
-		if (!preg_match("/^[a-zA-Z_0-9]*$/",$username)){
+		if (!preg_match($pattern,$username)){
 			
 			$valid = false;
 			$errors['username'] = "Only alpha-numeric and underscore allowed in username";  
@@ -67,9 +68,12 @@ if(isset($_POST['signup'])){
 		$valid = true;
 		$_POST['password'] = trim($_POST['password']);
 		
-		if(strlen($_POST['password'])<8){
+		if(!preg_match($pattern, $_POST['password'])){
 			$valid = false;
-			$errors['password'] ='Password must be atleast 8 characters.';
+			$errors['password'] ='Only letters, numbers or underscore allowed.';
+		}else if(strlen($_POST['password'])<6){
+			$valid = false;
+			$errors['password'] ='Password must be atleast 6 characters.';
 		}
 	}else{
 		$valid = false;
@@ -160,8 +164,7 @@ if(isset($_POST['login'])){
 		}
 	} 
 		
-	
-	
+		
 	if(empty($_POST['password'])){
 		$valid = false;
 		$errors['password'] = 'You did not type a password';
@@ -175,9 +178,9 @@ if(isset($_POST['login'])){
 		
 		try{
 						
-			$membersTable = new DatabaseTable($pdo,'users', 'email');
+			$usersTable = new DatabaseTable($pdo,'users', 'email');
 			
-			$query = $membersTable->selectRecords($email,$username);
+			$query = $usersTable->selectRecords($email,$username);
 				
 			//Check if records exists in the database
 			if($query->rowCount()==1){
@@ -241,6 +244,7 @@ if(isset($_POST['change_password'])){
 	$new_password = $_POST['new_password'];
 	$confirm_new_password = $_POST['confirm_new_password'];
 	
+	
 	//If loggedin validate form
 	if(empty($_POST['old_password'])){
 		$valid = false;
@@ -255,9 +259,13 @@ if(isset($_POST['change_password'])){
 		$new_password = trim($new_password);
 		$confirm_new_password = trim('confirm_new_password');
 	}
-	if(strlen($new_password)<8){
+	
+	if(!preg_match($pattern, $new_password)){
 		$valid = false;
-		$errors['new_password'] ='Password must be atleast 8 characters.';
+		$errors['new_password'] ='Only letters, numbers or underscore allowed.';
+	}else if(strlen($new_password)<6){
+		$valid = false;
+		$errors['new_password'] ='Password must be atleast 6 characters.';
 	}else if($_POST['new_password'] !== $_POST['confirm_new_password']){
 		$valid = false;
 		$errors['confirm_new_password'] ='Your new password did not match';
@@ -270,7 +278,6 @@ if(isset($_POST['change_password'])){
 	}else{
 		
 		try{
-			
 			$membersTable = new DatabaseTable($pdo,'users', 'email');
 			$query = $membersTable->selectRecords($_SESSION['email'],$_SESSION['username']);
 			
@@ -290,6 +297,7 @@ if(isset($_POST['change_password'])){
 					$valid = false;
 					$errors['old_password'] = 'Password is incorrect';
 					
+					
 					include __DIR__ . '/../templates/change-password.html.php';		
 				}
 				
@@ -306,19 +314,17 @@ if(isset($_POST['change_password'])){
 				
 				$fields =['password'=> $new_password];
 				
-				$membersTable->update($fields);
+				$sql=$membersTable->updateRecords($fields);
 				
 				session_destroy();
-				
+			
 				//Set global variables to display on the login form
-				$successMsg ='Update successful.';
-				$loginMsg ='Please, login with your new password';
-				$GLOBALS['successMsg'];
-				$GLOBALS['loginMsg'];
+				
+				$GLOBALS['successMsg'] = 'Update successful.';
+				$GLOBALS['loginMsg'] = 'Please, login with your new password';
 				
 				//Redirect to login page
-				header('Location: ../templates/login.html.php');
-			
+				header('Location: ../templates/login.html.php');			
 			}
 		}catch(PDOException $e){
 			
@@ -398,85 +404,88 @@ if(isset($_POST['recover_password'])){
 }
 	
 if(isset($_POST['reset_password'])){	
-	$new_password = $_POST['new_password'];
-	$confirm_new_password = $_POST['confirm_new_password'];
-	$email = filter_input(INPUT_GET, 'email');
-	$token = filter_input(INPUT_GET, 'key');
+
+	$email = $_POST['email'];
+	$token = $_POST['token'];
 	
-	if(empty(new_password)){
-		$valid = false;
-		$errors['new_password'] = 'Type your new password';
-	}else if(empty($confirm_new_password)){
-		$valid = false;
-		$errors['confirm_new_password'] = 'Confirm your new password';
-	}else{
+	if(!empty($_POST['new_password'])){
+		$valid = true;
 		$new_password = trim($_POST['new_password']);
+		
+		if(!preg_match($pattern,$new_password)){
+			$valid = false;
+			$errors['new_password'] ='Only letter, numbers or underscore allowed.';
+		}else if(strlen($new_password)<6){
+			$valid = false;
+			$errors['new_password'] ='Password must be atleast 6 characters.';
+		}		
+	}else{
+		$valid = false;
+		$errors['new_password'] = 'Password cannot be blank.';
 	}
 	
-	if(strlen($new_password)<8){
+	if(empty($_POST['confirm_new_password'])){
 		$valid = false;
-		$errors['new_password'] ='Password must be atleast 8 characters.';
+		$errors['confirm_new_password'] = 'Confirm your new password';
 		
-	}else if($new_password !== $confirm_new_password){
+	}else if($_POST['confirm_new_password'] !== $new_password){
 		$valid = false;
-		$errors['confirm_new_password'] ='Your new password did not match';
+		$errors['confirm_new_password'] ='Your passwords did not match';
 		
 	}else{
 		$valid = true;
 	}
 	
-			
+	//If everything is OK and valid is true 
 	if($valid){
 		
 		try{
 			
-			if(isset($_GET['key']) && isset($_GET['email']) && isset($_GET['action'])){	
-				$token = $_GET['key'];
-				$email = $_GET['email'];
-				$curDate = date('Y-m-d H:i:s');
-				$new_password = $_POST['new_password'];
-				
-				$selectPasswordTemp = selectPasswordTemp($pdo, $email, $token);
-				
-				if(!empty($selectPasswordTemp->rowCount)){
-					$expDateTimestamp = strtotime('expDate');
-					$curDateTimestamp = strtotime($curDate);
+			$curDate = date('Y-m-d H:i:s');
 					
-					if((date_diff($expDateTimestamp, $curDateTimestamp)<=86400)){
-						
-						$valid = true;
-						deleteToken($pdo, $email);
-						
-					}else{
-						
-						echo 'The token expired';
-					}
-				}else{
-					
-					echo 'The link din\'t work, please try again';
-				}
-				
-				if($valid){
-					$new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-					$email = $_GET['email'];
-					$new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+			$selectEmailToken = new DatabaseTable ($pdo, 'password_reset_temp', 'token');
+			$sql = $selectEmailToken->selectRecords($token, $email);
 			
-					$update = updatePassword($pdo, $new_password, $email);
+			if(!empty($sql->rowCount())){
+				
+				$row = $sql->fetch();
+				$expDateTimestamp = strtotime($row['expDate']);
+				$curDateTimestamp = strtotime($curDate);
+				
+				if(($curDateTimestamp - $expDateTimestamp)<=86400){
+														
+					$deleteToken = new DatabaseTable($pdo,'password_reset_temp', 'email');
+					$deleteToken->deleteRecords($email);
+					
+					$new_password = password_hash($new_password, PASSWORD_DEFAULT);
+					$_SESSION['email'] = $_POST['email'];
+					
+					$updatePassword = new DatabaseTable($pdo, 'users', 'email');
+					
+					$fields = ['password'=> $new_password];
+					
+					$updatePassword->updateRecords($fields);
 					
 					session_destroy();
 					
 					//Redirect to login page
 					$successMsg ='You have changed your password.';
 					$loginMsg ='Please, login with your new password';
-					global $successMsg;
-					global $loginMsg;
-					
+									
 					header('Location: ../templates/login.html.php');
-							
+								
 				}else{
-							echo 'Password was not changed, please try again';
-				}	
-			}	
+					//$valid = false;
+					echo 'The token expired';
+					exit();
+				}
+			
+			}else{
+				//$valid = false;
+				echo 'Token was not found, please try again';
+				exit();
+			}
+			
 		}catch(PDOException $e){
 		
 		$title ='An error has occured';
@@ -487,8 +496,7 @@ if(isset($_POST['reset_password'])){
 	}else{
 		//Display the form again
 		include __DIR__ . '/../templates/reset-password.html.php';
-	}
-		
+	}	
 }
 
 

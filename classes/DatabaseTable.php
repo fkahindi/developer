@@ -58,15 +58,7 @@ class DatabaseTable
 		
 		return $query;
 	}
-	public function selectPasswordTemp($pdo, $email, $token){
-		$sql= 'SELECT * FROM `password_reset_temp`
-		WHERE `email` = :email $$ `token` =:key';
-		
-		$parameters =['email'=>$email, 'key'=>$token];
-		
-		$query = query($pdo, $sql, $parameters);
-		return $query;
-	}
+	
 	public function insertRecord($fields) {
 		$query = 'INSERT INTO `'.$this->table .'`(';
 		
@@ -85,10 +77,9 @@ class DatabaseTable
 		$query .= ')';
 		
 		$this->query($query, $fields);
-
 	}
 	
-	public function update($fields) {
+	public function updateRecords($fields) {
 		$query ='UPDATE `'.$this->table. '` SET ';
 		
 		foreach($fields as $key=>$value){
@@ -104,11 +95,11 @@ class DatabaseTable
 		$this->query($query, $fields);
 	}
 
-	public function delete($email){
-		$parameters = [':email' => $email];
+	public function deleteRecords($value){
 		
-		$this->query('DELETE FROM `'.$this->table. '`WHERE `' 
-		.$this->keyfield. '` = :email', $parameters);
+		$sql = 'DELETE FROM `'.$this->table .'` WHERE `'.$this->keyfield .'` = :value';
+		$parameters = [':value' => $value];
+		
+		$this->query($sql, $parameters);
 	}
-
 }

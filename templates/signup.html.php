@@ -8,10 +8,15 @@
 	<style type="text/javascript" src="../resources/js/form.js"></style>
 </head>
 <body>
-	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. Passwords must be at least <strong>8</strong> characters.</p>
+	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. Passwords must be at least <strong>6</strong> characters.</p>
+	<p class="form-p">Passwords should only contain letters, numbers and underscores</p>
 		<div id="error_msg"></div>
 		<div id="register">
-		<h2>Sign Up Here </h2>
+			<div class="form_image">
+				<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+				<h2>Sign Up Here </h2>
+			</div>
+		
 		<form  method="POST" action="../includes/processFormAuthentication-Test.php" id="signup_form" >
 		
 			<div class="group-form">
