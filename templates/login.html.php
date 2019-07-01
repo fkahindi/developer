@@ -1,3 +1,8 @@
+<?php
+if(!isset($_SESSION)){
+	session_start();
+} 
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,9 +11,8 @@
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<h3 class="successMsg"><?php echo(!empty($GLOBALS['successMsg'])? $GLOBALS['successMsg']:'');?></h3>
-	<p><?php echo(!empty($GLOBALS['loginMsg'])? $GLOBALS['loginMsg']:''); ?></p>
-	
+	<h4 class="successMsg"><?php echo(!empty($_SESSION['success_msg'])? $_SESSION['success_msg']:'');?></h4>
+		
 	<div id="login">
 		<div class="form_image">
 			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >

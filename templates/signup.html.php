@@ -5,7 +5,6 @@
 	<meta charset="UTF-8">
 	<title>Sign Up</title>
 	<link rel="stylesheet" href="../resources/css/form.css">
-	<style type="text/javascript" src="../resources/js/form.js"></style>
 </head>
 <body>
 	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. Passwords must be at least <strong>6</strong> characters.</p>

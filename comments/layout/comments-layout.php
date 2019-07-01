@@ -1,4 +1,7 @@
 <?php
+if(!isset($_SESSION)){
+	session_start();
+}
 require __DIR__ .'/../../includes/commentsFunctions.php';
 require __DIR__ . '/comments_server.php';
 ?>
@@ -6,6 +9,7 @@ require __DIR__ . '/comments_server.php';
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+
 </head>
 <body>
 
@@ -15,8 +19,8 @@ require __DIR__ . '/comments_server.php';
 		<!--Display comment box -->
 		<div class="comment">
 			<h3>Comments</h3>
-			<form method="post" action="" >
-				<textarea name="comment" id="comment" cols="50" rows="6" maxlenth="100" placeholder="Type your comment here..." required></textarea>
+			<form method="post" >
+				<textarea name="comment" id="comment" cols="50" rows="6" maxlenth="100" placeholder="Type your comment here..." ></textarea>
 				<input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id'] ?>">
 				<input type="submit" id="post_btn" class="post_btn" name="submit" value="Post" >
 			</form>
@@ -32,7 +36,7 @@ require __DIR__ . '/comments_server.php';
 	totalComments();
 	?>&nbsp;Comment(s)</h3>
 	<hr>
-	<div class="comment" id="comment">
+	<div class="comments-area" id="comments-area">
 		<?php
 		//Display user comments
 		userComments();
@@ -45,5 +49,5 @@ require __DIR__ . '/comments_server.php';
 </div>
 </body>
 </html>
-<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
+<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
 <script src="/spexproject/resources/js/comments-scripts.js"></script>

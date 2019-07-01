@@ -342,6 +342,7 @@ header{
 .image-photo{
 	height:25px;
 	width:25px;
+	border:3px solid #2b5959;
 	border-radius:25px 25px;
 }
 .special{
@@ -532,6 +533,7 @@ header{
 .image-photo{
 	height:25px;
 	width:25px;
+	border:3px solid #2b5959;
 	border-radius:25px 25px;
 }
 .special{
@@ -686,6 +688,7 @@ header{
 .image-photo{
 	height:30px;
 	width:30px;
+	border:2px solid #2b5959;
 	border-radius: 30px 30px;
 }
 .special{
@@ -882,6 +885,7 @@ header{
 .image-photo{
 	height:35px;
 	width:35px;
+	border:3px solid #2b5959;
 	border-radius: 35px 35px;
 }
 .account-photo-box{
@@ -1053,6 +1057,7 @@ header{
 .image-photo{
 	height:50px;
 	width:50px;
+	border:3px solid #2b5959;
 	border-radius: 50px 50px;
 }
 .account-photo-box{

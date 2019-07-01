@@ -1,24 +1,32 @@
-$(document).ready(function(){
+$('document').ready(function(){
   // save comment to database
-  $('#post_btn').on('click', function(){
-    var user_id = $('#user_id').val();
-    var body = $('#comment').val();
+  $('#post_btn').on('click', function(e){
+	  e.preventDefault();
 	
-	if($body == ''){
-		return;
+    let user_id = $('#user_id').val();
+    let comment = $('#comment').val();
+	
+	if(comment == ''){
+		alert("Type a comment");
+		return false;
 	}
+	
     $.ajax({
-      url: '/spexproject/comments/layout/comments_server.php',
+      url: '/spexproject/comments/layout/comments_server.php', 
       type: 'POST',
       data: {
-        'save': 1,
+        'save':1,
         'user_id': user_id,
-        'body': body,
+        'body': comment,
       },
       success: function(response){
-        
+		
+		$('#comments_display_area').append(response);
+		
         $('#comment').val('');
-        $('#comments_display_area').append(response);
+        
       }
     });
+	
   });
+});

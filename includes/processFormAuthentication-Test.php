@@ -266,7 +266,10 @@ if(isset($_POST['change_password'])){
 	}else if(strlen($new_password)<6){
 		$valid = false;
 		$errors['new_password'] ='Password must be atleast 6 characters.';
-	}else if($_POST['new_password'] !== $_POST['confirm_new_password']){
+	}else if($new_password == $old_password){
+		$valid = false;
+		$errors['new_password'] ='New password cannot be same as old password.';
+	}else if($new_password !== $_POST['confirm_new_password']){
 		$valid = false;
 		$errors['confirm_new_password'] ='Your new password did not match';
 	}else{
@@ -309,19 +312,17 @@ if(isset($_POST['change_password'])){
 			
 			if($valid){
 		
-				$new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+				$new_password = password_hash($new_password, PASSWORD_DEFAULT);
 				$email = $_SESSION['email'];
 				
 				$fields =['password'=> $new_password];
 				
 				$sql=$membersTable->updateRecords($fields);
 				
-				session_destroy();
+				//session_destroy();
 			
-				//Set global variables to display on the login form
-				
-				$GLOBALS['successMsg'] = 'Update successful.';
-				$GLOBALS['loginMsg'] = 'Please, login with your new password';
+				//Set a variables to display on the login form
+				$_SESSION['success_msg'] = 'Update successful. <br> Please, login with your new password';
 				
 				//Redirect to login page
 				header('Location: ../templates/login.html.php');			
@@ -466,11 +467,10 @@ if(isset($_POST['reset_password'])){
 					
 					$updatePassword->updateRecords($fields);
 					
-					session_destroy();
+					//session_destroy();
 					
 					//Redirect to login page
-					$successMsg ='You have changed your password.';
-					$loginMsg ='Please, login with your new password';
+					$_SESSION['success_msg'] ='You have changed your password. <br> Please, login with your new password';
 									
 					header('Location: ../templates/login.html.php');
 								
