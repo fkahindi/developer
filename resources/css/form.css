@@ -120,6 +120,18 @@ form input[type="submit"]{
 	font-weight:bold;
 	color:black;
 }
+
+.reply form input[type="submit"]{
+	width:80px;
+	height:40px;
+	border-radius:5px;
+	background:#6D7B8D;
+	font-weight:bold;
+	color:black;
+}
+.reply .reply-text{
+	margin-left:5%;
+}
 .form_error span{
 	height: 20px;
 	font-size: 1em;
@@ -172,6 +184,20 @@ form input[type="submit"]{
 	background:#6D7B8D;
 	font-weight:bold;
 	color:black;
+}
+.reply form input[type="submit"]{
+	width:80px;
+	height:35px;
+	border-radius:5px;
+	background:#6D7B8D;
+	font-weight:bold;
+	color:black;
+	margin-left:70%;
+}
+.reply-textarea{
+	margin-left:20%;
+	background:rgb(245,245,245);
+	border-radius:5px;
 }
 .form_error span{
 	height: 30px;

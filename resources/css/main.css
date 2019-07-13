@@ -93,54 +93,119 @@ header, footer{
 	padding:0;
 	font-family:Calibri, 'Arial Narrow', Arial, sans-serif;	
 }
-.login-bar a{
+.login-signup a{
 	font-variant:small-caps;
 	color:rgb(240,240,240);
 }
-.special{
-	font-family: 'Arial Narrow', sans-serif;
-	color:#FFE87C;
-	font-size:80%;
+
+
+/* 
+/////////////////////////////
+ STYLING FOR TOOLTIP
+****************************
+*/
+
+/* Tooltip container */
+.tooltip{
+	position:relative;
+	display:inline-block;
+	top:10px;
+}
+/* Tooltip text */
+.tooltip .tooltip-text{
+	visibility:hidden;
+	width:140px;
+	background-color:#616D7E;
+	color:#fff;
 	padding:5px 0;
-	text-align:right;
+	border-radius:6px;
+	
+	/* Position the tooltip text */
+	position:absolute;
+	z-index:1;
+	left:40%;
+	margin-left:-60px;
+	
+	/* Fade in tooltip */
+	opacity:0;
+	transition:opacity 0.3s;
+}
+.tooltip-text p{
+	font-size:90%;
+	line-height:1;
+	text-align:left;
+	padding-left:5px;
+}
+/* Tooltip arrow */
+.tooltip .tooltip-text::after{
+	content:"";
+	position:absolute;
+	bottom:100%;
+	left:50%;
+	margin-left:-5px;
+	border-width:5px;
+	border-style:solid;
+	border-color: transparent  transparent #616D7E transparent;
+}
+/* Show tooltip when mouse over container */
+.tooltip:hover .tooltip-text{
+	visibility:visible;
+	opacity:1;
 	
 }
-.special a{
-	text-decoration:none;
-	color:white;
+
+/* 
+	END OF TOOLTIP STYLING
+//////////////////////////////////////
+*/
+
+/*
+*********************************************
+STYLING FOR PROFILE SETTINGS AND DISPLAY
+*********************************************
+*/
+#checkbox-control{
+	display:none;
 }
-.special a:hover{
-	text-decoration:underline;
-	color:white;
+.account-display-settings{
+	display:none;
+	position:relative;
+	top:5px;
+	right:60px;
+	min-width:170px;
+	height:100px;
+	background-color:#616D7E;;
+	border-radius:6px;
+	z-index:1;
+	
 }
-.settings{
-    position: absolute;
-    display: inline-block;
-}
-.settings-content {
-    display: none;
-    position: absolute;
-	right:5px;
-	min-width: 150px; 
-    z-index: 1;
-}
-.settings-content a {
-    color:rgb(10,10,10);
-    padding: 5px;
-    text-decoration: none;
-    display: block;
+.account-display-settings a{
+	font-size:100%;
+	line-height:1.3;
 	text-align:left;
+	padding-left:10px;
+	color:#fff;
 }
-.settings-content li{
-	background:#616D7E;
-	border-bottom: thin solid silver;
-	}
-.settings-content a:hover {
-	background:rgba(100,100,100,0.2);
-	color:white;
-	}
-.settings:hover .settings-content {
-    display: block;
+
+#checkbox-control:checked + .account-display-settings{
+	display:block;
+	text-align:left;
+	color:#fff;
+	padding-left:5px;
+}
+
+#checkbox-control:checked ~ .tooltip-text{
+	visibility:hidden;
+}
+.account-display-settings a{
+	font-size:90%;
+	line-height:1;
+	text-align:left;
+	padding-left:5px;
+	color:#F0F8FF;
+}
+.account-display-settings a:hover{
+	color:#fff;
 }
 header{
 	background:#293f50;
@@ -253,6 +318,9 @@ STYLING FOR COMMENTS SECTION
 	font-size:90%;
 	margin-top:10px;
 }
+.comments-container .hide-comment-id{
+	display:none;
+}
 .comments-section .profile-photo{
 	float:left;
 	width:10%;
@@ -264,10 +332,23 @@ STYLING FOR COMMENTS SECTION
 	margin-top:5px;
 	padding-left:5px;
 }
-.comments-section .user-info{
-	text-align:left;
+
+.replies-profile-photo{
+	float:left;
+	margin-left:40px;
 	
 }
+.replies-detail{
+	float:right;
+	width:85%;
+	margin-top:5px;
+	padding:5px 10px;
+	text-align:left;
+	line-height:1.2;
+	background: rgb(220,220,220);
+	border-radius:5px;
+}
+
 .user-info .username{
 	font-family:sans-serif;
 	color:rgb(50,50,50);
@@ -281,6 +362,25 @@ STYLING FOR COMMENTS SECTION
 .comments-section .comment-text{
 	padding-top:0;
 	line-height:1.2;
+}
+.replies-detail .user-info{
+	font-size:90%;
+}
+.replies-detail .reply-text{
+	text-align:left;
+	padding:3px 0 10px 0;
+}
+.comments-detail a{
+	font-family:Arial;
+	margin:0 10px;
+	text-transform:uppercase;
+}
+.reply-form{
+	left-margin:30px;
+	display:none;
+}
+div[class^="group replies_container_"] {
+	display:none;
 }
 @media only screen and (max-width: 600px){
 /* 
@@ -344,9 +444,6 @@ header{
 	width:25px;
 	border:3px solid #2b5959;
 	border-radius:25px 25px;
-}
-.special{
-	padding:0 10px;
 }
 
 .banner{
@@ -487,9 +584,7 @@ Small Devices (Portrait tablets and large phones, 600px and above)
 body{
 	font-size:100%;
 }
-header{
-		height:70px;
-	}
+
 [class*="col-"]{
 	width:100%
 }
@@ -531,23 +626,19 @@ header{
 	
 }
 .image-photo{
-	height:25px;
-	width:25px;
+	height:30px;
+	width:30px;
 	border:3px solid #2b5959;
-	border-radius:25px 25px;
+	border-radius:30px 30px;
 }
-.special{
-	padding:0;
-	font-size:70%;
-}
+
 .account-photo-box{
 	display:inline-block;
-	float:right;
+	float:none;
 	width:25%;
 	height:30px;
-	text-align:right;
+	text-align:left;
 	padding:5px 0;
-	overflow:hidden;
 }
 .login-signup{
 	display:inline-block;
@@ -608,9 +699,7 @@ footer{
 footer li{
 	display:inline-table
 }
-.login-bar span{
-	color:rgba(240, 256,40,.3);
-}
+
 ul span{
 	color:rgb(200,200,200);
 }
@@ -691,9 +780,7 @@ header{
 	border:2px solid #2b5959;
 	border-radius: 30px 30px;
 }
-.special{
-	padding:0;
-}
+
 .account-photo-box{
 	display:inline-block;
 	float:right;

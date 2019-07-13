@@ -5,4 +5,4 @@
 <link rel="stylesheet" href="/../spexproject/resources/css/form.css">
 <link rel="stylesheet" href="/../spexproject/resources/css/main.css">
 <link rel="icon" href="/../spexproject/resources/icons/logoicon.png" sizes="16x16 32x32" type="image/x-icon">
-<script type="text/javascript" src="/../spexproject/resources/js/dates.js"></script>
+

@@ -15,7 +15,7 @@ include __DIR__ . '/../includes/loginStatus.php';
 <body>
 	<h4 class="errorMsg">You are about to change your password. </h4>
 	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
-	<p class="form-p">Passwords must be at least eight characters.</p>
+	<p class="form-p">Passwords must be at least 6 characters.</p>
 
 	<div id="reset">
 		<div class="form_image">
@@ -30,11 +30,11 @@ include __DIR__ . '/../includes/loginStatus.php';
 			<span class="errorMsg"><?php echo (!empty($errors['old_password'])? $errors['old_password'] :'');?></span>
 						 
 			<label for="new_password">New Password:<span class="red"> &#42;</span></label>
-			 <input type="password" name="new_password" autocomplete="off" required>
+			 <input type="password" name="new_password" id ="new_password" autocomplete="off" required>
 			<span class="errorMsg"><?php echo (!empty($errors['new_password'])? $errors['new_password'] :'');?></span>
 			
 			<label for="confirm_new_password">Confirm New Password:<span class="red"> &#42;</span></label>
-			 <input type="password" name="confirm_new_password" autocomplete="off" required>
+			 <input type="password" name="confirm_new_password" id ="confirm_new_password" autocomplete="off" required>
 			<span class="errorMsg"><?php echo (!empty($errors['confirm_new_password'])? $errors['confirm_new_password'] :'');?></span>
 					
 			<input type="submit" name="change_password" class="button" value="Change"> 

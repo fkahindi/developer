@@ -14,36 +14,38 @@
 	<!--Login bar follows -->
 	<div class="login-bar">
 		<div class="group">
-			<div class="account-photo-box">
-			<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true)? '<span> <img src="' .$_SESSION['profile_photo'].'" alt="" class="image-photo"></span>':'';?>
+			<div class="account-photo-box tooltip">
+				<label for="checkbox-control">
+								<?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true):?> 
+					<span>  <img src="<?php echo $_SESSION['profile_photo'] ?>" alt="" class="image-photo"></span>
+				</label>
+				
+					<div class="tooltip-text">
+						<p><strong>Spex Account:</strong></p> 
+						<p><?php echo $_SESSION['fullname'] ?></p>
+						<p><?php echo $_SESSION['email'] ?></p>
+					</div>
+					<input type="checkbox" id="checkbox-control">
+					<div class="account-display-settings">
+						 															
+ 						<ul>
+							<li><a href="/spexproject/templates/change-password.html.php">Change Password </a> 
+							</li>
+							<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
+							<li><a href="/spexproject/includes/logout.php">Sign out </a></li>
+						</ul>
+					</div>
+				<?php endif; ?>
+					
 			</div>
-			<div class="login-signup ">
-			<?php echo (isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true)? 
-			'<a href="/spexproject/includes/logout.php">Log out </a> <span> &#124; </span> &nbsp; 
-			<span class="settings">
-				<ul>
-					<li><a href="#">Settings</a></li>
-					<ul class="settings-content">
-						<li><a href="/spexproject/templates/change-password.html.php">Change password </a> 
-						</li>
-						<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
-					</ul>
-				</ul>						
-			</span>':  
+			<div class="login-signup">
+			<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']== false)? 
 			'<a href="/spexproject/templates/login.html.php">Login </a> <span>&#124;</span>
-			<a href="/spexproject/templates/signup.html.php">Sign up</a> '; ?>
+			<a href="/spexproject/templates/signup.html.php">Sign up</a> '
+			: '' ?>
 			</div>
 		</div>
-		<div class="special">
-		<?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true){
-			if(!empty($_SESSION['username'])){
-				echo $_SESSION['username'];
-			}else{
-				echo $_SESSION['fullname'];
-			}
-		}
-		?>
-			
-		</div>
+		
 	</div>	
 </div>
+

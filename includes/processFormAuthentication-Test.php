@@ -237,7 +237,8 @@ if(isset($_POST['login'])){
 	}
 	
 }
-	
+
+//This section handles subscriber changing their password
 if(isset($_POST['change_password'])){
 
 	$old_password = $_POST['old_password'];
@@ -335,7 +336,8 @@ if(isset($_POST['change_password'])){
 		}
 	}
 }
-	
+
+//This section starts the process of forgotten password recovery
 if(isset($_POST['recover_password'])){
 	
 	$email = $_POST['email'];
@@ -403,7 +405,8 @@ if(isset($_POST['recover_password'])){
 	}
 	
 }
-	
+
+//This section allows the user to reset their password affter successful recovery
 if(isset($_POST['reset_password'])){	
 
 	$email = $_POST['email'];
@@ -499,7 +502,7 @@ if(isset($_POST['reset_password'])){
 	}	
 }
 
-
+//This section helps user to upload profile image of their account
 if(isset($_POST['image-upload'])){
 	require __DIR__ . '/loginStatus.php';
 	
