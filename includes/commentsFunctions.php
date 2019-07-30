@@ -1,6 +1,5 @@
 <?php
-	//require __DIR__ . '/credentials.php';
-
+	
 	$con = mysqli_connect('localhost', 'spex_db_user_member','AQD8Z0jHlUJypnKf','spex_db');
 	if(!$con){
 		die('Could not connect: ' . mysqli_connect($con));
@@ -67,7 +66,8 @@
 	//Receives values from jQuery for posting comments	
 	if(isset($_POST['submit_comment'])){
 		$user_id = $_POST['user_id']; 
-		$body = mysqli_real_escape_string($con, $_POST['body']);
+		$body = htmlspecialchars($_POST['body']);
+		$body = mysqli_real_escape_string($con, $body);
 
 		$sql = 'INSERT INTO `comments` (user_id, post_id, body, created_at) VALUES ('.$user_id .', 1, "'. $body .'", now() )';
 
@@ -97,7 +97,8 @@
 	if(isset($_POST['submit_reply'])){
 		$comment_id = $_POST['comment_id']; 
 		$user_id = $_POST['user_id'];
-		$reply_text = mysqli_real_escape_string($con, $_POST['reply_text']);
+		$reply_text = htmlspecialchars($_POST['reply_text']);
+		$reply_text = mysqli_real_escape_string($con, $reply_text);
 				
 		$sql = 'INSERT INTO `replies` (user_id, comment_id, body, created_at, updated_at) VALUES ('.$user_id .','. $comment_id . ', "'. $reply_text .'", now(), null )';
 

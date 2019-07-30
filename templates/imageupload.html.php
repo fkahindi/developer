@@ -15,8 +15,9 @@
 		<input type="file" name="fileToUpload" id="fileToUpload">
 		<span class="errorMsg"><?php echo (!empty($errors['fileToUpload'])? $errors['fileToUpload'] :'');?></span>
 		<input type="submit" value="Upload Image" name="image-upload" class="button">
+		<p><ul><li>Only images sizes of less than 500kb with formats .jpg, .png and .gif are allowed.</li></ul> </p>
 		</form>
 	</div>
-	<p>Only images sizes of less than 500kb with formats .jpg, .png and .gif are allowed. </p>
+	
 </body>
 </html>

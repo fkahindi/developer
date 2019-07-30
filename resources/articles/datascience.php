@@ -20,7 +20,7 @@ session_start();
 			<?php include __DIR__ .'/../../comments/layout/comments-layout.php'; ?>
 		</section><!--
 		--><aside class='col-2-5'>
-			
+			<?php include __DIR__ .'/../../templates/social-media-icons.html.php'; ?>
 		</aside>
 	    
 		
@@ -37,4 +37,7 @@ session_start();
 		
 	</footer>
 </body>
+<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
+<script src="/spexproject/resources/js/comments-scripts.js"></script>
+<script src="/spexproject/resources/js/menu-profile-controls.js"></script>
 </html>

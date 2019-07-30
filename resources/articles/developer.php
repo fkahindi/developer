@@ -1,12 +1,13 @@
 <?php
 session_start();
+include __DIR__ .'/../../admin/includes/posts_functions.php';
 
-include __DIR__ . '/../../includes/loginStatus.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<?php include __DIR__ .'/../../templates/head.html.php';?>
+	<?php $posts = getPostById($post_id); ?>
 </head>
 <body>
 	<header>
@@ -14,7 +15,8 @@ include __DIR__ . '/../../includes/loginStatus.php';
 	</header>
 	<main class="group">
 		<section class='col-3-5'>
-			<?php ''; ?>
+			<?php //include __DIR__ . '/front-end-form-validation.php'; ?>
+			<?php echo $posts['post_body']?>
 			
 		</section><!--
 		--><aside class='col-2-5'>
@@ -32,4 +34,7 @@ include __DIR__ . '/../../includes/loginStatus.php';
 		
 	</footer>
 </body>
+<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
+<script src="/spexproject/resources/js/comments-scripts.js"></script>
+<script src="/spexproject/resources/js/menu-profile-controls.js"></script>
 </html>

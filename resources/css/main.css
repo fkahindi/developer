@@ -33,8 +33,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	background:white;
-	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 	line-height: 1.5;
+}
+main {
+	font-family: sans-serif;
 }
 ol, ul {
   list-style: none;
@@ -91,13 +93,21 @@ _____________________________________________________________
 header, footer{
 	width:100%;
 	padding:0;
-	font-family:Calibri, 'Arial Narrow', Arial, sans-serif;	
+	font-family:Calibri, sans-serif;		
 }
 .login-signup a{
 	font-variant:small-caps;
 	color:rgb(240,240,240);
 }
-
+/* Menu controls to be displayed in small devices */
+#menu-checkbox-control, .dropdown-button{
+	display:none;
+}
+/*
+//////////////////////////////
+	TYPOGRAPHY
+******************************
+*/
 
 /* 
 /////////////////////////////
@@ -124,29 +134,23 @@ header, footer{
 	position:absolute;
 	z-index:1;
 	left:40%;
-	margin-left:-60px;
+	margin-left:-80px;
 	
 	/* Fade in tooltip */
 	opacity:0;
 	transition:opacity 0.3s;
 }
+.tooltip-text .color-sky{
+	color:rgb( 200, 200, 233)
+}
 .tooltip-text p{
 	font-size:90%;
 	line-height:1;
 	text-align:left;
-	padding-left:5px;
+	padding:3px 5px;
 }
-/* Tooltip arrow */
-.tooltip .tooltip-text::after{
-	content:"";
-	position:absolute;
-	bottom:100%;
-	left:50%;
-	margin-left:-5px;
-	border-width:5px;
-	border-style:solid;
-	border-color: transparent  transparent #616D7E transparent;
-}
+
+
 /* Show tooltip when mouse over container */
 .tooltip:hover .tooltip-text{
 	visibility:visible;
@@ -154,47 +158,41 @@ header, footer{
 	
 }
 
-/* 
-	END OF TOOLTIP STYLING
-//////////////////////////////////////
-*/
-
 /*
-*********************************************
+/////////////////////////////////////////////
 STYLING FOR PROFILE SETTINGS AND DISPLAY
 *********************************************
 */
-#checkbox-control{
+#profile-checkbox-control{
 	display:none;
 }
 .account-display-settings{
 	display:none;
 	position:relative;
-	top:5px;
-	right:60px;
+	top:0;
+	right:100%;
 	min-width:170px;
-	height:100px;
-	background-color:#616D7E;;
-	border-radius:6px;
+	line-height:1.5;
+	background-color:#616D7E;
 	z-index:1;
 	
 }
 .account-display-settings a{
 	font-size:100%;
-	line-height:1.3;
+	text-transform:uppercase;
 	text-align:left;
 	padding-left:10px;
 	color:#fff;
 }
 
-#checkbox-control:checked + .account-display-settings{
+#profile-checkbox-control:checked + .account-display-settings{
 	display:block;
 	text-align:left;
 	color:#fff;
 	padding-left:5px;
 }
 
-#checkbox-control:checked ~ .tooltip-text{
+#profile-checkbox-control:checked ~ .tooltip-text{
 	visibility:hidden;
 }
 .account-display-settings a{
@@ -211,6 +209,7 @@ header{
 	background:#293f50;
 }
 nav a{
+	
 	font-variant:small-caps;
 }
 
@@ -227,7 +226,6 @@ main ul li{
 	text-indent: 5px;
 }
 main h1, h2, h3{
-	font-family: sans-serif;
 	font-weight:bolder;
 	padding:10px 5px;
 	text-align:left;
@@ -253,6 +251,7 @@ main h3{
 }
 main p{
 	text-align:justify;
+	padding:10px 0;
 }
 section, aside{
 	padding:10px;
@@ -273,26 +272,9 @@ footer a{
 	color:red;
 	background:yellow;
 }
-/*
-===================================================
-CLEARFIX
-===================================================
-*/
-.group:before,
-.group:after{
-	content:"";
-	display: table;
-}
-.group:after{
-	clear:both;
-} 
-.group{
-	clear:both;
-	*zoom:1;
-} 
 
 /*
-*******************************
+///////////////////////////////
 STYLING FOR COMMENTS SECTION
 *******************************
 */
@@ -302,7 +284,6 @@ STYLING FOR COMMENTS SECTION
 	text-shadow:none;
 }
 .comments-container p{
-	font-family: sans-serif;
 	font-size:100%;
 }
 .comments-container hr{
@@ -382,6 +363,111 @@ STYLING FOR COMMENTS SECTION
 div[class^="group replies_container_"] {
 	display:none;
 }
+
+/*
+////////////////////////////////
+STYLING FOR SOCIAL MEDIA ICONS
+*******************************
+*/
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  right:0;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.icon-bar a:hover {
+  opacity: 0.7;
+}
+
+
+.facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.google {
+  background: #dd4b39;
+  color: white;
+}
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.youtube {
+  background: #bb0000;
+  color: white;
+}
+
+.instagram {
+  background: #125688;
+  color: white;
+}
+
+.pinterest {
+  background: #cb2027;
+  color: white;
+}
+/*
+//////////////////////////////////////////
+	STYLING FOR CODE DISPLAY SECTIONS
+*****************************************
+*/
+pre, pre code, samp{
+	display:block;
+	margin:0;
+}
+pre{
+	-moz-tab-size:4;
+	-o-tab-size:4;
+	tab-size:4;
+	overflow-x:auto;
+	
+}
+code{
+	font-family:'Courier New';
+	font-size:1.2em;
+	color:#000;
+}
+p code{
+	background:rgb(220,220,220);
+}
+/*
+===================================================
+CLEARFIX
+===================================================
+*/
+.group:before,
+.group:after{
+	content:"";
+	display: table;
+}
+.group:after{
+	clear:both;
+} 
+.group{
+	clear:both;
+	*zoom:1;
+} 
+
 @media only screen and (max-width: 600px){
 /* 
 Extra Small devices (Phones 600px and down) 
@@ -455,9 +541,12 @@ header{
 
 /* 
 ------------------------------------------------
-NAVIGATION MENU: STYLING FOR MOBILE 
+NAVIGATION MENU: FOR MOBILE 
 ------------------------------------------------
 */
+#menu-checkbox-control{
+	
+}
 .dropdown {
     position: absolute;
     display: inline-block;
@@ -466,9 +555,10 @@ NAVIGATION MENU: STYLING FOR MOBILE
 }
 
 .dropdown-button {
+	display:block;
     background-color: #293f50;
     color: white;
-    padding: 13px;
+    padding: 10px;
     font-size: 16px;
     border: none;
     cursor: pointer;
@@ -482,7 +572,7 @@ NAVIGATION MENU: STYLING FOR MOBILE
     position: absolute;
 	min-width: 150px; 
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1;	
 }
 .dropdown-content a {
     color:rgba(200,200,200,0.7);
@@ -504,15 +594,14 @@ NAVIGATION MENU: STYLING FOR MOBILE
 .dropdown-button:hover{
 	background:rgba(200,200,200,0.3);
 }
-.dropdown:hover .dropdown-content {
-    display: block;
-}
+
 nav{
 	width:50%;
 	height:40px;
 	margin:0;
 	text-align:center;
 }
+
 nav ul>span{
 	display:none;
 }
@@ -531,7 +620,6 @@ main{
 	padding:0 10px;
 }
 main h1, h2, h3{
-	font-family: sans-serif;
 	font-weight:bolder;
 	padding:10px 5px;
 	text-align:left;
@@ -1193,14 +1281,12 @@ nav li{
 nav ul li a{
 	padding:15px 10px;
 	color:rgb(250, 250,250);
-	font-size:110%;
-	
+	font-size:110%;	
 }
 nav ul li a:hover{
 	background-color: #334F5C;
 	color:rgb(255, 255,255);
 }
-
 footer li{
 	display:inline-table;
 }
@@ -1272,4 +1358,11 @@ main h3{
 }
 
 	
+}
+@media print
+{
+  pre{
+    overflow-x:visible;
+    white-space:pre-wrap;
+  }
 }

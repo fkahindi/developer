@@ -5,13 +5,6 @@ if(!isset($_SESSION)){
 require __DIR__ .'/../../includes/commentsFunctions.php';
 
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-
-</head>
-<body>
 
 <div class="comments-container">
 	<hr>
@@ -53,13 +46,25 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 			<div class="comments-detail">
 				<div class="user-info">
 					<span class="username"><?php echo getUserById($comment['user_id'])['username']; ?></span>
-					<span class="created-date"><?php echo date('F j, Y ', strtotime($comment['created_at'])); ?></span>
+					<span class="created-date"><?php echo date('F j, Y  \a\t H:i', strtotime($comment['created_at'])); ?></span>
 				</div>
 				<div class="comment-text">
 					<?php echo $comment['body']; ?>
 				</div>
+					<?php if(isset($_SESSION['loggedin'])): ?> 
 					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" class="reply-btn">Reply</a>
+					<?php endif; ?>
 					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" class="reply-thread">Show thread</a>
+					<?php if(isset($_SESSION['loggedin'])): ?>
+						<!-- Reply form -->
+						<div class="reply">
+							<form method="post" class="reply-form" id="comment_reply_form_<?php echo $comment['comment_id']; ?>" data_id="<?php echo $comment['comment_id']; ?>">
+							<textarea name="reply" id="reply-textarea" class="reply-textarea" cols="50" rows="4" maxlenth="70" placeholder="Type your reply..." ></textarea>
+							<input type="hidden" name="user_id" class="reply_form_user_id" value="<?php echo $_SESSION['user_id'] ?>">
+							<input type="submit" class="submit-reply" name="submit" value="Submit" >
+							</form>
+						</div>
+					<?php endif; ?>
 					
 					<!-- Get all replies by comment_id -->
 				<?php $replies = getRepliesByCommentId($comment['comment_id']) ?>
@@ -74,7 +79,7 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 								<div class="replies-detail">
 									<div class="user-info">
 										<span class="username"><?php echo getUserById($reply['user_id'])['username']; ?></span>
-										<span class="created-date"><?php echo date('F j, Y ', strtotime($reply['created_at'])); ?></span>
+										<span class="created-date"><?php echo date('F j, Y \a\t H:i', strtotime($reply['created_at'])); ?></span>
 									</div>
 									<div class="reply-text">
 										<?php echo $reply['body']; ?>
@@ -90,16 +95,7 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 						
 					</div>
 				</div>
-				<?php if(isset($_SESSION['loggedin'])): ?>
-					<!-- Reply form -->
-				<div class="reply">
-					<form method="post" class="reply-form" id="comment_reply_form_<?php echo $comment['comment_id']; ?>" data_id="<?php echo $comment['comment_id']; ?>">
-					<textarea name="reply" id="reply-textarea" class="reply-textarea" cols="50" rows="4" maxlenth="70" placeholder="Type your reply..." ></textarea>
-					<input type="hidden" name="user_id" class="reply_form_user_id" value="<?php echo $_SESSION['user_id'] ?>">
-					<input type="submit" class="submit-reply" name="submit" value="Submit" >
-					</form>
-				</div>
-				<?php endif; ?>
+				
 			</div>
 		</div>
 		<?php endforeach; ?>
@@ -110,7 +106,4 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 	<?php endif ?>
 	
 </div>
-</body>
-</html>
-<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
-<script src="/spexproject/resources/js/comments-scripts.js"></script>
+

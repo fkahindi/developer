@@ -12,6 +12,9 @@ form label, form input{
 	margin-bottom: 5px;
 	width: 90%;
 	}
+form label{
+	margin-top:10px;
+}
 form input{ 
 border: solid 1px #3E606F; 
 border-radius: 5px;
@@ -26,8 +29,10 @@ form a,
 #reset +.section a,
 #upload +.section a{
 	text-decoration:none;
-	color: blue;
+	color:blue;
+	
 }
+
 form .form_image{
 	text-align:center;
 	padding:10px;
@@ -43,6 +48,9 @@ margin:0 auto;
 .red{
 	color:red;
 }
+.centered{
+	text-align:center;
+}
 .errorMsg{
 	color: #D83D5A;	
 	}
@@ -50,11 +58,19 @@ margin:0 auto;
  color: #6B8E23;
  margin-bottom: 10px;
 }
-h3,h4,p{
+h3,h4{
 	text-align:center;
 }
 .form-p{
-	line-height: 0.5;
+	line-height:0.5;
+	margin:5px auto;
+	padding:10px;
+}
+
+#register ul,#reset ul, #upload ul  {
+	padding-left:10px;
+	font-size:10px;
+	
 }
 .form_error span{
 	width: 80%;
@@ -89,10 +105,7 @@ margin: 30px auto 20px auto;
 
 }
 form input{ 
-padding: 5px; 
-}
-form label{
-	margin-top:15px;
+padding: 8px; 
 }
 form input[type="submit"]{
 	margin-top:15px;
@@ -101,10 +114,6 @@ form input[type="submit"]{
 
 .section{
 	margin:15px auto;
-}
-.form-p{
-	line-height: 1;
-	margin:5px auto;
 }
 
 .comment form textarea{
@@ -156,9 +165,7 @@ margin: 35px auto 20px auto;
 .section{
 	margin:20px auto;
 }
-form label{
-	margin-top:20px;
-}
+
 form input{ 
 padding: 10px;
 

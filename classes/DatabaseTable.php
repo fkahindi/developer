@@ -19,7 +19,7 @@ class DatabaseTable
 		return $query;
 	}
 	
-	public function selectRecords($value1,$value2) {
+	public function selectRecords($value1,$value2='') {
 		
 		$sql = 'SELECT * FROM `'.$this->table .'`
 		WHERE `'.$this->keyfield .'` = :value1 OR `'

@@ -177,19 +177,27 @@ if(isset($_POST['login'])){
 	}else{
 		
 		try{
-						
+			//Select from users table			
 			$usersTable = new DatabaseTable($pdo,'users', 'email');
 			
 			$query = $usersTable->selectRecords($email,$username);
-				
+			
+			
 			//Check if records exists in the database
 			if($query->rowCount()==1){
 				
 				//Fetch the entire record
 				$row = $query->fetch();
 				
-				//Assign record values to variable
+				//Select from roles table using user's role_id
+				$rolesTable = new DatabaseTable($pdo, 'roles', 'role_id');
+				
+				$sql = $rolesTable->selectRecords($row['role_id']);
+				$record = $sql->fetch();
+				
+				//Assign records values to variables
 				$user_id = $row['user_id'];
+				$role = $record['role'];
 				$fullname = $row['fullname'];
 				$username = $row['username'];
 				$profile_photo = $row['profile_photo'];
@@ -204,14 +212,21 @@ if(isset($_POST['login'])){
 					//Store data in session variables
 					$_SESSION['loggedin'] = true;
 					$_SESSION['user_id'] = $user_id;
+					$_SESSION['role'] = $role;
 					$_SESSION['email'] = $email;
 					$_SESSION['password']= $hashed_password;
 					$_SESSION['fullname'] = $fullname;
 					$_SESSION['username'] = $username;
 					$_SESSION['profile_photo']= $profile_photo;
 						
-					//Redirect to welcome page
-					header('Location: ../templates/welcome.html.php');	
+					//Redirect accordingly
+					if($role == 'Admin'){
+						header('Location: ../admin/dashboard.php');
+					}elseif(($role == 'Author')){
+						header('Location: ../admin/posts.php');
+					}else{
+						header('Location: ../templates/welcome.html.php');
+					}										
 				}else{
 					//Display password error 
 					

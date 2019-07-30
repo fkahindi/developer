@@ -5,8 +5,10 @@
 	</div>
 	<!--Navigation bar follows-->
 	<div class="nav-bar dropdown">
-	<button class="dropdown-button">|||</button>
-	<nav class="dropdown-content">
+	<label for="menu-checkbox-control" class="dropdown-button">|||
+	<input type="checkbox" id="menu-checkbox-control">
+	</label>
+		<nav class="dropdown-content">
 		<?php require_once __DIR__ .'/nav.html.php'; ?>	
 
 	</nav>
@@ -14,18 +16,18 @@
 	<!--Login bar follows -->
 	<div class="login-bar">
 		<div class="group">
-			<div class="account-photo-box tooltip">
-				<label for="checkbox-control">
+			<div class="account-photo-box tooltip ">
+				<label for="profile-checkbox-control" id="tooltip">
 								<?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true):?> 
 					<span>  <img src="<?php echo $_SESSION['profile_photo'] ?>" alt="" class="image-photo"></span>
 				</label>
 				
 					<div class="tooltip-text">
 						<p><strong>Spex Account:</strong></p> 
-						<p><?php echo $_SESSION['fullname'] ?></p>
-						<p><?php echo $_SESSION['email'] ?></p>
+						<p class="color-sky"><?php echo $_SESSION['fullname'] ?></p>
+						<p class="color-sky"><?php echo $_SESSION['email'] ?></p>
 					</div>
-					<input type="checkbox" id="checkbox-control">
+					<input type="checkbox" id="profile-checkbox-control">
 					<div class="account-display-settings">
 						 															
  						<ul>

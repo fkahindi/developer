@@ -7,13 +7,14 @@
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. Passwords must be at least <strong>6</strong> characters.</p>
-	<p class="form-p">Passwords should only contain letters, numbers and underscores</p>
+	
+	
 		<div id="error_msg"></div>
 		<div id="register">
+		<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
 			<div class="form_image">
 				<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
-				<h2>Sign Up Here </h2>
+				<h2>Sign Up </h2>
 			</div>
 		
 		<form  method="POST" action="../includes/processFormAuthentication-Test.php" id="signup_form" >
@@ -43,6 +44,10 @@
 				<label for="password">Password:<span class="red"> &#42;</span></label>
 				<input name="password" id="password" class="form-control" type="password" autocomplete="off" required>
 				<span class="errorMsg"><?php echo(!empty($errors['password']) ? $errors['password'] : ''); ?></span>
+				<ul>
+					<li>Passwords must be at least <strong>6</strong> characters.</li>
+					<li>May contain letters, numbers with underscores.</li>
+				</ul>
 			</div>
 			
 			<div class="group-form">
