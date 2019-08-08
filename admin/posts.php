@@ -22,9 +22,10 @@
 <body>
 	<?php include __DIR__ .'/components/navbar.php'; ?>
 	<div class="container border border-dark m-3">
+	<div class="text-center text-success"><?php include __DIR__ .'/includes/messages.php'?></div>
 		<h1>Welcome <?php echo $_SESSION['fullname'] .' | '. $_SESSION['role']?></h1>
 		<div class="row my-5">
-		<?php include __DIR__ .'/includes/messages.php'?>
+		
 			<!--Row with 3 equal columns-->
 			<div class="col-md-3 panel-body border border-primary">
 				<!--Column left Navigation-->

@@ -24,7 +24,7 @@
 	<div class="container border mt-3">
 		
 		<div class="row my-5">
-		<div class="text-success"><?php include __DIR__ .'/includes/messages.php'?></div>
+		<div class="text text-right text-success"><?php include __DIR__ .'/includes/messages.php'?></div>
 			<!--Row with 3 equal columns-->
 			<div class="col-md-2 panel-body border">
 				<!--Column left Navigation-->
@@ -70,7 +70,7 @@
 						<!--Only Admin is supposed to publish posts -->
 						<?php if($_SESSION['role']== 'Admin'):?>
 						<!--Display checkbox for publishing/ unpublishing post  -->
-							<?php if($published === true):?>
+							<?php if($published == true):?>
 							<div class="form-group form-group-lg">
 								<label for="publish">
 									Publish

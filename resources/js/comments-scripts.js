@@ -4,6 +4,7 @@ $('document').ready(function(){
 	  e.preventDefault();
 	
     let user_id = $('#user_id').val();
+	let page_id = $('#page_id').val();
     let comment = $('#comment').val();
 	
 	if(comment == ''){
@@ -17,6 +18,7 @@ $('document').ready(function(){
       data: {
         'submit_comment':1,
         'user_id': user_id,
+		'page_id': page_id,
         'body': comment,
       },
       success: function(response){
@@ -27,7 +29,6 @@ $('document').ready(function(){
         
       }
     });
-	
   });
   
 	//When user clicks reply link to add reply under another user's comment

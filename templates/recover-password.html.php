@@ -9,10 +9,10 @@
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<p>Please fill out this form to recover your password.</p>
 	<div id="recover">
 		<div class="form_image">
 			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+			<p class="form-p">Please fill out this form to recover your password.</p>
 			<h2>Recover Password</h2>
 		</div>
 		<form method="POST" action="../includes/processFormAuthentication-Test.php">

@@ -4,6 +4,7 @@ if(!isset($_SESSION)){
 }
 require __DIR__ .'/../../includes/commentsFunctions.php';
 
+
 ?>
 
 <div class="comments-container">
@@ -11,10 +12,11 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 	<?php if(isset($_SESSION['loggedin'])): ?>
 		<!--Display comment box -->
 		<div class="comment">
-			<h3>Comments</h3>
+			<h3>Leave a comment</h3>
 			<form method="post" >
 				<textarea name="comment" id="comment" cols="50" rows="6" maxlenth="100" placeholder="Type your comment here..." ></textarea>
 				<input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['user_id'] ?>">
+				<input type="hidden" name="page_id" id="page_id" value="<?php echo $page_id ?>">
 				<input type="submit" id="submit_comment" class="post_btn" name="submit" value="Post" >
 			</form>
 		</div>
@@ -27,12 +29,16 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 	<h3><?php 
 	//Display total comments so far for every user
 	//totalComments();
-	 echo getCommentCountByPostId(1);
+	 echo getCommentCountByPostId($page_id);
 	?>&nbsp;Comment(s)</h3>
-	<hr>
+	<hr>	
+	<?php
+		//Retrieve comments for this post
+		$comments = getAllPostComments($page_id); 
+	?>
 	<?php if(isset($comments)): ?>
 	<div class="comments-area" id="comments-area">
-	<!-- Comments area -->
+	<!-- Comments display area -->
 	
 		<?php foreach($comments as $comment): ?>
 		<div class="comments-section group" >

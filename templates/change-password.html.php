@@ -16,9 +16,10 @@ include __DIR__ . '/../includes/loginStatus.php';
 	<h4 class="errorMsg">You are about to change your password. </h4>
 	
 	<div id="reset">
-		<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
+		
 		<div class="form_image">
 			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+			<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
 			<h2>Change Password</h2>
 		</div>
 	

@@ -15,7 +15,7 @@ include __DIR__ .'/includes/posts_functions.php';
 
 //Get all admin and author users
 $admins = getAdminUsers();
-$roles = ['Admin', 'Author'];
+$roles = ['Admin', 'Author', 'User'];
 ?>
 <!DOCTYPE html>
 <html lang="en">	
@@ -26,7 +26,7 @@ $roles = ['Admin', 'Author'];
 <body>
 	<?php include __DIR__ .'/components/navbar.php'; ?>
 	<div class="container border mt-2">
-	
+		<div class="panel panel-default text-success text-center"><?php echo isset($_SESSION['message'])? $_SESSION['message']:''; ?></div>
 		<div class="mx-auto my-4"><h1>Welcome <?php echo $_SESSION['fullname']?></h1></div>
 		
 		<div class="row my-5">
@@ -44,13 +44,13 @@ $roles = ['Admin', 'Author'];
 			<div class="col-md-4">
 			<!-- Middle column-->
 				<div class="action">
-				<form action="<?php echo __DIR__ .'users.php'; ?>">
+				<form method="post" action="users.php">
 				<!--Validating for errors on the form -->
 				<?php include __DIR__ .'/includes/errors.php'; ?>
 				
 				<!-- Attach a hidden id for user being edited-->
 				<?php if($isEditingUser === true): ?>
-				<input type="hidden" name="user_id" value="<?php echo $user_id ;?>">
+				<input type="hidden" value="<?php echo $user_id;?>" name="user_id">
 				<?php endif ?>
 								
 				<div class="form-group form-group-lg">
@@ -58,10 +58,10 @@ $roles = ['Admin', 'Author'];
 				<input type="text" value="<?php echo $username; ?>" name="username" placeholder="Username" id="username" class="form-control"></div>
 				<div class="form-group form-group-lg">
 				<label for="email">Email address:</label>
-				<input type="email" value="<?php echo $email; ?>" name="email" placeholder="Email" id="email"class="form-control"></div>
+				<input type="email" value="<?php echo $email; ?>" name="email" placeholder="Email" id="email" class="form-control"></div>
 				<div class="form-group form-group-lg">
-				<label for="email">User role:</label>
-				<select type="select" class="form-control" name="roles" placeholder="Assign role">
+				<label for="role">User role:</label>
+				<select type="select" class="form-control" name="role" placeholder="Assign role">
 						<option value="" selected disabled>Assign role</option>						
 						<?php foreach($roles as $key=>$role):?>
 						<option value="<?php echo $role; ?>"><?php echo $role; ?></option>
@@ -78,11 +78,12 @@ $roles = ['Admin', 'Author'];
 			
 				<!--Column right database output-->
 				<div class="table-div">
-				<?php echo isset($_SESSION['message'])? $_SESSION['message']:''; ?>
+				
 					<table class="table table-bordered table-hover table-condensed">
+						<caption class="text-center"><h4>Admins | Authors</h4></caption>
 						<thead>
 							<tr>
-								<th>SNo.</th><th>User</th><th>Role</th><th colspan="2">Action</th>
+								<th>SNo.</th><th>User</th><th>Role</th><th>Action</th>
 							</tr>
 						</thead>
 						<tbody>

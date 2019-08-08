@@ -1,8 +1,6 @@
 <?php
-$conn = mysqli_connect("localhost","spex_db_user_member","AQD8Z0jHlUJypnKf","spex_db",);
-if(!$conn){
-	die('Error connecting to database. '. mysqli_connect_error());
-}
+require_once __DIR__ .'/../../includes/DbConnection.php';
+
 //Admin user variable
 $user_id =0;
 $isEditingUser =false;
@@ -28,7 +26,7 @@ if(isset($_GET['edit-user'])){
 	$user_id = $_GET['edit-user'];
 	editUser($user_id);
 }
-//if user clicks Update admin button
+//if user clicks Update user button
 if(isset($_POST['update_user'])){
 	updateUser($_POST['update_user']);
 }
@@ -90,26 +88,28 @@ function updateUser($request_values){
 	global $conn, $user_id, $role, $isEditingUser, $errors;
 	
 	//get id of the user to be updated
-	$user_id = $request_values['user_id'];
+	$user_id = $_POST['user_id'];
 	//set editing state to false
 	$isEditingUser = false;
 	
-	if(isset($request_values['role'])){
-		$role = $request_values['role'];
+	if(isset($_POST['role'])){
+		$role = $_POST['role'];
 	}
+	
 	//update user role if no errors on the form
-	if(count($errors) == 0){
+	if(!$errors){
 		if($role =='Admin'){
-			$query = "UPDATE `users` SET role_id=1";
+			$query = "UPDATE `users` SET role_id=1, updated_at=now() WHERE user_id=$user_id";
 		}elseif($role == 'Author'){
-			$query = "UPDATE `users` SET role_id=2";
-		}
-		
-		mysqli_query($conn, $query);
-		
-		$_SESSION['message'] = 'User updated successfully';
-		header('Location: ../users.php');
-		exit(0);
+			$query = "UPDATE `users` SET role_id=2, updated_at=now() WHERE user_id=$user_id";
+		}elseif($role == 'User'){
+			$query = "UPDATE `users` SET role_id=3, updated_at=now() WHERE user_id=$user_id";
+		}		
+		if(mysqli_query($conn, $query)){
+			$_SESSION['message'] = 'User role update successful';
+			header('Location: users.php');
+			exit(0);
+		}		
 	}
 }
 
@@ -120,7 +120,7 @@ function deleteUser($user_id){
 	if(mysqli_query($conn, $sql)){
 		
 		$_SESSION['message'] = 'User successfully deleted.';
-		head('Location: ../users.php');
+		header('Location: users.php');
 		exit(0);
 	}
 }
@@ -217,7 +217,7 @@ function createTopic($request_values){
 		mysqli_query($conn, $query);
 		
 		$_SESSION['message'] = 'Topic created successfully.';
-		header('Location: ../topics.php');
+		header('Location: topics.php');
 		exit(0);		
 	}
 }
@@ -256,7 +256,7 @@ function updateTopic($request_values){
 		mysqli_query($conn, $query);
 		
 		$_SESSION['message'] = 'Topic updated successfully.';
-		header('Location: topics.php');
+		header('Location:topics.php');
 		exit(0);
 	}
 }

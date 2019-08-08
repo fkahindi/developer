@@ -12,8 +12,9 @@
 		<?php require_once __DIR__ .'/nav.html.php'; ?>	
 
 	</nav>
-	</div>	
-	<!--Login bar follows -->
+	</div>
+	
+	<!--Login and Search bars follows -->
 	<div class="login-bar">
 		<div class="group">
 			<div class="account-photo-box tooltip ">
@@ -23,9 +24,9 @@
 				</label>
 				
 					<div class="tooltip-text">
-						<p><strong>Spex Account:</strong></p> 
-						<p class="color-sky"><?php echo $_SESSION['fullname'] ?></p>
-						<p class="color-sky"><?php echo $_SESSION['email'] ?></p>
+						<p><strong>Account:</strong></p> 
+						<p><?php echo $_SESSION['fullname'] ?></p>
+						<p><?php echo $_SESSION['email'] ?></p>
 					</div>
 					<input type="checkbox" id="profile-checkbox-control">
 					<div class="account-display-settings">
@@ -40,11 +41,20 @@
 				<?php endif; ?>
 					
 			</div>
-			<div class="login-signup">
-			<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']== false)? 
-			'<a href="/spexproject/templates/login.html.php">Login </a> <span>&#124;</span>
-			<a href="/spexproject/templates/signup.html.php">Sign up</a> '
-			: '' ?>
+			<div class="login-signup-search-bar">
+				<!--Search bar -->
+				<div class="search-container">
+					<form action="" method="GET">
+						<span><input type="text" placeholder="Search..." name="search"></span>
+						<span><button type="submit"><i class="fa fa-search"></i></button></span>
+					</form>
+				</div>
+				<div class="login-signup">
+				<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']== false)? 
+				'<a href="/spexproject/templates/login.html.php">Login </a> <span>&#124;</span>
+				<a href="/spexproject/templates/signup.html.php">Sign up</a> '
+				: '' ?>
+				</div>
 			</div>
 		</div>
 		

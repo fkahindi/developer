@@ -11,9 +11,9 @@
 	
 		<div id="error_msg"></div>
 		<div id="register">
-		<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
 			<div class="form_image">
 				<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+				<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
 				<h2>Sign Up </h2>
 			</div>
 		

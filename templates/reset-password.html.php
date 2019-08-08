@@ -16,7 +16,7 @@ if(!empty($email) && !empty($token)){
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Password Reset</title>
+	<title>Reset Password</title>
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
@@ -24,11 +24,13 @@ if(!empty($email) && !empty($token)){
 		
 	<div id="error_msg"></div>
 	<div id="reset">
-		<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory</p>
+		
 		<div class="form_image">
 				<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+				<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory</p>
+				<h2>Reset Password</h2>
 		</div>
-		<h2>Reset Password</h2>
+		
 								
 		<form method="POST" name ="reset-password" action="../includes/processFormAuthentication-Test.php">
 		

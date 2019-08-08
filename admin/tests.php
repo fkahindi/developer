@@ -2,23 +2,25 @@
 session_start();
 //include __DIR__ .'/includes/admin_functions.php';
 //include __DIR__ .'/includes/posts_functions.php';
+include __DIR__ .'/../includes/DbConnection.php';
+//$post_id = getAllPublishedPostIds();
+//$paragraph = getFirstParagraph();
 
-if(isset($_POST['create_post'])){
-	$title = $_POST['title'];
-	$body = htmlspecialchars($_POST['body']);
-	$user_id = $_SESSION['user_id'];
-	$topic_id = $_POST['topic_id'];
-	if(isset($_POST['publish'])){
-		$published = $_POST['publish'];
+function getPostFirstParagraph($post_id){
+	global $conn;
+$sql ="SELECT  SUBSTR(post_body, 1, 300) AS post_body FROM `posts` WHERE post_id=$post_id";
+
+$result = mysqli_query($conn, $sql);
+
+	if($result){
+		$paragraph = mysqli_fetch_assoc($result);
+		
+		return htmlspecialchars_decode($paragraph['post_body']);	
+	}else{
+		return null;
 	}
-	
-	echo 'Post title is: '.$title . '<br>';
-	echo 'Post user_id is: '.$user_id . '<br>';
-	echo 'Post topic_id is: '.$topic_id . '<br>';
-	echo 'Post published: '.$published . '<br>';
-	echo $body . '<br>';
-	
 }
 
-
  
+echo getPostFirstParagraph(2);
+//echo $paragraph;

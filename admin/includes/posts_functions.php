@@ -1,8 +1,6 @@
 <?php
-$conn = mysqli_connect("localhost","spex_db_user_member","AQD8Z0jHlUJypnKf","spex_db",);
-if(!$conn){
-	die('Error connecting to database. '. mysqli_connect_error());
-}
+require_once __DIR__ .'/../../includes/DbConnection.php';
+
 //Post variables
 $post_id ='';
 $isEditingPost = false;
@@ -18,7 +16,20 @@ $topic_id ='';
 /*---------------
 --Post Functions
 -----------------*/
-//Get all posts of the user
+//Get numbe of posts in the posts table
+function getAllPublishedPostIds(){
+	global $conn;
+	
+	$sql ="SELECT post_id FROM `posts` WHERE published =1 ORDER BY created_at DESC";
+	$result = mysqli_query($conn, $sql);
+	if($result){
+		$published_post_id = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		return $published_post_id;
+	}else{
+		return null;
+	}	
+}
+//Get all posts based on the user
 function getAllPosts(){
 	global $conn, $_SESSION;
 	
@@ -49,7 +60,7 @@ function getAllPosts(){
 function getPostById($post_id){
 	global $conn;
 	$sql = "SELECT * FROM `posts` WHERE post_id=$post_id LIMIT 1";
-	$reslut = mysqli_query($conn, $sql);
+	$result = mysqli_query($conn, $sql);
 	
 	$post = mysqli_fetch_assoc($result);
 	
@@ -65,6 +76,21 @@ function getPostAuthorById($user_id){
 		
 		$author = mysqli_fetch_assoc($result);
 		return $author['username'];
+	}else{
+		return null;
+	}
+}
+//Select first 300 characters of post contents
+function getFirstParagraphPostById($post_id){
+	global $conn;
+	$sql ="SELECT SUBSTR(post_body, 1, 300) AS post_body FROM `posts` WHERE post_id=$post_id";
+
+	$result = mysqli_query($conn, $sql);
+
+	if($result){
+		$paragraph = mysqli_fetch_assoc($result);
+		
+		return htmlspecialchars_decode($paragraph['post_body'].'...');	
 	}else{
 		return null;
 	}
@@ -111,8 +137,8 @@ function createPost($request_values){
 	}else{
 		$topic_id = $request_values['topic_id'];
 	}
-	if(isset($request_values['published'])){
-		$published = $request_values['published'];
+	if(isset($_POST['publish'])){
+		$published = $_POST['publish'];
 	}
 	
 	//Create slug by replacing spaces in title with hyphens
@@ -150,7 +176,6 @@ function createPost($request_values){
 }
 
 function editPost($role_id){
-	
 	global $conn, $title, $post_slug, $body, $published, $isEditingPost, $post_id;
 	$sql = "SELECT * FROM `posts` WHERE post_id = $role_id LIMIT 1";
 	
@@ -169,8 +194,8 @@ function updatePost($request_values){
 	if(isset($request_values['topic_id'])){
 		$topic_id = esc($request_values['topic_id']);
 	}
-	if(isset($request_values['published'])){
-		$published = $request_values['published'];
+	if(isset($_POST['publish'])){
+		$published = $_POST['publish'];
 	}
 	
 	//Create slug by replacing spaces in title with hyphens
@@ -189,7 +214,7 @@ function updatePost($request_values){
 			if(isset($topic_id)){
 				$inserted_post_id = mysqli_insert_id($conn);
 				//create relationship between post and topic
-				$sql = "INSERT INTO (post_id, topic_id) VALUES ($inserted_post_id, $topic_id)";
+				$sql = "UPDATE `post_topic` SET topic_id=$topic_id WHERE post_id=$inserted_post_id";
 				
 				mysqli_query($conn, $sql);
 				$_SESSION['message']= 'Post values update successful.';

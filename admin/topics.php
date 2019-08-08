@@ -77,13 +77,13 @@
 							<tr>
 								<th>SNo.</th>
 								<th>Topic Name</th>
-								<th >Action</th>
+								<th colspan="2" class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php foreach($topics as $key => $topic):?>
 							<tr>
-								<td><?php echo $key + 1 ?></td>
+								<td class="text-center"><?php echo $key + 1 ?></td>
 								<td><?php echo $topic['topic_name'] ?></td>
 										
 								<td>
