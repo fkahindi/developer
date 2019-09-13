@@ -41,7 +41,7 @@
 			</div>
 			<div class="col-md-9 panel-body border">
 			<?php if(empty($posts)): ?>
-			<div class="mx-auto my-4"><h4>There no posts in database</h4></div>
+			<div class="mx-auto my-4"><h4>There are no posts to display</h4></div>
 				<!--Column right database output-->
 			<?php else: ?>	
 					<table class="table table-bordered table-hover table-condensed">

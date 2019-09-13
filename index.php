@@ -22,26 +22,36 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 				<?php foreach($published_post_ids as $post_id): ?>
 				<?php $post = getPostById($post_id['post_id']) ?>
 				<?php $post['author'] = getPostAuthorById($post['user_id'])?>
-				<h3><a href="templates/post.html.php?id=<?php echo $post_id['post_id']?>"><?php echo htmlspecialchars_decode($post['post_title']) ; ?><a/></h3>
-				<em class="post-acreditation">By <?php echo $post['author'];?><span> Published on <?php echo date( 'F j, Y', strtotime($post['created_at'])) ?></span></em>
-				<div class="paragraph-snippet"><?php echo getFirstParagraphPostById($post_id['post_id']); ?> </div><br>
+				<div>
+					<h3><a href="templates/post.html.php?id=<?php echo $post_id['post_id'] ?>&title=<?php echo $post['post_slug'] ?>"> <?php echo htmlspecialchars_decode($post['post_title']) ?></a></h3>
+				</div>
+				<div class="post-acreditation">
+					By <?php echo $post['author'];?><span>  
+					<?php echo isset($post['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($post['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($post['created_at'])) ?></span>
+				</div>
+				<div class="paragraph-snippet">
+					<?php echo getFirstParagraphPostById($post_id['post_id']) ?> 
+				</div><br>
 				<?php endforeach; ?>
 			</section><!--			
 			--><aside class="col-2-5">
 				<!-- Sidebar content goes here-->
-				<h2 class="centered">Popular posts</h2>
-				
+				<div class="recent-posts">
+				<h2 class="left">Recent posts</h2>
+				<?php $recent_posts = getMostRecentPosts(); ?>
+				<?php foreach($recent_posts as $latest_post): ?>
+				<h5><a href="templates/post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></h5>
+				<?php endforeach; ?>
+				</div>
 			</aside>	
 		</main>
-		<footer>
-			<div class="group">
+		<footer class="group">
 				<span class="float-right">
 					<?php include  __DIR__ .'/templates/nav.html.php'; ?>	
 				</span>
 				<span class="float-left">
 					<?php include __DIR__ . '/templates/copyright.html.php';?>
 				</span>
-			</div>
 		</footer>
 	</body>
 	<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>

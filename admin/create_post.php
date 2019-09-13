@@ -54,7 +54,7 @@
 						</div>
 						<div class="form-group form-group-lg">
 							
-							<textarea name="body" id="body" col="30" row="10" class="form-control"><?php echo $body; ?></textarea>
+							<textarea name="body" id="body" col="30" row="50" class="form-control"><?php echo $body; ?></textarea>
 							
 						</div>
 						<div>
@@ -104,6 +104,4 @@
 </body>
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<script src="../ckeditor/ckeditor.js"></script>
-<script>CKEDITOR.replace('body'); </script>
 </html>

@@ -12,8 +12,8 @@
 	<?php include __DIR__ .'/../../templates/head.html.php';?>
 	
 	<!-- Links for google code prettify both (.css and .js) files -->
-	<link rel="stylesheet" type="text/css" href="/../spexproject/resources/css/google-code-prettify/prettify.css">
-	<script type="text/javascript" src="/../spexproject/resources/css/google-code-prettify/prettify.js"></script>
+	<link rel="stylesheet" type="text/css" href="/spexproject/resources/css/google-code-prettify/prettify.css">
+	<script type="text/javascript" src="/spexproject/resources/css/google-code-prettify/prettify.js"></script>
 	<title><?php echo htmlspecialchars_decode($posts['post_title']) ;?> | Spex Solutions</title>
 </head>
 <body onload="PR.prettyPrint()">

@@ -1,5 +1,6 @@
 <?php
-$conn = mysqli_connect('localhost', 'spex_db_user_member','AQD8Z0jHlUJypnKf','spex_db');
+require_once __DIR__ . '/DbCredentials.php';
+$conn = mysqli_connect($servername, $username,$password,$dbname);
 	if(!$conn){
 		die('Could not connect: ' . mysqli_connect($con));
 	}

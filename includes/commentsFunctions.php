@@ -1,18 +1,9 @@
 <?php
-	//global $page_id;
 
 	require_once __DIR__ .'/DbConnection.php';
 	//$page_id = $posts['post_id'];
 	//Get post by post_id represented by page_id
-	/*
-	$sql ="SELECT * from `posts` WHERE post_id = $page_id";
-	$result = mysqli_query($conn, $sql);
-	if($result){
-		$posts = mysqli_fetch_assoc($result);
-	}else{
-		echo 'Error' .$sql. '<br>' .mysqli_error($conn);
-	}
-*/
+	
 	function getAllPostComments($page_id){
 		global $conn, $page_id;
 		//Get all comments related to a particular post and display them on the page of the post 
@@ -75,7 +66,11 @@
 		$body = mysqli_real_escape_string($conn, $body);
 		
 		$sql = "INSERT INTO `comments` (user_id, post_id, body, created_at) VALUES ($user_id, $page_id, '$body', now() )";
-
+		//$sql = "INSERT INTO `comments` (user_id, post_id, body, created_at) VALUES (?, ?, ?, ? )";
+		//$stmt = $conn->prepare($sql);
+		
+		//$stmt = bind_param("i,i,s,s",$user_id, $page_id, $body, now());
+		//$stmt -> execute()
 		mysqli_query($conn, $sql);
 
 		$id = mysqli_insert_id($conn);

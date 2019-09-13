@@ -8,6 +8,7 @@ $published = 0;
 $title ='';
 $post_slug = '';
 $body = '';
+$sound ='';
 $feature_image = '';
 $post_topic ='';
 $topic_id ='';
@@ -16,7 +17,7 @@ $topic_id ='';
 /*---------------
 --Post Functions
 -----------------*/
-//Get numbe of posts in the posts table
+//Get number of published posts in the posts table
 function getAllPublishedPostIds(){
 	global $conn;
 	
@@ -29,14 +30,28 @@ function getAllPublishedPostIds(){
 		return null;
 	}	
 }
-//Get all posts based on the user
+//Get the first two most recent posts
+function getMostRecentPosts(){
+	//
+	global $conn;
+	$sql = "SELECT * FROM `posts` WHERE published=1 ORDER BY created_at DESC LIMIT 3";
+	$result = mysqli_query($conn, $sql);
+	if($result){
+		$recent_posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		return  $recent_posts;
+	}else{
+		echo 'No recent posts';
+	}
+	
+}
+//Get posts for admins and authors based on the user logged in
 function getAllPosts(){
 	global $conn, $_SESSION;
 	
 	//Admins can view all posts but Authors will view only the posts they authored
 	if($_SESSION['role'] == 'Admin'){
 		
-		$sql = "SELECT * FROM `posts`";
+		$sql = "SELECT * FROM `posts` ORDER BY post_id DESC";
 		$select = mysqli_query($conn, $sql);
 	}elseif($_SESSION['role'] == 'Author'){
 		
@@ -56,7 +71,7 @@ function getAllPosts(){
 	return $all_posts;
 }
 
-//Get a single post by supplying post idate
+//Get a single post by supplying post id
 function getPostById($post_id){
 	global $conn;
 	$sql = "SELECT * FROM `posts` WHERE post_id=$post_id LIMIT 1";
@@ -123,15 +138,29 @@ if(isset($_GET['delet-post'])){
 --Post Functions
 -------------------------*/
 function createPost($request_values){
-	global $conn, $errors, $title, $topic_id, $body, $published;
+	global $conn, $errors, $title, $topic_id, $body, $published, $sound;
 	
-	$title = esc($request_values['title']);
+	$title = htmlspecialchars(esc($request_values['title']));
 	$body = htmlspecialchars(esc($request_values['body']));
 	$user_id = $_SESSION['user_id'];
 	
-	//Validate form
-	if(empty($title)){array_push($errors, "Post title is required");}
-	if(empty($body)){array_push($errors, "Post body is required");}
+	//Validate form, if $title and $body are not empty create metaphone words
+	if(empty($title)){
+		array_push($errors, "Post title is required");
+	}else{
+		$words = explode(' ', $title);
+		foreach($words as $word){
+			$sound .= metaphone($word).' ';
+		}
+	}
+	if(empty($body)){
+		array_push($errors, "Post body is required");
+	}else{
+		$words = explode(' ', $body);
+		foreach($words as $word){
+			$sound .= metaphone($word).' ';
+		}
+	}
 	if(empty($request_values['topic_id'])){
 		array_push($errors, "Post topic is required");
 	}else{
@@ -155,7 +184,7 @@ function createPost($request_values){
 	
 	//If no errors in the form, insert posts	
 	if(!$errors){
-		$query = "INSERT INTO `posts` (user_id, post_title, post_slug, post_body, published, created_at) VALUES($user_id, '$title', '$post_slug', '$body', $published, now())";
+		$query = "INSERT INTO `posts` (user_id, post_title, post_slug, post_body, published, created_at, metaphoned) VALUES($user_id, '$title', '$post_slug', '$body', $published, now(), '$sound')";
 		
 		$result = mysqli_query($conn, $query);
 		if($result){ //if post created successful
@@ -188,8 +217,8 @@ function editPost($role_id){
 }
 function updatePost($request_values){
 	global $conn, $title, $post_slug, $body, $published, $isEditingPost, $post_id, $errors;
-	$title = esc($request_values['title']);
-	$body = esc($request_values['body']);
+	$title = htmlspecialchars(esc($request_values['title']));
+	$body = htmlspecialchars(esc($request_values['body']));
 	$post_id = esc($request_values['post_id']);
 	if(isset($request_values['topic_id'])){
 		$topic_id = esc($request_values['topic_id']);
@@ -201,13 +230,27 @@ function updatePost($request_values){
 	//Create slug by replacing spaces in title with hyphens
 	$post_slug = makeSlug($title);
 	//Validate form
-	if(empty($title)){array_push($errors, "Post title is required");}
-	if(empty($body)){array_push($errors, "Post body is required");}
+	if(empty($title)){
+		array_push($errors, "Post title is required");
+	}else{
+		$words = explode(' ', $title);
+		foreach($words as $word){
+			$sound .= metaphone($word).' ';
+		}
+	}
+	if(empty($body)){
+		array_push($errors, "Post body is required");
+	}else{
+		$words = explode(' ', $body);
+		foreach($words as $word){
+			$sound .= metaphone($word).' ';
+		}
+	}
 	
 	
 	//Udate if there are no errors
 	if(!$errors){
-		$query = "UPDATE `posts` SET post_title='$title', post_slug='$post_slug', post_body='$body', published=$published, updated_at=now() WHERE post_id=$post_id";
+		$query = "UPDATE `posts` SET post_title='$title', post_slug='$post_slug', post_body='$body', published=$published, updated_at=now(), metaphoned='$sound' WHERE post_id=$post_id";
 		
 		//Attach topic to posts in post_topic table
 		if(mysqli_query($conn, $query)){ //if query was created successfully
@@ -234,8 +277,8 @@ function deletePost($post_id){
 	global $conn;
 	$sql = "DELETE FROM `posts` WHERE post_id=$post_id";
 	if(mysqli_query($conn, $sql)){
-		
-		$_SESSION['message'] = 'Post delete successful.';
+				
+		$_SESSION['message'] = 'Post, related comments and replies deleted successfully.';
 		header('Location: posts.php');
 			exit(0);
 	}
@@ -258,7 +301,7 @@ if(isset($_GET['publish']) || isset($_GET['unpublish'])){
 function togglePublishPost($post_id, $message){
 	global $conn;
 	
-	$sql = "UPDATE posts SET published =!published WHERE post_id=$post_id";
+	$sql = "UPDATE `posts` SET published =!publish WHERE post_id=$post_id";
 	if(mysqli_query($conn, $sql)){
 		$_SESSION['message'] = $message;
 		header('Location: posts.php');

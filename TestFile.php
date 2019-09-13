@@ -1,28 +1,8 @@
 <?php
-include __DIR__ .'/includes/DatabaseConnection.php';
+include __DIR__ . '/admin/includes/posts_functions.php';
 
-selectRecord($pdo, ['email' => 'fkahindi@yahoo.com']);
+$recent_posts = getMostRecentPosts();
 
-echo $query;
-
-function selectRecord($pdo, $fields){
-	
-	$query = 'SELECT * FROM `members`';
-	
-	foreach ($fields as $key=>$value){
-		$query .= '`'.$key. '` =:' . $key. ',';
-	}
-	
-	$query .= rtrim($query, ',');
-	
-	$query .= 'WHERE `email` = :$key';
-	
-	query($pdo, $query, $fields);
-	
-}
-
-function query($pdo, $sql, $fields=[]){
-	$query = $pdo->prepare($sql);
-	$query->execute($fields);
-	return $query;
+foreach($recent_posts as  $recent_post){
+	echo $recent_post['post_title'].'<br>';
 }

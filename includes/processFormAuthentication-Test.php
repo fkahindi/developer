@@ -97,8 +97,8 @@ if(isset($_POST['signup'])){
 				
 	}else{
 		try{			
-			$membersTable = new DatabaseTable($pdo, 'users', 'email');
-			$query = $membersTable->selectRecords($email, $username);
+			$usersTable = new DatabaseTable($pdo, 'users', 'email');
+			$query = $usersTable->selectRecords($email, $username);
 			
 			if($query->rowCount()>0){
 				//User already exists
@@ -130,7 +130,7 @@ if(isset($_POST['signup'])){
 				'created_at' => $created_at
 			];
 			
-			$membersTable->insertRecord($fields);
+			$usersTable->insertRecord($fields);
 					
 			header('Location: ../templates/signupsuccessful.html.php');
 			}
@@ -297,8 +297,8 @@ if(isset($_POST['change_password'])){
 	}else{
 		
 		try{
-			$membersTable = new DatabaseTable($pdo,'users', 'email');
-			$query = $membersTable->selectRecords($_SESSION['email'],$_SESSION['username']);
+			$usersTable = new DatabaseTable($pdo,'users', 'email');
+			$query = $usersTable->selectRecords($_SESSION['email'],$_SESSION['username']);
 			
 			if($query->rowCount()==1){
 				
@@ -333,7 +333,7 @@ if(isset($_POST['change_password'])){
 				
 				$fields =['password'=> $new_password];
 				
-				$sql=$membersTable->updateRecords($fields);
+				$sql=$usersTable->updateRecords($fields);
 				
 				//session_destroy();
 			
@@ -378,9 +378,9 @@ if(isset($_POST['recover_password'])){
 	}else{
 		
 		try{
-			$membersTable = new DatabaseTable($pdo, 'users', 'email');
+			$usersTable = new DatabaseTable($pdo, 'users', 'email');
 			
-			$query = $membersTable->selectRecords($_POST['email'],$username);
+			$query = $usersTable->selectRecords($_POST['email'],$username);
 			
 			if(empty($query->rowCount())){
 				$valid = false;
@@ -529,7 +529,7 @@ if(isset($_POST['image-upload'])){
 	try{	
 		//Check if an image has been selected
 	
-		if(getimagesize($_FILES['fileToUpload']['tmp_name']) !== false){
+		if(!empty(getimagesize($_FILES['fileToUpload']['tmp_name']))){
 			
 			// Check file size
 			if($_FILES['fileToUpload']['size']>500000){
@@ -541,7 +541,7 @@ if(isset($_POST['image-upload'])){
 				// Allow only .jpg, .png and .gif file formats
 			}else if($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'gif'){
 				$uploadOk = 0;
-				$errors['fileToUpload'] = 'Sorry, only JPG and PNG files are allowed';
+				$errors['fileToUpload'] = 'Sorry, only JPG, PNG or GIF files are allowed';
 				
 				include __DIR__ . '/../templates/imageupload.html.php';
 			}else{
@@ -564,8 +564,8 @@ if(isset($_POST['image-upload'])){
 			$username= $_SESSION['username'];
 			
 			try{
-				$membersTable = new DatabaseTable($pdo, 'users', 'email');
-				$query = $membersTable->selectRecords($email, $username);
+				$usersTable = new DatabaseTable($pdo, 'users', 'email');
+				$query = $usersTable->selectRecords($email, $username);
 				
 				if($query->rowCount()>0){
 					$row = $query->fetch();
@@ -600,12 +600,13 @@ if(isset($_POST['image-upload'])){
 				$file_path = '/spexproject/resources/photos/'.$target_file;
 											
 				try{
+					//Update profile_photo file path in the database
 					$fields = ['profile_photo' => $file_path];
 					
-					$membersTable->update($fields);
+					$usersTable->updateRecords($fields);
 					
 					//Fetch the records again to place the image photo in session
-					$query = $membersTable->selectRecords($email, $username);
+					$query = $usersTable->selectRecords($email, $username);
 					if($query->rowCount()== 1){
 						$row = $query->fetch();
 						

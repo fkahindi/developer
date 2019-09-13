@@ -35,13 +35,6 @@ body {
 	background:white;
 	line-height: 1.5;
 }
-main {
-	font-family: sans-serif;
-}
-ol, ul {
-  list-style: none;
-}
-
 a{
 	text-decoration:none;
 }
@@ -58,9 +51,9 @@ table {
   border-spacing: 0;
 }
 /*
-_____________________________________________________________
-General Styles
-_____________________________________________________________
+/////////////////////
+** GENERAL STYLES
+*********************
 */
 *,
 *::before,
@@ -73,13 +66,12 @@ _____________________________________________________________
 .errors{
 	padding:1em;
 	border:1px solid red;
-	background:lightyelloe;
+	background:lightyellow;
 	color:red;
 	margin-bottom:1em;
 	overflow:auto;
 }
 .float-right{
-	
 	float:right;
 }
 .float-left{
@@ -99,7 +91,95 @@ header, footer{
 	padding:0;
 	font-family:Calibri, sans-serif;		
 }
+nav a{
+	font-variant:small-caps;
+	color:rgb(255, 255,255);
+}
+nav ul, .account-display-settings ul{
+	list-style:none;
+}
+nav ul li a:hover{
+	background-color: #334F5C;
+	color:rgb( 200, 200, 233);
+}
+nav ul li a{
+	padding:15px 10px;
+	color:rgb(250, 250,250);
+}
+main{
+	margin:0 auto;
+	font-family: sans-serif;
+}
+main ul, ol{
+	text-indent: 10px;
+	padding-left: 20px;
+}
+main ul{
+	list-style:disc;
+}
 
+main table, tr{
+	width:100%;
+	text-align:left;
+}
+main table th{
+	font-weight:bold;
+	background:rgb(200,230,200);
+}
+main tbody tr:nth-child(even){
+	 background: #f0f0f2;
+}
+main table td:first-child {
+	font-family:'Courier New', courier;
+	font-weight:bold;
+	
+}
+main table th, td{
+	padding:3px 10px;
+	border:thin solid rgb(200,200,200);
+}
+section, aside{
+	padding:10px;
+	text-align:justify;
+}
+footer{
+	padding:10px 40px;
+	background:rgba(15, 15,15, 0.5);
+}
+footer a{
+	font-variant:small-caps;
+}
+
+footer li{
+	display:inline-table;
+}
+footer ul span{
+	color:rgb(200,200,200);
+}
+footer a{
+	text-decoration:none;
+	color:black;
+}
+footer a:hover{
+	color:rgb(240, 240,240);
+}
+/*
+/////////////////////////////////////
+CLEARFIX
+*************************************
+*/
+.group:before,
+.group:after{
+	content:"";
+	display: table;
+}
+.group:after{
+	clear:both;
+} 
+.group{
+	clear:both;
+	*zoom:1;
+} 
 
 /*
 //////////////////////////////
@@ -122,16 +202,24 @@ main h3{
 	text-align:left;
 	color:maroon;
 }
+main h4{
+	text-align:left;
+	color:purple;
+}
 main p{
 	text-align:justify;
-	padding:0;
+	padding:5px 0;
 }
-.login-bar a:hover{
+/* 
+///////////////////////////////
+ STYLING FOR HEADER SECTIONS
+*******************************
+*/
+.log-account-section a:hover{
 	text-decoration:underline;
 }
-.login-signup-search-bar{
-	display:inline-block;
-	float:left;
+.log-account-section span{
+	color:rgba(240, 256,40,.3);
 }
 .login-signup{
 	display:block;
@@ -141,12 +229,12 @@ main p{
 .login-signup a{
 	color:rgb( 200, 200, 233);
 }
+
 .search-container{
-	dispaly:block;
+	display:block;
 	margin:0;
 	width:100%;
 }
-
 .search-container input[type=text] {
   padding: 6px;
   width:100%;
@@ -190,7 +278,7 @@ main p{
 .tooltip .tooltip-text{
 	visibility:hidden;
 	width:140px;
-	background-color:#616D7E;
+	background:rgb( 35, 35, 60);
 	color:#fff;
 	padding:5px 0;
 	border-radius:6px;
@@ -205,7 +293,6 @@ main p{
 	opacity:0;
 	transition:opacity 0.3s;
 }
-
 .tooltip-text p{
 	font-size:90%;
 	line-height:1;
@@ -236,32 +323,29 @@ STYLING FOR PROFILE SETTINGS AND DISPLAY
 	display:none;
 	position:relative;
 	top:0;
-	right:100%;
-	min-width:170px;
-	background-color:#616D7E;
+	min-width:10.625em;
+	background:rgb( 35, 35, 60);
 	color:#fff;
-	padding:10px 5px;
 	border-radius:5px;
 	z-index:1;
 }
 .account-display-settings ul li{
-	border-bottom: 3px groove gray;
+	border-bottom: thin groove gray;
+}
+.account-display-settings ul li:last-child{
+	border-bottom:none;
 }
 
 #profile-checkbox-control:checked + .account-display-settings{
 	display:block;
 	text-align:left;
-	
 }
-
 #profile-checkbox-control:checked ~ .tooltip-text{
 	visibility:hidden;
 }
 .account-display-settings a{
 	font-size:90%;
-	line-height:1.5;
 	text-align:left;
-	padding:15px 10px;
 	color:rgb( 200, 200, 233);
 }
 .account-display-settings a:hover{
@@ -270,66 +354,7 @@ STYLING FOR PROFILE SETTINGS AND DISPLAY
 header  ul, .login-signup span{
 	color:rgb(200,200,200);
 }
-nav a{
-	font-variant:small-caps;
-	color:rgb(255, 255,255);
-}
-nav ul li a:hover{
-	background-color: #334F5C;
-	color:rgb( 200, 200, 233);
-	
-}
-nav ul li a{
-	padding:15px 10px;
-	color:rgb(250, 250,250);
-}
-main{
-	margin:0 auto;
-}
-main ul{
-	list-style:disc;
-	text-indent: 3px;
-	padding-left: 20px;
-}
-main ul li{
-	text-align:left;
-	text-indent: 5px;
-}
 
-
-section, aside{
-	padding:10px;
-	text-align:justify;
-}
-footer{
-	position:relative;
-	bottom:0;
-	left:0;
-	right:0;
-	padding:10px 40px;
-	background:rgba(15, 15,15, 0.5);
-}
-footer a{
-	font-variant:small-caps;
-}
-
-footer li{
-	display:inline-table;
-}
-footer ul span{
-	color:rgb(200,200,200);
-}
-footer a{
-	text-decoration:none;
-	color:black;
-}
-footer a:hover{
-	color:rgb(240, 240,240);
-}
-::selection{
-	color:red;
-	background:yellow;
-}
 
 /*
 ///////////////////////////////
@@ -415,7 +440,7 @@ STYLING FOR COMMENTS SECTION
 	text-transform:uppercase;
 }
 .reply-form{
-	left-margin:30px;
+	margin-left:30px;
 	display:none;
 }
 div[class^="group replies_container_"] {
@@ -496,23 +521,27 @@ pre{
 	-o-tab-size:4;
 	tab-size:4;
 	overflow-x:auto;
+	margin:10px 0;
+	font-size:.9em;
 	
 }
 code{
 	font-family:'Courier New';
 	font-size:1em;
 	color:#000;
+	padding:0 2px;
 }
 p code{
-	background:rgb(220,220,220);
+	background:rgb(230,230,230);
 }
-/******************************************
+/*
+////////////////////////////////////////////
 **STYLING FOR DYNAMIC CONTENT ON INDEX PAGE
 ******************************************/
 .paragraph-snippet{
 	padding: 10px 5px;
 	font-family:'Times New Roman';
-	font-siz:80%;
+	font-size:90%;
 	line-height:1;
 	border:0 solid;
 	box-shadow:0 5px 5px grey; 
@@ -521,33 +550,28 @@ p code{
 	color:gray;
 	font-size:14px;
 }
-/*
-===================================================
-CLEARFIX
-===================================================
-*/
-.group:before,
-.group:after{
-	content:"";
-	display: table;
+.recent-posts{
+	margin-left:1em;
 }
-.group:after{
-	clear:both;
-} 
-.group{
-	clear:both;
-	*zoom:1;
-} 
-
-/***************************************** 
-MENU CONTROLS FOR SMALL DEVICES ONLY
+.recent-posts a{
+	color:#157DEC;
+}
+.recent-posts a:hover{
+	text-decoration:underline;
+	color:#0041C2;
+}
+/*
+////////////////////////////////////////// 
+HIDE MENU CONTROLS FOR SMALL DEVICES ONLY
 ******************************************/
 #menu-checkbox-control, .dropdown-button{
 	display:none;
 }
 @media only screen and (max-width: 600px){
 /* 
-Extra Small devices (Phones 600px and down) 
+--------------------------------------------
+EXTRA SMALL DEVICES (PHONES 600PX AND DOWN) 
+--------------------------------------------
 */
 
 
@@ -564,43 +588,47 @@ header{
 [class*="col-"]{
 	width:100%
 }
-
-.login-bar{
-	width:50%;
-	float:right;
-	padding:5px 0 0 0;
-	text-align:left;
-	font-size:80%;
+.search-container{
+	display:none;
+}
+.banner-bar, .log-account-section{
+	display:block;
+	height:60px;
+	margin:0;
+	padding:0;
+	vertical-align:top;
 }
 .banner-bar{
 	float:left;
 	width:50%;
-	padding-left:10%;
+	padding-left:15%;
 	padding-top:10px;
 	text-align:right;
 }
-.login-bar span{
-	color:white;
+.banner{
+	text-align:center;
+	width:90%; 
+	height:50%;
 }
-.login-bar a:hover{
-	text-decoration:underline;
+.log-account-section{
+	float:right;
+	width:50%;
+	padding-right:10%;
+	text-align:right;
+	font-size:80%;
+}
+.account-display-settings{
+	right:100%;
+	margin-left:-20px;
+}
+.account-display-settings ul li{
+	padding:2px 0px 2px 20px;
 }
 .account-photo-box{
-	display:inline-block;
-	float:right;
 	width:25%;
 	height:30px;
 	text-align:right;
-	padding:0 10px;
-}
-.login-signup{
-	display:inline-block;
-	float:left;
-	width:70%;
-	height:35px;
-	padding:5px;
-	text-align:center;
-	font-size:90%;
+	padding:0 5px;
 }
 .image-photo{
 	height:25px;
@@ -609,21 +637,12 @@ header{
 	border-radius:25px 25px;
 }
 
-.banner{
-	text-align:center;
-	width:90%; 
-	height:50%;
-	
-}
-
 /* 
 ------------------------------------------------
 NAVIGATION MENU: FOR MOBILE 
 ------------------------------------------------
 */
-#menu-checkbox-control{
-	
-}
+
 .dropdown {
     position: absolute;
     display: inline-block;
@@ -647,7 +666,7 @@ NAVIGATION MENU: FOR MOBILE
 .dropdown-content {
     display: none;
     position: absolute;
-	min-width: 150px; 
+	min-width: 12.5em;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;	
 }
@@ -659,24 +678,23 @@ NAVIGATION MENU: FOR MOBILE
 	text-align:left;
 }
 .dropdown-content li{
-	background:#616D7E;
-	border-top: 1px solid silver;
+	background:rgb( 35, 35, 60);
+	border-top: thin solid silver;
 	}
 .dropdown-content a:hover {
-	color:white;
+	color:rgb( 200, 200, 233);
 	}
 
 .dropdown-button:hover{
-	background:rgba(200,200,200,0.3);
+	background:rgb( 35, 35, 60);
 }
-
-nav{
-	width:50%;
-	height:40px;
-	margin:0;
-	text-align:center;
+nav a{
+	font-variant:normal;
 }
-
+nav ul li a:hover{
+	background:rgb( 35, 35, 50);
+	
+}
 nav ul>span{
 	display:none;
 }
@@ -709,7 +727,7 @@ FOOTER SECTION
 footer{
 	width:100%;
 	min-height:40px;
-	font-size:12px;
+	font-size:80%;
 	text-align:center;
 	padding:10px;
 }
@@ -725,7 +743,7 @@ footer li{
 }
 footer a{
 	color:black;
-	font-size:90%;
+	font-size:80%;
 }
 footer a:hover{
 	color:white;
@@ -735,9 +753,11 @@ footer ul span{
 }
 }
 
-@media only screen and (min-width:600px) and (max-width:768px){
-/* 
-Small Devices (Portrait tablets and large phones, 600px and above)
+@media only screen and (min-width:600px) and (max-width:768px) {
+/*
+-------------------------------------------------------------------
+SMALL DEVICES (PORTRAIT TABLETS AND LARGE PHONES, 600PX AND ABOVE)
+-------------------------------------------------------------------
 */
 /*
 =================================================
@@ -762,31 +782,61 @@ main{
 header{
 	height:70px;
 	}
-.banner-bar, .nav-bar, .login-bar{
-	float:left;
-	display:inline-block;
+.banner-bar, .navigation-utilities-section, .log-account-section{
+	display:block;
 	height:70px;
 	margin:0;
-	padding:5px 0;
+	padding:0;
+	vertical-align:top;
 }
-
 .banner-bar{
-	width:15%;	
+	float:left;
+	width:15%;
 }
-.nav-bar{
+.banner{
+	padding-top:0;
+	padding-left:5px;
+	width:90%; 
+	height:40%;
+}
+.navigation-utilities-section{
+	float:left;
 	width:65%;
 }
-.login-bar{
+.search-container, .nav-bar{
+	text-align:center;
+}
+.search-container{
+	height:30px;
+}
+.nav-bar{
+	height:40px;
+}
+.search-container input[type=text] {
+  padding: 3px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.search-container button {
+  padding: 3px 9px;
+  margin-left:-25px;
+  margin-top: 5px;
+  font-size: 14px;
+  border-radius:0 5px 5px 0;
+}
+.log-account-section{
+	float:right;
 	width:20%;
-	padding-right:5px;
+	text-align:center;
 }
-
-.login-bar a:hover{
-	text-decoration:underline;
+.login-signup{
+	padding-top:10px;
 }
-.login-bar span{
-	color:rgba(240, 256,40,.3);
-	
+.account-display-settings{
+	right:100%;
+}
+.account-display-settings ul li{
+	padding:2px 0px 2px 20px;
 }
 .image-photo{
 	height:30px;
@@ -794,34 +844,18 @@ header{
 	border:3px solid #2b5959;
 	border-radius:30px 30px;
 }
-
 .account-photo-box{
 	display:inline-block;
 	float:none;
-	width:25%;
-	height:30px;
-	text-align:left;
+	width:40%;
+	height:35px;
+	margin-right:20%;
 	padding:5px 0;
 }
-.login-signup{
-	display:inline-block;
-	float:left;
-	width:70%;
-	height:35px;
-	padding-top:5px;
-	text-align:left;
-	font-size:70%;
-}
-.banner{
-	padding-top:0;
-	padding-left:5px;
-	width:100%; 
-	height:50%;
-}
+
 .dropdown button{
 	display:none;
 }
-
 
 /*
 =================================================
@@ -829,26 +863,25 @@ NAVIGATION & LINKS
 =================================================
 */
 nav{
-	position:relative;
-	top:15px;
 	text-align:center;
 	margin: 0;
 	padding: 5px 0;
+	font-size:100%;
+}
+nav ul{
+	text-align:center;
 }
 nav li{
 	display:inline-block;
+	padding:0;
 }
-
 nav ul li a{
-	padding:15px 2px;
-	color:rgb(250, 250,250);
+	padding:8px 2px;
 	font-size:80%;
 	
 }
-nav ul li a:hover,nav ul li a:active{
-	background-color: #334F5C;
-	color:rgb(255, 255,255);
-}
+
+
 /*
 =================================================
 FOOTER
@@ -893,84 +926,93 @@ main h3{
 }
 @media only screen and (min-width:768px) and (max-width:992px){
 /*
-================================================
+------------------------------------------------
 MEDIUM DEVICES (LANDSCAPE TABLETS, 768px and up)
-================================================
+-------------------------------------------------
 */
  
-.float-right{
-	float:right;
-}
-float-left{
-	float:left;
-}
+
 /*
 =================================================
 HEADER AND SECTIONS
 =================================================
-*/	
+*/
 header{
-	height:70px;
-	}
-.banner-bar, .nav-bar, .login-bar{
-	float:left;
-	display:inline-block;
+	width:100%;
 	height:70px;
 	margin:0;
-	padding:5px 0;
+	}
+.banner-bar, .navigation-utilities-section, .log-account-section{
+	display:block;
+	height:70px;
+	margin:0;
+	padding:0;
+	vertical-align:top;
 }
 .banner-bar{
-	width:20%;	
-}
-.nav-bar{
-	width:60%;
-}
-.login-bar{
-	width:20%;
-	padding-top:10px;
-	padding-right: 5px;
-}
-
-.login-bar a:hover{
-	text-decoration:underline;
-}
-.login-bar span{
-	color:rgba(240, 256,40,.3);
-}
-.image-photo{
-	height:30px;
-	width:30px;
-	border:2px solid #2b5959;
-	border-radius: 30px 30px;
-}
-
-.account-photo-box{
-	display:inline-block;
-	float:right;
-	width:25%;
-	height:35px;
-	padding:5px;
-	
-}
-.login-signup{
-	display:inline-block;
 	float:left;
-	width:70%;
-	height:35px;
-	padding-top:0;
-	text-align:left;
-	font-size:80%;
+	width:20%;
 }
 .banner{
 	padding-top:5px;
-	padding-left:10px;
-	width:90%; 
+	padding-left:20px;
+	width:80%; 
 	height:60%;
+}
+.navigation-utilities-section{
+	float:left;
+	width:50%;
+}
+.search-container, .nav-bar{
+	height:35px;
+	text-align:center;
+}
+.search-container input[type=text] {
+  padding: 3px;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.search-container button {
+  padding: 3px 9px;
+  margin-left:-25px;
+  margin-top: 5px;
+  font-size: 14px;
+  border-radius:0 5px 5px 0;
+}
+.log-account-section{
+	float:right;
+	width:30%;
+	text-align:center;
+}
+.login-signup{
+	padding-top:10px;
+}
+.account-display-settings{
+	right:100%;
+	
+}
+.account-display-settings ul li{
+	padding:2px 0px 2px 20px;
+}
+.image-photo{
+	position:relative;
+	left:0;
+	height:30px;
+	width:30px;
+	border:3px solid #2b5959;
+	border-radius: 30px 30px;
+}
+.account-photo-box{
+	float:right;
+	display:inline-block;
+	width:25%;
+	height:35px;
+	margin-right:25%;
+	padding:5px;
 }
 .dropdown button{
 	display:none;
 }
-
 
 /*
 =================================================
@@ -978,61 +1020,27 @@ NAVIGATION & LINKS
 =================================================
 */
 nav{
-	position:relative;
-	top:20px;
+	margin:0 ;
 	text-align:left;
-	margin:0;
-	padding:0;
+	padding-top:0;
+	padding-bottom:5px;
+	font-size:100%;
+	
+}
+nav ul{
+	text-align:center;
 }
 nav li{
 	display:inline-block;
+	padding:0;
 }
-
 nav ul li a{
-	padding:15px 4px;
-	color:rgb(250, 250,250);
-	font-size:90%;
+	padding:8px 2px;
+	font-size:80%;
 	
 }
-nav ul li a:hover{
-	background-color: #334F5C;
-	color:rgb(255, 255,255);
-}
-footer li{
-	display:inline-table;
-}
-.login-bar span{
-	color:rgba(240, 256,40,.3);
-}
-ul span{
-	color:rgb(200,200,200);
-}
-footer a{
-	color:black;
-	font-size:80%;
-}
-footer a:hover{
-	color:rgb(240, 240,240);
-}
 
-/*
-===================================================
-CLEARFIX
-===================================================
 
-*/
-.group::before,
-.group::after{
-	content:"";
-	display: table;
-}
-.group::after{
-	clear:both;
-} 
-.group{
-	clear:both;
-	*zoom:1;
-}
 /*
 ===========================================
 PAGE GRID
@@ -1044,6 +1052,7 @@ PAGE GRID
 .col-4-5{
 	display: inline-block;
 	vertical-align: top;
+	float:left;
 }
 .col-1-5{
 	max-width:20%;
@@ -1077,103 +1086,92 @@ main h1{
 }
 main h2{
 	font-size:130%;
-	font-weight:600;
-	color:green;
-	
+	font-weight:600;	
 }
 main h3{
 	font-size:110%;
-	font-weight:600;
-	
+	font-weight:600;	
 }
-
-
-/*
-End of desktop styles
-_________________________________________________
-*/
+main h4{
+	font-size:100%;
+	font-weight:400;
+}
 }
 
 @media only screen and (min-width:992px) and (max-width:1200px){
 /*
-Large Devices (Laptops and Desktops 992px and above)  
+----------------------------------------------------
+LARGE DEVICES (LAPTOPS AND DESKTOPS 992PX AND ABOVE)  
+---------------------------------------------------
 */
 	
 /*
 =================================================
-HEADER AND SECTIONS
+HEADER SECTIONS
 =================================================
-*/	
+*/
 header{
-	height:100px;
-	}
-.banner-bar, .nav-bar, .login-bar{
-	float:left;
-	display:inline-block;
+	width:100%;
 	height:100px;
 	margin:0;
-	padding:10px 0;
+	}
+.banner-bar, .navigation-utilities-section, .log-account-section{
+	display:block;
+	height:100px;
+	margin:0;
+	padding:0;
+	vertical-align:top;
 }
 .banner-bar{
+	float:left;
 	width:20%;
-	
 }
-.nav-bar{
+.banner{
+	padding-top:5px;
+	padding-left:20px;
+	width:80%; 
+	height:60%;
+}
+.navigation-utilities-section{
+	float:left;
 	width:50%;
 }
-.login-bar{
-	width:30%;
-	padding-right:15px;
+.search-container, .nav-bar{
+	height:50px;
+	text-align:center;
 }
-
-.login-bar a:hover{
-	text-decoration:underline;
-}
-.login-bar span{
-	color:rgba(240, 256,40,.3);
-}
-.login-signup-search-bar{
-	display:inline-block;
-	float:left;
-	margin-top:0;
-	width:75%;
-	padding-top:5px;
-	text-align:center;	
-}
-.login-signup-search-bar .login-signup, .search-container{
-	display:block;
-	margin:0;
-	width:100%;
-	height:45%;
-}
-
-
 .search-container button {
 	margin-left:-25px;
 }
-
+.log-account-section{
+	float:right;
+	width:30%;
+	text-align:center;
+}
+.login-signup{
+	padding-top:10px;
+}
+.account-display-settings{
+	right:90%;
+}
+.account-display-settings ul li{
+	padding:2px 0px 2px 20px;
+}
 .image-photo{
 	position:relative;
-	left:20px;
+	left:0;
 	height:35px;
 	width:35px;
 	border:3px solid #2b5959;
 	border-radius: 35px 35px;
-	
 }
 .account-photo-box{
 	float:right;
 	display:inline-block;
 	width:25%;
 	height:40px;
+	margin-right:15%;
 	padding:5px;
-}
-
-.banner{
-	padding-top:5px;
-	padding-left:20px;
-	width:80%; 
-	height:60%;
 }
 .dropdown button{
 	display:none;
@@ -1185,42 +1183,22 @@ NAVIGATION & LINKS
 =================================================
 */
 nav{
-	position:relative;
-	top:40px;
 	margin:0 ;
 	text-align:left;
-	padding-top:0;
-	padding-bottom:10px;
+	padding-top:10px;
+	padding-bottom:5px;
 	font-size:100%;
+}
+nav ul{
+	text-align:center;
 }
 nav li{
 	display:inline-block;
 }
-
 nav ul li a{
-	padding:15px 8px;
-	color:rgb(250, 250,250);
-	font-size:100%;
+	padding:10px 2px;
+	
 }
-
-nav ul li a:hover{
-	background-color: #334F5C;
-}
-nav ul span{
-	color:rgb(200,200,200);
-}
-footer li{
-	display:inline-table;
-}
-
-footer a{
-	text-decoration:none;
-	color:black;
-}
-footer a:hover{
-	color:rgb(240, 240,240);
-}
-
 
 /*
 ===========================================
@@ -1233,6 +1211,7 @@ PAGE GRID
 .col-4-5{
 	display: inline-block;
 	vertical-align: top;
+	float:left;
 }
 .col-1-5{
 	width:20%;
@@ -1268,80 +1247,86 @@ main h1{
 main h2{
 	font-size:150%;
 	font-weight:600;
-		
 }
 main h3{
-	font-size:120%;
+	font-size:140%;
 	font-weight:600;
 }
-
-
-/*
-End of desktop styles
-_________________________________________________
-*/
+main h4{
+	font-size:120%;
+	font-weight:500;
+}
 }
 @media only screen and (min-width:1200px) {
 /*
-Extra large devices (Large Laptops and Desktops, 1200px and up )
+----------------------------------------------------------------
+EXTRA LARGE DEVICES (LARGE LAPTOPS AND DESKTOPS, 1200PX AND UP)
+-----------------------------------------------------------------
 */
 
 /*
 =================================================
-Header and Sections
+HEADER SECTIONS
 =================================================
 */	
 
 header{
 	height:120px;
+	margin:0;
 	}
-.banner-bar, .nav-bar, .login-bar{
-	float:left;
-	display:inline-block;
+.banner-bar, .navigation-utilities-section, .log-account-section{
+	display:block;
 	height:120px;
 	margin:0;
-	padding:10px 0;
+	padding:0;
+	vertical-align:top;
 }
 .banner-bar{
+	float:left;
 	width:20%;
 }
-.nav-bar{
-	width:50%;
-}
-.login-bar{
-	width:30%;
-	padding-right:15px;
-}
-
-.login-signup-search-bar{
-	width:70%;
-	height:40px;
+.banner{
 	padding-top:5px;
-	text-align:center;	
+	padding-left:20px;
+	width:60%; 
+	height:60%;
+}
+.navigation-utilities-section{
+	float:left;
+	width:60%;
+}
+.search-container, .nav-bar{
+	height:60px;
+	text-align:center;
 }
 .search-container button {
-	margin-left:-10px;
+	margin-left:-25px;
 }
-
+.log-account-section{
+	float:right;
+	width:20%;
+	text-align:center;
+}
+.login-signup{
+	padding-top:10px;
+}
+.account-display-settings{
+	right:35%;
+}
+.account-display-settings ul li{
+	padding:2px 0 2px 20px;
+}
 .image-photo{
 	height:50px;
 	width:50px;
 	border-radius: 50px 50px;
 }
 .account-photo-box{
-	float:right;
-	display:inline-block;
 	width:30%;
 	height:60px;
+	margin-right:0;
 	padding:5px;
 	text-align:right;
-}
-
-.banner{
-	padding-top:5px;
-	padding-left:20px;
-	width:60%; 
-	height:60%;
 }
 .dropdown button{
 	display:none;
@@ -1353,13 +1338,14 @@ NAVIGATION & LINKS
 =================================================
 */
 nav{
-	position:relative;
-	top:60px;
 	margin:0 auto;
 	text-align:left;
-	padding-top:0;
+	padding-top:10px;
 	padding-bottom:10px;
 	font-size:90%;
+}
+nav ul{
+	text-align:center;
 }
 nav li{
 	display:inline-block;
@@ -1376,6 +1362,7 @@ PAGE GRID
 .col-4-5{
 	display: inline-block;
 	vertical-align: top;
+	float:left;
 }
 .col-1-5{
 	width:20%;
@@ -1408,6 +1395,16 @@ TYPOGRAPHY
 main p, li{
 	font-size:120%;
 }
+main ul, ol{
+	text-indent: 20px;
+	padding: 20px 40px;
+}
+main table {
+	margin:30px 5px;
+}
+main p{
+	padding:10px 0;
+}
 main h1{
 	font-size:180%;
 	font-weight:800;	
@@ -1417,11 +1414,20 @@ main h2{
 	font-weight:600;	
 }
 main h3{
-	font-size:120%;
+	font-size:140%;
 	font-weight:600;
 }
-
-	
+main h4{
+	font-size:120%;
+	font-weight:500;
+}
+aside .recent-posts{
+	padding-left:50px;
+}
+.recent-posts h5{
+	padding:5px 0;
+	line-height:1;
+}	
 }
 @media print
 {

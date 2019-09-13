@@ -22,14 +22,14 @@
 			<div class="group-form">
 				<label for="fullname">Full Name:</label>
 				<input  name="fullname" id="fullname" class="form-control" type="text" 
-				value="<?php echo (empty($fullname)? '': $fullname); ?>" autocomplete="off" >
+				value="<?php echo (empty($fullname)? '': $fullname); ?>" maxlength="35" autocomplete="off" >
 				<span class="errorMsg"> <?php echo(!empty($errors['fullname']) ? $errors['fullname'] : ''); ?></span>
 			</div>
 			
 			<div class="group-form">
 				<label for="username">Username:<span class="red"> &#42;</span></label>
 				<input  name="username" id="username" class="form-control" type="text" 
-				value="<?php echo (empty($username)? '': $username); ?>" autocomplete="off" required>
+				value="<?php echo (empty($username)? '': $username); ?>" maxlength="15" autocomplete="off" required>
 				<span class="errorMsg"> <?php echo(!empty($errors['username']) ? $errors['username'] : ''); ?></span>
 			</div>
 			
