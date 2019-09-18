@@ -6,7 +6,7 @@ $('document').ready(function(){
 	let confirm_password_state = false;
 
  $('#username').on('blur', function(){
-	let illegalChars = /\W/; // allow letters, numbers, and underscores
+	let illegalChars = /\W/; // allow at least letters, numbers, and underscores
 	let username = $('#username').val();
 	
 	if(username == ''){
@@ -37,7 +37,12 @@ $('document').ready(function(){
 			username_state = false;
 			$('#username').parent().removeClass();
 			$('#username').parent().addClass("form_error");
-			$('#username').siblings("span").text('Sorry...Only letters, number and underscore allowed');
+			$('#username').siblings("span").text('Sorry...Only letters, number or underscore allowed');
+		}else if(username.length<3){
+			username_state = false;
+			$('#username').parent().removeClass();
+			$('#username').parent().addClass("form_error");
+			$('#username').siblings("span").text('Sorry...Username should be three letters or more');
 		}
     }
   });

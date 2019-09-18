@@ -33,6 +33,9 @@ if(isset($_POST['signup'])){
 	if(empty($_POST['username'])){
 		$valid = false;
 		$errors['username'] = 'Name cannot be blank';
+	}else if(strlen($_POST['username'])<3){
+		$valid = false;
+		$errors['username'] = 'Username must be at least three characters';
 	}else{
 		
 		$username = test_input($_POST['username']);
@@ -534,7 +537,7 @@ if(isset($_POST['image-upload'])){
 			// Check file size
 			if($_FILES['fileToUpload']['size']>500000){
 				$uploadOk = 0;
-				$errors['fileToUpload'] = 'Sorry, your file is too large';
+				$errors['fileToUpload'] = 'Sorry, image is too large';
 
 				include __DIR__ . '/../templates/imageupload.html.php';
 				

@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION)){
+	session_start();
+}
+include __DIR__ . '/../includes/loginStatus.php';
+ ?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -11,13 +17,37 @@
 	
 		<form action="/spexproject/includes/processFormAuthentication-Test.php" method="post" enctype="multipart/form-data">
 		<h2>Select image to upload:</h2>
-		
-		<input type="file" name="fileToUpload" id="fileToUpload">
+		<div class="group-form">
+		<input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
 		<span class="errorMsg"><?php echo (!empty($errors['fileToUpload'])? $errors['fileToUpload'] :'');?></span>
-		<input type="submit" value="Upload Image" name="image-upload" class="button">
+		</div>
+		<input type="submit" value="Upload Image" name="image-upload" class="button" id="image-upload-btn">
 		<p><ul><li>Only images sizes of less than 500kb with formats .jpg, .png and .gif are allowed.</li></ul> </p>
 		</form>
 	</div>
 	
 </body>
 </html>
+<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
+<script>
+$('document').ready(function(){
+	
+	$('#image-upload-btn').on('click', function(e){
+		let fileToUpload = $('#fileToUpload').val();
+		
+		if(fileToUpload ==''){
+			e.preventDefault();
+			$('#fileToUpload').parent().removeClass();
+			$('#fileToUpload').parent().addClass("form_error");
+			$('#fileToUpload').siblings("span").text('You did not select an image');
+			return ;
+		}else{
+			return true;
+		}
+	});
+	$('#fileToUpload').on('input', function(){
+		
+		$('#fileToUpload').siblings("span").text('');		
+	});
+});
+</script>

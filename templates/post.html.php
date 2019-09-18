@@ -44,7 +44,6 @@ if(!isset($_SESSION)){
 				<h5><a href="post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></h5>
 				<?php endforeach; ?>
 				</div>
-			<?php include __DIR__ .'/social-media-icons.html.php'; ?>
 		</aside>		
 	</main>
 	<footer class="group">

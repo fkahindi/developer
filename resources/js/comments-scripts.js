@@ -45,10 +45,7 @@ $('document').ready(function(){
 		$('form#comment_reply_form_'+ comment_id).toggle(400);
 		
 		$(this).text($(this).text() == 'Reply' ? 'Cancel' : 'Reply');
-		
-		
-	
-				
+						
 		$('.submit-reply').on('click', function(e){
 			e.preventDefault();
 			

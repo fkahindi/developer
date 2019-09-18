@@ -30,9 +30,7 @@ form a,
 #upload +.section a{
 	text-decoration:none;
 	color:blue;
-	
 }
-
 form .form_image{
 	text-align:center;
 	padding:10px;
@@ -62,15 +60,13 @@ h3,h4{
 	text-align:center;
 }
 .form-p{
-	line-height:0.5;
+	line-height:1;
 	margin:5px auto;
 	padding:10px;
 }
-
 #register ul,#reset ul, #upload ul  {
 	padding-left:10px;
 	font-size:10px;
-	
 }
 .form_error span{
 	width: 80%;
@@ -90,11 +86,10 @@ h3,h4{
   border: 1px solid green;
 }
 #error_msg {
+  text-align: left;
+  margin-left: 10px;
   color: red;
-  text-align: center;
-  margin: 10px auto;
 }
-
 @media only screen and (max-width:600px){
 .section,#register,#login, #recover,#reset, #upload{
 width: 250px; 
@@ -150,7 +145,7 @@ form input[type="submit"]{
   height: 20px;
   font-size: 1em;
 }
- }
+}
 @media only screen and (min-width:600px){
  .section,#register,#login, #recover,#reset, #upload{
 width: 300px; border: 1px solid #d6d7da; 

@@ -23,4 +23,13 @@ $('document').ready(function(){
 		
 	});
 	
+	/* Monitor browser window size and display normal menu if size is greater than 600px */
+	window.onresize = function(){
+		
+		if(window.innerWidth > 600){
+		$('.dropdown-content').show();
+		}else{
+			$('.dropdown-content').hide();
+		}
+	}
 });

@@ -1,8 +1,4 @@
-<?php
-include __DIR__ . '/admin/includes/posts_functions.php';
-
-$recent_posts = getMostRecentPosts();
-
-foreach($recent_posts as  $recent_post){
-	echo $recent_post['post_title'].'<br>';
-}
+<form method="POST" action="">
+	E-mail: <input type="text" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$" title="Type a valid email address."> 
+	<input type="submit" name="submit" value="Submit">
+</form>

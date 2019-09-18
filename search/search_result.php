@@ -26,7 +26,7 @@ if(isset($_POST['search_term'])){
 			<!--Display results -->
 			<h1><?=$row['post_id'] ?></h1>
 			<h2><?=htmlspecialchars_decode($row['post_title']) ?></h2>
-			<h3><?=htmlspecialchars_decode($row['post_body']) ?></h3>
+			<h3><?=htmlspecialchars_decode($row['post_body']['search_term']) ?></h3>
 			<?php
 		}
 	}else{

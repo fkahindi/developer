@@ -2,7 +2,6 @@
 session_start(); 
 include __DIR__ .'/admin/includes/posts_functions.php';
 	$published_post_ids = getAllPublishedPostIds();
-	//$paragraphs = getFirstParagraphPostById();
 ?>
 <!DOCTYPE html>
 <html lang="en">

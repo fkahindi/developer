@@ -523,7 +523,6 @@ pre{
 	overflow-x:auto;
 	margin:10px 0;
 	font-size:.9em;
-	
 }
 code{
 	font-family:'Courier New';
@@ -560,6 +559,7 @@ p code{
 	text-decoration:underline;
 	color:#0041C2;
 }
+
 /*
 ////////////////////////////////////////// 
 HIDE MENU CONTROLS FOR SMALL DEVICES ONLY
@@ -574,10 +574,18 @@ EXTRA SMALL DEVICES (PHONES 600PX AND DOWN)
 --------------------------------------------
 */
 
+/* 
+================================================
+LAYOUT
+================================================
+ */
+[class*="col-"]{
+	width:100%
+}
 
 /* 
 ===================================================
-Header
+HEADER AND SECTIONS
 ===================================================
 */
 
@@ -585,22 +593,36 @@ header{
 	width:100%;
 	height:60px;
 	}
-[class*="col-"]{
-	width:100%
-}
 .search-container{
-	display:none;
+	position:absolute;
+	top:0;
+	display:block;
+	text-align:center;
+	height:20px;
+}
+.search-container input[type=text] {
+  padding: 3px;
+  margin-top: 0;
+  font-size: 14px;
+}
+.search-container button {
+  padding: 3px 9px;
+  margin-left:-25px;
+  margin-top: 0;
+  font-size: 14px;
+  border-radius:0 5px 5px 0;
 }
 .banner-bar, .log-account-section{
 	display:block;
-	height:60px;
-	margin:0;
+	height:30px;
+	
 	padding:0;
-	vertical-align:top;
+	
 }
 .banner-bar{
 	float:left;
-	width:50%;
+	width:40%;
+	margin:10px;
 	padding-left:15%;
 	padding-top:10px;
 	text-align:right;
@@ -613,18 +635,24 @@ header{
 .log-account-section{
 	float:right;
 	width:50%;
-	padding-right:10%;
+	position:absolute;
+	top:30px;
+	left:50%;
+	padding-right:2%;
 	text-align:right;
 	font-size:80%;
 }
 .account-display-settings{
 	right:100%;
-	margin-left:-20px;
+	margin-left:-70px;
 }
 .account-display-settings ul li{
 	padding:2px 0px 2px 20px;
 }
 .account-photo-box{
+	position:absolute;
+	top:0;
+	left:60%;
 	width:25%;
 	height:30px;
 	text-align:right;
@@ -684,7 +712,6 @@ NAVIGATION MENU: FOR MOBILE
 .dropdown-content a:hover {
 	color:rgb( 200, 200, 233);
 	}
-
 .dropdown-button:hover{
 	background:rgb( 35, 35, 60);
 }
@@ -698,7 +725,17 @@ nav ul li a:hover{
 nav ul>span{
 	display:none;
 }
-
+/* 
+------------------------------------------
+TOOL TIP
+------------------------------------------
+ */
+.tooltip .tooltip-text{		
+	margin-left:-100px;
+}
+.tooltip-text p{
+	padding:3px 10px;
+}
 /* 
 --------------------------------------------------
 MAIN SECTION
@@ -717,6 +754,16 @@ main h1, h2, h3{
 	padding:10px 5px;
 	text-align:left;
 	text-shadow: 3px 6px 2px rgba(0, 0, 0, .3);
+}
+.recent-posts h5{
+	padding:2px 0;
+	line-height:.8;
+}
+.recent-posts a{
+	font-size:80%;
+}
+pre{
+	padding-left:10px;
 }
 /* 
 --------------------------------------------------
@@ -761,7 +808,7 @@ SMALL DEVICES (PORTRAIT TABLETS AND LARGE PHONES, 600PX AND ABOVE)
 */
 /*
 =================================================
-	GENERAL CLASSES
+	GENERAL LAYOUT
 =================================================
 	*/
 body{
@@ -774,14 +821,19 @@ body{
 main{
 	width:90%
 }
+header{
+	height:70px;
+}
+footer{
+	font-size:80%;
+	min-height:40px;
+}
 /*
 =================================================
 	HEADER AND SECTIONS
 =================================================
 */	
-header{
-	height:70px;
-	}
+
 .banner-bar, .navigation-utilities-section, .log-account-section{
 	display:block;
 	height:70px;
@@ -806,11 +858,11 @@ header{
 .search-container, .nav-bar{
 	text-align:center;
 }
-.search-container{
-	height:30px;
-}
 .nav-bar{
 	height:40px;
+}
+.search-container{
+	height:30px;
 }
 .search-container input[type=text] {
   padding: 3px;
@@ -887,11 +939,6 @@ nav ul li a{
 FOOTER
 =================================================
 */
-footer{
-	font-size:80%;
-	min-height:40px;
-	
-}
 footer li{
 	display:inline-table
 }
@@ -922,7 +969,22 @@ main h3{
 	font-size:110%;
 	font-weight:600;
 }
+.recent-posts h5{
+	padding:2px 0;
+	line-height:.9;
+}
+.recent-posts a{
+	font-size:90%;
+}
 
+/* 
+=========================================================
+CODE SECTIONS
+=======================================================
+ */
+ pre{
+	padding-left:10px;
+}
 }
 @media only screen and (min-width:768px) and (max-width:992px){
 /*
@@ -930,18 +992,50 @@ main h3{
 MEDIUM DEVICES (LANDSCAPE TABLETS, 768px and up)
 -------------------------------------------------
 */
- 
+
+/*
+===========================================
+PAGE GRID
+==========================================
+*/
+.col-1-5,
+.col-2-5,
+.col-3-5,
+.col-4-5{
+	display: inline-block;
+	vertical-align: top;
+	float:left;
+}
+.col-1-5{
+	max-width:20%;
+}
+.col-2-5{
+	max-width:40%;
+}
+.col-3-5{
+	max-width:60%;
+}
+.col-4-5{
+	max-width:80%
+}
+main{
+	width:100%;
+}
+header{
+	height:70px;
+	margin:0;
+	}
+footer{
+	height:40px;
+	padding:5px 100px;
+}
 
 /*
 =================================================
 HEADER AND SECTIONS
 =================================================
 */
-header{
-	width:100%;
-	height:70px;
-	margin:0;
-	}
+
 .banner-bar, .navigation-utilities-section, .log-account-section{
 	display:block;
 	height:70px;
@@ -1039,41 +1133,6 @@ nav ul li a{
 	font-size:80%;
 	
 }
-
-
-/*
-===========================================
-PAGE GRID
-==========================================
-*/
-.col-1-5,
-.col-2-5,
-.col-3-5,
-.col-4-5{
-	display: inline-block;
-	vertical-align: top;
-	float:left;
-}
-.col-1-5{
-	max-width:20%;
-}
-.col-2-5{
-	max-width:40%;
-}
-.col-3-5{
-	max-width:60%;
-}
-.col-4-5{
-	max-width:80%
-}
-main{
-	width:100%;
-}
-
-footer{
-	height:40px;
-	padding:5px 100px;
-}
 /*
 ===========================================
 TYPOGRAPHY
@@ -1096,6 +1155,16 @@ main h4{
 	font-size:100%;
 	font-weight:400;
 }
+.recent-posts h5{
+	padding:3px 0;
+	line-height:.9;
+}
+.recent-posts a{
+	font-size:90%;
+}
+pre{
+	padding-left:15px;
+}
 }
 
 @media only screen and (min-width:992px) and (max-width:1200px){
@@ -1104,17 +1173,50 @@ main h4{
 LARGE DEVICES (LAPTOPS AND DESKTOPS 992PX AND ABOVE)  
 ---------------------------------------------------
 */
-	
 /*
-=================================================
-HEADER SECTIONS
-=================================================
+===========================================
+PAGE GRID 
+==========================================
 */
+.col-1-5,
+.col-2-5,
+.col-3-5,
+.col-4-5{
+	display: inline-block;
+	vertical-align: top;
+	float:left;
+}
+.col-1-5{
+	width:20%;
+}
+.col-2-5{
+	width:40%;
+}
+.col-3-5{
+	width:60%;
+}
+.col-4-5{
+	width:80%
+}
+main{
+	width:90%;
+	padding:5px;
+	
+}
 header{
 	width:100%;
 	height:100px;
 	margin:0;
 	}
+footer{
+	height:40px;
+	padding:10px 200px;
+}	
+/*
+=================================================
+HEADER SECTIONS
+=================================================
+*/
 .banner-bar, .navigation-utilities-section, .log-account-section{
 	display:block;
 	height:100px;
@@ -1202,6 +1304,45 @@ nav ul li a{
 
 /*
 ===========================================
+TYPOGRAPHY
+==========================================
+*/
+
+main h1{
+	font-size:160%;
+	font-weight:800;	
+}
+main h2{
+	font-size:150%;
+	font-weight:600;
+}
+main h3{
+	font-size:140%;
+	font-weight:600;
+}
+main h4{
+	font-size:120%;
+	font-weight:500;
+}
+.recent-posts h5{
+	padding:3px 0;
+	line-height:.9;
+}
+.recent-posts a{
+	font-size:95%;
+}
+pre{
+	padding-left:15px;
+}
+}
+@media only screen and (min-width:1200px) {
+/*
+----------------------------------------------------------------
+EXTRA LARGE DEVICES (LARGE LAPTOPS AND DESKTOPS, 1200PX AND UP)
+-----------------------------------------------------------------
+*/
+/*
+===========================================
 PAGE GRID 
 ==========================================
 */
@@ -1228,52 +1369,20 @@ PAGE GRID
 main{
 	width:90%;
 	padding:5px;
-	
 }
+header{
+	height:120px;
+	margin:0;
+	}
 footer{
 	height:40px;
 	padding:10px 200px;
 }
 /*
-===========================================
-TYPOGRAPHY
-==========================================
-*/
-
-main h1{
-	font-size:160%;
-	font-weight:800;	
-}
-main h2{
-	font-size:150%;
-	font-weight:600;
-}
-main h3{
-	font-size:140%;
-	font-weight:600;
-}
-main h4{
-	font-size:120%;
-	font-weight:500;
-}
-}
-@media only screen and (min-width:1200px) {
-/*
-----------------------------------------------------------------
-EXTRA LARGE DEVICES (LARGE LAPTOPS AND DESKTOPS, 1200PX AND UP)
------------------------------------------------------------------
-*/
-
-/*
 =================================================
 HEADER SECTIONS
 =================================================
 */	
-
-header{
-	height:120px;
-	margin:0;
-	}
 .banner-bar, .navigation-utilities-section, .log-account-section{
 	display:block;
 	height:120px;
@@ -1351,39 +1460,7 @@ nav li{
 	display:inline-block;
 }
 
-/*
-===========================================
-PAGE GRID 
-==========================================
-*/
-.col-1-5,
-.col-2-5,
-.col-3-5,
-.col-4-5{
-	display: inline-block;
-	vertical-align: top;
-	float:left;
-}
-.col-1-5{
-	width:20%;
-}
-.col-2-5{
-	width:40%;
-}
-.col-3-5{
-	width:60%;
-}
-.col-4-5{
-	width:80%
-}
-main{
-	width:90%;
-	padding:5px;
-}
-footer{
-	height:40px;
-	padding:10px 200px;
-}
+
 footer a{
 	font-size:90%;
 }
@@ -1425,9 +1502,12 @@ aside .recent-posts{
 	padding-left:50px;
 }
 .recent-posts h5{
-	padding:5px 0;
-	line-height:1;
-}	
+	padding:4px 0;
+	line-height:.9;
+}
+.recent-posts a{
+	font-size:95%;
+}
 }
 @media print
 {
