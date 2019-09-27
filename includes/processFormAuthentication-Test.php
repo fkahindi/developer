@@ -1,6 +1,8 @@
 <?php
 //Initialize session
-session_start();
+if(!isset($_SESSION)){
+	session_start();
+}
 
 //include necessary the files
 
@@ -148,7 +150,8 @@ if(isset($_POST['signup'])){
 	
 // This section handles user logins
 if(isset($_POST['login'])){
-	
+	$page_id = $_SESSION['page_id'];
+	$page_slug = $_SESSION['post_slug'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	
@@ -166,8 +169,6 @@ if(isset($_POST['login'])){
 			$valid = true;
 		}
 	} 
-		
-		
 	if(empty($_POST['password'])){
 		$valid = false;
 		$errors['password'] = 'You did not type a password';
@@ -184,7 +185,6 @@ if(isset($_POST['login'])){
 			$usersTable = new DatabaseTable($pdo,'users', 'email');
 			
 			$query = $usersTable->selectRecords($email,$username);
-			
 			
 			//Check if records exists in the database
 			if($query->rowCount()==1){
@@ -221,15 +221,15 @@ if(isset($_POST['login'])){
 					$_SESSION['fullname'] = $fullname;
 					$_SESSION['username'] = $username;
 					$_SESSION['profile_photo']= $profile_photo;
+					$_SESSION['page_id'] = $page_id;
+					$_SESSION['post_slug'] = $page_slug;
 						
 					//Redirect accordingly
-					if($role == 'Admin'){
-						header('Location: ../admin/dashboard.php');
-					}elseif(($role == 'Author')){
-						header('Location: ../admin/posts.php');
+					if(isset($_SESSION['page_id'])){
+						header('Location: ../templates/post.html.php?id='.$_SESSION['page_id'].'&title='.$_SESSION['post_slug']);
 					}else{
 						header('Location: ../templates/welcome.html.php');
-					}										
+					}					
 				}else{
 					//Display password error 
 					

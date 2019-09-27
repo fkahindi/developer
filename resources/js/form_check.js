@@ -1,13 +1,13 @@
 $('document').ready(function(){
 	
-	let username_state = false;
-	let email_state = false;
-	let password_state = false;
-	let confirm_password_state = false;
+	var username_state = false;
+	var email_state = false;
+	var password_state = false;
+	var confirm_password_state = false;
 
  $('#username').on('blur', function(){
-	let illegalChars = /\W/; // allow at least letters, numbers, and underscores
-	let username = $('#username').val();
+	var illegalChars = /\W/; // allow at least letters, numbers, and underscores
+	var username = $('#username').val();
 	
 	if(username == ''){
 	
@@ -48,9 +48,9 @@ $('document').ready(function(){
   });
  });		
   $('#email').on('blur', function(){
- 	let email = $('#email').val();
-	let emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; //Check if it's valid mail address
-	let illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; // Check for illegal characters
+ 	var email = $('#email').val();
+	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; //Check if it's valid mail address
+	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; // Check for illegal characters
  	if (email == '') {
  		email_state = false;
  		return;
@@ -93,8 +93,8 @@ $('document').ready(function(){
  //----- Validate password
  $('#password').on('change', function(){
 
- 	let password = $('#password').val();
-	let illegalChars = /\W/;  // allow only letters, numbers or underscore 
+ 	var password = $('#password').val();
+	var illegalChars = /\W/;  // allow only letters, numbers or underscore 
  	if (password.length<6) {
 		password_state = false;
 		$('#password').parent().removeClass();
@@ -117,8 +117,8 @@ $('document').ready(function(){
  //----- Validate comfirm_password
  $('#confirm_password').on('change', function(){
 
- 	let confirm_password = $('#confirm_password').val();
-	let password = $('#password').val();
+ 	var confirm_password = $('#confirm_password').val();
+	var password = $('#password').val();
 	 
  	if (confirm_password.length<6 || confirm_password != password) {
 		confirm_password_state = false;
@@ -136,10 +136,10 @@ $('document').ready(function(){
  $('#submit_btn').on('click', function(e){
 	
  	if (username_state == false || email_state == false || password_state == false || confirm_password_state == false) {
-		let username = $('#username').val();
-		let email = $('#email').val();
-		let password = $('#password').val();
-		let confirm_password = $('#confirm_password').val();
+		var username = $('#username').val();
+		var email = $('#email').val();
+		var password = $('#password').val();
+		var confirm_password = $('#confirm_password').val();
 		
 		e.preventDefault();
 		

@@ -113,7 +113,7 @@ function updateUser($request_values){
 	}
 }
 
-function deleteUser($user_id){
+/* function deleteUser($user_id){
 	global $conn;
 	
 	$sql = 'DELETE FROM `users` WHERE user_id=$user_id';
@@ -123,7 +123,7 @@ function deleteUser($user_id){
 		header('Location: users.php');
 		exit(0);
 	}
-}
+} */
 
 /*******************************************
 *--Returns all admin users with their roles

@@ -53,6 +53,6 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 				</span>
 		</footer>
 	</body>
-	<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
+	<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
 	<script src="/spexproject/resources/js/menu-profile-controls.js"></script>
 </html>

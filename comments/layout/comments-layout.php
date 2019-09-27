@@ -3,10 +3,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 require __DIR__ .'/../../includes/commentsFunctions.php';
-
-
 ?>
-
 <div class="comments-container">
 	<hr>
 	<?php if(isset($_SESSION['loggedin'])): ?>
@@ -23,7 +20,7 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 	<?php else: ?>
 		<!--Display login link  -->
 		<div>
-			<h5><a href="/spexproject/templates/login.html.php">Sign in</a> to comment.</h5>
+			<h5><b> To comment and participate in conversations, please <a href="/spexproject/templates/login.html.php">Sign in</a></b></h5>
 		</div>
 	<?php endif; ?>
 	<h3><?php 
@@ -39,10 +36,8 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 	<?php if(isset($comments)): ?>
 	<div class="comments-area" id="comments-area">
 	<!-- Comments display area -->
-	
 		<?php foreach($comments as $comment): ?>
 		<div class="comments-section group" >
-			
 			<div class="hide-comment-id">
 				<?php echo $comment['comment_id']; ?>
 			</div>
@@ -70,11 +65,13 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 							<input type="submit" class="submit-reply" name="submit" value="Submit" >
 							</form>
 						</div>
-					<?php endif; ?>
-					
-					<!-- Get all replies by comment_id -->
-				<?php $replies = getRepliesByCommentId($comment['comment_id']) ?>
+					<?php endif; ?>	
 				<div class="group replies_container_<?php echo $comment['comment_id']; ?>" >
+					<div class="replies_by_ajax">
+						<!--Display reply by AJAX here -->
+					</div>
+					<!-- Get all replies by comment_id and display them below -->
+					<?php $replies = getRepliesByCommentId($comment['comment_id']) ?>
 					<?php if(isset($replies)): ?>
 						<?php foreach($replies as $reply): ?>
 							<!--Reply -->
@@ -90,26 +87,17 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 									<div class="reply-text">
 										<?php echo $reply['body']; ?>
 									</div>
-									
 								</div>
 							</div><br>
 						<?php endforeach; ?>
 					<?php endif; ?>
-					<div class="replies_by_ajax">
-						<!--Display replies by AJAX -->
-						
-						
-					</div>
+					
 				</div>
-				
 			</div>
 		</div>
 		<?php endforeach; ?>
-		
 		<!--Display form comments using AJAX below here -->
-		
 	</div>
 	<?php endif ?>
-	
 </div>
 

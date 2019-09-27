@@ -9,6 +9,10 @@ if(!isset($_SESSION)){
 	
 	//Get page id representing this post 
 	$page_id = $posts['post_id'];
+	//SESSION variables for page reference 
+	$post_slug = $posts['post_slug'];
+	$_SESSION['page_id'] = $page_id;
+	$_SESSION['post_slug'] = $post_slug;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,6 +32,9 @@ if(!isset($_SESSION)){
 			
 			<!-- The title will be fetched from database -->
 			<h1><?php echo ucwords(htmlspecialchars_decode($posts['post_title'])) ;?></h1>
+			<div class="post-acreditation">  
+				<?php echo isset($posts['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($posts['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($posts['created_at'])) ?>
+			</div>
 			
 			<!-- The page content will be fetched from database -->
 			<?php echo htmlspecialchars_decode($posts['post_body']) ;?>
@@ -55,9 +62,8 @@ if(!isset($_SESSION)){
 			</span> 
 	</footer>
 </body>
-<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
+<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
 <script src="/spexproject/resources/js/comments-scripts.js"></script>
 <script src="/spexproject/resources/js/menu-profile-controls.js"></script>
 <script type="text/javascript" src="/spexproject/resources/css/google-code-prettify/prettify.js"></script>
-
 </html>

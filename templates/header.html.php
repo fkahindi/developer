@@ -41,12 +41,16 @@
 					</div>
 					<input type="checkbox" id="profile-checkbox-control">
 					<div class="account-display-settings">
-																					
 						<ul>
 							<li><a href="/spexproject/templates/change-password.html.php">Change Password </a> 
 							</li>
 							<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
 							<li><a href="/spexproject/includes/logout.php">Sign out </a></li>
+							<?php if($_SESSION['role'] == 'Admin'):?>
+								<li><a href="/spexproject/admin/dashboard.php?role=$_SESSION['role']'">Admin Area </a></li>
+							<?php elseif($_SESSION['role'] == 'Author'): ?>
+								<li><a href="/spexproject/admin/posts.php?role=$_SESSION['role']'">Admin Posts </a></li>
+							<?php endif; ?>
 						</ul>
 					</div>
 				<?php endif; ?>

@@ -36,7 +36,7 @@
 	//Getting replies by comment_id
 	function getRepliesByCommentId($id){
 		global $conn;
-		$sql = "SELECT * FROM `replies` WHERE comment_id =$id";
+		$sql = "SELECT * FROM `replies` WHERE comment_id =$id ORDER BY created_at DESC";
 		
 		$result = mysqli_query($conn, $sql);
 		if($result){
@@ -59,18 +59,14 @@
 	}
 	
 	//Receives values from jQuery for posting comments	
-	if(isset($_POST['submit_comment'])){
+	if(isset($_POST['submit_comment']) && $_POST['body']!==""){
 		$user_id = $_POST['user_id']; 
 		$page_id = $_POST['page_id'];
 		$body = htmlspecialchars($_POST['body']);
 		$body = mysqli_real_escape_string($conn, $body);
 		
 		$sql = "INSERT INTO `comments` (user_id, post_id, body, created_at) VALUES ($user_id, $page_id, '$body', now() )";
-		//$sql = "INSERT INTO `comments` (user_id, post_id, body, created_at) VALUES (?, ?, ?, ? )";
-		//$stmt = $conn->prepare($sql);
 		
-		//$stmt = bind_param("i,i,s,s",$user_id, $page_id, $body, now());
-		//$stmt -> execute()
 		mysqli_query($conn, $sql);
 
 		$id = mysqli_insert_id($conn);
@@ -95,7 +91,7 @@
 	}
 	
 	//Receives from jQuery for posting replies
-	if(isset($_POST['submit_reply'])){
+	if(isset($_POST['submit_reply']) && $_POST['reply_text']!==""){
 		$comment_id = $_POST['comment_id']; 
 		$user_id = $_POST['user_id'];
 		$reply_text = htmlspecialchars($_POST['reply_text']);
