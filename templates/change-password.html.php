@@ -37,7 +37,7 @@ include __DIR__ . '/../includes/loginStatus.php';
 				<span class="errorMsg"><?php echo (!empty($errors['new_password'])? $errors['new_password'] :'');?></span>
 				<ul>
 						<li>Passwords must be at least <strong>6</strong> characters.</li>
-						<li>May contain letters, numbers with underscores.</li>
+						<li>May contain letters, numbers, underscore, hyphen or dot.</li>
 				</ul>
 			</div>
 			

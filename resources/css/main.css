@@ -82,6 +82,15 @@ table {
 .float-left{
 	float:left;
 }
+.align-left{
+	text-align:left;
+}
+.align-right{
+	text-align:right;
+}
+.align-center{
+	text-align:center;
+}
 .hidden{
 	display:none;
 }
@@ -132,6 +141,11 @@ main table th, td{
 	padding:3px 10px;
 	border:thin solid rgb(200,200,200);
 }
+.subscribe-section{
+	border:2px solid rgb(100,200,100);
+	padding:5px;
+	margin:5px 5%;
+}
 section, aside{
 	padding:10px;
 	text-align:justify;
@@ -180,11 +194,14 @@ CLEARFIX
 	TYPOGRAPHY
 ******************************
 */
+main{
+	margin:0 auto;
+	font-family: sans-serif;
+}
 main h1, h2, h3{
 	font-weight:bolder;
 	padding:5px;
 	text-align:left;
-	
 }
 main h1{
 	color:#071418;
@@ -193,7 +210,6 @@ main h2{
 	color:#585858;
 }
 main h3{
-	text-align:left;
 	color:maroon;
 }
 main h4{
@@ -211,16 +227,16 @@ main .special-p{
 main .special-p code{
 	background:inherit;
 }
-main{
-	margin:0 auto;
-	font-family: sans-serif;
-}
 main ul, ol{
 	text-indent: 10px;
 	padding-left: 30px;
 }
 main ul{
 	list-style:disc;
+}
+.subscribe-section p{
+	text-align:left;
+	line-height:1;
 }
 /* 
 ///////////////////////////////
@@ -269,9 +285,7 @@ main ul{
 	display:inline-block;
 }
 .image-photo{
-	
 	border:3px solid #2b5959;
-	
 }
 
 /* 
@@ -335,6 +349,7 @@ STYLING FOR PROFILE SETTINGS AND DISPLAY
 	display:none;
 	position:relative;
 	top:0;
+	right:-50%;
 	min-width:10.625em;
 	background:rgb( 35, 35, 60);
 	color:#fff;
@@ -356,7 +371,7 @@ STYLING FOR PROFILE SETTINGS AND DISPLAY
 	visibility:hidden;
 }
 .account-display-settings a{
-	font-size:90%;
+	font-size:1em;
 	text-align:left;
 	color:rgb( 200, 200, 233);
 }
@@ -366,7 +381,6 @@ STYLING FOR PROFILE SETTINGS AND DISPLAY
 header  ul, .login-signup span{
 	color:rgb(200,200,200);
 }
-
 
 /*
 ///////////////////////////////
@@ -383,7 +397,7 @@ STYLING FOR COMMENTS SECTION
 }
 .comments-container hr{
 	margin-top:30px;
-	border:thin solid gray;
+	border: thin dashed #ADD8E6;
 }
 .comments-container hr:nth-of-type(2){
 	margin:0;
@@ -408,7 +422,6 @@ STYLING FOR COMMENTS SECTION
 	margin-top:5px;
 	padding-left:5px;
 }
-
 .replies-profile-photo{
 	float:left;
 	margin-left:40px;
@@ -451,8 +464,11 @@ STYLING FOR COMMENTS SECTION
 	margin:0 10px;
 	text-transform:uppercase;
 }
+.reply{
+	width:100%;
+}
 .reply-form{
-	margin-left:30px;
+	margin:5px;
 	display:none;
 }
 div[class^="group replies_container_"] {
@@ -600,7 +616,6 @@ LAYOUT
 HEADER AND SECTIONS
 ===================================================
 */
-
 header{
 	width:100%;
 	height:60px;
@@ -653,8 +668,7 @@ header{
 	font-size:80%;
 }
 .account-display-settings{
-	right:100%;
-	margin-left:-70px;
+	margin-left:-6.5em; 
 }
 .account-display-settings ul li{
 	padding:2px 0px 2px 20px;
@@ -662,7 +676,7 @@ header{
 .account-photo-box{
 	position:absolute;
 	top:0;
-	left:60%;
+	left:50%;
 	width:25%;
 	height:30px;
 	text-align:right;
@@ -744,6 +758,7 @@ TOOL TIP
 .tooltip-text p{
 	padding:3px 10px;
 }
+
 /* 
 --------------------------------------------------
 MAIN SECTION
@@ -758,7 +773,13 @@ main h1, h2, h3{
 	font-weight:bolder;
 	padding:10px 5px;
 	text-align:left;
-	text-shadow: 3px 6px 2px rgba(0, 0, 0, .3);
+}
+.reply-form{
+	margin-left:5px;
+}
+.replies-profile-photo{
+	margin-left:10px;
+	
 }
 .recent-posts h5{
 	padding:2px 0;
@@ -825,6 +846,9 @@ body{
 main{
 	width:90%
 }
+.subscribe-section{
+	margin:5px 10%;	
+}
 header{
 	height:70px;
 }
@@ -883,7 +907,7 @@ footer{
 .log-account-section{
 	float:right;
 	width:20%;
-	text-align:center;
+	text-align:left;
 }
 .login-signup{
 	padding-top:10px;
@@ -961,6 +985,9 @@ footer a:hover{
 TYPOGRAPHY
 =================================================
 */
+.account-display-settings{
+	font-size:.8em;
+}
 main p, li{
 	font-size:1.1em;
 }
@@ -975,6 +1002,9 @@ main h2{
 main h3{
 	font-size:110%;
 	font-weight:600;
+}
+.login-signup{
+	font-size:80%;
 }
 .recent-posts h5{
 	padding:2px 0;
@@ -1029,6 +1059,9 @@ PAGE GRID
 }
 main{
 	width:100%;
+}
+.subscribe-section{
+	margin:5px 10%;	
 }
 header{
 	height:70px;
@@ -1147,6 +1180,9 @@ nav ul li a{
 TYPOGRAPHY
 ==========================================
 */
+.account-display-settings{
+	font-size:.9em;
+}
 main p, li{
 	font-size:1.1em;
 }
@@ -1215,7 +1251,9 @@ PAGE GRID
 main{
 	width:90%;
 	padding:5px;
-	
+}
+.subscribe-section{
+	margin:5px 10%;	
 }
 header{
 	width:100%;
@@ -1268,10 +1306,10 @@ HEADER SECTIONS
 	padding-top:10px;
 }
 .account-display-settings{
-	right:90%;
+	right:60%;
 }
 .account-display-settings ul li{
-	padding:2px 0px 2px 20px;
+	padding:2px 0px 2px 15px;
 }
 .image-photo{
 	position:relative;
@@ -1321,6 +1359,9 @@ nav ul li a{
 TYPOGRAPHY
 ==========================================
 */
+.account-display-settings{
+	font-size:.85em;
+}
 main p, li{
 	font-size:1.2em;
 }
@@ -1387,6 +1428,11 @@ PAGE GRID
 }
 main{
 	width:90%;
+	margin: 0 auto;
+}
+.subscribe-section{
+	margin:10px 10%;
+	
 }
 header{
 	height:120px;
@@ -1441,7 +1487,7 @@ HEADER SECTIONS
 	right:35%;
 }
 .account-display-settings ul li{
-	padding:2px 0 2px 20px;
+	padding:1px 0 1px 20px;
 }
 .image-photo{
 	height:50px;
@@ -1483,6 +1529,9 @@ nav li{
 TYPOGRAPHY
 ==========================================
 */
+.account-display-settings a{
+	font-size:.8em;
+}
 main p, li{
 	font-size:1.3em;
 }

@@ -25,7 +25,7 @@
 			<div class="login-signup">
 			<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']== false)? 
 			'<a href="/spexproject/templates/login.html.php">Login </a> <span>&#124;</span>
-			<a href="/spexproject/templates/signup.html.php">Sign up</a> '
+			<a href="/spexproject/templates/create-account.html.php">Create Account</a> '
 			: '' ?>
 			</div>	
 			<div class="account-photo-box tooltip ">
@@ -47,9 +47,9 @@
 							<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
 							<li><a href="/spexproject/includes/logout.php">Sign out </a></li>
 							<?php if($_SESSION['role'] == 'Admin'):?>
-								<li><a href="/spexproject/admin/dashboard.php?role=$_SESSION['role']'">Admin Area </a></li>
+								<li><a href="/spexproject/admin/dashboard.php">Admin Area </a></li>
 							<?php elseif($_SESSION['role'] == 'Author'): ?>
-								<li><a href="/spexproject/admin/posts.php?role=$_SESSION['role']'">Admin Posts </a></li>
+								<li><a href="/spexproject/admin/posts.php">Admin Posts </a></li>
 							<?php endif; ?>
 						</ul>
 					</div>
@@ -58,4 +58,3 @@
 		</div>
 	</div>	
 </div>
-

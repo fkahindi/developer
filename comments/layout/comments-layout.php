@@ -19,15 +19,15 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 		</div>
 	<?php else: ?>
 		<!--Display login link  -->
-		<div>
-			<h5><b> To comment and participate in conversations, please <a href="/spexproject/templates/login.html.php">Sign in</a></b></h5>
+		<div class="align-left">
+			<h5><b> To comment or participate in conversations, please <a href="/spexproject/templates/login.html.php">Sign in</a>  &#124; <a href="/spexproject/templates/create-account.html.php"> Create an account.</a></b></h5>
 		</div>
 	<?php endif; ?>
-	<h3><?php 
+	<h5><?php 
 	//Display total comments so far for every user
 	//totalComments();
 	 echo getCommentCountByPostId($page_id);
-	?>&nbsp;Comment(s)</h3>
+	?>&nbsp;Comment(s)</h5>
 	<hr>	
 	<?php
 		//Retrieve comments for this post
@@ -60,7 +60,7 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 						<!-- Reply form -->
 						<div class="reply">
 							<form method="post" class="reply-form" id="comment_reply_form_<?php echo $comment['comment_id']; ?>" data_id="<?php echo $comment['comment_id']; ?>">
-							<textarea name="reply" id="reply-textarea" class="reply-textarea" cols="50" rows="4" maxlenth="70" placeholder="Type your reply..." ></textarea>
+							<textarea name="reply" id="reply-textarea" class="reply-textarea" cols="50" rows="4" maxlenth="100" placeholder="Type your reply..." ></textarea>
 							<input type="hidden" name="user_id" class="reply_form_user_id" value="<?php echo $_SESSION['user_id'] ?>">
 							<input type="submit" class="submit-reply" name="submit" value="Submit" >
 							</form>
@@ -100,4 +100,3 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 	</div>
 	<?php endif ?>
 </div>
-

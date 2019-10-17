@@ -66,26 +66,21 @@
 		$body = htmlspecialchars($_POST['body']);
 		$body = mysqli_real_escape_string($conn, $body);
 		
-		//$sql = "INSERT INTO `comments` (user_id, post_id, body, created_at) VALUES ($user_id, $page_id, '$body', now() )";
 		$sql = "INSERT INTO `comments` (user_id, post_id, body, created_at) VALUES (?, ?, ?, ? )";
 		$stmt = $conn->prepare($sql);
 		
-		$stmt = bind_param("i,i,s,s",$user_id, $page_id, $body, now());
+		$stmt = bind_param("iiss",$user_id, $page_id, $body, now());
 		//$stmt -> execute();
-		//mysqli_query($conn, $sql);
-
-		//$id = mysqli_insert_id($conn);
-
-			
+					
 		if($stmt->execute()=== true){
-			$id = $conn->insert-id;
+			$id = $conn->insert_id;
 			
 			$query = "SELECT * FROM comments WHERE comment_id =$id";
 
 			$select = $conn->query($query);
 			
 			if($select->num_rows>0){
-				$comment = $select->fetch_assoc;
+				$comment = $select->fetch_assoc();
 				
 				include __DIR__ . '/../comments/layout/comments_output.php';
 			}else{
@@ -104,27 +99,20 @@
 		$reply_text = htmlspecialchars($_POST['reply_text']);
 		$reply_text = mysqli_real_escape_string($conn, $reply_text);
 				
-		//$sql = "INSERT INTO `replies` (user_id, comment_id, body, created_at, updated_at) VALUES ($user_id ,$comment_id, '$reply_text', now(), null )";
-		
+				
 		$sql = "INSERT INTO `replies` (user_id, comment_id, body, created_at, updated_at) VALUES (? ,?, ?, ?, ? )";
 		$stmt=$conn->prepare($sql);
 		
-		$stmt = bind_param("i,i,s,s,s",$user_id, $comment_id,$reply_text,now(), null);
-		
-		
-		//mysqli_query($conn, $sql);
-
-		//$insert_id = mysqli_insert_id($conn);
-
-			
+		$stmt = bind_param("iisss",$user_id, $comment_id,$reply_text,now(), null);
+				
 		if($stmt->execute()=== true){
-			$insert_id =$conn->insert-id;
+			$insert_id =$conn->insert_id;
 			$query = "SELECT * FROM replies WHERE reply_id =$insert_id";
 
 			$select = $conn->query($query);
 			
 			if($select->num_rows>0){
-				$reply = $select->fetch_assoc;
+				$reply = $select->fetch_assoc();
 				
 				include __DIR__ . '/../comments/layout/replies_output.php';
 			}else{

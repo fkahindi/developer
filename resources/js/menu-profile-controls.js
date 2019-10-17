@@ -7,7 +7,6 @@ $('document').ready(function(){
 		}else{
 			$('.tooltip-text').show(200);
 		}
-			
 	});
 	
 	$('#profile-checkbox-control').on('click', function(){
@@ -26,10 +25,10 @@ $('document').ready(function(){
 	/* Monitor browser window size and display normal menu if size is greater than 600px */
 	window.onresize = function(){
 		
-		if(window.innerWidth > 600){
-		$('.dropdown-content').show();
-		}else{
+		if( document.documentElement.clientWidth < 600 || window.innerWidth < 617){
 			$('.dropdown-content').hide();
+		}else{
+			$('.dropdown-content').show();
 		}
 	}
 });

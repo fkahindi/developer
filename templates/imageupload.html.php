@@ -28,19 +28,19 @@ include __DIR__ . '/../includes/loginStatus.php';
 	
 </body>
 </html>
-<script src="/spexproject/resources/js/jquery-3.4.0.min.js"></script>
+<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
 <script>
 $('document').ready(function(){
 	
 	$('#image-upload-btn').on('click', function(e){
-		let fileToUpload = $('#fileToUpload').val();
+		var fileToUpload = $('#fileToUpload').val();
 		
 		if(fileToUpload ==''){
 			e.preventDefault();
 			$('#fileToUpload').parent().removeClass();
 			$('#fileToUpload').parent().addClass("form_error");
 			$('#fileToUpload').siblings("span").text('You did not select an image');
-			return ;
+			return false;
 		}else{
 			return true;
 		}

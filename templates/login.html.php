@@ -34,7 +34,7 @@ if(!isset($_SESSION)){
 		</form>
 	</div>
 	<div class="section">
-		<p class="centered"><a href="../templates/recover-password.html.php">Forgot password</a> | <a href="/spexproject/templates/signup.html.php"> Create an account.</a></p>
+		<p class="centered"><a href="../templates/recover-password.html.php">Forgot password</a> | <a href="/spexproject/templates/create-account.html.php"> Create an account.</a></p>
 	</div>
 </body>
 </html>

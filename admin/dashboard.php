@@ -8,9 +8,6 @@ include __DIR__ . '/../includes/loginStatus.php';
 if($_SESSION['role'] !== 'Admin'){
 	header('Location: ../index.php');
 }
-
- 
-
 ?>
 <!DOCTYPE html>
 <html lang="en">	

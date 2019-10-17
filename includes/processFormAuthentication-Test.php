@@ -13,22 +13,21 @@ $fullname = $username = $profile_photo = $email = $password = $confirm_password 
 
 $errors =[];
 $valid = true;
-$pattern = "/^[a-zA-Z_0-9]*$/"; // Matches letters, numbers and the underscore
+$gen_pattern ="/^[\w]{3,}$/"; //Matches atleast characters made of alpha-numeric and underscore
+$password_pattern = "/^[\w\-.]+$/"; // Matches letters, numbers, underscore, dash or dot
 
-//This section handles user sign ups (user registration)
+//This section handles user account creation
 
-if(isset($_POST['signup'])){
+if(isset($_POST['create-account'])){
 	
 	//Assign variables
 	$fullname = $_POST['fullname'];
 	$username = $_POST['username'];
 	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$confirm_password = $_POST['confirm_password'];
-	
+		
 	//Incase any field is left blank
 	if(!empty($_POST['fullname'])){
-		$fullname = test_input($_POST['fullname']);
+		$fullname = filter_var($_POST['fullname'], FILTER_SANITIZE_STRING);
 	}else{
 		$fullname = '';
 	}
@@ -39,15 +38,14 @@ if(isset($_POST['signup'])){
 		$valid = false;
 		$errors['username'] = 'Username must be at least three characters';
 	}else{
-		
 		$username = test_input($_POST['username']);
 		$username = trim($username);
 				
 		//Check if name contain only aphabet, numbers and underscore
-		if (!preg_match($pattern,$username)){
+		if (!preg_match($gen_pattern,$username)){
 			
 			$valid = false;
-			$errors['username'] = "Only alpha-numeric and underscore allowed in username";  
+			$errors['username'] = "Only alpha numeric and underscore allowed in username";  
 		} 
 	}
 	
@@ -55,7 +53,7 @@ if(isset($_POST['signup'])){
 		$valid = false;
 		$errors['email'] ='Email cannot be blank';
 	}else{
-		
+		$valid = true;
 		//Remove spaces incase they exist
 		$email = trim($_POST['email']);
 		//Remove illegal characters from email
@@ -67,91 +65,164 @@ if(isset($_POST['signup'])){
 			$errors['email'] = 'Invalid email address';
 		}	
 	}
-
-	if(!empty($_POST['password'])){
-		
-		$valid = true;
-		$_POST['password'] = trim($_POST['password']);
-		
-		if(!preg_match($pattern, $_POST['password'])){
-			$valid = false;
-			$errors['password'] ='Only letters, numbers or underscore allowed.';
-		}else if(strlen($_POST['password'])<6){
-			$valid = false;
-			$errors['password'] ='Password must be atleast 6 characters.';
-		}
-	}else{
-		$valid = false;
-		$errors['password'] ='Password cannot be blank';
-	}
 	
-	if(empty($_POST['confirm_password'])){
-		
-		$valid = false;
-		$errors['confirm_password'] ='Must confirm Password';
-		
-	}else if($_POST['password'] != $_POST['confirm_password']){
-		
-		$valid = false;
-		$errors['confirm_password'] = 'Passwords did not match';
-	}
-	
-	if(!empty($errors)){
-	
-		include __DIR__ .'/../templates/signup.html.php';
-				
-	}else{
-		try{			
-			$usersTable = new DatabaseTable($pdo, 'users', 'email');
-			$query = $usersTable->selectRecords($email, $username);
-			
-			if($query->rowCount()>0){
-				//User already exists
-				$valid = false;
-				$row = $query->fetch();
-				if($row['username']=== $username){
-					$errors['username'] ='This username already exists';
-				}else if($row['email']=== $email){
-					$errors['email'] = 'This email already exists';
-				}
-								
-				include __DIR__ .'/../templates/signup.html.php';
-				
-			}else{
-				$valid = true;
-			}
-			
-			if($valid){
+	if(empty($errors)){
+		try{	
+			$curDate = date('Y-m-d H:i:s');			
 			$created_at = new DateTime();	
 			$created_at = $created_at->format('Y-m-d H:i:s');
-			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-			$profile_photo = '/spexproject/resources/photos/profile.png';
-			$fields = [
-				'fullname'=> $fullname,
-				'username'=> $username,
-				'profile_photo'=>$profile_photo,
-				'email' => $email,
-				'password' => $password,
-				'created_at' => $created_at
-			];
+			$token = bin2hex(random_bytes(50));
 			
-			$usersTable->insertRecord($fields);
+			$users_tempTable = new DatabaseTable($pdo, 'users_temp','email');
+			$query = $users_tempTable->selectRecords($email);
 					
-			header('Location: ../templates/signupsuccessful.html.php');
+			if(!empty($query->rowCount())){
+				//If email exists check if token still valid 
+				$row = $query->fetch();
+								
+				$createdDateTimeStamp = strtotime($row['created_at']);
+				$curDateTimeStamp = strtotime($curDate);
+				
+				if($curDateTimeStamp - $createdDateTimeStamp <= 172800){
+					//If link was sent in less than 48 hrs notify user
+					echo 'A link was sent to your email in less than 48 hours ago. Check your email inbox.';
+				}else {
+					//Update token and date then send email link
+					$fields = ['token' => $token, 'created_at' => $created_at];
+					$update_usersToken = $users_tempTable->updateRecords($fields,$email);
+					//require_once __DIR__ .'/subscribe-email-link.php';
+					echo 'A link was sent some time back, but has been sent again';
+				} 	
+			}else{
+				$fields = [
+				'fullname' => $fullname,
+				'username' => $username,
+				'email' => $email,
+				'token' => $token,
+				'created_at' => $created_at
+				];
+				$insert_tempRecord = $users_tempTable ->insertRecord($fields);
+				
+				require_once __DIR__ .'/create-account-email-link.php';
+				echo 'A link has been sent to your email address, please verify it.';
 			}
-
 		}catch(PDOException $e){
 			$title ='An error has occured';
 			$output = 'Database error: ' . $e->getMessage() . ' in '
 			. $e->getFile() . ':' . $e->getLine();
-		}	
+		}				
+	}else{
+		include __DIR__ .'/../templates/create-account.html.php';	
 	}
+}
+
+//This section handles account email verification
+if(isset($_POST['set-account-password'])){
+	$email = $_POST['email'];
+	$token = $_POST['token'];
+	$password = $_POST['password'];
+	$confirm_password = $_POST['confirm_password'];
+			
+	//If loggedin validate form
+	if(empty($_POST['password'])){
+		$valid = false;
+		$errors['password'] = 'Password field cannot be blank';
+	}else if(empty($_POST['confirm_password'])){
+		$valid = false;
+		$errors['confirm_password'] = 'Confirm your password';
+	}else{
+		$valid = true;
+		$password = filter_var($password, FILTER_SANITIZE_STRING);
+		$confirm_password = filter_var($confirm_password, FILTER_SANITIZE_STRING);
+		$password = trim($password);
+	}
+	if(!preg_match($password_pattern, $password)){
+		$valid = false;
+		$errors['password'] ='Only alphanumeric, underscore, dash and dot are allowed.';
+	}else if(strlen($password)<6){
+		$valid = false;
+		$errors['password'] ='Password must be at least 6 characters.';
+	}else if($password !== $confirm_password){
+		$valid = false;
+		$errors['confirm_password'] ='Your passwords do not match';
+	}else{
+		$valid = true;
+	}
+	
+	//If everything is OK and valid is true 
+	if($valid){
+		
+		try{
+			
+			$curDate = date('Y-m-d H:i:s');
+					
+			$selectEmailToken = new DatabaseTable ($pdo, 'users_temp', 'token');
+			$sql = $selectEmailToken->selectRecords($token, $email);
+			
+			if(!empty($sql->rowCount())){
+				
+				$row = $sql->fetch();
+				$fullname = $row['fullname'];
+				$username = $row['username'];
+				$expDateTimestamp = strtotime($row['created_at']);
+				$curDateTimestamp = strtotime($curDate);
+				
+				if(($curDateTimestamp - $expDateTimestamp)<=172800){
+					$created_at = new DateTime();	
+					$created_at = $created_at->format('Y-m-d H:i:s');
+					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+					$profile_photo = '/spexproject/resources/photos/profile.png';
+					$fields = [
+						'fullname'=> $fullname,
+						'username'=> $username,
+						'profile_photo'=>$profile_photo,
+						'email' => $email,
+						'password' => $password,
+						'created_at' => $created_at
+					];
+					$usersTable = new DatabaseTable($pdo, 'users', 'email');
+					$usersTable->insertRecord($fields);
+													
+					$deleteToken = new DatabaseTable($pdo,'users_temp', 'email');
+					$deleteToken->deleteRecords($email);
+					
+					//Redirect to login page
+					$_SESSION['success_msg'] ='Congratulations! Your account is set. <br> Please, login to your account.';
+									
+					header('Location: ../templates/login.html.php');
+								
+				}else{
+					//$valid = false;
+					echo 'The token expired';
+					exit();
+				}
+			
+			}else{
+				//$valid = false;
+				echo 'Token was not found, please try again';
+				exit();
+			}
+			
+		}catch(PDOException $e){
+		
+		$title ='An error has occured';
+		$output = 'Database error: ' . $e->getMessage() . ' in '
+		. $e->getFile() . ':' . $e->getLine();
+		}
+			
+	}else{
+		//Display the form again
+		include __DIR__ . '/../templates/set-account-password.html.php';
+	}
+	
 }
 	
 // This section handles user logins
 if(isset($_POST['login'])){
-	$page_id = $_SESSION['page_id'];
-	$page_slug = $_SESSION['post_slug'];
+	if(isset($_SESSION['page_id'])&& isset($_SESSION['post_slug'])){
+		$page_id = $_SESSION['page_id'];
+		$page_slug = $_SESSION['post_slug'];
+	}
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	
@@ -179,7 +250,6 @@ if(isset($_POST['login'])){
 	if(!$valid){
 		include __DIR__ . '/../templates/login.html.php';
 	}else{
-		
 		try{
 			//Select from users table			
 			$usersTable = new DatabaseTable($pdo,'users', 'email');
@@ -262,33 +332,33 @@ if(isset($_POST['change_password'])){
 	$old_password = $_POST['old_password'];
 	$new_password = $_POST['new_password'];
 	$confirm_new_password = $_POST['confirm_new_password'];
-	
-	
+		
 	//If loggedin validate form
 	if(empty($_POST['old_password'])){
 		$valid = false;
 		$errors['old_password'] = 'You must enter your old password';
-	}else if(empty($new_password)){
+	}else if(empty($_POST['new_password'])){
 		$valid = false;
 		$errors['new_password'] = 'Enter the new password';
-	}else if(empty($confirm_new_password)){
+	}else if(empty($_POST['confirm_new_password'])){
 		$valid = false;
 		$errors['confirm_new_password'] = 'Confirm your new password';
 	}else{
+		$old_password = filter_var($old_password, FILTER_SANITIZE_STRING);
+		$new_password = filter_var($new_password, FILTER_SANITIZE_STRING);
+		$confirm_new_password = filter_var($confirm_new_password, FILTER_SANITIZE_STRING);
 		$new_password = trim($new_password);
-		$confirm_new_password = trim('confirm_new_password');
 	}
-	
-	if(!preg_match($pattern, $new_password)){
+	if(!preg_match($password_pattern, $new_password)){
 		$valid = false;
-		$errors['new_password'] ='Only letters, numbers or underscore allowed.';
+		$errors['new_password'] ='Only apha-numeric, underscore, dash and dot are allowed.';
 	}else if(strlen($new_password)<6){
 		$valid = false;
 		$errors['new_password'] ='Password must be atleast 6 characters.';
 	}else if($new_password == $old_password){
 		$valid = false;
 		$errors['new_password'] ='New password cannot be same as old password.';
-	}else if($new_password !== $_POST['confirm_new_password']){
+	}else if($new_password !== $confirm_new_password){
 		$valid = false;
 		$errors['confirm_new_password'] ='Your new password did not match';
 	}else{
@@ -336,7 +406,7 @@ if(isset($_POST['change_password'])){
 				
 				$fields =['password'=> $new_password];
 				
-				$sql=$usersTable->updateRecords($fields);
+				$sql=$usersTable->updateRecords($fields,$email);
 				
 				//session_destroy();
 			
@@ -387,13 +457,12 @@ if(isset($_POST['recover_password'])){
 			
 			if(empty($query->rowCount())){
 				$valid = false;
-				$errors['email'] = 'This email address is not registered';
+				$errors['email'] = 'This email address does not exist';
 				include __DIR__ . '/../templates/recover-password.html.php';
 			}else{
 				$valid = true;
 				if($row=$query->fetch()){
 				$email = $row['email'];
-				$password = $row['password'];
 				}
 			}
 			
@@ -410,7 +479,7 @@ if(isset($_POST['recover_password'])){
 				$password_resetTable =  new DatabaseTable($pdo, 'password_reset_temp');
 				$password_resetTable->insertRecord($fields);
 				
-				include __DIR__. '/../includes/sendLink.php';
+				include __DIR__. '/../includes/reset-password-link.php';
 			}
 		}catch(PDOException $e){
 			
@@ -430,34 +499,31 @@ if(isset($_POST['reset_password'])){
 	$email = $_POST['email'];
 	$token = $_POST['token'];
 	
-	if(!empty($_POST['new_password'])){
-		$valid = true;
-		$new_password = trim($_POST['new_password']);
-		
-		if(!preg_match($pattern,$new_password)){
-			$valid = false;
-			$errors['new_password'] ='Only letter, numbers or underscore allowed.';
-		}else if(strlen($new_password)<6){
-			$valid = false;
-			$errors['new_password'] ='Password must be atleast 6 characters.';
-		}		
-	}else{
+	if(empty($_POST['new_password'])){
 		$valid = false;
 		$errors['new_password'] = 'Password cannot be blank.';
-	}
-	
-	if(empty($_POST['confirm_new_password'])){
+	}else if(empty($_POST['confirm_new_password'])){
 		$valid = false;
 		$errors['confirm_new_password'] = 'Confirm your new password';
-		
-	}else if($_POST['confirm_new_password'] !== $new_password){
-		$valid = false;
-		$errors['confirm_new_password'] ='Your passwords did not match';
-		
 	}else{
 		$valid = true;
+		$new_password = filter_var($_POST['new_password'], FILTER_SANITIZE_STRING);
+		$new_password = trim($_POST['new_password']);
+		$confirm_new_password = filter_var($_POST['confirm_new_password'], FILTER_SANITIZE_STRING);
+		$confirm_new_password = trim($_POST['confirm_new_password']);
 	}
-	
+			
+	if(!preg_match($password_pattern,$new_password)){
+		$valid = false;
+		$errors['new_password'] ='Only alpha-numeric, underscore, dash and dot are allowed.';
+	}else if(strlen($new_password)<6){
+		$valid = false;
+		$errors['new_password'] ='Password must be atleast 6 characters.';
+	}else if($confirm_new_password !== $new_password){
+		$valid = false;
+		$errors['confirm_new_password'] ='Your passwords did not match';
+	}
+		
 	//If everything is OK and valid is true 
 	if($valid){
 		
@@ -486,7 +552,7 @@ if(isset($_POST['reset_password'])){
 					
 					$fields = ['password'=> $new_password];
 					
-					$updatePassword->updateRecords($fields);
+					$updatePassword->updateRecords($fields,$_SESSION['email']);
 					
 					//session_destroy();
 					
@@ -606,7 +672,7 @@ if(isset($_POST['image-upload'])){
 					//Update profile_photo file path in the database
 					$fields = ['profile_photo' => $file_path];
 					
-					$usersTable->updateRecords($fields);
+					$usersTable->updateRecords($fields,$email);
 					
 					//Fetch the records again to place the image photo in session
 					$query = $usersTable->selectRecords($email, $username);

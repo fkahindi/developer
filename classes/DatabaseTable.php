@@ -79,7 +79,7 @@ class DatabaseTable
 		$this->query($query, $fields);
 	}
 	
-	public function updateRecords($fields) {
+	public function updateRecords($fields,$keyfield) {
 		$query ='UPDATE `'.$this->table. '` SET ';
 		
 		foreach($fields as $key=>$value){
@@ -90,7 +90,7 @@ class DatabaseTable
 		$query .= ' WHERE `'.$this->keyfield .'`= :keyfield';
 		
 		//Setting :$keyfield variable
-		$fields ['keyfield'] = $_SESSION['email'];
+		$fields ['keyfield'] = $keyfield;
 		
 		$this->query($query, $fields);
 	}

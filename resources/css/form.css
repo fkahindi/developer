@@ -1,4 +1,4 @@
-.section,#register,#login, #recover,#reset, #upload{
+.section,#create-account,#login,#recover,#reset, #upload, #subscribe{
 	border: 1px solid #d6d7da;
 	border-radius: 5px;
 	font-family: arial; 
@@ -24,10 +24,11 @@ form input:focus{
 }
 form a, 
 #login +.section a,
-#register +.section a,
+#create-account +.section a,
 #recover +.section a,
 #reset +.section a,
-#upload +.section a{
+#upload +.section a,
+#subscribe +.section a{
 	text-decoration:none;
 	color:blue;
 }
@@ -43,6 +44,17 @@ padding: 12px 15px;
 color: #ffffff;
 margin:0 auto;
 }
+.reply-textarea{
+	background:rgb(245,245,245);
+	border-radius:5px;
+}
+.reply form input[type="submit"]{
+	border-radius:5px;
+	background:#6D7B8D;
+	font-weight:bold;
+	color:black;
+	margin-right:10%;
+}
 .red{
 	color:red;
 }
@@ -56,6 +68,11 @@ margin:0 auto;
  color: #6B8E23;
  margin-bottom: 10px;
 }
+.subscribe_error{
+	color:#C04000;
+	font-weight:bold;
+	padding:10px 0;
+}
 h3,h4{
 	text-align:center;
 }
@@ -64,7 +81,7 @@ h3,h4{
 	margin:5px auto;
 	padding:10px;
 }
-#register ul,#reset ul, #upload ul  {
+#create-account ul,#reset ul, #upload ul  {
 	padding-left:10px;
 	font-size:10px;
 }
@@ -91,7 +108,7 @@ h3,h4{
   color: red;
 }
 @media only screen and (max-width:600px){
-.section,#register,#login, #recover,#reset, #upload{
+.section,#create-account,#login, #recover,#reset, #upload, #subscribe{
 width: 250px; 
 padding: 0px 5px; 
 line-height: 16px;
@@ -99,18 +116,21 @@ font-size: 14px;
 margin: 30px auto 20px auto;
 
 }
+#subscribe{
+	max-width: 100%;
+}
+#subscribe input[type="submit"]{
+	margin:15px 0 10px 0;
+}
 form input{ 
 padding: 8px; 
 }
 form input[type="submit"]{
-	margin-top:15px;
-	margin-bottom: 10px;
+	margin:15px auto 10px auto;
 }
-
 .section{
 	margin:15px auto;
 }
-
 .comment form textarea{
 	width:90%;
 	border:thin solid #6D7B8D;
@@ -127,14 +147,14 @@ form input[type="submit"]{
 
 .reply form input[type="submit"]{
 	width:80px;
-	height:40px;
-	border-radius:5px;
-	background:#6D7B8D;
-	font-weight:bold;
-	color:black;
+	height:30px;
 }
+.reply form textarea{
+	width:100%;
+}
+.
 .reply .reply-text{
-	margin-left:5%;
+	margin-left:1%;
 }
 .form_error span{
 	height: 20px;
@@ -147,27 +167,22 @@ form input[type="submit"]{
 }
 }
 @media only screen and (min-width:600px){
- .section,#register,#login, #recover,#reset, #upload{
+ .section,#create-account,#login, #recover,#reset, #upload, #subscribe{
 width: 300px; border: 1px solid #d6d7da; 
 padding: 0px 15px 15px 15px; 
 border-radius: 5px;font-family: arial; 
 font-size: 14px; 
 margin: 35px auto 20px auto;
-
 }
-
-
 .section{
 	margin:20px auto;
 }
-
 form input{ 
 padding: 10px;
 
 }
 form input[type="submit"]{
-	margin-top:20px;
-	margin-bottom: 10px;
+	margin:20px 0 10px 0;
 }
 
 .right-align{
@@ -190,16 +205,13 @@ form input[type="submit"]{
 .reply form input[type="submit"]{
 	width:80px;
 	height:35px;
-	border-radius:5px;
-	background:#6D7B8D;
-	font-weight:bold;
-	color:black;
 	margin-left:70%;
 }
+.reply form textarea{
+	width:90%;
+}
 .reply-textarea{
-	margin-left:20%;
-	background:rgb(245,245,245);
-	border-radius:5px;
+	margin-left:5%;
 }
 .form_error span{
 	height: 30px;

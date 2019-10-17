@@ -1,16 +1,28 @@
 $('document').ready(function(){
-	
+	var fullname_state = false;
 	var username_state = false;
 	var email_state = false;
-	var password_state = false;
-	var confirm_password_state = false;
-
+ $('#fullname').on('change', function(){
+	 var fullnameFilter = /^[\w\s\-.]+$/;
+	 var fullname = $('#fullname').val();
+	 if(!fullnameFilter.test(fullname)){
+		fullname_state = false;
+      	$('#fullname').parent().removeClass();
+      	$('#fullname').parent().addClass("form_error");
+      	$('#fullname').siblings("span").text('Use letters, space, numbers, dot, underscore or dash'); 
+	 }else{
+		fullname_state = true;
+		$('#fullname').parent().removeClass();
+		$('#fullname').parent().addClass("form_success");
+		$('#fullname').siblings("span").text('Ok');
+	 }
+ });
  $('#username').on('blur', function(){
 	var illegalChars = /\W/; // allow at least letters, numbers, and underscores
 	var username = $('#username').val();
 	
 	if(username == ''){
-	
+		username_state = false;
 		return;
 	}
   $.ajax({
@@ -25,19 +37,19 @@ $('document').ready(function(){
       	username_state = false;
       	$('#username').parent().removeClass();
       	$('#username').parent().addClass("form_error");
-      	$('#username').siblings("span").text('Sorry... Username already exists');
+      	$('#username').siblings("span").text('Sorry... You cannot use: '+username);
       }else if(response == 'not_taken') {
       	username_state = true;
       	$('#username').parent().removeClass();
       	$('#username').parent().addClass("form_success");
-      	$('#username').siblings("span").text('Username OK');
+      	$('#username').siblings("span").text('OK');
       }
 	  //---Further username validation---
 		if(username.match(illegalChars)){
 			username_state = false;
 			$('#username').parent().removeClass();
 			$('#username').parent().addClass("form_error");
-			$('#username').siblings("span").text('Sorry...Only letters, number or underscore allowed');
+			$('#username').siblings("span").text('Sorry...Only letters, number or underscore allowed, no spaces.');
 		}else if(username.length<3){
 			username_state = false;
 			$('#username').parent().removeClass();
@@ -67,19 +79,19 @@ $('document').ready(function(){
           email_state = false;
           $('#email').parent().removeClass();
           $('#email').parent().addClass("form_error");
-          $('#email').siblings("span").text('Sorry... Email address already exists');
+          $('#email').siblings("span").text('Sorry... You cannot use ' +email);
       	}else if (response == 'not_taken') {
       	  email_state = true;
       	  $('#email').parent().removeClass();
       	  $('#email').parent().addClass("form_success");
-      	  $('#email').siblings("span").text('Email OK');
+      	  $('#email').siblings("span").text('OK');
       	}
 		//Further email validation
 		if(!emailFilter.test(email)){
 			email_state = false;
 			$('#email').parent().removeClass();
 			$('#email').parent().addClass("form_error");
-			$('#email').siblings("span").text('Please! Enter valid email address');
+			$('#email').siblings("span").text('Please, Enter valid email address');
 		}else if(email.match(illegalChars)){
 			email_state = false;
 			$('#email').parent().removeClass();
@@ -90,57 +102,13 @@ $('document').ready(function(){
  	});	
  }); 
  
- //----- Validate password
- $('#password').on('change', function(){
-
- 	var password = $('#password').val();
-	var illegalChars = /\W/;  // allow only letters, numbers or underscore 
- 	if (password.length<6) {
-		password_state = false;
-		$('#password').parent().removeClass();
-		$('#password').parent().addClass("form_error");
-		$('#password').siblings("span").text('Sorry... password too short');
-	}else if(illegalChars.test(password)){
-		password_state = false;
-		$('#password').parent().removeClass();
-		$('#password').parent().addClass("form_error");
-		$('#password').siblings("span").text('Sorry... Only letters, numbers or underscores');
-	}else{
-		password_state = true;
-		$('#password').parent().removeClass();
-		$('#password').parent().addClass("form_success");
-		$('#password').siblings("span").text('OK');
- 	}
- });
- //--------
- 
- //----- Validate comfirm_password
- $('#confirm_password').on('change', function(){
-
- 	var confirm_password = $('#confirm_password').val();
-	var password = $('#password').val();
-	 
- 	if (confirm_password.length<6 || confirm_password != password) {
-		confirm_password_state = false;
-		$('#confirm_password').parent().removeClass();
-		$('#confirm_password').parent().addClass("form_error");
-		$('#confirm_password').siblings("span").text('Sorry... Passwords do not match');
-	}else{
-		confirm_password_state = true;
-		$('#confirm_password').parent().removeClass();
-		$('#confirm_password').parent().addClass("form_success");
-		$('#confirm_password').siblings("span").text('OK');
- 	}
- });
- //--------
  $('#submit_btn').on('click', function(e){
 	
- 	if (username_state == false || email_state == false || password_state == false || confirm_password_state == false) {
+ 	if (username_state == false || email_state == false || fullname_state == false) {
+		var fullname = $('#fullname').val();
 		var username = $('#username').val();
 		var email = $('#email').val();
-		var password = $('#password').val();
-		var confirm_password = $('#confirm_password').val();
-		
+				
 		e.preventDefault();
 		
 		$('#error_msg').text('Fix the errors in the form first');
@@ -156,20 +124,11 @@ $('document').ready(function(){
 			$('#email').parent().addClass("form_error");
 			$('#email').siblings("span").text('Email is required');
 		}
-		if(password == ''){
-			password_state = false;
-			$('#password').parent().removeClass();
-			$('#password').parent().addClass("form_error");
-			$('#password').siblings("span").text('Password is required');
-		}
-		if(confirm_password == ''){
-			confirm_password_state = false;
-			$('#confirm_password').parent().removeClass();
-			$('#confirm_password').parent().addClass("form_error");
-			$('#confirm_password').siblings("span").text('Must confirm  password');
-		}
 		
 	}else{
+		$('#fullname').siblings("span").text('');
+		$('#username').siblings("span").text('');
+		$('#email').siblings("span").text('');
 		return true;
 	}
  });

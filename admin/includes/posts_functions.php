@@ -288,20 +288,22 @@ function deletePost($post_id){
 if(isset($_GET['publish']) || isset($_GET['unpublish'])){
 	$message ='';
 	if(isset($_GET['publish'])){
+		$published = 1;
 		$message = 'Post published successfully.';
 		$post_id = $_GET['publish'];
 	}elseif(isset($_GET['unpublish'])){
+		$published = 0;
 		$message = 'Post successfully unpublished.';
 		$post_id = $_GET['unpublish'];
 	}
-	togglePublishPost($post_id, $message);
+	togglePublishPost($post_id, $published, $message);
 }
 
 //Publish/ unpublish posts
-function togglePublishPost($post_id, $message){
+function togglePublishPost($post_id, $published, $message){
 	global $conn;
 	
-	$sql = "UPDATE `posts` SET published =!publish WHERE post_id=$post_id";
+	$sql = "UPDATE `posts` SET published =$published WHERE post_id=$post_id";
 	if(mysqli_query($conn, $sql)){
 		$_SESSION['message'] = $message;
 		header('Location: posts.php');
