@@ -594,28 +594,27 @@ if(isset($_POST['image-upload'])){
 	$target_file = $target_dir . basename($_FILES['fileToUpload']['name']);
 	$uploadOk = 1;
 	$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-	
+	$allowed_image_types = array("png","jpg","jpeg","gif");
 	try{	
 		//Check if an image has been selected
 	
 		if(!empty(getimagesize($_FILES['fileToUpload']['tmp_name']))){
 			
-			// Check file size
-			if($_FILES['fileToUpload']['size']>500000){
+			// Allow only jpg, jpeg, png and gif file formats
+			if(!in_array($imageFileType, $allowed_image_types)){
+				$uploadOk = 0;
+				$errors['fileToUpload'] = 'Sorry, only JPG, JPEG, PNG or GIF files are allowed';
+				
+				include __DIR__ . '/../templates/imageupload.html.php';
+				
+				// Validate image size is 2MB or less
+			}else if($_FILES['fileToUpload']['size']>2000000){
 				$uploadOk = 0;
 				$errors['fileToUpload'] = 'Sorry, image is too large';
 
 				include __DIR__ . '/../templates/imageupload.html.php';
-				
-				// Allow only .jpg, .png and .gif file formats
-			}else if($imageFileType != 'jpg' && $imageFileType != 'png' && $imageFileType != 'gif'){
-				$uploadOk = 0;
-				$errors['fileToUpload'] = 'Sorry, only JPG, PNG or GIF files are allowed';
-				
-				include __DIR__ . '/../templates/imageupload.html.php';
 			}else{
 				$uploadOk = 1;
-			
 			}
 			
 		}else{
@@ -701,9 +700,9 @@ if(isset($_POST['image-upload'])){
 	}
 }
 		
-	function test_input($data){
-	
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data, ENT_QUOTES);
-	return $data;
-	}
+function test_input($data){
+
+$data = stripslashes($data);
+$data = htmlspecialchars($data, ENT_QUOTES);
+return $data;
+}

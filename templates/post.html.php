@@ -13,6 +13,7 @@ if(!isset($_SESSION)){
 	$post_slug = $posts['post_slug'];
 	$_SESSION['page_id'] = $page_id;
 	$_SESSION['post_slug'] = $post_slug;
+	$published_post_ids = getAllPublishedPostIds();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,18 +21,30 @@ if(!isset($_SESSION)){
 	
 	<!-- Links for google code prettify both (.css and .js at bottom of page) files -->
 	<link rel="stylesheet" type="text/css" href="/spexproject/resources/css/google-code-prettify/prettify.css">
-	<title><?php echo htmlspecialchars_decode($posts['post_title']) ;?> | Spex Solutions</title>
+	<title><?php echo htmlspecialchars_decode($posts['post_title']) ;?> | Developers Pot</title>
 </head>
 <body onload="PR.prettyPrint()">
 	<header>
 		<?php include __DIR__ .'/header.html.php';?>
 	</header>
 	<main class="group">
-		<section class='col-3-5'>
+		<aside class="col-1-10 hide-in-mobile">
+				<div class="published-topics">
+				<h2 class="left">Topics</h2>
+				<?php foreach($published_post_ids as $post_id): ?>
+					<?php $topic = getPublishedTopics($post_id['post_id'])?>
+					<h5><?php echo $topic['topic_name'] ?></h5>
+				<?php endforeach; ?>
+				</div>
+			</aside><!--
+			--><section class='col-6-10'>
 			<!-- The title will be fetched from database -->
 			<h1><?php echo ucwords(htmlspecialchars_decode($posts['post_title'])) ;?></h1>
 			<div class="post-acreditation">  
 				<?php echo isset($posts['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($posts['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($posts['created_at'])) ?>
+			</div>
+			<div class="post-main-image">
+				<?php echo (!empty($posts['image'])? '<img src="'.$posts['image'].'" alt="article image" class="article-post-image">':'')?>
 			</div>
 			<div>				
 			<!-- The page content will be fetched from database -->
@@ -43,7 +56,7 @@ if(!isset($_SESSION)){
 			</div>
 			
 		</section><!--
-		--><aside class='col-2-5'>
+		--><aside class='col-3-10'>
 			<div class="recent-posts">
 			<!-- Sidebar items go here -->
 				<h2 class="left">Recent posts</h2>
@@ -52,7 +65,16 @@ if(!isset($_SESSION)){
 				<h5><a href="post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></h5>
 				<?php endforeach; ?>
 			</div>
-		</aside>
+		</aside><!--			
+			--><aside class="hide-in-bigger-screens">
+				<div class="published-topics">
+				<h2 class="left">Browse Topics</h2>
+				<?php foreach($published_post_ids as $post_id): ?>
+					<?php $topic = getPublishedTopics($post_id['post_id'])?>
+					<h5><?php echo $topic['topic_name'] ?></h5>
+				<?php endforeach; ?>
+				</div>
+			</aside>
 	</main>
 	<footer class="group">
 			<span class="float-right">
@@ -64,7 +86,9 @@ if(!isset($_SESSION)){
 	</footer>
 </body>
 <script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
+<script src="/spexproject/resources/js/get-meta-keywords.js"></script>
 <script src="/spexproject/resources/js/menu-profile-controls.js"></script>
 <script src="/spexproject/resources/js/subscribe-comments-replies-scripts.js"></script>
-<script type="text/javascript" src="/spexproject/resources/css/google-code-prettify/prettify.js"></script>
+<script src="/spexproject/resources/css/google-code-prettify/prettify.js"></script>
+
 </html>

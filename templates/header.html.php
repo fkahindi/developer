@@ -1,7 +1,7 @@
 <div class="group">
 	<!-- Banner bar follows-->
 	<div class="banner-bar">
-		<img src="/spexproject/resources/images/spexbanner-orange-yellow.png" alt="Spex Banner" class="banner">
+		<h1>Developers Pot</h1>
 	</div>
 	<!--Enclosing nav-bar -->
 	<div class="navigation-utilities-section">

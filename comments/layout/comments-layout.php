@@ -55,7 +55,7 @@ require __DIR__ .'/../../includes/commentsFunctions.php';
 					<?php if(isset($_SESSION['loggedin'])): ?> 
 					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" class="reply-btn">Reply</a>
 					<?php endif; ?>
-					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" class="reply-thread">Show thread</a>
+					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" class="reply-thread">&#9660;Show</a>
 					<?php if(isset($_SESSION['loggedin'])): ?>
 						<!-- Reply form -->
 						<div class="reply">

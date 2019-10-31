@@ -181,10 +181,17 @@ $('document').ready(function(){
 		e.preventDefault();
 		
 		var thread_reply_id = $(this).data('id');
+		var html1="&#9650;";
+		var html2= "&#9660;";
 				
 		$('.group.replies_container_'+ thread_reply_id).toggle(100);
 		
-		$(this).text($(this).text() == 'Show thread' ? 'Hide thread' : 'Show thread');
+		$(this).text($(this).text() == convertEntities(html1) ? convertEntities(html2) : convertEntities(html1));
 				
 	});
+	function convertEntities(html){
+		var el = document.createElement("div");
+		el.innerHTML = html;
+		return el.firstChild.data;
+	}
 });

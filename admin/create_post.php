@@ -2,7 +2,7 @@
 	if(!isset($_SESSION)){
 		session_start();
 	}
-	include __DIR__ . '/../includes/loginStatus.php';
+	require_once __DIR__ . '/../includes/loginStatus.php';
 	if($_SESSION['role']!== 'Admin' && $_SESSION['role']!== 'Author'){
 		header('Location: ../index.php');
 	}	
@@ -39,8 +39,8 @@
 				<?php endif ?>
 			</div>
 			<div class="col-md-10 panel-body border">
-				<h1>Creat/ Edit Post</h1>
-				<form method="post" action="create_post.php">
+				<h1>Create/ Edit Post</h1>
+				<form method="post" action="create_post.php" enctype="multipart/form-data">
 					<div class="form-group form-group-lg">
 						<!-- Validate errors on form-->
 						<div class="text-danger"><?php include __DIR__ .'/includes/errors.php';?></div>
@@ -53,13 +53,22 @@
 							<input type="text" name="title" value="<?php echo $title; ?>" class="form-control" placeholder="Title">
 						</div>
 						<div class="form-group form-group-lg">
+							<input type="file" name="post_main_image" placeholder="Select image">
+							<p><ul><li>Only images sizes of less than 5Mb with formats .jpg, .png and .gif are allowed.</li></ul> </p>
+						
+						</div>
+						<div class="form-group form-group-lg">
 							
 							<textarea name="body" id="body" col="30" row="50" class="form-control"><?php echo $body; ?></textarea>
 							
 						</div>
 						<div>
 							<select name="topic_id" class="form-control">
-								<option value="" selected disabled>Choose topic</option>
+								<?php if($isEditingPost== true):?>
+									<option value="<?php echo $topic_id; ?>" selected ><?php echo $topic_name;  ?></option>
+								<?php else: ?>
+									<option value="" selected ><?php echo 'Select topic'  ?></option>
+								<?php endif ?>
 								<?php foreach($topics as $topic):?>
 									<option value="<?php echo $topic['topic_id']; ?>">
 										<?php echo $topic['topic_name']; ?>

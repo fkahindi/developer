@@ -1,5 +1,5 @@
 <div class="subscribe-section">
-	<h5 class="align-left"><strong>You can subscribe and get notified when there is a new post.</strong></h5>
+	<h5 class="align-left"><strong>You can get notified when there is a new post, if you subscribe below.</strong></h5>
 	<form  method="POST" action="" id="subscribe" >
 		<div class="subscribe_error"></div>
 		<div class="group-form">

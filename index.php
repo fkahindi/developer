@@ -8,16 +8,31 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 	<!-- head section -->
 	<?php require_once __DIR__ .'/templates/head.html.php'; ?>
 	<!--// head section -->
-	<title>Spex Management Solutions</title> 
+	<title>Developers Pot</title> 
 	</head>
 	<body>
 		<header>
 		<?php require_once __DIR__ . '/templates/header.html.php';?>
 		</header>
 		<main class="group">
-			<!-- Main section-->
-			<section class="col-3-5">
-				<h1>Welcome to Developers Pot</h1>
+			<aside class="col-2-10 hide-in-mobile">
+				<div class="published-topics">
+				<h2 class="left">Topics</h2>
+				<?php 
+					//Get all published topics in an array
+					foreach($published_post_ids as $post_id){
+					$topic = getPublishedTopics($post_id['post_id']);
+					$topic_for_display[]= $topic['topic_name'];
+					} 
+					//Prepare a unique-topics array and display content
+					foreach(array_unique($topic_for_display) as $display_topic){
+						echo '<h5>'.$display_topic .'</h5>';
+					}			
+				?>
+				</div>
+			</aside><!--
+			--><section class="col-5-10">
+				<h1>Welcome to Developers Pot</h1><hr>
 				<?php foreach($published_post_ids as $post_id): ?>
 				<?php $post = getPostById($post_id['post_id']) ?>
 				<?php $post['author'] = getPostAuthorById($post['user_id'])?>
@@ -28,12 +43,15 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 					By <?php echo $post['author'];?><span>  
 					<?php echo isset($post['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($post['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($post['created_at'])) ?></span>
 				</div>
+				<div class="post-main-image">
+				<?php echo (!empty($post['image'])? '<img src="'.$post['image'].'" alt="article image" class="article-index-image">':'')?>
+				</div>
 				<div class="paragraph-snippet">
 					<?php echo getFirstParagraphPostById($post_id['post_id']) ?> 
 				</div><br>
 				<?php endforeach; ?>
 			</section><!--			
-			--><aside class="col-2-5">
+			--><aside class="col-3-10">
 				<!-- Sidebar content goes here-->
 				<div class="recent-posts">
 				<h2 class="left">Recent posts</h2>
@@ -41,6 +59,22 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 				<?php foreach($recent_posts as $latest_post): ?>
 				<h5><a href="templates/post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></h5>
 				<?php endforeach; ?>
+				</div>
+			</aside><!--			
+			--><aside class="hide-in-bigger-screens">
+				<div class="published-topics">
+				<h2 class="left">Browse Topics</h2>
+				<?php 
+					//Get all published topics in an array
+					foreach($published_post_ids as $post_id){
+					$topic = getPublishedTopics($post_id['post_id']);
+					$topic_for_display[]= $topic['topic_name'];
+					} 
+					//Prepare a unique-topics array and display content
+					foreach(array_unique($topic_for_display) as $display_topic){
+						echo '<h5>'.$display_topic .'</h5>';
+					}				
+				?>
 				</div>
 			</aside>	
 		</main>
@@ -54,5 +88,8 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 		</footer>
 	</body>
 	<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
+	<script src="/spexproject/resources/js/get-meta-keywords.js"></script>
 	<script src="/spexproject/resources/js/menu-profile-controls.js"></script>
+	
+	
 </html>

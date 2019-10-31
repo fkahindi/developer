@@ -1,38 +1,22 @@
 <?php
-require_once __DIR__ . '/includes/DbConnection.php';
-
-	function getUserById($id){
-		global $conn;
-		$sql = "SELECT user_id, username, profile_photo FROM `users` WHERE user_id=$id";
-		
-		$result =$conn->query($sql);
-		if($result->num_rows>0){
-			$row = $result->fetch_assoc();
-		
-			return $row;
-		}else{
-			echo '0 records';
-		}
-		
+ echo 'Page uri is: '.$_SERVER['REQUEST_URI'].'<br>'; 
+ echo 'Host server is: '.$_SERVER['SERVER_NAME'].'<br>'; 
+ echo 'server address is: '.$_SERVER['SERVER_ADDR'].'<br>'; 
+ 
+ ?>
+ <script>
+	function convertEntities(html){
+		var el = document.createElement("span");
+		el.innerHTML = html;
+		return el.firstChild.data;
 	}
-$row =getUserById(2);
-echo $row['username']. '<br>';
-echo $row['profile_photo']. '<br>';
-
-function getAllPostComments($page_id){
-		global $conn;
-		//Get all comments related to a particular post and display them on the page of the post 
-		$sql = "SELECT * FROM `comments` WHERE post_id = $page_id ORDER BY created_at DESC";
-		$query_result = $conn->query($sql);
-		if($query_result->num_rows>0){
-			$comments = $query_result->fetch_assoc();
-			return $comments;
-		}else{
-			echo '0 comments';
-		}
-		
-	}
-$result = getAllPostComments(2);
-foreach($result as $comment){
-	echo $comment['comment_id'];
-} 
+	var html = "&#9650; &#9660;";
+	var text = convertEntities(html);
+	document.write(text);
+ </script>
+ <?php
+ echo "Today is " . date("Y/m/d") . "<br>"; 
+echo "Today is " . date("Y.m.d") . "<br>"; 
+echo "Today is " . date("Y-m-d") . "<br>"; 
+echo "Today is " . date("l"). "<br>"; 
+echo __DIR__;

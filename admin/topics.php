@@ -47,10 +47,10 @@
 					<div class="form-group form-group-lg">
 						<!-- Validate errors on form-->
 						<?php include __DIR__ .'/includes/errors.php';?>
-						
+					
 						<!--Id is required to identify the form -->
 						<?php if($isEditingTopic === true):?>
-						<input type="hidden" name="topic_id" value="<?php echo $topic_id; ?>">
+						<input type="hidden" name="topic_id" value="<?php echo $_GET['edit-topic']; ?>">
 						<?php endif ?> 
 						<div class="form-group">
 						<input type="text" name="topic_name" value="<?php echo $topic_name; ?>" class="form-control" placeholder="Topic">
@@ -66,7 +66,7 @@
 					</div>
 				</form>
 			</div>
-			<!--Right columne -->
+			<!--Right column -->
 			<div class="col-md-6">
 				<?php if(empty($topics)): ?>
 			<div class="mx-auto my-4"><h4>There no topics in database</h4></div>

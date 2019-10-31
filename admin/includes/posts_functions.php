@@ -6,6 +6,7 @@ $post_id ='';
 $isEditingPost = false;
 $published = 0;
 $title ='';
+$image_file ='';
 $post_slug = '';
 $body = '';
 $sound ='';
@@ -30,9 +31,22 @@ function getAllPublishedPostIds(){
 		return null;
 	}	
 }
-//Get the first two most recent posts
+
+//Get published topics
+function getPublishedTopics($published_post_id){
+	global $conn;
+	$query = "SELECT * FROM topics WHERE topic_id =
+			(SELECT topic_id FROM post_topic WHERE post_id=$published_post_id) LIMIT 1";
+	$result = mysqli_query($conn, $query);
+	if($result){
+		$published_topic = mysqli_fetch_assoc($result);
+		return $published_topic;
+	}else{
+		return null;
+	}
+}
+//Get the first three most recent posts
 function getMostRecentPosts(){
-	//
 	global $conn;
 	$sql = "SELECT * FROM `posts` WHERE published=1 ORDER BY created_at DESC LIMIT 3";
 	$result = mysqli_query($conn, $sql);
@@ -138,7 +152,7 @@ if(isset($_GET['delet-post'])){
 --Post Functions
 -------------------------*/
 function createPost($request_values){
-	global $conn, $errors, $title, $topic_id, $body, $published, $sound;
+	global $conn, $errors, $title, $topic_id, $body, $published, $image_file, $sound;
 	
 	$title = htmlspecialchars(esc($request_values['title']));
 	$body = htmlspecialchars(esc($request_values['body']));
@@ -172,7 +186,32 @@ function createPost($request_values){
 	
 	//Create slug by replacing spaces in title with hyphens
 	$post_slug = makeSlug($title);
+	//Get image filename
+	$image_file = $_FILES['post_main_image']['name'];
+	if(!empty(getimagesize($_FILES['post_main_image']['tmp_name']))){
+		$target_file = '../resources/images/'.basename($image_file);
+		$imageFileType = strtolower(pathinfo($target, PATHINFO_EXTENSION));
+		//Check if image already exists in target folder, to ensure no image overwriting
+		if(file_exists($target_file)){
+			array_push($errors, 'There is already an image with the same name. Try change the name and continue.');
+		}
+		//Check image size
+		if($_FILES['post_main_image']['size']>5000000){
+			array_push($errors, 'Sorry, image is too large');
 			
+		// Allow only .jpg, .png and .gif file formats
+		}else if($imageFileType != 'jpg' && $imageFileType != 'png' && 		$imageFileType != 'gif'){
+			array_push($errors,'Sorry, only JPG, PNG or GIF files are allowed');
+		}
+		if(!move_uploaded_file($_FILES['post-main-image']['tmp_name'], $target_file)){
+			array_push($errors, 'Post image could not be uploaded, if problem persists try publishing without the image.');
+		}else{
+			$image_path = '/spexproject/resources/images/'.basename($image_file);
+		}
+	}else{
+		$image_path = null;
+	}
+					
 	//Make sure no file is saved twice
 	$post_check ="SELECT * FROM `posts` WHERE post_slug='$post_slug' LIMIT 1";
 	
@@ -184,7 +223,7 @@ function createPost($request_values){
 	
 	//If no errors in the form, insert posts	
 	if(!$errors){
-		$query = "INSERT INTO `posts` (user_id, post_title, post_slug, post_body, published, created_at, metaphoned) VALUES($user_id, '$title', '$post_slug', '$body', $published, now(), '$sound')";
+		$query = "INSERT INTO `posts` (user_id, post_title, post_slug, post_body, published, image, created_at, metaphoned) VALUES($user_id, '$title', '$post_slug', '$body', $published, '$image_path', now(), '$sound')";
 		
 		$result = mysqli_query($conn, $query);
 		if($result){ //if post created successful
@@ -199,24 +238,27 @@ function createPost($request_values){
 			header('Location: posts.php');
 			exit(0);
 		}else{
-			array_push($errors, 'Insert record unsuccessful.');
+			array_push($errors, 'Insert record was not successful.');
 		}		
 	} 
 }
 
 function editPost($role_id){
-	global $conn, $title, $post_slug, $body, $published, $isEditingPost, $post_id;
+	global $conn, $title, $post_slug, $body, $published,$image_file, $isEditingPost, $post_id, $topic_name, $topic_id;
 	$sql = "SELECT * FROM `posts` WHERE post_id = $role_id LIMIT 1";
 	
 	$result = mysqli_query($conn, $sql);
 	$post = mysqli_fetch_assoc($result);
 	//Set form values to be updated on form
 	$title = $post['post_title'];
+	$image_file = $post['image'];
 	$body = $post['post_body'];
 	$published = $post['published'];
+	$topic_name = getPublishedTopics($post['post_id'])['topic_name'];
+	$topic_id = getPublishedTopics($post['post_id'])['topic_id'];
 }
 function updatePost($request_values){
-	global $conn, $title, $post_slug, $body, $published, $isEditingPost, $post_id, $errors;
+	global $conn, $title, $post_slug, $body, $published, $isEditingPost, $post_id, $topic_id, $sound, $errors;
 	$title = htmlspecialchars(esc($request_values['title']));
 	$body = htmlspecialchars(esc($request_values['body']));
 	$post_id = esc($request_values['post_id']);
@@ -247,20 +289,42 @@ function updatePost($request_values){
 		}
 	}
 	
+		$image_file = $_FILES['post_main_image']['name'];
+		if(!empty(getimagesize($_FILES['post_main_image']['tmp_name']))){
+			$target_file = '../resources/images/'.basename($image_file);
+			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+		
+			//Check image size
+			if($_FILES['post_main_image']['size']>5000000){
+				array_push($errors, 'Sorry, image is too large');
+				
+				// Allow only .jpg, .png and .gif file formats
+			}else if($imageFileType != 'jpg' && $imageFileType != 'png' && 		$imageFileType != 'gif'){
+				array_push($errors,'Sorry, only JPG, PNG or GIF files are allowed');
+			}
+			if(!move_uploaded_file($_FILES['post_main_image']['tmp_name'],$target_file)){
+				array_push($errors, 'Post image could not be uploaded, if problem persists try publishing without the image.');
+			}else{
+				$image_path = '/spexproject/resources/images/'.basename($image_file);
+			}
+		}else{
+		$image_path = null;
+		}
 	
 	//Udate if there are no errors
 	if(!$errors){
-		$query = "UPDATE `posts` SET post_title='$title', post_slug='$post_slug', post_body='$body', published=$published, updated_at=now(), metaphoned='$sound' WHERE post_id=$post_id";
+		$query = "UPDATE `posts` SET post_title='$title', post_slug='$post_slug', post_body='$body', published=$published, image='$image_path', updated_at=now(), metaphoned='$sound' WHERE post_id=$post_id";
 		
 		//Attach topic to posts in post_topic table
-		if(mysqli_query($conn, $query)){ //if query was created successfully
+		if(mysqli_query($conn, $query)){ 
+		//if query was created successfully
+		
 			if(isset($topic_id)){
-				$inserted_post_id = mysqli_insert_id($conn);
 				//create relationship between post and topic
-				$sql = "UPDATE `post_topic` SET topic_id=$topic_id WHERE post_id=$inserted_post_id";
+				$sql = "UPDATE `post_topic` SET topic_id=$topic_id WHERE post_id=$post_id";
 				
 				mysqli_query($conn, $sql);
-				$_SESSION['message']= 'Post values update successful.';
+				$_SESSION['message']= 'Post and topic values updated successfully.';
 				header('Location: posts.php');
 				exit(0);
 			}

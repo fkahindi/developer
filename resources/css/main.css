@@ -31,6 +31,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+@font-face{
+	font-family: 'Aladin';
+	src:local(Aladin), url('../fonts/Aladin-Regular.ttf') format('opentype');
+}
 body {
 	background:white;
 	line-height: 1.5;
@@ -46,21 +50,14 @@ q:before, q:after {
   content: '';
   content: none;
 }
-strong, b{
-	font-weight:bold;
-}
-em, i{
-	font-style:italic;
-}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/*
-/////////////////////
-** GENERAL STYLES
-*********************
-*/
+/**********************
+** GENERAL STYLES	**
+**********************/
 *,
 *::before,
 *::after {
@@ -97,30 +94,31 @@ table {
 .errors ul{
 	margin-left:1em;
 }
+header, footer{
+	width:100%;
+	padding:0;		
+}
 header{
 	background:#293f50;
 }
-header, footer{
-	width:100%;
-	padding:0;
-	font-family:Calibri, sans-serif;		
+footer{
+	padding:10px 40px;
+	background:rgba(15, 15,15, 0.5);
 }
-nav a{
-	font-variant:small-caps;
-	color:rgb(255, 255,255);
+footer li{
+	display:inline-table;
 }
 nav ul, .account-display-settings ul{
 	list-style:none;
 }
-nav ul li a:hover{
-	background-color: #334F5C;
-	color:rgb( 200, 200, 233);
-}
+
 nav ul li a{
 	padding:15px 10px;
 	color:rgb(250, 250,250);
 }
-
+main{
+	margin:0 auto;
+}
 main table, tr{
 	width:100%;
 	text-align:left;
@@ -132,11 +130,6 @@ main table th{
 main tbody tr:nth-child(even){
 	 background: #f0f0f2;
 }
-main table td:first-child {
-	font-family:'Courier New', courier;
-	font-weight:bold;
-	
-}
 main table th, td{
 	padding:3px 10px;
 	border:thin solid rgb(200,200,200);
@@ -146,36 +139,17 @@ main table th, td{
 	padding:5px;
 	margin:5px 5%;
 }
-section, aside{
+section{
 	padding:10px;
 	text-align:justify;
 }
-footer{
-	padding:10px 40px;
-	background:rgba(15, 15,15, 0.5);
+aside{
+	padding:10px;
+	text-align:left;
 }
-footer a{
-	font-variant:small-caps;
-}
-
-footer li{
-	display:inline-table;
-}
-footer ul span{
-	color:rgb(200,200,200);
-}
-footer a{
-	text-decoration:none;
-	color:black;
-}
-footer a:hover{
-	color:rgb(240, 240,240);
-}
-/*
-/////////////////////////////////////
-CLEARFIX
-*************************************
-*/
+/**********************************
+** 		CLEARFIX				**
+***********************************/
 .group:before,
 .group:after{
 	content:"";
@@ -189,17 +163,68 @@ CLEARFIX
 	*zoom:1;
 } 
 
-/*
-//////////////////////////////
-	TYPOGRAPHY
-******************************
-*/
+/*****************************
+**		TYPOGRAPHY			**
+******************************/
+strong, b{
+	font-weight:bold;
+}
+em, i{
+	font-style:italic;
+}
 main{
-	margin:0 auto;
-	font-family: sans-serif;
+	font-family: calibri, sans-serif;
+}
+header, footer{
+	font-family:Calibri, sans-serif;		
+}
+header  ul{
+	color:rgb(200,200,200);
+}
+
+footer ul span{
+	color:rgb(200,200,200);
+}
+footer a{
+	font-variant:small-caps;
+	text-decoration:none;
+	color:black;
+}
+footer a:hover{
+	color:rgb(240, 240,240);
+}
+.banner-bar h1{
+	font-family: Aladin;
+	color:white;
+	text-align:center;
+}
+nav a{
+	font-variant:small-caps;
+	color:rgb(255, 255,255);
+}
+nav ul li a:hover{
+	background-color: #334F5C;
+	color:rgb( 200, 200, 233);
+}
+.login-signup span{
+	color:rgb(200,200,200);
+}
+.login-signup a{
+	color:rgb( 200, 200, 233);
+}
+.account-display-settings a{
+	font-size:1em;
+	text-align:left;
+	color:rgb( 200, 200, 233);
+}
+.account-display-settings a:hover{
+	color:#fff;
+}
+.search-container input[type=text], .search-container button{
+	font-size: 1.1em;
 }
 main h1, h2, h3{
-	font-weight:bolder;
+	font-weight:bold;
 	padding:5px;
 	text-align:left;
 }
@@ -227,6 +252,10 @@ main .special-p{
 main .special-p code{
 	background:inherit;
 }
+main table td:first-child {
+	font-family:'Courier New', courier;
+	font-weight:bold;
+}
 main ul, ol{
 	text-indent: 10px;
 	padding-left: 30px;
@@ -234,15 +263,61 @@ main ul, ol{
 main ul{
 	list-style:disc;
 }
+.comments-container h3, h4, h5{
+	padding-top:20px ;
+	color:black;
+	text-shadow:none;
+}
+.comments-container p{
+	font-size:100%;
+}
+.comments-section{
+	font-family:"Times New Roman";
+	font-size:100%;
+}
+.comments-detail a{
+	font-family:Arial;	
+}
+.user-info .username{
+	font-family:sans-serif;
+	color:rgb(50,50,50);
+	font-weight:bold;
+	font-size:90%;	
+}
+.user-info .created-date{
+	font-style:italic;
+}
+.replies-detail .user-info{
+	font-size:90%;
+}
+.paragraph-snippet{
+	font-family:calibri, sans-serif;
+	font-size:90%;
+	line-height:1;
+}
+.recent-posts a,.published-topics a{
+	color:#157DEC;
+}
+.recent-posts a:hover,.published-topics a:hover{
+	text-decoration:underline;
+	color:#0041C2;
+}
+.post-acreditation{
+	color:gray;
+	font-size:14px;
+}
+code{
+	font-family:'Courier New',Courier;
+	font-size:1em;
+	color:#000;
+}
 .subscribe-section p{
 	text-align:left;
 	line-height:1;
 }
-/* 
-///////////////////////////////
- STYLING FOR HEADER SECTIONS
-*******************************
-*/
+/********************************
+** STYLING FOR HEADER SECTIONS **
+*********************************/
 .log-account-section a:hover{
 	text-decoration:underline;
 }
@@ -254,10 +329,6 @@ main ul{
 	margin:0;
 	width:100%;
 }
-.login-signup a{
-	color:rgb( 200, 200, 233);
-}
-
 .search-container{
 	display:block;
 	margin:0;
@@ -267,13 +338,11 @@ main ul{
   padding: 6px;
   width:100%;
   margin-top: 8px;
-  font-size: 17px;
   border: none;
 }
 .search-container button {
   padding: 6px 9px;
   margin-top: 8px;
-  font-size: 17px;
   border: none;
   border-radius:0 5px 5px 0;
   cursor: pointer;
@@ -288,11 +357,9 @@ main ul{
 	border:3px solid #2b5959;
 }
 
-/* 
-/////////////////////////////
- STYLING FOR TOOLTIP
-****************************
-*/
+/*************************
+** STYLING FOR TOOLTIP	**
+**************************/
 
 /* Tooltip container */
 .tooltip{
@@ -337,8 +404,7 @@ main ul{
 	
 }
 
-/*
-/////////////////////////////////////////////
+/********************************************
 STYLING FOR PROFILE SETTINGS AND DISPLAY
 *********************************************
 */
@@ -370,31 +436,11 @@ STYLING FOR PROFILE SETTINGS AND DISPLAY
 #profile-checkbox-control:checked ~ .tooltip-text{
 	visibility:hidden;
 }
-.account-display-settings a{
-	font-size:1em;
-	text-align:left;
-	color:rgb( 200, 200, 233);
-}
-.account-display-settings a:hover{
-	color:#fff;
-}
-header  ul, .login-signup span{
-	color:rgb(200,200,200);
-}
 
-/*
-///////////////////////////////
+
+/******************************
 STYLING FOR COMMENTS SECTION
-*******************************
-*/
-.comments-container h3, h4, h5{
-	padding-top:20px ;
-	color:black;
-	text-shadow:none;
-}
-.comments-container p{
-	font-size:100%;
-}
+*******************************/
 .comments-container hr{
 	margin-top:30px;
 	border: thin dashed #ADD8E6;
@@ -404,8 +450,6 @@ STYLING FOR COMMENTS SECTION
 	border:thin solid silver;
 }
 .comments-section{
-	font-family:"Times New Roman";
-	font-size:90%;
 	margin-top:10px;
 }
 .comments-container .hide-comment-id{
@@ -425,7 +469,6 @@ STYLING FOR COMMENTS SECTION
 .replies-profile-photo{
 	float:left;
 	margin-left:40px;
-	
 }
 .replies-detail{
 	float:right;
@@ -437,32 +480,19 @@ STYLING FOR COMMENTS SECTION
 	background: rgb(220,220,220);
 	border-radius:5px;
 }
-
-.user-info .username{
-	font-family:sans-serif;
-	color:rgb(50,50,50);
-	font-weight:bold;
-	font-size:110%;	
-}
 .user-info .created-date{
-	font-style:italic;
 	padding-left:5px;
 }
 .comments-section .comment-text{
 	padding-top:0;
 	line-height:1.2;
 }
-.replies-detail .user-info{
-	font-size:90%;
+.comments-detail a{
+	margin:0 10px;
 }
 .replies-detail .reply-text{
 	text-align:left;
 	padding:3px 0 10px 0;
-}
-.comments-detail a{
-	font-family:Arial;
-	margin:0 10px;
-	text-transform:uppercase;
 }
 .reply{
 	width:100%;
@@ -475,11 +505,9 @@ div[class^="group replies_container_"] {
 	display:none;
 }
 
-/*
-////////////////////////////////
+/********************************
 STYLING FOR SOCIAL MEDIA ICONS
-*******************************
-*/
+********************************/
 .icon-bar {
   position: fixed;
   top: 50%;
@@ -536,9 +564,8 @@ STYLING FOR SOCIAL MEDIA ICONS
   background: #cb2027;
   color: white;
 }
-/*
-//////////////////////////////////////////
-** STYLING FOR CODE DISPLAY SECTIONS
+/***************************************
+** STYLING FOR CODE DISPLAY SECTIONS  **
 ****************************************/
 pre, pre code, samp{
 	display:block;
@@ -549,47 +576,34 @@ pre{
 	-o-tab-size:4;
 	tab-size:4;
 	overflow-x:auto;
-	margin:10px 0;
+	margin: 0;
 	font-size:.9em;
 }
 code{
-	font-family:'Courier New';
-	font-size:1em;
-	color:#000;
 	padding:0 2px;
 }
 p code{
 	background:rgb(230,230,230);
 }
-/*
-////////////////////////////////////////////
+/******************************************
 **STYLING FOR DYNAMIC CONTENT ON INDEX PAGE
 ******************************************/
 .paragraph-snippet{
-	padding: 10px 5px;
-	font-family:'Times New Roman';
-	font-size:90%;
-	line-height:1;
+	padding:5px;
 	border:0 solid;
 	box-shadow:0 5px 5px grey; 
 }
-.post-acreditation{
-	color:gray;
-	font-size:14px;
-}
-.recent-posts{
-	margin-left:1em;
-}
-.recent-posts a{
-	color:#157DEC;
-}
-.recent-posts a:hover{
-	text-decoration:underline;
-	color:#0041C2;
-}
 
-/*
-////////////////////////////////////////// 
+/*********************************
+**STYLING FOR SIDEBARS (ASIDE) 	**
+**********************************/
+.recent-posts,.published-topics{
+	padding-left:1em;
+}
+.published-topics ul{
+	list-style:none;
+}
+/***************************************** 
 HIDE MENU CONTROLS FOR SMALL DEVICES ONLY
 ******************************************/
 #menu-checkbox-control, .dropdown-button{
@@ -610,7 +624,9 @@ LAYOUT
 [class*="col-"]{
 	width:100%
 }
-
+.hide-in-mobile{
+	display:none;
+}
 /* 
 ===================================================
 HEADER AND SECTIONS
@@ -620,6 +636,11 @@ header{
 	width:100%;
 	height:60px;
 	}
+.banner-bar h1{
+	text-align:left;
+	padding-top:.5em;
+	font-size:.8em;
+}
 .search-container{
 	position:absolute;
 	top:0;
@@ -690,9 +711,9 @@ header{
 }
 
 /* 
-------------------------------------------------
+===========================================
 NAVIGATION MENU: FOR MOBILE 
-------------------------------------------------
+===========================================
 */
 
 .dropdown {
@@ -748,9 +769,9 @@ nav ul>span{
 	display:none;
 }
 /* 
-------------------------------------------
+====================================
 TOOL TIP
-------------------------------------------
+====================================
  */
 .tooltip .tooltip-text{		
 	margin-left:-100px;
@@ -760,9 +781,9 @@ TOOL TIP
 }
 
 /* 
---------------------------------------------------
+=====================================
 MAIN SECTION
---------------------------------------------------
+=====================================
 */
 section, aside{
 	width:100%;
@@ -771,8 +792,27 @@ section, aside{
 }
 main h1, h2, h3{
 	font-weight:bolder;
-	padding:10px 5px;
+	padding:5px;
 	text-align:left;
+}
+.post-main-image{
+	width:70%;
+	margin:10px auto;
+}
+.post-main-image .article-index-image{
+	width:150px;
+	height:150px;
+}
+.post-main-image .article-post-image{
+	width:100%;
+	max-width:250px;
+	height:250px;
+}
+.comment-text{
+	text-align:left;
+}
+.reply-thread, .reply-btn{
+	font-size:0.9em;
 }
 .reply-form{
 	margin-left:5px;
@@ -781,7 +821,7 @@ main h1, h2, h3{
 	margin-left:10px;
 	
 }
-.recent-posts h5{
+.recent-posts h5, .published-topics h5{
 	padding:2px 0;
 	line-height:.8;
 }
@@ -789,12 +829,12 @@ main h1, h2, h3{
 	font-size:80%;
 }
 pre{
-	padding-left:10px;
+	padding-left:1em;
 }
 /* 
---------------------------------------------------
+===================================
 FOOTER SECTION
---------------------------------------------------
+===================================
 */
 footer{
 	width:100%;
@@ -832,10 +872,10 @@ SMALL DEVICES (PORTRAIT TABLETS AND LARGE PHONES, 600PX AND ABOVE)
 -------------------------------------------------------------------
 */
 /*
-=================================================
+=====================================
 	GENERAL LAYOUT
-=================================================
-	*/
+=====================================
+*/
 body{
 	font-size:100%;
 }
@@ -846,11 +886,27 @@ body{
 main{
 	width:90%
 }
+.hide-in-mobile{
+	display:none;
+}
+
+header{
+	height:70px;
+}
 .subscribe-section{
 	margin:5px 10%;	
 }
-header{
-	height:70px;
+.post-main-image{
+	width:70%;
+	margin:20px;
+}
+.post-main-image .article-index-image{
+	width:200px;
+	height:200px;
+}
+.post-main-image .article-post-image{
+	width:70%;
+	height:300px;
 }
 footer{
 	font-size:80%;
@@ -872,6 +928,11 @@ footer{
 .banner-bar{
 	float:left;
 	width:15%;
+}
+.banner-bar h1{
+	text-align:right;
+	padding-top:.5em;
+	font-size:1.1em;
 }
 .banner{
 	padding-top:0;
@@ -960,8 +1021,6 @@ nav ul li a{
 	font-size:80%;
 	
 }
-
-
 /*
 =================================================
 FOOTER
@@ -974,12 +1033,7 @@ footer li{
 ul span{
 	color:rgb(200,200,200);
 }
-footer a{
-	color:black;
-}
-footer a:hover{
-	color:rgb(240, 240,240);
-}	
+	
 /*
 =================================================
 TYPOGRAPHY
@@ -989,19 +1043,23 @@ TYPOGRAPHY
 	font-size:.8em;
 }
 main p, li{
-	font-size:1.1em;
+	font-size:1em;
 }
 main h1{
-	font-size:140%;
+	font-size:110%;
 	font-weight:800;
 }
 main h2{
-	font-size:130%;
+	font-size:90%;
 	font-weight:600;	
 }
 main h3{
-	font-size:110%;
-	font-weight:600;
+	font-size:80%;
+	font-weight:600;	
+}
+main h4{
+	font-size:70%;
+	font-weight:400;
 }
 .login-signup{
 	font-size:80%;
@@ -1014,15 +1072,18 @@ main h3{
 	font-size:90%;
 }
 footer a{
-	
+	color:black;
+}
+footer a:hover{
+	color:rgb(240, 240,240);
 }
 /* 
-=========================================================
+===================================
 CODE SECTIONS
-=======================================================
+===================================
  */
  pre{
-	padding-left:10px;
+	padding-left:1em;
 }
 }
 @media only screen and (min-width:768px) and (max-width:992px){
@@ -1037,36 +1098,43 @@ MEDIUM DEVICES (LANDSCAPE TABLETS, 768px and up)
 PAGE GRID
 ==========================================
 */
-.col-1-5,
-.col-2-5,
-.col-3-5,
-.col-4-5{
+.col-1-10,.col-2-10,.col-3-10,.col-4-10,.col-5-10,.col-6-10,.col-7-10,.col-8-10,
+.col-9-10{
 	display: inline-block;
 	vertical-align: top;
 	float:left;
 }
-.col-1-5{
-	max-width:20%;
-}
-.col-2-5{
-	max-width:40%;
-}
-.col-3-5{
-	max-width:60%;
-}
-.col-4-5{
-	max-width:80%
-}
+.col-1-10{width:10%;}.col-2-10{width:20%;}.col-3-10{width:30%;}.col-4-10{width:40%
+}.col-5-10{width:50%;}.col-6-10{width:60%;}.col-7-10{width:70%;}.col-8-10{width:80%;}.col-9-10{width:90%;}
 main{
 	width:100%;
+}
+section,aside{
+	display:inline-block;
+}
+.hide-in-bigger-screens{
+	display:none;
+}
+
+header{
+	height:70px;
+	margin:0;
 }
 .subscribe-section{
 	margin:5px 10%;	
 }
-header{
-	height:70px;
-	margin:0;
-	}
+.post-main-image{
+	width:70%;
+	margin:20px;
+}
+.post-main-image .article-index-image{
+	width:200px;
+	height:200px;
+}
+.post-main-image .article-post-image{
+	width:80%;
+	height:300px;
+}
 footer{
 	height:40px;
 	padding:5px 100px;
@@ -1088,6 +1156,11 @@ HEADER AND SECTIONS
 .banner-bar{
 	float:left;
 	width:20%;
+}
+.banner-bar h1{
+	text-align:right;
+	padding-top:.5em;
+	font-size:1.5em;
 }
 .banner{
 	padding-top:5px;
@@ -1151,17 +1224,15 @@ HEADER AND SECTIONS
 }
 
 /*
-=================================================
-NAVIGATION & LINKS
-=================================================
+===================================
+NAVIGATION
+===================================
 */
 nav{
 	margin:0 ;
 	text-align:left;
 	padding-top:0;
 	padding-bottom:5px;
-	font-size:100%;
-	
 }
 nav ul{
 	text-align:center;
@@ -1172,48 +1243,68 @@ nav li{
 }
 nav ul li a{
 	padding:8px 2px;
-	font-size:80%;
-	
 }
 /*
-===========================================
+===================================
 TYPOGRAPHY
-==========================================
+===================================
 */
+nav{
+	font-size:100%;
+}
+nav ul li a{
+	font-size:80%;
+}
 .account-display-settings{
 	font-size:.9em;
 }
 main p, li{
-	font-size:1.1em;
+	font-size:1em;
 }
 main h1{
-	font-size:140%;
+	font-size:110%;
 	font-weight:800;
 }
 main h2{
-	font-size:130%;
+	font-size:90%;
 	font-weight:600;	
 }
 main h3{
-	font-size:110%;
+	font-size:80%;
 	font-weight:600;	
 }
 main h4{
-	font-size:100%;
+	font-size:70%;
 	font-weight:400;
 }
-.recent-posts h5{
+
+section{
+	padding:0 3%;
+}
+aside{
+	text-align:left;
+	padding-left:10px;
+}
+aside .recent-posts{
+	padding-left:0;
+}
+aside .published-topics{
+	padding-left:10px;
+}
+
+.recent-posts h5, .published-topics h5{
 	padding:3px 0;
 	line-height:.9;
 }
 .recent-posts a{
 	font-size:90%;
 }
+
 footer a{
 	font-size:.7em;
 }
 pre{
-	padding-left:15px;
+	padding-left:1em;
 }
 }
 
@@ -1228,38 +1319,45 @@ LARGE DEVICES (LAPTOPS AND DESKTOPS 992PX AND ABOVE)
 PAGE GRID 
 ==========================================
 */
-.col-1-5,
-.col-2-5,
-.col-3-5,
-.col-4-5{
+.col-1-10,.col-2-10,.col-3-10,.col-4-10,.col-5-10,.col-6-10,.col-7-10,.col-8-10,
+.col-9-10{
 	display: inline-block;
 	vertical-align: top;
 	float:left;
 }
-.col-1-5{
-	width:20%;
-}
-.col-2-5{
-	width:40%;
-}
-.col-3-5{
-	width:60%;
-}
-.col-4-5{
-	width:80%
+.col-1-10{width:10%;}.col-2-10{width:20%;}.col-3-10{width:30%;}.col-4-10{width:40%
+}.col-5-10{width:50%;}.col-6-10{width:60%;}.col-7-10{width:70%;}.col-8-10{width:80%;}.col-9-10{width:90%;}
+.hide-in-bigger-screens{
+	display:none;
 }
 main{
-	width:90%;
+	width:95%;
 	padding:5px;
 }
-.subscribe-section{
-	margin:5px 10%;	
+section,aside{
+	display:inline-block;
 }
 header{
 	width:100%;
 	height:100px;
 	margin:0;
-	}
+}
+.subscribe-section{
+	margin:5px 10%;	
+}
+.post-main-image{
+	width:60%;
+	margin:20px;
+	
+}
+.post-main-image .article-index-image{
+	width:200px;
+	height:200px;
+}
+.post-main-image .article-post-image{
+	width:100%;
+	height:400px;
+}
 footer{
 	height:40px;
 	padding:10px 200px;
@@ -1279,6 +1377,11 @@ HEADER SECTIONS
 .banner-bar{
 	float:left;
 	width:20%;
+}
+.banner-bar h1{
+	text-align:right;
+	padding-top:.5em;
+	font-size:1.8em;
 }
 .banner{
 	padding-top:5px;
@@ -1381,7 +1484,20 @@ main h4{
 	font-size:120%;
 	font-weight:500;
 }
-.recent-posts h5{
+section{
+	padding:0 10px;
+}
+aside{
+	text-align:left;
+}
+aside .recent-posts{
+	padding-left:5px;
+}
+aside .published-topics{
+	padding-left:5px;
+}
+
+.recent-posts h5, .published-topics h5{
 	padding:3px 0;
 	line-height:.9;
 }
@@ -1392,7 +1508,7 @@ footer a{
 	font-size:.7em;
 }
 pre{
-	padding-left:15px;
+	padding-left:1em;
 }
 }
 @media only screen and (min-width:1200px) {
@@ -1406,37 +1522,39 @@ EXTRA LARGE DEVICES (LARGE LAPTOPS AND DESKTOPS, 1200PX AND UP)
 PAGE GRID 
 ==========================================
 */
-.col-1-5,
-.col-2-5,
-.col-3-5,
-.col-4-5{
+.col-1-10,.col-2-10,.col-3-10,.col-4-10,.col-5-10,.col-6-10,.col-7-10,.col-8-10,
+.col-9-10{
 	display: inline-block;
 	vertical-align: top;
 	float:left;
 }
-.col-1-5{
-	width:20%;
-}
-.col-2-5{
-	width:40%;
-}
-.col-3-5{
-	width:60%;
-}
-.col-4-5{
-	width:80%
+.col-1-10{width:10%;}.col-2-10{width:20%;}.col-3-10{width:30%;}.col-4-10{width:40%
+}.col-5-10{width:50%;}.col-6-10{width:60%;}.col-7-10{width:70%;}.col-8-10{width:80%;}.col-9-10{width:90%;}
+.hide-in-bigger-screens{
+	display:none;
 }
 main{
 	width:90%;
 	margin: 0 auto;
 }
-.subscribe-section{
-	margin:10px 10%;
-	
-}
 header{
 	height:120px;
 	margin:0;
+}
+.subscribe-section{
+	margin:10px 10%;
+}
+.post-main-image{
+	width:50%;
+	margin:20px;
+}
+.post-main-image .article-index-image{
+	width:350px;
+	height:300px;
+}
+.post-main-image .article-post-image{
+	width:100%;
+	height:400px;
 }
 footer{
 	height:40px;
@@ -1457,6 +1575,11 @@ HEADER SECTIONS
 .banner-bar{
 	float:left;
 	width:20%;
+}
+.banner-bar h1{
+	text-align:right;
+	padding-top:.5em;
+	font-size:2.4em;
 }
 .banner{
 	padding-top:5px;
@@ -1543,25 +1666,35 @@ main table {
 	margin:30px 5px;
 }
 main h1{
-	font-size:180%;
+	font-size:160%;
 	font-weight:800;	
 }
 main h2{
-	font-size:160%;
+	font-size:140%;
 	font-weight:600;	
 }
 main h3{
-	font-size:140%;
+	font-size:120%;
 	font-weight:600;
 }
 main h4{
 	font-size:120%;
 	font-weight:500;
 }
-aside .recent-posts{
-	padding-left:50px;
+
+section{
+	padding:0 20px;
 }
-.recent-posts h5{
+aside{
+	text-align:left;
+}
+aside .recent-posts{
+	padding-left:5px;
+}
+aside .published-topics{
+	padding-left:5px;
+}
+.recent-posts h5, .published-topics h5{
 	padding:4px 0;
 	line-height:.9;
 }

@@ -250,6 +250,7 @@ function updateTopic($request_values){
 	if(empty($topic_name)){
 		array_push($errors, 'Topic name is required.');
 	}
+	
 	//Register topic if there are no errors
 	if(count($errors) == 0){
 		$query = "UPDATE `topics` SET topic_name='$topic_name', topic_slug='$topic_slug' WHERE topic_id=$topic_id";

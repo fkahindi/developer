@@ -4,8 +4,8 @@
 if(isset($_POST['search_term'])){
 	include __DIR__ .'/../includes/DBConnection.php';
 	
-	echo $_POST['search_term'].'<br>';
-	$query = $_POST['search_term'];
+	echo htmlspecialchars($_POST['search_term']).'<br>';
+	$query = htmlspecialchars($_POST['search_term']);
 	
 	//Seperating words and appending the metaphone of each word with a space
 	$search = explode(' ', $query);
@@ -13,20 +13,20 @@ if(isset($_POST['search_term'])){
 	foreach($search as $word){
 		$search_term .= metaphone($word).' ';
 	}
-	echo $search_term .'<br>';
-	$sql ="SELECT * FROM `posts` WHERE metaphoned LIKE '%$search_term%'";
+	$sql ="CONCAT_WS('',TRIM(SUBSTRING_INDEX(SUBSTRING(post_body,1,INSTR('$search_term')-1),'',-20)),'$search_term', TRIM(SUBSTRING_INDEX(SUBSTRING(post_body, INSTR(post_body,'$search_term' )+LENGTH('$search_term')),'',20)))";
+	/* $sql ="SELECT post_title, SUBSTRING(post_body, LOCATE('$search_term',post_body)-100, 200) text FROM `posts` WHERE metaphoned LIKE '%$search_term%' AND published=1"; */
 	$res = mysqli_query($conn, $sql);
 	if(!$res){
 		echo mysqli_error($conn);
 	}
 	if(mysqli_num_rows($res)>0){
+	
 		while($row=mysqli_fetch_assoc($res)){
-
 			?>
 			<!--Display results -->
-			<h1><?=$row['post_id'] ?></h1>
-			<h2><?=htmlspecialchars_decode($row['post_title']) ?></h2>
-			<h3><?=htmlspecialchars_decode($row['post_body']['search_term']) ?></h3>
+			<h5><?=htmlspecialchars_decode($row['post_title']) ?></h5>
+			
+			<p><?=htmlspecialchars_decode($row['text']) ?></p>
 			<?php
 		}
 	}else{
