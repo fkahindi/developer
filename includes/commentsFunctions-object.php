@@ -8,25 +8,34 @@
 	function getAllPostComments($page_id){
 		global $conn, $page_id;
 		//Get all comments related to a particular post and display them on the page of the post 
-		$sql = "SELECT * FROM `comments` WHERE post_id = $page_id ORDER BY created_at DESC";
-		$query_result = $conn->query($sql);
-		if($query_result->num_rows>0){
-			$comments = $query_result->fetch_assoc();
-			return $comments;
-		}else{
-			echo '0 comments';
-		}
-		
+		$sql = "SELECT * FROM `comments` WHERE post_id = ? ORDER BY created_at DESC";
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param('i',$page_id);
+		$comm_id =0;
+		$user_id =0;
+		$post_id =0;
+		$comm='';
+		$created='';
+		$updated='';
+		$stmt->bind_result($comm_id,$user_id,$post_id,$comm,$created,$updated);
+		$stmt->execute();
+		$comments=$stmt->fetch();
 	}
 	//Get users by id
 
 	function getUserById($id){
 		global $conn;
-		$sql = "SELECT user_id, username, profile_photo FROM `users` WHERE user_id=$id";
+		$sql = "SELECT user_id, username, profile_photo FROM `users` WHERE user_id=?";
 		
-		$result =$conn->query($sql);
+		$stmt =$conn->prepare($sql);
+		$stmt->bind_param("i", $id);
+		$user_id =0;
+		$username ='';
+		$profile_photo ='';
+		$stmt->bind_result($user_id,$username,$profile_photo);
+		$result = $stmt->execute();
 		if($result->num_rows>0){
-			$row = $result->fetch_assoc();
+			$row = $result->fetch();
 		
 			return $row;
 		}else{
@@ -37,11 +46,20 @@
 	//Getting replies by comment_id
 	function getRepliesByCommentId($id){
 		global $conn;
-		$sql = "SELECT * FROM `replies` WHERE comment_id =$id";
+		$sql = "SELECT * FROM `replies` WHERE comment_id =?";
 		
-		$result = $conn->query($sql);
+		$stmt = $conn->prepare($sql);
+		$stmt->bind_param("i", $id);
+		$reply_id =0;
+		$user_id =0;
+		$comment_id =0;
+		$body ='';
+		$created ='';
+		$updated ='';
+		$tmt->bind_result($reply_id,$reply_id,$comment_id,$body,$created,$updated );
+		$result=$stmt->execute();
 		if($result->num_rows>0){
-			$replies = $result->fetch_assoc();
+			$replies = $result->fetch();
 			
 			return $replies;
 		}else{
@@ -49,11 +67,16 @@
 		}
 		
 	}
-	
+	//Take page id and retrieve number of comments 
 	function getCommentCountByPostId($id){
 		global $conn;
-		$result = $conn->query("SELECT COUNT(*) AS total FROM comments WHERE post_id=$id");
-		$data = $result->fetch_assoc();
+		$query="SELECT COUNT(*) AS total FROM comments WHERE post_id=?";
+		$stmt=$conn->prepare($query);
+		$stmt->bind_param("i",$id);
+		$total =0;
+		$stmt->bind_result($total);
+		$stmt->execute();
+		$data=$stmt->fetch();
 		
 		return $data['total'];
 		
@@ -72,15 +95,23 @@
 		$stmt = bind_param("iiss",$user_id, $page_id, $body, now());
 		//$stmt -> execute();
 					
-		if($stmt->execute()=== true){
-			$id = $conn->insert_id;
+		if($stmt->execute()){
+			$id = $stmt->insert_id;
 			
-			$query = "SELECT * FROM comments WHERE comment_id =$id";
+			$query = "SELECT * FROM comments WHERE comment_id =?";
 
-			$select = $conn->query($query);
+			$result = $conn->prepare($query);
+			$result->bind_param('i',$id);
+			$comm_id =0;
+			$user_id =0;
+			$post_id =0;
+			$comm='';
+			$created='';
+			$updated='';
+			$result->bind_result($comm_id,$user_id,$post_id,$comm,$created,$updated);
 			
-			if($select->num_rows>0){
-				$comment = $select->fetch_assoc();
+			if($result->num_rows>0){
+				$comment = $result->fetch();
 				
 				include __DIR__ . '/../comments/layout/comments_output.php';
 			}else{
@@ -105,14 +136,22 @@
 		
 		$stmt = bind_param("iisss",$user_id, $comment_id,$reply_text,now(), null);
 				
-		if($stmt->execute()=== true){
-			$insert_id =$conn->insert_id;
-			$query = "SELECT * FROM replies WHERE reply_id =$insert_id";
-
-			$select = $conn->query($query);
+		if($stmt->execute()){
+			$insert_id =$stmt->insert_id;
+			$query = "SELECT * FROM replies WHERE reply_id =?";
+			$result=$conn->prepare($query);
+			$result->bind_param('i',$insert_id);
+			$reply_id =0;
+			$user_id =0;
+			$comment_id =0;
+			$body ='';
+			$created ='';
+			$updated ='';
+			$result->bind_result($reply_id,$reply_id,$comment_id,$body,$created,$updated );
+			$result->execute($query);
 			
-			if($select->num_rows>0){
-				$reply = $select->fetch_assoc();
+			if($result->num_rows>0){
+				$reply = $result->fetch();
 				
 				include __DIR__ . '/../comments/layout/replies_output.php';
 			}else{

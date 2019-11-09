@@ -23,6 +23,8 @@
 	<?php include __DIR__ .'/components/navbar.php'; ?>
 	<div class="container border border-dark m-3">
 	<div class="text-center text-success"><?php include __DIR__ .'/includes/messages.php'?></div>
+	</div>
+		<div class="text-center text-danger"><?php include __DIR__ .'/includes/errors.php';?></div>
 		<h1>Welcome <?php echo $_SESSION['fullname'] .' | '. $_SESSION['role']?></h1>
 		<div class="row my-5">
 		
@@ -84,7 +86,7 @@
 								</td>
 								<td>
 									<p>
-									<a href="create_post.php?delete-post=<?php echo $post['post_id'] ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Trash</a>
+									<a href="posts.php?delete-post=<?php echo $post['post_id'] ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Trash</a>
 									</p>
 								</td>
 							</tr>

@@ -1,22 +1,23 @@
 <?php
- echo 'Page uri is: '.$_SERVER['REQUEST_URI'].'<br>'; 
- echo 'Host server is: '.$_SERVER['SERVER_NAME'].'<br>'; 
- echo 'server address is: '.$_SERVER['SERVER_ADDR'].'<br>'; 
+ include __DIR__ .'/admin/includes/posts_functions.php';
+ include __DIR__ .'/admin/includes/admin_functions.php';
+ $published_post_ids = getAllPublishedPostIds();
  
- ?>
- <script>
-	function convertEntities(html){
-		var el = document.createElement("span");
-		el.innerHTML = html;
-		return el.firstChild.data;
+ /* foreach($published_post_ids as $post_id){
+
+	$topic_id = getPublishedTopics($post_id['post_id'])['topic_id'];
+	echo getTopicNameById($topic_id).'<br>';
+	$posts = getPublishedPostsByTopic($topic_id);
+	foreach($posts as $post){
+	echo $post['post_title'].'<br>';
 	}
-	var html = "&#9650; &#9660;";
-	var text = convertEntities(html);
-	document.write(text);
- </script>
- <?php
- echo "Today is " . date("Y/m/d") . "<br>"; 
-echo "Today is " . date("Y.m.d") . "<br>"; 
-echo "Today is " . date("Y-m-d") . "<br>"; 
-echo "Today is " . date("l"). "<br>"; 
-echo __DIR__;
+ } */
+ $topics = getAllTopics();
+ foreach($topics as $topic){
+	 echo $topic['topic_name'].'<br>';
+	 $topic_id = $topic['topic_id'];
+	 $posts = getPublishedPostsByTopic($topic_id);
+	 foreach($posts as $post){
+		echo $post['post_title'].'<br>';
+	}
+ }

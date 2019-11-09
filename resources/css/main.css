@@ -221,7 +221,7 @@ nav ul li a:hover{
 	color:#fff;
 }
 .search-container input[type=text], .search-container button{
-	font-size: 1.1em;
+	font-size: 100%;
 }
 main h1, h2, h3{
 	font-weight:bold;
@@ -247,7 +247,6 @@ main p{
 }
 main .special-p{
 	background:rgb(100,200,100);
-	
 }
 main .special-p code{
 	background:inherit;
@@ -338,12 +337,15 @@ code{
   padding: 6px;
   width:100%;
   margin-top: 8px;
-  border: none;
+  background:inherit;
+  color:rgb( 200, 200, 233);
+  border:thin solid gray;
 }
 .search-container button {
   padding: 6px 9px;
   margin-top: 8px;
-  border: none;
+   background:inherit;
+  border:thin solid gray;
   border-radius:0 5px 5px 0;
   cursor: pointer;
 }
@@ -650,14 +652,14 @@ header{
 }
 .search-container input[type=text] {
   padding: 3px;
-  margin-top: 0;
+  margin-top: 3px;
   font-size: 14px;
 }
 .search-container button {
   padding: 3px 9px;
   margin-left:-25px;
-  margin-top: 0;
-  font-size: 14px;
+  margin-top: 3px;
+  font-size: 12px;
   border-radius:0 5px 5px 0;
 }
 .banner-bar, .log-account-section{

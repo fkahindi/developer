@@ -1,6 +1,7 @@
 <?php 
 session_start(); 
 include __DIR__ .'/admin/includes/posts_functions.php';
+include __DIR__ .'/admin/includes/admin_functions.php';
 	$published_post_ids = getAllPublishedPostIds();
 ?>
 <!DOCTYPE html>
@@ -18,17 +19,9 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 			<aside class="col-2-10 hide-in-mobile">
 				<div class="published-topics">
 				<h2 class="left">Topics</h2>
-				<?php 
-					//Get all published topics in an array
-					foreach($published_post_ids as $post_id){
-					$topic = getPublishedTopics($post_id['post_id']);
-					$topic_for_display[]= $topic['topic_name'];
-					} 
-					//Prepare a unique-topics array and display content
-					foreach(array_unique($topic_for_display) as $display_topic){
-						echo '<h5>'.$display_topic .'</h5>';
-					}			
-				?>
+					
+				<?php include __DIR__ . '/admin/published_posts_by_topics.php';?>					
+					
 				</div>
 			</aside><!--
 			--><section class="col-5-10">
@@ -64,17 +57,7 @@ include __DIR__ .'/admin/includes/posts_functions.php';
 			--><aside class="hide-in-bigger-screens">
 				<div class="published-topics">
 				<h2 class="left">Browse Topics</h2>
-				<?php 
-					//Get all published topics in an array
-					foreach($published_post_ids as $post_id){
-					$topic = getPublishedTopics($post_id['post_id']);
-					$topic_for_display[]= $topic['topic_name'];
-					} 
-					//Prepare a unique-topics array and display content
-					foreach(array_unique($topic_for_display) as $display_topic){
-						echo '<h5>'.$display_topic .'</h5>';
-					}				
-				?>
+					<?php include __DIR__ . '/admin/published_posts_by_topics.php';?>				
 				</div>
 			</aside>	
 		</main>

@@ -15,7 +15,6 @@
 		}else{
 			echo 'Error'.$query.'<br>'.mysqli_error($conn);
 		}
-		
 	}
 	//Get users by id
 
@@ -31,7 +30,6 @@
 		}else{
 			echo 'Error'.$query.'<br>'.mysqli_error($conn);
 		}
-		
 	}
 	//Getting replies by comment_id
 	function getRepliesByCommentId($id){
@@ -46,7 +44,6 @@
 		}else{
 			echo 'Error'.$sql.'<br>'.mysqli_error($conn);
 		}
-		
 	}
 	
 	function getCommentCountByPostId($id){

@@ -3,6 +3,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 	include __DIR__ .'/../admin/includes/posts_functions.php';
+	include __DIR__ .'/../admin/includes/admin_functions.php';
 	if(isset($_GET['id'])){
 		$posts = getPostById($_GET['id']);
 	}
@@ -28,16 +29,13 @@ if(!isset($_SESSION)){
 		<?php include __DIR__ .'/header.html.php';?>
 	</header>
 	<main class="group">
-		<aside class="col-1-10 hide-in-mobile">
+		<aside class="col-2-10 hide-in-mobile">
 				<div class="published-topics">
 				<h2 class="left">Topics</h2>
-				<?php foreach($published_post_ids as $post_id): ?>
-					<?php $topic = getPublishedTopics($post_id['post_id'])?>
-					<h5><?php echo $topic['topic_name'] ?></h5>
-				<?php endforeach; ?>
+				<?php include __DIR__ . '/../admin/published_posts_by_topics.php';?>
 				</div>
 			</aside><!--
-			--><section class='col-6-10'>
+			--><section class='col-5-10'>
 			<!-- The title will be fetched from database -->
 			<h1><?php echo ucwords(htmlspecialchars_decode($posts['post_title'])) ;?></h1>
 			<div class="post-acreditation">  
@@ -69,10 +67,7 @@ if(!isset($_SESSION)){
 			--><aside class="hide-in-bigger-screens">
 				<div class="published-topics">
 				<h2 class="left">Browse Topics</h2>
-				<?php foreach($published_post_ids as $post_id): ?>
-					<?php $topic = getPublishedTopics($post_id['post_id'])?>
-					<h5><?php echo $topic['topic_name'] ?></h5>
-				<?php endforeach; ?>
+				<?php include __DIR__ . '/../admin/published_posts_by_topics.php';?>
 				</div>
 			</aside>
 	</main>

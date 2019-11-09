@@ -31,20 +31,59 @@ function getAllPublishedPostIds(){
 		return null;
 	}	
 }
-
-//Get published topics
+/* function getTopicNameById($published_post_id)
+{
+	global $conn;
+	$sql = "SELECT topic_name FROM topics WHERE topic_id=$published_post_id";
+	$result = mysqli_query($conn, $sql);
+	$topic = mysqli_fetch_assoc($result);
+	
+	return $topic['topic_name'];
+} */
 function getPublishedTopics($published_post_id){
 	global $conn;
-	$query = "SELECT * FROM topics WHERE topic_id =
-			(SELECT topic_id FROM post_topic WHERE post_id=$published_post_id) LIMIT 1";
-	$result = mysqli_query($conn, $query);
+	$sql ="SELECT * FROM topics WHERE topic_id= 
+	(SELECT topic_id FROM post_topic WHERE post_id=$published_post_id) LIMIT 1";
+	$result = mysqli_query($conn, $sql);
 	if($result){
 		$published_topic = mysqli_fetch_assoc($result);
-		return $published_topic;
+		return  $published_topic;
 	}else{
-		return null;
+		echo 'No topics';
 	}
 }
+function getPublishedPostsByTopic($topic_id) {
+	global $conn;
+	$sql = "SELECT * FROM posts ps 
+			WHERE ps.published=1 AND ps.post_id IN 
+			(SELECT pt.post_id FROM post_topic pt 
+				WHERE pt.topic_id=$topic_id GROUP BY pt.post_id 
+				HAVING COUNT(1) = 1)";
+				
+	$result = mysqli_query($conn, $sql);
+	
+	// fetch all posts as an associative array called $posts
+	$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+	$final_posts = array();
+	foreach ($posts as $post) {
+		$post['topic'] = getPublishedTopics($post['post_id']); 
+		array_push($final_posts, $post);
+	}
+	return $final_posts;
+}
+/* function getAllPostsByTopic($topic_id){
+	global $conn;
+	
+	$query = "SELECT * FROM posts WHERE post_id =	(SELECT post_id FROM post_topic WHERE topic_id =$topic_id)";
+	$result = mysqli_query($conn, $query);
+	if($result){
+		$posts_by_topic = mysqli_fetch_assoc($result);
+		return  $posts_by_topic;
+	}else{
+		echo 'No posts';
+	}
+} */
 //Get the first three most recent posts
 function getMostRecentPosts(){
 	global $conn;
@@ -143,8 +182,8 @@ if(isset($_POST['update_post'])){
 	updatePost($_POST);
 }
 //If user click Delete button
-if(isset($_GET['delet-post'])){
-	$post_id =$_GET['delete-post'];
+if(isset($_GET['delete-post'])){
+	$post_id = $_GET['delete-post'];
 	deletePost($post_id);
 }
 
@@ -337,14 +376,16 @@ function updatePost($request_values){
 
 //Delete blog post
 function deletePost($post_id){
-	
-	global $conn;
+	global $conn, $errors;
 	$sql = "DELETE FROM `posts` WHERE post_id=$post_id";
 	if(mysqli_query($conn, $sql)){
 				
 		$_SESSION['message'] = 'Post, related comments and replies deleted successfully.';
 		header('Location: posts.php');
 			exit(0);
+	}else{
+		array_push($errors, 'Delete failed!');
+		
 	}
 }
 
