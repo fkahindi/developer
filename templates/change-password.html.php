@@ -4,6 +4,10 @@ if(!isset($_SESSION)){
 	session_start();
 }
 include __DIR__ . '/../includes/loginStatus.php';
+include __DIR__ .'/../includes/processFormAuthentication-Test.php';
+if(isset($_POST['change_password'])){
+changePassword();
+}
  ?>
 <!doctype html>
 <html lang="en">
@@ -18,13 +22,13 @@ include __DIR__ . '/../includes/loginStatus.php';
 	<div id="reset">
 		
 		<div class="form_image">
-			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+			<div class="banner-bar"><h2>Developers Pot</h2></div>
 			<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
 			<h2>Change Password</h2>
 		</div>
 	
 	
-		<form method="POST" action="../includes/processFormAuthentication-Test.php">
+		<form method="POST" action="">
 			<div class="group-form">
 				<label for="old_password">Old Password:<span class="red"> &#42;</span></label>
 				 <input type="password" name="old_password" autocomplete="off" required>

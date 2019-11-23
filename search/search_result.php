@@ -12,7 +12,7 @@ if(isset($_POST['search_term'])){
 		$search_term .= metaphone($word).' ';
 	}
 	
-	$sql ="SELECT post_title, SUBSTRING(post_body, LOCATE('$search_term',post_body)-200, 500) text FROM `posts` WHERE metaphoned LIKE '%$search_term%' AND published=1";
+	$sql ="SELECT post_title, SUBSTRING(post_body, LOCATE(post_body,'$search_term')-200, 500) text FROM `posts` WHERE metaphoned LIKE '%$search_term%' AND published=1";
 	$res = mysqli_query($conn, $sql);
 	if(!$res){
 		echo mysqli_error($conn);

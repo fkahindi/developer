@@ -9,7 +9,11 @@ if(isset($_GET['email']) && isset($_GET['key'])){
 }
 	
 
-if(!empty($email) && !empty($token)){	
+if(!empty($email) && !empty($token)){
+include __DIR__ .'/../includes/processFormAuthentication-Test.php';
+if(isset($_POST['reset_password'])){	
+	resetPassword();	
+}
 ?>
 	
 <!doctype html>
@@ -26,13 +30,13 @@ if(!empty($email) && !empty($token)){
 	<div id="reset">
 		
 		<div class="form_image">
-				<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+				<div class="banner-bar"><h2>Developers Pot</h2></div>
 				<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory</p>
 				<h2>Reset Password</h2>
 		</div>
 		
 								
-		<form method="POST" name ="reset-password" action="../includes/processFormAuthentication-Test.php">
+		<form method="POST" name ="reset-password" action="">
 		
 			<input type="hidden" name="action" value="update">
 			<div class="group-form">

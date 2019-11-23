@@ -32,7 +32,7 @@ if(!isset($_SESSION)){
 		<aside class="col-2-10 hide-in-mobile">
 				<div class="published-topics">
 				<h2 class="left">Topics</h2>
-				<?php include __DIR__ . '/../admin/published_posts_by_topics.php';?>
+				<?php include __DIR__ . '/published_posts_by_topics.html.php';?>
 				</div>
 			</aside><!--
 			--><section class='col-5-10'>
@@ -67,7 +67,7 @@ if(!isset($_SESSION)){
 			--><aside class="hide-in-bigger-screens">
 				<div class="published-topics">
 				<h2 class="left">Browse Topics</h2>
-				<?php include __DIR__ . '/../admin/published_posts_by_topics.php';?>
+				<?php include __DIR__ . '/published_posts_by_topics.html.php';?>
 				</div>
 			</aside>
 	</main>

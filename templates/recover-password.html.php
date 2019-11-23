@@ -1,3 +1,10 @@
+<?php 
+include __DIR__ .'/../includes/processFormAuthentication-Test.php'; 
+if(isset($_POST['recover_password'])){
+	recoverPassword();	
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,11 +15,11 @@
 <body>
 	<div id="recover">
 		<div class="form_image">
-			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+			<div class="banner-bar"><h2>Developers Pot</h2></div>
 			<p class="form-p">Please fill out this form to recover your password.</p>
 			<h2>Recover Password</h2>
 		</div>
-		<form method="POST" action="../includes/processFormAuthentication-Test.php">
+		<form method="POST" action="">
 			<label for="email">Enter your email address:</label>
 			 <input type="email" name="email" autocomplete="off" required> <span class="errorMsg">
 			 <?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>

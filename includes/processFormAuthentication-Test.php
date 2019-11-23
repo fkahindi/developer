@@ -9,7 +9,7 @@ if(!isset($_SESSION)){
 include __DIR__ .'/../includes/DatabaseConnection.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 
-$fullname = $username = $profile_photo = $email = $password = $confirm_password = $new_password = $old_password = $confirm_new_password ='';
+//$fullname = $username = $profile_photo = $password = $confirm_password = $new_password = $old_password = $confirm_new_password = '';
 
 $errors =[];
 $valid = true;
@@ -17,9 +17,9 @@ $gen_pattern ="/^[\w]{3,}$/"; //Matches atleast characters made of alpha-numeric
 $password_pattern = "/^[\w\-.]+$/"; // Matches letters, numbers, underscore, dash or dot
 
 //This section handles user account creation
-
-if(isset($_POST['create-account'])){
-	
+function createAccount(){
+	global $pdo, $errors,$valid, $gen_pattern;
+		
 	//Assign variables
 	$fullname = $_POST['fullname'];
 	$username = $_POST['username'];
@@ -63,48 +63,65 @@ if(isset($_POST['create-account'])){
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
 			$valid = false;
 			$errors['email'] = 'Invalid email address';
-		}	
+		}		
 	}
 	
 	if(empty($errors)){
-		try{	
-			$curDate = date('Y-m-d H:i:s');			
-			$created_at = new DateTime();	
-			$created_at = $created_at->format('Y-m-d H:i:s');
-			$token = bin2hex(random_bytes(50));
-			
-			$users_tempTable = new DatabaseTable($pdo, 'users_temp','email');
-			$query = $users_tempTable->selectRecords($email);
-					
-			if(!empty($query->rowCount())){
-				//If email exists check if token still valid 
-				$row = $query->fetch();
-								
-				$createdDateTimeStamp = strtotime($row['created_at']);
-				$curDateTimeStamp = strtotime($curDate);
+		try{
+			//Check whether the email or username are already in use
+			$usersTable = new DatabaseTable($pdo, 'users', 'email','username');
+			$sql = $usersTable->selectColumnsRecords($email,$username);
+			if($sql->rowCount()>0){
+				$valid = false;
+				$row = $sql->fetch();
+				if($row['username'] === $username){
+					$errors['username'] = 'You cannot use '.$username;
+				}
+				if($row['email'] === $email){
+					$errors['email'] = 'You cannot use '.$email;
+				}
 				
-				if($curDateTimeStamp - $createdDateTimeStamp <= 172800){
-					//If link was sent in less than 48 hrs notify user
-					echo 'A link was sent to your email in less than 48 hours ago. Check your email inbox.';
-				}else {
-					//Update token and date then send email link
-					$fields = ['token' => $token, 'created_at' => $created_at];
-					$update_usersToken = $users_tempTable->updateRecords($fields,$email);
-					//require_once __DIR__ .'/subscribe-email-link.php';
-					echo 'A link was sent some time back, but has been sent again';
-				} 	
 			}else{
-				$fields = [
-				'fullname' => $fullname,
-				'username' => $username,
-				'email' => $email,
-				'token' => $token,
-				'created_at' => $created_at
-				];
-				$insert_tempRecord = $users_tempTable ->insertRecord($fields);
 				
-				require_once __DIR__ .'/create-account-email-link.php';
-				echo 'A link has been sent to your email address, please verify it.';
+				$curDate = date('Y-m-d H:i:s');			
+				$created_at = new DateTime();	
+				$created_at = $created_at->format('Y-m-d H:i:s');
+				$token = bin2hex(random_bytes(50));
+				
+				$users_tempTable = new DatabaseTable($pdo, 'users_temp','email');
+				$query = $users_tempTable->selectColumnRecords($email);
+						
+				if($query->rowCount()>0){
+					//If email exists check if token still valid 
+					$temp_row = $query->fetch();
+									
+					$createdDateTimeStamp = strtotime($temp_row['created_at']);
+					$curDateTimeStamp = strtotime($curDate);
+					$span = $curDateTimeStamp - $createdDateTimeStamp;
+					if($span<= 86400){
+						//If link was sent in less than 48 hrs notify user
+
+						echo 'A link was sent to '.$temp_row['email'].' address in less than 24 hours ago. Check your email inbox.';
+						
+					}else{
+						//Update token, date and fullname (if set) then send email link
+						$fields = ['fullname'=>$fullname, 'token' => $token, 'created_at' => $created_at];
+						$update_usersToken = $users_tempTable->updateRecords($fields,$email);
+						require_once __DIR__ .'/create-account-email-link.php';
+						
+					} 	
+				}else{
+					$fields = [
+					'fullname' => $fullname,
+					'username' => $username,
+					'email' => $email,
+					'token' => $token,
+					'created_at' => $created_at
+					];
+					$insert_tempRecord = $users_tempTable ->insertRecord($fields);
+					
+					require_once __DIR__ .'/create-account-email-link.php';	
+				}
 			}
 		}catch(PDOException $e){
 			$title ='An error has occured';
@@ -112,22 +129,25 @@ if(isset($_POST['create-account'])){
 			. $e->getFile() . ':' . $e->getLine();
 		}				
 	}else{
-		include __DIR__ .'/../templates/create-account.html.php';	
+		$form_error = 'Form has errors';		
 	}
+
 }
 
-//This section handles account email verification
-if(isset($_POST['set-account-password'])){
-	$email = $_POST['email'];
-	$token = $_POST['token'];
+
+//This function handles account email verification
+function setAccountPassword(){
+	global $pdo, $password_pattern,$password, $confirm_password, $profile_photo, $valid, $errors;
+	
+	$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+	$token = filter_var($_POST['token'], FILTER_SANITIZE_STRING);
 	$password = $_POST['password'];
 	$confirm_password = $_POST['confirm_password'];
-			
-	//If loggedin validate form
+		
 	if(empty($_POST['password'])){
 		$valid = false;
-		$errors['password'] = 'Password field cannot be blank';
-	}else if(empty($_POST['confirm_password'])){
+		$errors['password'] = 'Password cannot be blank';
+	}elseif(empty($_POST['confirm_password'])){
 		$valid = false;
 		$errors['confirm_password'] = 'Confirm your password';
 	}else{
@@ -135,39 +155,40 @@ if(isset($_POST['set-account-password'])){
 		$password = filter_var($password, FILTER_SANITIZE_STRING);
 		$confirm_password = filter_var($confirm_password, FILTER_SANITIZE_STRING);
 		$password = trim($password);
-	}
-	if(!preg_match($password_pattern, $password)){
-		$valid = false;
-		$errors['password'] ='Only alphanumeric, underscore, dash and dot are allowed.';
-	}else if(strlen($password)<6){
-		$valid = false;
-		$errors['password'] ='Password must be at least 6 characters.';
-	}else if($password !== $confirm_password){
-		$valid = false;
-		$errors['confirm_password'] ='Your passwords do not match';
-	}else{
-		$valid = true;
+		
+		if(!preg_match($password_pattern, $password)){
+			$valid = false;
+			$errors['password'] ='Only alphanumeric, underscore, dash and dot are allowed.';
+		}else if(strlen($password)<6){
+			$valid = false;
+			$errors['password'] ='Password must be at least 6 characters.';
+		}else if($password !== $confirm_password){
+			$valid = false;
+			$errors['confirm_password'] ='Your passwords do not match';
+		}
 	}
 	
 	//If everything is OK and valid is true 
 	if($valid){
-		
+
 		try{
 			
 			$curDate = date('Y-m-d H:i:s');
 					
-			$selectEmailToken = new DatabaseTable ($pdo, 'users_temp', 'token');
-			$sql = $selectEmailToken->selectRecords($token, $email);
-			
-			if(!empty($sql->rowCount())){
+			$selectEmailToken = new DatabaseTable ($pdo, 'users_temp','token', 'email');
+			$sql = $selectEmailToken->selectMatchColumnsRecords($token, $email);
+							
+			if($sql->rowCount()==1){
 				
 				$row = $sql->fetch();
 				$fullname = $row['fullname'];
 				$username = $row['username'];
 				$expDateTimestamp = strtotime($row['created_at']);
 				$curDateTimestamp = strtotime($curDate);
+				$span = $curDateTimestamp - $expDateTimestamp;
 				
-				if(($curDateTimestamp - $expDateTimestamp)<=172800){
+				if($span<=86400){
+					
 					$created_at = new DateTime();	
 					$created_at = $created_at->format('Y-m-d H:i:s');
 					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -192,14 +213,13 @@ if(isset($_POST['set-account-password'])){
 					header('Location: ../templates/login.html.php');
 								
 				}else{
-					//$valid = false;
+					
 					echo 'The token expired';
 					exit();
 				}
 			
 			}else{
-				//$valid = false;
-				echo 'Token was not found, please try again';
+				echo 'Could not find token, please try again';
 				exit();
 			}
 			
@@ -208,17 +228,13 @@ if(isset($_POST['set-account-password'])){
 		$title ='An error has occured';
 		$output = 'Database error: ' . $e->getMessage() . ' in '
 		. $e->getFile() . ':' . $e->getLine();
-		}
-			
-	}else{
-		//Display the form again
-		include __DIR__ . '/../templates/set-account-password.html.php';
+		}	
 	}
-	
 }
 	
-// This section handles user logins
-if(isset($_POST['login'])){
+// This function handles user logins
+function login(){
+	global $pdo, $valid, $errors;
 	if(isset($_SESSION['page_id'])&& isset($_SESSION['post_slug'])){
 		$page_id = $_SESSION['page_id'];
 		$page_slug = $_SESSION['post_slug'];
@@ -244,17 +260,19 @@ if(isset($_POST['login'])){
 		$valid = false;
 		$errors['password'] = 'You did not type a password';
 	}else{
-		$valid = true;
+		
+		$password = filter_var($password, FILTER_SANITIZE_STRING);
 		$password =trim($_POST['password']);
+		$valid = true;
 	}
 	if(!$valid){
-		include __DIR__ . '/../templates/login.html.php';
+		$form_error = 'Form has errors';
 	}else{
 		try{
 			//Select from users table			
 			$usersTable = new DatabaseTable($pdo,'users', 'email');
 			
-			$query = $usersTable->selectRecords($email,$username);
+			$query = $usersTable->selectColumnRecords($email);
 			
 			//Check if records exists in the database
 			if($query->rowCount()==1){
@@ -265,7 +283,7 @@ if(isset($_POST['login'])){
 				//Select from roles table using user's role_id
 				$rolesTable = new DatabaseTable($pdo, 'roles', 'role_id');
 				
-				$sql = $rolesTable->selectRecords($row['role_id']);
+				$sql = $rolesTable->selectColumnRecords($row['role_id']);
 				$record = $sql->fetch();
 				
 				//Assign records values to variables
@@ -305,15 +323,12 @@ if(isset($_POST['login'])){
 					
 					$errors['password'] ='Incorrect email or password';
 												
-					include __DIR__ . '/../templates/login.html.php';
 				}
 				
 			}else{
 				//Display error message: the email does not exist
 				$errors['email'] ='Email address does not exist';
 				
-				//Display login form again
-				include __DIR__ . '/../templates/login.html.php';
 			}	
 
 		}catch(PDOException $e){
@@ -323,12 +338,12 @@ if(isset($_POST['login'])){
 		}
 
 	}
-	
 }
 
-//This section handles subscriber changing their password
-if(isset($_POST['change_password'])){
-
+//This function handles password change by user
+function changePassword(){
+	global $pdo, $password_pattern, $valid, $errors;
+	
 	$old_password = $_POST['old_password'];
 	$new_password = $_POST['new_password'];
 	$confirm_new_password = $_POST['confirm_new_password'];
@@ -365,13 +380,11 @@ if(isset($_POST['change_password'])){
 		$valid = true;
 	}
 		
-	if(!$valid){
-		include __DIR__ . '/../templates/change-password.html.php';
-	}else{
-		
+	if($valid){
+				
 		try{
-			$usersTable = new DatabaseTable($pdo,'users', 'email');
-			$query = $usersTable->selectRecords($_SESSION['email'],$_SESSION['username']);
+			$usersTable = new DatabaseTable($pdo,'users', 'email','username');
+			$query = $usersTable->selectMatchColumnsRecords($_SESSION['email'],$_SESSION['username']);
 			
 			if($query->rowCount()==1){
 				
@@ -387,10 +400,7 @@ if(isset($_POST['change_password'])){
 				}else{
 					
 					$valid = false;
-					$errors['old_password'] = 'Password is incorrect';
-					
-					
-					include __DIR__ . '/../templates/change-password.html.php';		
+					$errors['old_password'] = 'Password is incorrect';		
 				}
 				
 			}else{
@@ -425,9 +435,9 @@ if(isset($_POST['change_password'])){
 	}
 }
 
-//This section starts the process of forgotten password recovery
-if(isset($_POST['recover_password'])){
-	
+//This function begins the process of recovering forgotten password
+function recoverPassword(){
+	global $pdo, $valid, $errors;
 	$email = $_POST['email'];
 			
 	if(empty($_POST['email'])){
@@ -444,21 +454,16 @@ if(isset($_POST['recover_password'])){
 				$valid = true;
 			}
 	}		
-	if(!$valid){
-		//Display the form again
-		include __DIR__ . '/../templates/recover-password.html.php';
-		
-	}else{
+	if($valid){
 		
 		try{
 			$usersTable = new DatabaseTable($pdo, 'users', 'email');
 			
-			$query = $usersTable->selectRecords($_POST['email'],$username);
+			$query = $usersTable->selectColumnRecords($email);
 			
-			if(empty($query->rowCount())){
+			if($query->rowCount() == 0){
 				$valid = false;
 				$errors['email'] = 'This email address does not exist';
-				include __DIR__ . '/../templates/recover-password.html.php';
 			}else{
 				$valid = true;
 				if($row=$query->fetch()){
@@ -490,12 +495,10 @@ if(isset($_POST['recover_password'])){
 		
 		
 	}
-	
 }
 
-//This section allows the user to reset their password affter successful recovery
-if(isset($_POST['reset_password'])){	
-
+//This function allows the user to reset their password affter successful recovery
+function resetPassword(){
 	$email = $_POST['email'];
 	$token = $_POST['token'];
 	
@@ -531,8 +534,8 @@ if(isset($_POST['reset_password'])){
 			
 			$curDate = date('Y-m-d H:i:s');
 					
-			$selectEmailToken = new DatabaseTable ($pdo, 'password_reset_temp', 'token');
-			$sql = $selectEmailToken->selectRecords($token, $email);
+			$selectEmailToken = new DatabaseTable ($pdo, 'password_reset_temp', 'token','email');
+			$sql = $selectEmailToken->selectMatchColumnsRecords($token, $email);
 			
 			if(!empty($sql->rowCount())){
 				
@@ -540,7 +543,7 @@ if(isset($_POST['reset_password'])){
 				$expDateTimestamp = strtotime($row['expDate']);
 				$curDateTimestamp = strtotime($curDate);
 				
-				if(($curDateTimestamp - $expDateTimestamp)<=86400){
+				if(($curDateTimestamp - $expDateTimestamp)<=82400){
 														
 					$deleteToken = new DatabaseTable($pdo,'password_reset_temp', 'email');
 					$deleteToken->deleteRecords($email);
@@ -580,16 +583,15 @@ if(isset($_POST['reset_password'])){
 		. $e->getFile() . ':' . $e->getLine();
 		}
 			
-	}else{
-		//Display the form again
-		include __DIR__ . '/../templates/reset-password.html.php';
-	}	
+	}
 }
 
-//This section helps user to upload profile image of their account
-if(isset($_POST['image-upload'])){
-	require __DIR__ . '/loginStatus.php';
-	
+//This function helps user to upload profile image of their account
+function imageUpload(){
+	if(isset($_SESSION['page_id'])&& isset($_SESSION['post_slug'])){
+		$page_id = $_SESSION['page_id'];
+		$page_slug = $_SESSION['post_slug'];
+	}	
 	$target_dir = '../resources/photos/';
 	$target_file = $target_dir . basename($_FILES['fileToUpload']['name']);
 	$uploadOk = 1;
@@ -604,15 +606,11 @@ if(isset($_POST['image-upload'])){
 			if(!in_array($imageFileType, $allowed_image_types)){
 				$uploadOk = 0;
 				$errors['fileToUpload'] = 'Sorry, only JPG, JPEG, PNG or GIF files are allowed';
-				
-				include __DIR__ . '/../templates/imageupload.html.php';
-				
+								
 				// Validate image size is 2MB or less
 			}else if($_FILES['fileToUpload']['size']>2000000){
 				$uploadOk = 0;
 				$errors['fileToUpload'] = 'Sorry, image is too large';
-
-				include __DIR__ . '/../templates/imageupload.html.php';
 			}else{
 				$uploadOk = 1;
 			}
@@ -620,8 +618,6 @@ if(isset($_POST['image-upload'])){
 		}else{
 			$uploadOk = 0;
 			$errors['fileToUpload'] =  'No image was selected.';	
-			
-			include __DIR__ . '/../templates/imageupload.html.php';
 		}
 		
 		//If everything is ok, try to upload the file
@@ -633,7 +629,7 @@ if(isset($_POST['image-upload'])){
 			
 			try{
 				$usersTable = new DatabaseTable($pdo, 'users', 'email');
-				$query = $usersTable->selectRecords($email, $username);
+				$query = $usersTable->selectColumnRecords($email);
 				
 				if($query->rowCount()>0){
 					$row = $query->fetch();
@@ -674,17 +670,20 @@ if(isset($_POST['image-upload'])){
 					$usersTable->updateRecords($fields,$email);
 					
 					//Fetch the records again to place the image photo in session
-					$query = $usersTable->selectRecords($email, $username);
+					$query = $usersTable->selectColumnRecords($email);
 					if($query->rowCount()== 1){
 						$row = $query->fetch();
 						
 						//Set the session photo path again	
 						$_SESSION['profile_photo'] = $row['profile_photo'];
 					}			
-					
-					echo 'Your photo has been updated. You may need to refresh the page for it to reflect. <br>';
-					echo '<a href="../index.php">Continue</a>';
-										
+					//Redirect accordingly
+					if(isset($_SESSION['page_id'])){
+						header('Location: ../templates/post.html.php?id='.$_SESSION['page_id'].'&title='.$_SESSION['post_slug']);
+					}else{
+						header('Location: ../index.php');
+					}
+															
 				}catch(PDOException $e){
 					$title ='An error has occured';
 					$output = 'Database error: ' . $e->getMessage() . ' in '

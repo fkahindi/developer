@@ -2,8 +2,7 @@
 $output='<p>Dear ' .$username .',</p>';
 $output.='<p>Please use following link to verify your email.</p>';
 $output.='<p>---------Developerspot----------------------------------------------------</p>';
-$output.='<p><a href="/spexproject/templates/set-account-password.html.php?
-key='.$token.'&email='.$email.'&action=set" target="_blank">
+$output.='<p><a href="/spexproject/templates/set-account-password.html.php?key='.$token.'&email='.$email.'&action=set" target="_blank">
 Confirm account creation </a></p>';		
 $output.='<p>-------------------------------------------------------------</p>';
 $output.='<p>Please click the link above to confirm it is you who requested account creation at Developerspot.

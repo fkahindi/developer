@@ -2,7 +2,7 @@
 if(!isset($_SESSION)){
 	session_start();
 }
-require __DIR__ .'/../../includes/commentsFunctions.php';
+require __DIR__ .'/../../includes/comments_functions.php';
 ?>
 <div class="comments-container">
 	<hr>

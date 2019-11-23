@@ -6,11 +6,13 @@ class DatabaseTable
 	private $pdo;
 	private $table;
 	private $keyfield;
+	private $keyfield2;
 	
-	public function __construct(PDO $pdo, string $table, string $keyfield =''){
+	public function __construct(PDO $pdo, string $table, string $keyfield ='', $keyfield2 =''){
 		$this->pdo = $pdo;
 		$this->table = $table;
 		$this->keyfield = $keyfield;
+		$this->keyfield2 = $keyfield2;
 	}
 	
 	private function query( $sql, $parameters=[]){
@@ -19,7 +21,7 @@ class DatabaseTable
 		return $query;
 	}
 	
-	public function selectRecords($value1,$value2='') {
+	public function selectColumnRecords($value1,$value2=''){
 		
 		$sql = 'SELECT * FROM `'.$this->table .'`
 		WHERE `'.$this->keyfield .'` = :value1 OR `'
@@ -33,12 +35,25 @@ class DatabaseTable
 		
 		return $query;
 	}
+	public function selectColumnsRecords($value1,$value2){
+		
+		$sql = 'SELECT * FROM `'.$this->table .'`
+		WHERE `'.$this->keyfield .'` = :value1 OR `'
+		.$this->keyfield2 .'` = :value2';
+		
+		$parameters =['value1'=> $value1,
+		'value2'=> $value2
+		];
 
-	public function selectMatchRecords($value1, $value2){
+		$query = $this->query($sql, $parameters);
+		
+		return $query;
+	}
+	public function selectMatchColumnsRecords($value1, $value2){
 		
 		$sql = 'SELECT * FROM `'.$this->table .'`
 		WHERE `'.$this->keyfield .'` = :value1 AND `'
-		.$this->keyfield .'` = :value2';
+		.$this->keyfield2 .'` = :value2';
 		
 		$parameters =['value1'=> $value1,
 		'value2'=> $value2
@@ -48,6 +63,14 @@ class DatabaseTable
 		
 		return $query;
 		
+	}
+	public function selectAllRecords(){ 
+		$sql = 'SELECT * FROM `'.$this->table .'`';
+		
+		
+		$query = $this->query($sql);
+		
+		return $query;
 	}
 	public function selectCountAllRecords(){
 		

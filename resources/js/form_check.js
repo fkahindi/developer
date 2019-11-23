@@ -5,16 +5,17 @@ $('document').ready(function(){
  $('#fullname').on('change', function(){
 	 var fullnameFilter = /^[\w\s\-.]+$/;
 	 var fullname = $('#fullname').val();
+	 
 	 if(!fullnameFilter.test(fullname)){
 		fullname_state = false;
-      	$('#fullname').parent().removeClass();
-      	$('#fullname').parent().addClass("form_error");
-      	$('#fullname').siblings("span").text('Use letters, space, numbers, dot, underscore or dash'); 
+		$('#fullname').parent().removeClass();
+		$('#fullname').parent().addClass("form_error");
+		$('#fullname').siblings("span").text('Use letters, space, numbers, dot, underscore or dash'); 
 	 }else{
 		fullname_state = true;
 		$('#fullname').parent().removeClass();
 		$('#fullname').parent().addClass("form_success");
-		$('#fullname').siblings("span").text('Ok');
+		$('#fullname').siblings("span").text('');
 	 }
  });
  $('#username').on('blur', function(){
@@ -42,7 +43,7 @@ $('document').ready(function(){
       	username_state = true;
       	$('#username').parent().removeClass();
       	$('#username').parent().addClass("form_success");
-      	$('#username').siblings("span").text('OK');
+      	$('#username').siblings("span").text('');
       }
 	  //---Further username validation---
 		if(username.match(illegalChars)){
@@ -84,7 +85,7 @@ $('document').ready(function(){
       	  email_state = true;
       	  $('#email').parent().removeClass();
       	  $('#email').parent().addClass("form_success");
-      	  $('#email').siblings("span").text('OK');
+      	  $('#email').siblings("span").text('');
       	}
 		//Further email validation
 		if(!emailFilter.test(email)){
@@ -104,32 +105,36 @@ $('document').ready(function(){
  
  $('#submit_btn').on('click', function(e){
 	
- 	if (username_state == false || email_state == false || fullname_state == false) {
+ 	if(username_state == false || email_state == false || fullname_state == false)
+	{	
 		var fullname = $('#fullname').val();
 		var username = $('#username').val();
 		var email = $('#email').val();
-				
+		
 		e.preventDefault();
 		
 		$('#error_msg').text('Fix the errors in the form first');
+				
 		if(username == ''){
 			username_state = false;
 			$('#username').parent().removeClass();
 			$('#username').parent().addClass("form_error");
 			$('#username').siblings("span").text('Username is required');
+			
 		}
 		if(email == ''){
-			email_state = false;
-			$('#email').parent().removeClass();
-			$('#email').parent().addClass("form_error");
-			$('#email').siblings("span").text('Email is required');
-		}
-		
+				email_state = false;
+				$('#email').parent().removeClass();
+				$('#email').parent().addClass("form_error");
+				$('#email').siblings("span").text('Email is required');
+		}		
 	}else{
+		$('#error_msg').text('');
 		$('#fullname').siblings("span").text('');
 		$('#username').siblings("span").text('');
 		$('#email').siblings("span").text('');
 		return true;
+		
 	}
  });
  

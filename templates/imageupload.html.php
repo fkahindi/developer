@@ -2,7 +2,11 @@
 if(!isset($_SESSION)){
 	session_start();
 }
-include __DIR__ . '/../includes/loginStatus.php';
+require __DIR__ . '/../includes/loginStatus.php';
+include __DIR__ .'/../includes/processFormAuthentication-Test.php';
+if(isset($_POST['image-upload'])){
+	imageUpload();
+}
  ?>
 <!doctype html>
 <html lang="en">
@@ -15,7 +19,7 @@ include __DIR__ . '/../includes/loginStatus.php';
 	
 	<div id="upload">
 	
-		<form action="/spexproject/includes/processFormAuthentication-Test.php" method="post" enctype="multipart/form-data">
+		<form action="" method="post" enctype="multipart/form-data">
 		<h2>Select image to upload:</h2>
 		<div class="group-form">
 		<input type="file" name="fileToUpload" id="fileToUpload" class="form-control">

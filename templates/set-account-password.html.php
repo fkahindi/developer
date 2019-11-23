@@ -4,12 +4,17 @@ if(!isset($_SESSION)){
 }
 if(isset($_GET['email']) && isset($_GET['key'])){
 	
-	$email=$_GET['email'];
-	$token=$_GET['key'];	
+	$email = $_GET['email'];
+	$token = $_GET['key'];	
 }
-	
 
-if(!empty($email) && !empty($token)){	
+if(!empty($email) && !empty($token)){
+require __DIR__ .'/../includes/processFormAuthentication-Test.php';
+
+if(isset($_POST['set-account-password'])){
+	setAccountPassword();
+}	
+
 ?>
 	
 <!doctype html>
@@ -20,24 +25,24 @@ if(!empty($email) && !empty($token)){
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<h3> </h3>
+	<h3></h3>
 		
 	<div id="error_msg"></div>
 	<div id="reset">
 		
 		<div class="form_image">
-				<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+				<div class="banner-bar"><h2>Developers Pot</h2></div>
 				<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory</p>
 				<h2>Set Account Password</h2>
 		</div>
 		
 								
-		<form method="POST" name ="set-password" action="../includes/processFormAuthentication-Test.php">
+		<form method="POST" name ="set-password" action="">
 		
-			<input type="hidden" name="action" value="update">
+			<input type="hidden" name="action" value="set">
 			<div class="group-form">
 			<label for="password">Password:<span class="red"> &#42;</span></label>
-			 <input type="password" id ="password" name="password" value="<?php echo(empty($password)? '': $password); ?>" autocomplete="off" required>
+			 <input type="password" id ="password" name="password" value="<?php echo(empty($password)? '': $password); ?>" autocomplete="off" >
 			<span class="errorMsg"><?php echo (!empty($errors['password'])? $errors['password'] :'');?></span>
 				<ul>
 					<li>Passwords must be at least <strong>6</strong> characters.</li>
@@ -47,7 +52,7 @@ if(!empty($email) && !empty($token)){
 			
 			<div class="group-form">
 			<label for="confirm_password">Confirm Password:<span class="red"> &#42;</span></label>
-			 <input type="password" id="confirm_password" name="confirm_password" value="<?php echo(empty($confirm_new_password)? '': $confirm_new_password); ?>" autocomplete="off" required>
+			 <input type="password" id="confirm_password" name="confirm_password" value="<?php echo(empty($confirm_password)? '': $confirm_password); ?>" autocomplete="off" >
 			<span class="errorMsg"><?php echo (!empty($errors['confirm_password'])? $errors['confirm_password'] :'');?></span>
 			</div>
 			

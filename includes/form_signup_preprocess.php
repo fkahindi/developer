@@ -1,10 +1,11 @@
 <?php 
-require_once __DIR__ .'/DbConnection.php';
+require __DIR__ .'/DatabaseConnection.php';
+require __DIR__ .'/../classes/DatabaseTable.php';
   if (isset($_POST['username_check'])) {
   	$username = $_POST['username'];
-  	$sql = "SELECT username FROM users WHERE username='$username'";
-  	$results = $conn->query($sql);
-  	if ($results->num_rows > 0) {
+	$usersTable = new DatabaseTable($pdo, 'users','username');
+	$sql = $usersTable->selectColumnRecords($username);
+  	if ($sql->rowCount() > 0) {
   	  echo "taken";	
   	}else{
   	  echo 'not_taken';
@@ -13,9 +14,9 @@ require_once __DIR__ .'/DbConnection.php';
   }
   if (isset($_POST['email_check'])) {
   	$email = $_POST['email'];
-  	$sql = "SELECT email FROM users WHERE email='$email'";
-  	$results = $conn->query($sql);
-  	if ($results->num_rows > 0) {
+	$usersTable = new DatabaseTable($pdo, 'users','email');
+	$sql = $usersTable->selectColumnRecords($email);
+  	if ($sql->rowCount() > 0) {
   	  echo "taken";	
   	}else{
   	  echo 'not_taken';

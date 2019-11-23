@@ -20,7 +20,7 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 				<div class="published-topics">
 				<h2 class="left">Topics</h2>
 					
-				<?php include __DIR__ . '/admin/published_posts_by_topics.php';?>					
+				<?php include __DIR__ . '/templates/published_posts_by_topics.html.php';?>					
 					
 				</div>
 			</aside><!--
@@ -37,10 +37,12 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 					<?php echo isset($post['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($post['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($post['created_at'])) ?></span>
 				</div>
 				<div class="post-main-image">
-				<?php echo (!empty($post['image'])? '<img src="'.$post['image'].'" alt="article image" class="article-index-image">':'')?>
+				<a href="templates/post.html.php?id=<?php echo $post_id['post_id'] ?>&title=<?php echo $post['post_slug'] ?>">
+				<?php echo (!empty($post['image'])? '<img src="'.$post['image'].'" alt="article image" class="article-index-image">':'')?></a>
 				</div>
 				<div class="paragraph-snippet">
-					<?php echo getFirstParagraphPostById($post_id['post_id']) ?> 
+					<?php echo getFirstParagraphPostById($post_id['post_id']) ?>
+					<a href="templates/post.html.php?id=<?php echo $post_id['post_id'] ?>&title=<?php echo $post['post_slug'] ?>">Read more...</a>
 				</div><br>
 				<?php endforeach; ?>
 			</section><!--			
@@ -57,7 +59,7 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 			--><aside class="hide-in-bigger-screens">
 				<div class="published-topics">
 				<h2 class="left">Browse Topics</h2>
-					<?php include __DIR__ . '/admin/published_posts_by_topics.php';?>				
+					<?php include __DIR__ . '/templates/published_posts_by_topics.html.php';?>				
 				</div>
 			</aside>	
 		</main>

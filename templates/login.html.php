@@ -2,6 +2,10 @@
 if(!isset($_SESSION)){
 	session_start();
 } 
+include_once __DIR__ . '/../includes/processFormAuthentication-Test.php';
+if(isset($_POST['login'])){
+	login();
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -14,13 +18,14 @@ if(!isset($_SESSION)){
 	<h4 class="successMsg"><?php echo(!empty($_SESSION['success_msg'])? $_SESSION['success_msg']:'');?></h4>
 		
 	<div id="login">
+		<h5 class="errorMsg"><?php echo(isset($form_error)? $form_error: '');?></h5>
 		<div class="form_image">
-			<img src="../resources/images/spexbanner.png" width="60%" height="30" alt="" >
+			<div class="banner-bar"><h2>Developers Pot</h2></div>
 			<h2>Login</h2>
 		
 		</div>
 	
-		<form method="POST" action="../includes/processFormAuthentication-Test.php">
+		<form method="POST" action="">
 			<label for="email">Email address:</label>
 			 <input type="text" name="email" value="<?php echo (!empty($email)? $email:'');?>"autocomplete="off"> <span class="errorMsg"><?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>
 			
