@@ -5,12 +5,10 @@ if(!isset($_SESSION)){
 if(isset($_GET['email']) && isset($_GET['key'])){
 	
 	$email=$_GET['email'];
-	$token=$_GET['key'];	
-}
-	
+	$token=$_GET['key'];
 
-if(!empty($email) && !empty($token)){
-	require_once __DIR__ . '/../includes/confirm_subscription.php';
+	require __DIR__ . '/../includes/confirm_subscription.php';
 }else{
 	echo 'Token was not found';
-}	
+}
+

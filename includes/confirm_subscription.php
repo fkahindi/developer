@@ -1,10 +1,9 @@
 <?php
 //include necessary the files
-	require_once __DIR__ .'/../includes/DatabaseConnection.php';
-	require_once __DIR__ . '/../classes/DatabaseTable.php';
-	
+
+try{
 	$subscribeTempTbl = new DatabaseTable($pdo, 'subscribe_temp_tbl','email');
-	$sql = $subscribeTempTbl->selectRecords($email);
+	$sql = $subscribeTempTbl->selectColumnRecords($email);
 	
 	if(!empty($sql->rowCount())){
 		
@@ -27,11 +26,19 @@
 			
 			$sql = $subscribeTempTbl->deleteRecords($email);
 			echo '<h2>Subscription confirmed! </h2><br>';
-			echo '<h4>You will be notified, when there is a new article.</h3><br>';
+			echo '<h4>You will be notified when a new post is available.</h3><br>';
 			echo '<p><a href="/spexproject/index.php">Continue</a></p>';
 		}else{
 			echo 'Token expired';
 		}
+		
 	}else{
 		echo 'Token was not found';
 	}
+}catch(PDOException $e){
+	if($e->errorInfo[1]==1062){echo 'Subscriber already exists.';}		
+	$title ='An error has occured';
+	$output = 'Database error: ' . $e->getMessage() . ' in '
+	. $e->getFile() . ':' . $e->getLine();
+}	
+	

@@ -45,7 +45,7 @@ if(isset($_POST['subscribe'])){
 			$token = bin2hex(random_bytes(50));
 			
 			$subscribeTempTbl = new DatabaseTable($pdo, 'subscribe_temp_tbl','email');
-			$sql = $subscribeTempTbl->selectRecords($email);
+			$sql = $subscribeTempTbl->selectColumnRecords($email);
 			//Check if email already exists
 			if(!empty($sql->rowCount())){
 				//if email exists check if token is still valid

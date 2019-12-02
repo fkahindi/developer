@@ -97,12 +97,11 @@ $('document').ready(function(){
     var comment = $('#comment').val();
 	
 	if(comment == ''){
-		alert("Type a comment");
 		return false;
 	}
 	
     $.ajax({
-      url: '/spexproject/includes/commentsFunctions.php', 
+      url: '/spexproject/includes/comments_functions.php', 
       type: 'POST',
       data: {
         'submit_comment':1,
@@ -132,8 +131,8 @@ $('document').ready(function(){
 		// Get comment id from reply-btn data-id attrib.
 		var comment_id = $(this).data('id');
 		
-		// show/hide the appropriate reply form (from the reply-btn (this), go to the parent element (comment-details)
-		// and then its siblings which is a form element with id comment_reply_form_ + comment_id)
+		/* show/hide the appropriate reply form (from the reply-btn (this), go to the parent element (comment-details) and then its siblings  which is a form element with id comment_reply_form_ + comment_id) 
+		*/
 		
 		$('form#comment_reply_form_'+ comment_id).toggle(100);
 		
@@ -149,8 +148,9 @@ $('document').ready(function(){
 			if(reply_text == ''){
 				return false;
 			}
+			
 			$.ajax({
-				url: '/spexproject/includes/commentsFunctions.php',
+				url: '/spexproject/includes/comments_functions.php',
 				type: 'POST',
 				data:{
 					'submit_reply':1,
@@ -159,17 +159,14 @@ $('document').ready(function(){
 					'reply_text': reply_text
 				},
 				success: function(data){
-					if(data==='error'){
-						alert('There was an error adding reply. Please try later...');
-					}else{
-						
-						$('.replies_container_'+ comment_id).children('.replies_by_ajax').append(data);
-						reply_textarea.val('');
-						$('form#comment_reply_form_'+ comment_id).hide(100);
-						$('a.reply-btn').text('Reply');
-						$('.group.replies_container_'+ comment_id).show(100);
-						comment_id = '';
-					}
+											
+					$('.replies_container_'+ comment_id).children('.replies_by_ajax').prepend(data);
+					reply_textarea.val('');
+					$('form#comment_reply_form_'+ comment_id).hide(100);
+					$('a.reply-btn').text('Reply');
+					$('.group.replies_container_'+ comment_id).show(100);
+					comment_id = '';
+					
 				}
 			});
 			

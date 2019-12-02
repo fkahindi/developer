@@ -5,7 +5,8 @@ if(!isset($_SESSION)){
 if(isset($_GET['email']) && isset($_GET['key'])){
 	
 	$email = $_GET['email'];
-	$token = $_GET['key'];	
+	$token = $_GET['key'];
+	$username = $_GET['username'];
 }
 
 if(!empty($email) && !empty($token)){
@@ -58,6 +59,7 @@ if(isset($_POST['set-account-password'])){
 			
 			<input type="hidden" name="email" value="<?php echo $email; ?>">
 			<input type="hidden" name="token" value="<?php echo $token; ?>">
+			<input type="hidden" name="username" value="<?php echo $username; ?>">
 					
 			<input type="submit" name="set-account-password" id="submit_btn" class="button" value="Set Password"> 
 		</form>

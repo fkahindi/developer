@@ -8,7 +8,7 @@ $output.='<p>-------------------------------------------------------------</p>';
 $output.='<p>Please click the link above to confirm it is you who requested account creation at Developerspot.
 The link will expire after 1 day for security reasons.</p>';
 $output.='<p>If you did not make this request, no action 
-is needed, no account will be created.</p>';   	
+is needed; no account will be created.</p>';   	
 $output.='<p>Thanks,</p>';
 $output.='<p>Developerspot Team</p>';
 $body = $output; 
@@ -37,8 +37,8 @@ if(!$mail->Send()){
 	echo 'Message could not be sent.';
 	echo "Mailer Error: " . $mail->ErrorInfo;
 }else{
-	echo "<div class='error'>
-	<p>An email has been sent to ".$email.". You will neet to confirm before your account with us is set.</p>
+	$form_msg = "<div class='error'>
+	<p>An email has been sent to ".$email.". You will need to open your  email and confirm  before your account is set.</p>
 	</div><br /><br /><br />";
 	}
  

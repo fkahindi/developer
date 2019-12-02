@@ -141,6 +141,7 @@ function setAccountPassword(){
 	
 	$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
 	$token = filter_var($_POST['token'], FILTER_SANITIZE_STRING);
+	$username =filter_var($_Post['username'], FILTER_SANITIZE_STRING);
 	$password = $_POST['password'];
 	$confirm_password = $_POST['confirm_password'];
 		
@@ -172,7 +173,6 @@ function setAccountPassword(){
 	if($valid){
 
 		try{
-			
 			$curDate = date('Y-m-d H:i:s');
 					
 			$selectEmailToken = new DatabaseTable ($pdo, 'users_temp','token', 'email');
@@ -180,54 +180,56 @@ function setAccountPassword(){
 							
 			if($sql->rowCount()==1){
 				
-				$row = $sql->fetch();
-				$fullname = $row['fullname'];
-				$username = $row['username'];
-				$expDateTimestamp = strtotime($row['created_at']);
-				$curDateTimestamp = strtotime($curDate);
-				$span = $curDateTimestamp - $expDateTimestamp;
 				
-				if($span<=86400){
+					$row = $sql->fetch();
+					$fullname = $row['fullname'];
+					$username = $row['username'];
+					$expDateTimestamp = strtotime($row['created_at']);
+					$curDateTimestamp = strtotime($curDate);
+					$span = $curDateTimestamp - $expDateTimestamp;
 					
-					$created_at = new DateTime();	
-					$created_at = $created_at->format('Y-m-d H:i:s');
-					$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-					$profile_photo = '/spexproject/resources/photos/profile.png';
-					$fields = [
-						'fullname'=> $fullname,
-						'username'=> $username,
-						'profile_photo'=>$profile_photo,
-						'email' => $email,
-						'password' => $password,
-						'created_at' => $created_at
-					];
-					$usersTable = new DatabaseTable($pdo, 'users', 'email');
-					$usersTable->insertRecord($fields);
-													
-					$deleteToken = new DatabaseTable($pdo,'users_temp', 'email');
-					$deleteToken->deleteRecords($email);
-					
-					//Redirect to login page
-					$_SESSION['success_msg'] ='Congratulations! Your account is set. <br> Please, login to your account.';
+					if($span<=86400){
+						
+						$created_at = new DateTime();	
+						$created_at = $created_at->format('Y-m-d H:i:s');
+						$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+						$profile_photo = '/spexproject/resources/photos/profile.png';
+						$fields = [
+							'fullname'=> $fullname,
+							'username'=> $username,
+							'profile_photo'=>$profile_photo,
+							'email' => $email,
+							'password' => $password,
+							'created_at' => $created_at
+						];
+						$usersTable = new DatabaseTable($pdo, 'users', 'email');
+						$usersTable->insertRecord($fields);
+														
+						$deleteToken = new DatabaseTable($pdo,'users_temp', 'email');
+						$deleteToken->deleteRecords($email);
+						
+						//Redirect to login page
+						$_SESSION['success_msg'] ='Congratulations! Your account is set. <br> Please, login to your account.';
+										
+						header('Location: ../templates/login.html.php');
 									
-					header('Location: ../templates/login.html.php');
-								
-				}else{
-					
-					echo 'The token expired';
-					exit();
-				}
-			
+					}else{
+						
+						echo 'The token expired';
+						exit();
+					}			
 			}else{
 				echo 'Could not find token, please try again';
 				exit();
 			}
 			
 		}catch(PDOException $e){
-		
-		$title ='An error has occured';
-		$output = 'Database error: ' . $e->getMessage() . ' in '
-		. $e->getFile() . ':' . $e->getLine();
+			if($e->errorInfo[1]==1062){
+				echo 'Email or Username already exists.';
+			}
+			$title ='An error has occured';
+			$output = 'Database error: ' . $e->getMessage() . ' in '
+			. $e->getFile() . ':' . $e->getLine();			
 		}	
 	}
 }

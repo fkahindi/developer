@@ -2,7 +2,7 @@
 $output='<p>Dear user,</p>';
 $output.='<p>Please use the following link to confirm your subscription for new posts notification from Developerspot.</p>';
 $output.='<p>---------Developerspot----------------------------------------------------</p>';
-$output.='<p><a href="/spexproject/templates/confirm-subscription.html.php?
+$output.='<p><a href="localhost/spexproject/templates/confirm-subscription.html.php?
 key='.$token.'&email='.$email.'&action=subscribe" target="_blank">
 Confirm email subscription</a></p>';		
 $output.='<p>-------------------------------------------------------------</p>';
