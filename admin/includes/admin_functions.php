@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .'/../../includes/DbConnection.php';
+require_once __DIR__ .'/../../../includes_devspot/DbConnection.php';
 
 //Admin user variable
 $user_id =0;
@@ -25,6 +25,10 @@ if(isset($_GET['edit-user'])){
 	$isEditingUser = true;
 	$user_id = $_GET['edit-user'];
 	editUser($user_id);
+}
+//if user clicks Search button
+if(isset($_POST['search_user'])){
+	searchUser($_POST['search_user']);
 }
 //if user clicks Update user button
 if(isset($_POST['update_user'])){
@@ -112,7 +116,30 @@ function updateUser($request_values){
 		}		
 	}
 }
-
+function searchUser($request_values){
+	global $conn;
+		
+	if(isset($_POST['username']) || isset($_POST['email'])){
+		
+		$username = $_POST['username'];
+		$email = $_POST['email'];
+		
+		$query = "SELECT * FROM `users` WHERE username='$username' OR email='$email'";
+		
+		$result = mysqli_query($conn, $query);
+		if($result){
+			$user_record = mysqli_fetch_assoc($result);
+			
+			$user_id =$user_record['user_id'];
+			$username = $user_record['username'];
+			$email = $user_record['email'];
+			//echo $email;
+			
+		}else{
+			echo 'No such user exists';
+		}
+	}
+}
 /* function deleteUser($user_id){
 	global $conn;
 	

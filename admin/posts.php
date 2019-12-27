@@ -1,12 +1,14 @@
-<?php  
+<?php 
+ /* Start session if not already started */
 	if(!isset($_SESSION)){
 		session_start();
 	}
+	/* Only admins and authors can access this page, and must logged in */
 	include __DIR__ . '/../includes/loginStatus.php';
 	if($_SESSION['role']!== 'Admin' && $_SESSION['role']!== 'Author'){
 		header('Location: ../index.php');
 	}	
-	
+	/* Load necessary functions */
 	include __DIR__ .'/includes/admin_functions.php';
 	include __DIR__ .'/includes/posts_functions.php';
 
@@ -86,7 +88,7 @@
 								</td>
 								<td>
 									<p>
-									<a href="posts.php?delete-post=<?php echo $post['post_id'] ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Trash</a>
+									<a href="posts.php?delete-post=<?php echo $post['post_id'] ?>" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-trash"></span> Trash</a>
 									</p>
 								</td>
 							</tr>
@@ -100,4 +102,16 @@
 </body>
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+$('document').ready(function(){
+	$('.delete').on('click',function(){
+		var isSure = confirm("Are you sure you want to delete post?");
+		if(isSure){
+			return true;
+		}else{
+			return false;
+		}
+	});
+});
+</script>
 </html>

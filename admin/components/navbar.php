@@ -6,7 +6,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>                        
 			</button>
-			<a class="navbar-brand" href="/spexproject/index.php">Spex Solutions</a>
+			<a class="navbar-brand" href="/spexproject/index.php">Developerspot</a>
 		</div>	
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<div class=" nav navbar-nav navbar-right">

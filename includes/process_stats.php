@@ -1,5 +1,5 @@
 <?php
-include __DIR__ .'DbConnection.php';
+include __DIR__ .'/../../includes_devspot/DbConnection.php';
 // Use the same-origin policy to prevent cross-site scripting (XSS) attacks
 // Remember to replace http://yourdomain.com/ with your actual domain
 if( strpos( $_SERVER['SERVER_NAME'], 'localhost/' ) !== 0 ) {

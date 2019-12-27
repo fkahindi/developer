@@ -4,7 +4,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 include __DIR__ . '/../includes/loginStatus.php';
-include __DIR__ .'/../includes/processFormAuthentication-Test.php';
+include __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['change_password'])){
 changePassword();
 }
@@ -31,13 +31,13 @@ changePassword();
 		<form method="POST" action="">
 			<div class="group-form">
 				<label for="old_password">Old Password:<span class="red"> &#42;</span></label>
-				 <input type="password" name="old_password" autocomplete="off" required>
+				 <input type="password" name="old_password" maxlength="50" autocomplete="off" required>
 				<span class="errorMsg"><?php echo (!empty($errors['old_password'])? $errors['old_password'] :'');?></span>
 			</div>
 			
 			<div class="group-form">
 				<label for="new_password">New Password:<span class="red"> &#42;</span></label>
-				 <input type="password" name="new_password" id ="new_password" autocomplete="off" required>
+				 <input type="password" name="new_password" id ="new_password" maxlength="50" autocomplete="off" required>
 				<span class="errorMsg"><?php echo (!empty($errors['new_password'])? $errors['new_password'] :'');?></span>
 				<ul>
 						<li>Passwords must be at least <strong>6</strong> characters.</li>
@@ -47,7 +47,7 @@ changePassword();
 			
 			<div class="group-form">
 			<label for="confirm_new_password">Confirm New Password:<span class="red"> &#42;</span></label>
-			 <input type="password" name="confirm_new_password" id ="confirm_new_password" autocomplete="off" required>
+			 <input type="password" name="confirm_new_password" id ="confirm_new_password" maxlength="50" autocomplete="off" required>
 			<span class="errorMsg"><?php echo (!empty($errors['confirm_new_password'])? $errors['confirm_new_password'] :'');?></span>
 			</div>
 			

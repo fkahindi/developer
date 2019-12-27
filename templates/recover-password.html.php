@@ -1,5 +1,5 @@
 <?php 
-include __DIR__ .'/../includes/processFormAuthentication-Test.php'; 
+include __DIR__ .'/../includes/process_form.php'; 
 if(isset($_POST['recover_password'])){
 	recoverPassword();	
 }
@@ -21,7 +21,7 @@ if(isset($_POST['recover_password'])){
 		</div>
 		<form method="POST" action="">
 			<label for="email">Enter your email address:</label>
-			 <input type="email" name="email" autocomplete="off" required> <span class="errorMsg">
+			 <input type="email" name="email" maxlength="50" autocomplete="off" required> <span class="errorMsg">
 			 <?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>
 			 
 			<input type="submit" name="recover_password" class="button" value="Submit"> 

@@ -37,8 +37,5 @@ try{
 	}
 }catch(PDOException $e){
 	if($e->errorInfo[1]==1062){echo 'Subscriber already exists.';}		
-	$title ='An error has occured';
-	$output = 'Database error: ' . $e->getMessage() . ' in '
-	. $e->getFile() . ':' . $e->getLine();
 }	
 	

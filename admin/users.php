@@ -70,6 +70,7 @@ $roles = ['Admin', 'Author', 'User'];
 					<!-- if editing user, display the update button instead of create button -->
 				 
 					<button type="submit" class="btn btn-primary btn-md" name="update_user">UPDATE</button>
+					<button type="submit" class="btn btn-primary btn-md" name="search_user">SEARCH</button>
 									
 				</form>
 				</div>

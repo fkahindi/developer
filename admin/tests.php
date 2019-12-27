@@ -2,7 +2,7 @@
 session_start();
 //include __DIR__ .'/includes/admin_functions.php';
 //include __DIR__ .'/includes/posts_functions.php';
-include __DIR__ .'/../includes/DbConnection.php';
+include __DIR__ .'/../../includes_devspot/DbConnection.php';
 //$post_id = getAllPublishedPostIds();
 //$paragraph = getFirstParagraph();
 

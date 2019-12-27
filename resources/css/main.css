@@ -357,7 +357,9 @@ code{
 .image-photo{
 	border:3px solid #2b5959;
 }
-
+.image-photo:hover{
+	cursor:pointer;
+}
 /*************************
 ** STYLING FOR TOOLTIP	**
 **************************/
@@ -406,9 +408,8 @@ code{
 }
 
 /********************************************
-STYLING FOR PROFILE SETTINGS AND DISPLAY
-*********************************************
-*/
+**STYLING FOR PROFILE SETTINGS AND DISPLAY**
+*********************************************/
 #profile-checkbox-control{
 	display:none;
 }
@@ -1026,7 +1027,6 @@ footer{
 	margin-right:20%;
 	padding:5px 0;
 }
-
 .dropdown button{
 	display:none;
 }

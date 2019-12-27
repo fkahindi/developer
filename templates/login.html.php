@@ -2,7 +2,7 @@
 if(!isset($_SESSION)){
 	session_start();
 } 
-include_once __DIR__ . '/../includes/processFormAuthentication-Test.php';
+include_once __DIR__ . '/../includes/process_form.php';
 if(isset($_POST['login'])){
 	login();
 }

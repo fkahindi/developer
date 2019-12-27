@@ -3,35 +3,38 @@
 if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin']!= true){
 		header('Location: /spexproject/templates/login.html.php');
 		exit;
-	}else{
-		if(!empty($_SESSION['email'])){
-			include __DIR__ . '/DatabaseConnection.php';
-			
-			$sql = 'SELECT * FROM `users` WHERE email = :email';
-			
-			$stmt=$pdo->prepare($sql);
-			$stmt->bindValue(':email', $_SESSION['email']);
-			
-			$stmt->execute();
-			
-			if($stmt->rowCount() == 1){
-				//The session email is in the database
-				if($row = $stmt->fetch()){
-					$email = $row['email'];
-					$hashed_password = $row['password'];
+}else{
+	if(!empty($_SESSION['email'])){
+		$email = $_SESSION['email'];
+		include __DIR__ . '/../../includes_devspot/DatabaseConnection.php';
+		include __DIR__ . '/../classes/DatabaseTable.php';
 					
-					//Check whether session email and password match the ones in the database
-					if($_SESSION['email']== $email && $_SESSION['password'] == $hashed_password){
-						
-						$_SESSION['loggedin'] = true;
-						
-					}else{
-						//There is a problem, the user session using someones session
-						include __DIR__ . '/../includes/logout.php';
-					}
+		$usersTable = new DatabaseTable($pdo,'users', 'email');
+	
+		$sql = $usersTable->selectColumnRecords($email);
+					
+		if($sql->rowCount() == 1){
+			//The session email is in the database
+			if($row = $sql->fetch()){
+				$email = $row['email'];
+				$hashed_password = $row['password'];
+				
+				//Check whether session email and password match the ones in the database
+				if($_SESSION['email']== $email && $_SESSION['password'] == $hashed_password){
+					
+					$_SESSION['loggedin'] = true;
+					$rolesTable = new DatabaseTable($pdo, 'roles', 'role_id');
+					$query = $rolesTable->selectColumnRecords($row['role_id']);
+					$record = $query->fetch();
+					$_SESSION['role']= $record['role'];
+					
 				}else{
-					echo 'User could not be verified';
+					//There is a problem, session values mismatch database credentials
+					include __DIR__ . '/../includes/logout.php';
 				}
+			}else{
+				echo 'User could not be verified';
 			}
 		}
 	}
+}

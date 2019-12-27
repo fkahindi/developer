@@ -3,7 +3,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 require __DIR__ . '/../includes/loginStatus.php';
-include __DIR__ .'/../includes/processFormAuthentication-Test.php';
+include __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['image-upload'])){
 	imageUpload();
 }
@@ -18,7 +18,7 @@ if(isset($_POST['image-upload'])){
 <body>
 	
 	<div id="upload">
-	
+		<div class="banner-bar"><h2>Developers Pot</h2></div>
 		<form action="" method="post" enctype="multipart/form-data">
 		<h2>Select image to upload:</h2>
 		<div class="group-form">

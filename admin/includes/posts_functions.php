@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .'/../../includes/DbConnection.php';
+require_once __DIR__ .'/../../../includes_devspot/DbConnection.php';
 
 //Post variables
 $post_id ='';
@@ -18,7 +18,7 @@ $topic_id ='';
 /*---------------
 --Post Functions
 -----------------*/
-//Get number of published posts in the posts table
+/* Get number of published posts in the posts table */
 function getAllPublishedPostIds(){
 	global $conn;
 	
@@ -31,15 +31,7 @@ function getAllPublishedPostIds(){
 		return null;
 	}	
 }
-/* function getTopicNameById($published_post_id)
-{
-	global $conn;
-	$sql = "SELECT topic_name FROM topics WHERE topic_id=$published_post_id";
-	$result = mysqli_query($conn, $sql);
-	$topic = mysqli_fetch_assoc($result);
-	
-	return $topic['topic_name'];
-} */
+/* Retrieve published topics using post_id of published posts */
 function getPublishedTopics($published_post_id){
 	global $conn;
 	$sql ="SELECT * FROM topics WHERE topic_id= 
@@ -52,6 +44,7 @@ function getPublishedTopics($published_post_id){
 		echo 'No topics';
 	}
 }
+/* Retrieve published posts categorised by topic using topic_id */
 function getPublishedPostsByTopic($topic_id) {
 	global $conn;
 	$sql = "SELECT * FROM posts ps 
@@ -62,7 +55,7 @@ function getPublishedPostsByTopic($topic_id) {
 				
 	$result = mysqli_query($conn, $sql);
 	
-	// fetch all posts as an associative array called $posts
+	/* fetch all posts as an associative array called $posts */
 	$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 	$final_posts = array();
@@ -72,19 +65,15 @@ function getPublishedPostsByTopic($topic_id) {
 	}
 	return $final_posts;
 }
-/* function getAllPostsByTopic($topic_id){
+/* Get topic by name provided on menu links */
+function getTopicByName($topic_name){
 	global $conn;
-	
-	$query = "SELECT * FROM posts WHERE post_id =	(SELECT post_id FROM post_topic WHERE topic_id =$topic_id)";
-	$result = mysqli_query($conn, $query);
-	if($result){
-		$posts_by_topic = mysqli_fetch_assoc($result);
-		return  $posts_by_topic;
-	}else{
-		echo 'No posts';
-	}
-} */
-//Get the first three most recent posts
+	$sql = "SELECT * FROM topics WHERE topic_name = '$topic_name' LIMIT 1";
+	$result = mysqli_query($conn, $sql);
+	$menu_topic = mysqli_fetch_assoc($result);
+	return $menu_topic;
+}
+/* Get the first three most recent posts */
 function getMostRecentPosts(){
 	global $conn;
 	$sql = "SELECT * FROM `posts` WHERE published=1 ORDER BY created_at DESC LIMIT 3";
@@ -97,11 +86,11 @@ function getMostRecentPosts(){
 	}
 	
 }
-//Get posts for admins and authors based on the user logged in
+/* Get posts for admins and authors based on the user logged in */
 function getAllPosts(){
 	global $conn, $_SESSION;
 	
-	//Admins can view all posts but Authors will view only the posts they authored
+	/* --Admins can view all posts but Authors will view only the posts they authored-- */
 	if($_SESSION['role'] == 'Admin'){
 		
 		$sql = "SELECT * FROM `posts` ORDER BY post_id DESC";
@@ -124,7 +113,7 @@ function getAllPosts(){
 	return $all_posts;
 }
 
-//Get a single post by supplying post id
+/* Retrive a single post by supplid post id */
 function getPostById($post_id){
 	global $conn;
 	$sql = "SELECT * FROM `posts` WHERE post_id=$post_id LIMIT 1";
@@ -134,7 +123,7 @@ function getPostById($post_id){
 	
 	return $post;
 }
-//Get username/ author of each post
+/* Get username/ author of each post */
 function getPostAuthorById($user_id){
 	global $conn;
 	$sql ="SELECT username FROM `users` WHERE user_id=$user_id";
@@ -148,7 +137,7 @@ function getPostAuthorById($user_id){
 		return null;
 	}
 }
-//Select first 300 characters of post contents
+/* Select first 300 characters of post contents */
 function getFirstParagraphPostById($post_id){
 	global $conn;
 	$sql ="SELECT SUBSTR(post_body, 1, 300) AS post_body FROM `posts` WHERE post_id=$post_id";
@@ -165,7 +154,7 @@ function getFirstParagraphPostById($post_id){
 }
 
 /*-----------------------
---Post Actions
+	--Post Actions--
 ------------------------*/
 //If user clicks Save post button
 if(isset($_POST['create_post'])){
@@ -188,7 +177,7 @@ if(isset($_GET['delete-post'])){
 }
 
 /*-----------------------
---Post Functions
+	--Post Functions--
 -------------------------*/
 function createPost($request_values){
 	global $conn, $errors, $title, $topic_id, $body, $published, $image_file, $sound;

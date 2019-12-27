@@ -10,7 +10,7 @@ if(isset($_GET['email']) && isset($_GET['key'])){
 }
 
 if(!empty($email) && !empty($token)){
-require __DIR__ .'/../includes/processFormAuthentication-Test.php';
+require __DIR__ .'/../includes/process_form.php';
 
 if(isset($_POST['set-account-password'])){
 	setAccountPassword();
@@ -43,7 +43,7 @@ if(isset($_POST['set-account-password'])){
 			<input type="hidden" name="action" value="set">
 			<div class="group-form">
 			<label for="password">Password:<span class="red"> &#42;</span></label>
-			 <input type="password" id ="password" name="password" value="<?php echo(empty($password)? '': $password); ?>" autocomplete="off" >
+			 <input type="password" id ="password" name="password" value="<?php echo(empty($password)? '': $password); ?>" maxlength="50" autocomplete="off" >
 			<span class="errorMsg"><?php echo (!empty($errors['password'])? $errors['password'] :'');?></span>
 				<ul>
 					<li>Passwords must be at least <strong>6</strong> characters.</li>
@@ -53,7 +53,7 @@ if(isset($_POST['set-account-password'])){
 			
 			<div class="group-form">
 			<label for="confirm_password">Confirm Password:<span class="red"> &#42;</span></label>
-			 <input type="password" id="confirm_password" name="confirm_password" value="<?php echo(empty($confirm_password)? '': $confirm_password); ?>" autocomplete="off" >
+			 <input type="password" id="confirm_password" name="confirm_password" value="<?php echo(empty($confirm_password)? '': $confirm_password); ?>" maxlength="50" autocomplete="off" >
 			<span class="errorMsg"><?php echo (!empty($errors['confirm_password'])? $errors['confirm_password'] :'');?></span>
 			</div>
 			

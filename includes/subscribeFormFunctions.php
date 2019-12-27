@@ -4,7 +4,7 @@ if(!isset($_SESSION)){
 }
 
 //include necessary the files
-include __DIR__ .'/../includes/DatabaseConnection.php';
+include __DIR__ .'/../../includes_devspot/DatabaseConnection.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 
 $name = $email = '';
@@ -38,48 +38,41 @@ if(isset($_POST['subscribe'])){
 		}
 	}
 	if($valid){
-		try{
-			$curDate = date('Y-m-d H:i:s');			
-			$created_at = new DateTime();	
-			$created_at = $created_at->format('Y-m-d H:i:s');
-			$token = bin2hex(random_bytes(50));
-			
-			$subscribeTempTbl = new DatabaseTable($pdo, 'subscribe_temp_tbl','email');
-			$sql = $subscribeTempTbl->selectColumnRecords($email);
-			//Check if email already exists
-			if(!empty($sql->rowCount())){
-				//if email exists check if token is still valid
-				$row=$sql->fetch();
-				$createdDateTimeStamp = strtotime($row['created_at']);
-				$curDateTimeStamp = strtotime($curDate);
-				if($curDateTimeStamp - $createdDateTimeStamp<=3600){
-					//If an hour has not elapsed since record update notify user.
-					echo 'A link was sent to your email in less than 1 hour ago. Check your email inbox.';
-				}else{
-					//Update token and date then send email link
-					$fields = ['token' => $token, 'created_at' => $created_at];
-					$updateToken = $subscribeTempTbl->updateRecords($fields,$email);
-					require_once __DIR__ .'/subscribe-email-link.php';
-					echo 'A link was sent to your email box some time back, but has been sent again';
-				}
-				
+		
+		$curDate = date('Y-m-d H:i:s');			
+		$created_at = new DateTime();	
+		$created_at = $created_at->format('Y-m-d H:i:s');
+		$token = bin2hex(random_bytes(50));
+		
+		$subscribeTempTbl = new DatabaseTable($pdo, 'subscribe_temp_tbl','email');
+		$sql = $subscribeTempTbl->selectColumnRecords($email);
+		//Check if email already exists
+		if(!empty($sql->rowCount())){
+			//if email exists check if token is still valid
+			$row=$sql->fetch();
+			$createdDateTimeStamp = strtotime($row['created_at']);
+			$curDateTimeStamp = strtotime($curDate);
+			if($curDateTimeStamp - $createdDateTimeStamp<=3600){
+				//If an hour has not elapsed since record update notify user.
+				echo 'A link was sent to your email in less than 1 hour ago. Check your email inbox.';
 			}else{
-				$fields = [
-				'name' => $name,
-				'email' => $email,
-				'token' => $token,
-				'created_at' => $created_at
-				];
-				$query = $subscribeTempTbl ->insertRecord($fields);
+				//Update token and date then send email link
+				$fields = ['token' => $token, 'created_at' => $created_at];
+				$updateToken = $subscribeTempTbl->updateRecords($fields,$email);
 				require_once __DIR__ .'/subscribe-email-link.php';
-				echo 'A link has been sent to your email address, please confirm subscription.';
+				echo 'A link was sent to your email box some time back, but has been sent again';
 			}
-					
-		}catch(PDOException $e){
 			
-			$title ='An error has occured';
-			$output = 'Database error: ' . $e->getMessage() . ' in '
-			. $e->getFile() . ':' . $e->getLine();
-		}		
+		}else{
+			$fields = [
+			'name' => $name,
+			'email' => $email,
+			'token' => $token,
+			'created_at' => $created_at
+			];
+			$query = $subscribeTempTbl ->insertRecord($fields);
+			require_once __DIR__ .'/subscribe-email-link.php';
+			echo 'A link has been sent to your email address, please confirm subscription.';
+		}	
 	}
 }

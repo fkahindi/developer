@@ -2,7 +2,7 @@
 if(!isset($_SESSION)){
 	session_start();
 }
-include __DIR__ .'/../includes/processFormAuthentication-Test.php';
+include __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['create-account'])){
 	createAccount();
 }
@@ -43,8 +43,7 @@ if(isset($_POST['create-account'])){
 			
 			<div class="group-form">
 				<label for="email"> Email:<span class="red"> &#42;</span></label>
-				<input name="email" id="email" class="form-control" type="email" 
-				 type="email" value="<?php echo(empty($email)? '': $email); ?>" autocomplete="off" >
+				<input name="email" id="email" class="form-control" type="email" value="<?php echo(empty($email)? '': $email); ?>" maxlength="50" autocomplete="off" >
 				<span class="errorMsg"> <?php echo(!empty($errors['email']) ? $errors['email'] : ''); ?> </span>
 			</div>
 			<input name="create-account" type="submit" id="submit_btn" class="button" value="Create Account">

@@ -1,5 +1,5 @@
 <?php 
-require __DIR__ .'/DatabaseConnection.php';
+require __DIR__ .'/../../includes_devspot/DatabaseConnection.php';
 require __DIR__ .'/../classes/DatabaseTable.php';
   if (isset($_POST['username_check'])) {
   	$username = $_POST['username'];
