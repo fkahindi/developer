@@ -36,10 +36,7 @@ include __DIR__ .'/../admin/includes/admin_functions.php';
 					By <?php echo $pub_post['author'];?><span>  
 					<?php echo isset($pub_post['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($pub_post['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($pub_post['created_at'])) ?></span>
 				</div>
-				<div class="post-main-image">
-				<a href="/spexproject/templates/post.html.php?id=<?php echo $pub_post['post_id'] ?>&title=<?php echo $pub_post['post_slug'] ?>">
-				<?php echo (!empty($pub_post['image'])? '<img src="'.$pub_post['image'].'" alt="article image" class="article-index-image">':'')?></a>
-				</div>
+					
 				<div class="paragraph-snippet">
 					<?php echo getFirstParagraphPostById($pub_post['post_id']) ?>
 					<a href="/spexproject/templates/post.html.php?id=<?php echo $pub_post['post_id'] ?>&title=<?php echo $pub_post['post_slug'] ?>">Read more...</a>

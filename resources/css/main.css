@@ -342,8 +342,8 @@ code{
 }
 .search-container button {
   padding: 6px 9px;
-  margin-top: 8px;
-   background:inherit;
+  margin-top: 7px;
+  background:gray;
   border:thin solid gray;
   border-radius:0 5px 5px 0;
   cursor: pointer;

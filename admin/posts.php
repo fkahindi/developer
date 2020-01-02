@@ -4,7 +4,7 @@
 		session_start();
 	}
 	/* Only admins and authors can access this page, and must logged in */
-	include __DIR__ . '/../includes/loginStatus.php';
+	include __DIR__ . '/includes/admin_login_status.php';
 	if($_SESSION['role']!== 'Admin' && $_SESSION['role']!== 'Author'){
 		header('Location: ../index.php');
 	}	

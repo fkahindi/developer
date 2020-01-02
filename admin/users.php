@@ -3,7 +3,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-include __DIR__ . '/../includes/loginStatus.php';
+include __DIR__ . '/includes/admin_login_status.php';
 	
 if($_SESSION['role'] !== 'Admin'){
 	header('Location: ../index.php');
@@ -27,7 +27,7 @@ $roles = ['Admin', 'Author', 'User'];
 	<?php include __DIR__ .'/components/navbar.php'; ?>
 	<div class="container border mt-2">
 		<div class="panel panel-default text-success text-center"><?php echo isset($_SESSION['message'])? $_SESSION['message']:''; ?></div>
-		<div class="mx-auto my-4"><h1>Welcome <?php echo $_SESSION['fullname']?></h1></div>
+		<div class="mx-auto my-4 text-center"><h3>Administration Panel: <?php echo $_SESSION['fullname']?></h3></div>
 		
 		<div class="row my-5">
 			<!--Row with 3 equal columns-->
@@ -49,7 +49,7 @@ $roles = ['Admin', 'Author', 'User'];
 				<?php include __DIR__ .'/includes/errors.php'; ?>
 				
 				<!-- Attach a hidden id for user being edited-->
-				<?php if($isEditingUser === true): ?>
+				<?php if($isEditingUser === true || $isSearchUser === true): ?>
 				<input type="hidden" value="<?php echo $user_id;?>" name="user_id">
 				<?php endif ?>
 								

@@ -7,7 +7,6 @@ if(!isset($_SESSION)){
 	if(isset($_GET['id'])){
 		$posts = getPostById($_GET['id']);
 	}
-	
 	//Get page id representing this post 
 	$page_id = $posts['post_id'];
 	//SESSION variables for page reference 
@@ -50,7 +49,7 @@ if(!isset($_SESSION)){
 			<!-- Call to subscribe for notification -->
 			<?php  include __DIR__.'/subscribe.html.php';?>
 			<!--Comments sections  -->
-			<?php include __DIR__ .'/../comments/layout/comments-layout.php'; ?>
+			<?php include __DIR__ .'/../comments/comments-layout.php'; ?>
 			</div>
 			
 		</section><!--

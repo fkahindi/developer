@@ -384,36 +384,28 @@ function changePassword(){
 			
 			if(password_verify($old_password, $hashed_password) && (!empty($_SESSION['email']))){
 				
-				$valid = true;
+				$new_password = password_hash($new_password, PASSWORD_DEFAULT);
+				$email = $_SESSION['email'];
+				
+				$fields =['password'=> $new_password];
+				
+				$sql=$usersTable->updateRecords($fields,$email);
+											
+				//Set a variables to display on the login form
+				$_SESSION['success_msg'] = 'Update successful. <br> Please, login with your new password';
+				
+				//Redirect to login page
+				header('Location: ../templates/login.html.php');
 				
 			}else{
 				
 				$valid = false;
-				$errors['old_password'] = 'Password is incorrect';		
+				$errors['old_password'] = 'Password is incorrect';	
 			}
 			
 		}else{
 			$valid = false;
 			$errors['email'] = 'Sorry, you need to login.';
-			include __DIR__ . '/../templates/login.html.php';
-		}
-		
-		if($valid){
-	
-			$new_password = password_hash($new_password, PASSWORD_DEFAULT);
-			$email = $_SESSION['email'];
-			
-			$fields =['password'=> $new_password];
-			
-			$sql=$usersTable->updateRecords($fields,$email);
-			
-			//session_destroy();
-		
-			//Set a variables to display on the login form
-			$_SESSION['success_msg'] = 'Update successful. <br> Please, login with your new password';
-			
-			//Redirect to login page
-			header('Location: ../templates/login.html.php');			
 		}
 	}
 }
@@ -552,6 +544,7 @@ function resetPassword(){
 
 //This function helps user to upload profile image of their account
 function imageUpload(){
+	global $pdo;
 	if(isset($_SESSION['page_id'])&& isset($_SESSION['post_slug'])){
 		$page_id = $_SESSION['page_id'];
 		$page_slug = $_SESSION['post_slug'];

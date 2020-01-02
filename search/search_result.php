@@ -22,7 +22,6 @@ if(isset($_POST['search_term']) && (!empty($_POST['search_term']))){
 	
 	$res=$stmt->fetchAll();
 	if($res){
-		//var_dump($res);
 		foreach($res as $row){
 		?>
 		<!--Display results -->

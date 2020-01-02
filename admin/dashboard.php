@@ -3,7 +3,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-include __DIR__ . '/../includes/loginStatus.php';
+include __DIR__ . '/includes/admin_login_status.php';
 	
 if($_SESSION['role'] !== 'Admin'){
 	header('Location: ../index.php');

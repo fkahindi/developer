@@ -3,7 +3,8 @@ require_once __DIR__ .'/../../../includes_devspot/DbConnection.php';
 
 //Admin user variable
 $user_id =0;
-$isEditingUser =false;
+$isEditingUser = false;
+$isSearchUser = false;
 $username ='';
 $role = '';
 $email ='';
@@ -28,6 +29,7 @@ if(isset($_GET['edit-user'])){
 }
 //if user clicks Search button
 if(isset($_POST['search_user'])){
+	$isSearchUser = true;
 	searchUser($_POST['search_user']);
 }
 //if user clicks Update user button
@@ -95,6 +97,8 @@ function updateUser($request_values){
 	$user_id = $_POST['user_id'];
 	//set editing state to false
 	$isEditingUser = false;
+	//set search user state to false
+	$isSearchUser = false;
 	
 	if(isset($_POST['role'])){
 		$role = $_POST['role'];
@@ -117,7 +121,7 @@ function updateUser($request_values){
 	}
 }
 function searchUser($request_values){
-	global $conn;
+	global $conn, $user_id, $username, $email, $isSearchUser;
 		
 	if(isset($_POST['username']) || isset($_POST['email'])){
 		
@@ -133,24 +137,13 @@ function searchUser($request_values){
 			$user_id =$user_record['user_id'];
 			$username = $user_record['username'];
 			$email = $user_record['email'];
-			//echo $email;
-			
+					
 		}else{
 			echo 'No such user exists';
 		}
 	}
 }
-/* function deleteUser($user_id){
-	global $conn;
-	
-	$sql = 'DELETE FROM `users` WHERE user_id=$user_id';
-	if(mysqli_query($conn, $sql)){
-		
-		$_SESSION['message'] = 'User successfully deleted.';
-		header('Location: users.php');
-		exit(0);
-	}
-} */
+
 
 /*******************************************
 *--Returns all admin users with their roles
