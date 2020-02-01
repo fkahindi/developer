@@ -36,12 +36,13 @@ require __DIR__ .'/../includes/comments_functions.php';
 			include __DIR__ .'/comments_display_main_block.php';
 		?>
 	</div>
+	<?php if($total_comments>$no_of_records_per_page):?>
 	<div data-id="<?php echo $page_id; ?>" id="pagination" class="pagination">
-		
 		<span class="<?php echo ($page_no >= $number_of_pages)? 'disabled':'' ?>">
 		
-		<a href="<?php echo ($page_no >= $number_of_pages)?'#': '?page_no='.($page_no+1); ?>" data-id="<?php echo ($page_no >= $number_of_pages)?'#':($page_no+1); ?>"
+		<a href="<?php echo ($page_no >= $number_of_pages)?'#': '?page_no='.($page_no=$page_no+1); ?>" data-id="<?php echo ($page_no >= $number_of_pages)?'':($page_no); ?>"
 		class="load-more">Load more...</a>
-		</span>
+		</span><?php echo 'Page_num: '.$page_no; ?>
 	</div>
+	<?php endif; ?>
 </div>

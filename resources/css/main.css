@@ -477,7 +477,8 @@ STYLING FOR COMMENTS SECTION
 	text-align:left;
 	line-height:1.2;
 	background: rgb(220,220,220);
-	border-radius:5px;
+	border-radius:0 10px/ 10px 20px;
+	
 }
 .user-info .created-date{
 	padding-left:5px;
@@ -491,7 +492,7 @@ STYLING FOR COMMENTS SECTION
 }
 .replies-detail .reply-text{
 	text-align:left;
-	padding:3px 0 10px 0;
+	padding:3px 0 5px 0;
 }
 .reply{
 	width:100%;

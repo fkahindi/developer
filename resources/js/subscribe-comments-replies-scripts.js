@@ -91,8 +91,8 @@ $('document').ready(function(){
   * Using the parent comments-container for events delegation
   */
   $('#comments-container').on('click',['.submit_comment','.post_reply','.reply-btn','.reply-thread','.load-more'], function(e){
-	  e.preventDefault();
-	  var target = e.target;
+		e.preventDefault();
+		var target = e.target;
 		var comment_id = parseInt(target.id.match(/\d+/));	  
 	switch(target.className.toLowerCase()){
 		case 'submit_comment':
@@ -124,7 +124,6 @@ $('document').ready(function(){
 		if(comment == ''){
 			return false;
 		}
-		
 		$.ajax({
 			url: '/spexproject/includes/comments_functions.php', 
 			type: 'POST',
@@ -157,7 +156,6 @@ $('document').ready(function(){
 	
 	//Posting a reply
 	function postReply(comment_id){
-		var comment_id = Number(comment_id);
 		var reply_textarea = $('#post_reply_'+ comment_id).siblings('.reply-textarea');
 		var reply_text = $('#post_reply_'+ comment_id).siblings('#reply_textarea_'+ comment_id).val();
 		var user_id = $('#post_reply_'+ comment_id).siblings('.reply_form_user_id').val();
@@ -167,7 +165,6 @@ $('document').ready(function(){
 		if(reply_text == ''){
 			return false;
 		}
-		
 		$.ajax({
 			url: '/spexproject/includes/comments_functions.php',
 			type: 'POST',
@@ -199,7 +196,6 @@ $('document').ready(function(){
 		
 		$('#reply_thread_'+comment_id).text($('#reply_thread_'+comment_id).text() == convertEntities(html1) ? convertEntities(html2) : convertEntities(html1));
 	}
-	
 	//When user clicks Load more...
 	function loadMoreComments(){
 		var page_id = $('.pagination').data('id');
@@ -208,7 +204,7 @@ $('document').ready(function(){
 		var offset = 0;
 		var limit = '';
 		
-		if(page_no!="#"){
+		if(page_no!=''){
 			var offset = page_no * no_of_records_per_page;
 		}else{
 			return false;
@@ -225,8 +221,8 @@ $('document').ready(function(){
 			},
 			success: function(data){
 	
-				//$('.pagination').prepend(data);
 				$('#comments-area').append(data);
+				/* $('.load-more').data('id')= page_no+1; */
 			}
 		});
 	}
