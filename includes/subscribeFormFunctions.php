@@ -58,11 +58,15 @@ if(isset($_POST['subscribe'])){
 			}else{
 				//Update token and date then send email link
 				$fields = ['token' => $token, 'created_at' => $created_at];
-				$updateToken = $subscribeTempTbl->updateRecords($fields,$email);
+				
 				require_once __DIR__ .'/subscribe-email-link.php';
-				echo 'A link was sent to your email box some time back, but has been sent again';
+				if(isset($emil_success)){
+				$updateToken = $subscribeTempTbl->updateRecords($fields,$email);
+				echo $emil_success;
+				}else{
+					echo $email_error;
+				}				
 			}
-			
 		}else{
 			$fields = [
 			'name' => $name,
@@ -70,9 +74,15 @@ if(isset($_POST['subscribe'])){
 			'token' => $token,
 			'created_at' => $created_at
 			];
-			$query = $subscribeTempTbl ->insertRecord($fields);
+			//
+			/* Insert record into subscribers' temp table and send mail to user, otherwise display error. */
 			require_once __DIR__ .'/subscribe-email-link.php';
-			echo 'A link has been sent to your email address, please confirm subscription.';
+			if(isset($emil_success)){
+				$query = $subscribeTempTbl ->insertRecord($fields);
+				echo $emil_success;
+			}else{
+				echo $email_error;
+			}
 		}	
 	}
 }

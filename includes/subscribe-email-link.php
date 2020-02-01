@@ -35,11 +35,7 @@ $mail->Subject = $subject;
 $mail->Body = $body;
 $mail->AddAddress($email_to);
 if(!$mail->Send()){
-	echo 'Message could not be sent.';
-	echo "Mailer Error: " . $mail->ErrorInfo;
+	$email_error = ' <div class="errorMsg"> Message could not be sent. <br> Mailer Error: '. $mail->ErrorInfo .'</div>';
 }else{
-	echo "<div class='error'>
-	<p>An email has been sent to you with instructions to confirm your email.</p>
-	</div><br><br><br>";
+	$emil_success = '<div class="successMsg">An email has been sent to you with instructions to confirm your subscription.</div>';
 	}
- 

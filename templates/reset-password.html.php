@@ -51,7 +51,7 @@ if(isset($_POST['reset_password'])){
 			
 			<div class="group-form">
 			<label for="confirm_new_password">Confirm New Password:<span class="red"> &#42;</span></label>
-			 <input type="password" id="confirm_password" name="confirm_new_password" value="<?php echo(empty($confirm_new_password)? '': $confirm_new_password); ?>" maxlength="50" autocomplete="off" >
+			 <input type="password" id="confirm_password" name="confirm_new_password" value="<?php echo(empty($confirm_new_password)? '': $confirm_new_password); ?>" maxlength="51" autocomplete="off" >
 			<span class="errorMsg"><?php echo (!empty($errors['confirm_new_password'])? $errors['confirm_new_password'] :'');?></span>
 			</div>
 			

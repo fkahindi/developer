@@ -4,7 +4,7 @@
 }
 .banner-bar{
 	font-family: Aladin;
-	color:000;
+	color:#000;
 	text-align:left;
 }
 .section,#create-account,#login,#recover,#reset, #upload, #subscribe{
@@ -161,7 +161,6 @@ form input[type="submit"]{
 .reply form textarea{
 	width:100%;
 }
-.
 .reply .reply-text{
 	margin-left:1%;
 }

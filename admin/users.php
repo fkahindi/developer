@@ -25,9 +25,9 @@ $roles = ['Admin', 'Author', 'User'];
 </head>
 <body>
 	<?php include __DIR__ .'/components/navbar.php'; ?>
-	<div class="container border mt-2">
-		<div class="panel panel-default text-success text-center"><?php echo isset($_SESSION['message'])? $_SESSION['message']:''; ?></div>
-		<div class="mx-auto my-4 text-center"><h3>Administration Panel: <?php echo $_SESSION['fullname']?></h3></div>
+	<div class="container-fluid">
+		<div class="panel panel-default text-success text-center"><?php echo isset($_SESSION['message'])? $_SESSION['message']:''; ?></div> 
+		<div class="mx-auto my-4"><h3>Admin Panel :: <?php echo $_SESSION['fullname']?></h3></div>
 		
 		<div class="row my-5">
 			<!--Row with 3 equal columns-->
@@ -41,12 +41,12 @@ $roles = ['Admin', 'Author', 'User'];
 				<div><a href="#">manage users</a></div>
 				<div><a href="topics.php">manage topics</a></div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 			<!-- Middle column-->
 				<div class="action">
 				<form method="post" action="users.php">
 				<!--Validating for errors on the form -->
-				<?php include __DIR__ .'/includes/errors.php'; ?>
+				<div class="text-left text-danger"><h4><?php include __DIR__ .'/includes/errors.php'; ?></h4></div>
 				
 				<!-- Attach a hidden id for user being edited-->
 				<?php if($isEditingUser === true || $isSearchUser === true): ?>
@@ -75,7 +75,7 @@ $roles = ['Admin', 'Author', 'User'];
 				</form>
 				</div>
 			</div>
-			<div class="col-md-6 panel-body border">
+			<div class="col-md-7 panel-body border">
 			
 				<!--Column right database output-->
 				<div class="table-div">
@@ -111,4 +111,5 @@ $roles = ['Admin', 'Author', 'User'];
 </body>
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/tooltip-call.js"></script>
 </html>

@@ -30,29 +30,28 @@
 			</div>	
 			<div class="account-photo-box tooltip ">
 				<label for="profile-checkbox-control" id="tooltip">
-								<?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true):?> 
-					<span>  <img src="<?php echo $_SESSION['profile_photo'] ?>" alt="" class="image-photo"></span>
-				</label>
+					<?php if(isset($_SESSION['loggedin']) && $_SESSION['loggedin']== true):?> 
+					<span>  <img src="<?php echo $_SESSION['profile_photo'] ?>" alt="" class="image-photo"></span></label>
 				
-					<div class="tooltip-text">
-						<p><strong>Account:</strong></p> 
-						<p><?php echo $_SESSION['fullname'] ?></p>
-						<p><?php echo $_SESSION['email'] ?></p>
-					</div>
-					<input type="checkbox" id="profile-checkbox-control">
-					<div class="account-display-settings">
-						<ul>
-							<li><a href="/spexproject/templates/change-password.html.php">Change Password </a> 
-							</li>
-							<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
-							<li><a href="/spexproject/includes/logout.php">Sign out </a></li>
-							<?php if($_SESSION['role'] == 'Admin'):?>
-								<li><a href="/spexproject/admin/dashboard.php">Admin Area </a></li>
-							<?php elseif($_SESSION['role'] == 'Author'): ?>
-								<li><a href="/spexproject/admin/posts.php">Admin Posts </a></li>
-							<?php endif; ?>
-						</ul>
-					</div>
+				<div class="tooltip-text">
+					<p><strong>Account:</strong></p> 
+					<p><?php echo $_SESSION['fullname'] ?></p>
+					<p><?php echo $_SESSION['email'] ?></p>
+				</div>
+				<input type="checkbox" id="profile-checkbox-control">
+				<div class="account-display-settings">
+					<ul>
+						<li><a href="/spexproject/templates/change-password.html.php">Change Password </a> 
+						</li>
+						<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
+						<li><a href="/spexproject/includes/logout.php">Sign out </a></li>
+						<?php if($_SESSION['role'] == 'Admin'):?>
+							<li><a href="/spexproject/admin/dashboard.php">Admin Area </a></li>
+						<?php elseif($_SESSION['role'] == 'Author'): ?>
+							<li><a href="/spexproject/admin/posts.php">Admin Posts </a></li>
+						<?php endif; ?>
+					</ul>
+				</div>
 				<?php endif; ?>
 			</div>						
 		</div>

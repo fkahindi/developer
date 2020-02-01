@@ -27,7 +27,7 @@ if(isset($_POST['login'])){
 	
 		<form method="POST" action="">
 			<label for="email">Email address:</label>
-			 <input type="text" name="email" value="<?php echo (!empty($email)? $email:'');?>"autocomplete="off"> <span class="errorMsg"><?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>
+			 <input type="text" name="email" value="<?php echo (!empty($email)? $email:'');?>" autocomplete="off"> <span class="errorMsg"><?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>
 			
 			<label for="password">Password: <span class="right-align"> </span></label>
 			 <input type="password" name="password" autocomplete="off" >

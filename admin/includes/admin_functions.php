@@ -121,7 +121,7 @@ function updateUser($request_values){
 	}
 }
 function searchUser($request_values){
-	global $conn, $user_id, $username, $email, $isSearchUser;
+	global $conn, $user_id, $username, $email, $isSearchUser, $errors;
 		
 	if(isset($_POST['username']) || isset($_POST['email'])){
 		
@@ -137,9 +137,12 @@ function searchUser($request_values){
 			$user_id =$user_record['user_id'];
 			$username = $user_record['username'];
 			$email = $user_record['email'];
+			if(empty($user_record)){
+				array_push($errors, 'User not found');
+			}
 					
 		}else{
-			echo 'No such user exists';
+			echo 'Error has occured!';
 		}
 	}
 }

@@ -113,4 +113,5 @@
 </body>
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/tooltip-call.js"></script>
 </html>

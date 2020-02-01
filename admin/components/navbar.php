@@ -6,7 +6,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>                        
 			</button>
-			<a class="navbar-brand" href="/spexproject/index.php">Developerspot</a>
+			<a class="navbar-brand" href="/spexproject/index.php" data-toggle="tooltip" data-placement="auto bottom"  title="Click to move to home page">Developerspot</a>
 		</div>	
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<div class=" nav navbar-nav navbar-right">

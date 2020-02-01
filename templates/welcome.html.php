@@ -9,6 +9,11 @@ if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
 	
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
 <h4>Welcome <?php echo (!empty($_SESSION['username'])? $_SESSION['username']:'');?></h4>
-<p>Start <a href="../index.php"> browsing</a>.</p>
+<p> <a href="../index.php"> Continue</a>.</p>
+</body>
+</html>

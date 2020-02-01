@@ -1,4 +1,7 @@
 #
+Options +FollowSymlinks
+RewriteEngine On
+#
 # 1. Prevent listing of files in this folder
 #
 Options  -Indexes
@@ -8,6 +11,13 @@ Options  -Indexes
 #
 #Order deny,allow
 #Deny from all
-#
-RewriteEngine On
-#RewriteRule ^([0-9]+).html /abc.php?id=$1 [QSA,L]
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+ 
+RewriteRule ^posts/(\d+)*$ ./post.html.php?id=$1
+RewriteRule ^topics/(\d+)*$ ./topic_page.html.php?name=$1
+ 
+RewriteRule ^search/(.*)$ ./search_result.php=$1
+
+
+

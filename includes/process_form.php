@@ -465,6 +465,7 @@ function recoverPassword(){
 
 //This function allows the user to reset their password affter successful recovery
 function resetPassword(){
+	global $pdo, $password_pattern;
 	$email = $_POST['email'];
 	$token = $_POST['token'];
 	

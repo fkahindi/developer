@@ -46,10 +46,14 @@ if(!isset($_SESSION)){
 			<div>				
 			<!-- The page content will be fetched from database -->
 			<?php echo htmlspecialchars_decode($posts['post_body']) ;?>
-			<!-- Call to subscribe for notification -->
-			<?php  include __DIR__.'/subscribe.html.php';?>
+				<div>
+				<!-- Call to subscribe for notification -->
+				<?php  include __DIR__.'/subscribe.html.php';?>
+				</div>
+				<div>
 			<!--Comments sections  -->
 			<?php include __DIR__ .'/../comments/comments-layout.php'; ?>
+				</div>
 			</div>
 			
 		</section><!--
@@ -78,11 +82,10 @@ if(!isset($_SESSION)){
 				<?php include __DIR__ . '/copyright.html.php';?>
 			</span> 
 	</footer>
-</body>
-<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
+	<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
 <script src="/spexproject/resources/js/get-meta-keywords.js"></script>
+<script src="/spexproject/resources/css/google-code-prettify/prettify.js"></script>
 <script src="/spexproject/resources/js/menu-profile-controls.js"></script>
 <script src="/spexproject/resources/js/subscribe-comments-replies-scripts.js"></script>
-<script src="/spexproject/resources/css/google-code-prettify/prettify.js"></script>
-
+</body>
 </html>

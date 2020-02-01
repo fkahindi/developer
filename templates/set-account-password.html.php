@@ -15,9 +15,7 @@ require __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['set-account-password'])){
 	setAccountPassword();
 }	
-
 ?>
-	
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,7 +51,7 @@ if(isset($_POST['set-account-password'])){
 			
 			<div class="group-form">
 			<label for="confirm_password">Confirm Password:<span class="red"> &#42;</span></label>
-			 <input type="password" id="confirm_password" name="confirm_password" value="<?php echo(empty($confirm_password)? '': $confirm_password); ?>" maxlength="50" autocomplete="off" >
+			 <input type="password" id="confirm_password" name="confirm_password" value="<?php echo(empty($confirm_password)? '': $confirm_password); ?>" maxlength="51" autocomplete="off" >
 			<span class="errorMsg"><?php echo (!empty($errors['confirm_password'])? $errors['confirm_password'] :'');?></span>
 			</div>
 			

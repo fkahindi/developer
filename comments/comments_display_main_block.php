@@ -2,24 +2,6 @@
 if(!isset($_SESSION)){
 	session_start();
 }
-require_once __DIR__ .'/includes/comments_functions.php';
-
-if(isset($_GET['pageno'])){
-	$pageno = $_GET['pageno'];
-}else{
-	$pageno = 1;
-}
-
-$no_of_records_per_page = 10;
-$offset = ($pageno - 1)*$no_of_records_per_page;
-
-$total_rows = getCommentCountByPostId(1);;
-
-$total_pages = ceil($total_rows/$no_of_records_per_page);
-
-$limit=" LIMIT $offset, $no_of_records_per_page";
-
-$comments = getAllPostComments(1, $limit);
 ?>
 <?php if(isset($comments)): ?>
 	<div class="comments-area" id="comments-area">
@@ -46,7 +28,7 @@ $comments = getAllPostComments(1, $limit);
 						<a href="#" data-id="<?php echo $comment['comment_id']; ?>" id="reply_btn_<?php echo $comment['comment_id']; ?>" class="reply-btn">Reply</a>
 					<?php endif; ?>
 					<?php if($num_replies>0):?>
-					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" class="reply-thread">&#9660;</a><span><?php echo $num_replies; ?> Replies</span>
+					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" id="reply_thread_<?php echo $comment['comment_id']; ?>" class="reply-thread">&#9660;</a><span><?php echo $num_replies; ?> Replies</span>
 					<?php endif; ?>
 					<?php if(isset($_SESSION['loggedin'])): ?>
 						<!-- Reply form -->
@@ -83,19 +65,8 @@ $comments = getAllPostComments(1, $limit);
 				</div>
 			</div>
 		</div>
-				<?php endforeach; ?>
+		<?php endforeach; ?>
 		<!--Display form comments using AJAX below here -->
-		
+				
 	</div>
 	<?php endif ?>
-
-<ul class="pagination">
-	<li><a href="?pageno=1">First</a></li>
-	<li class="<?php if($pageno<=1){echo 'disabled';} ?>">
-		<a href="<?php if($pageno<=1){echo '#';}else{echo "?pageno=".($pageno-1);} ?>">Prev</a>
-	</li>
-	<li class="<?php if($pageno>= $total_pages){echo 'disabled';} ?>">
-		<a href="<?php if($pageno>= $total_pages){echo '#';}else{echo "?pageno=".($pageno+1);} ?>">Next</a>
-	</li>
-	<li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
-</ul>

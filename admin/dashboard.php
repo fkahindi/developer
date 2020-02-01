@@ -19,14 +19,14 @@ if($_SESSION['role'] !== 'Admin'){
 	<div class="container bg-info">
 	
 	</div>
-	<div class="container border mt-3">
+	<div class="container-fluid">
 		<div class="mx-auto my-4"><h1><?php echo $_SESSION['role']; ?></h1></div>
 		
 		<div class="row ">
 			<!--Row with 3 equal columns-->
 			<div class="col-md-4 panel-body border">
 				<!--Column left -->
-				<a href="#">New Registered Users</a>
+				<a href="#">Registered Users | Posts</a>
 			</div>
 			<div class="col-md-4 panel-body border">
 				<!--Column middle -->
@@ -34,7 +34,7 @@ if($_SESSION['role'] !== 'Admin'){
 			</div>
 			<div class="col-md-4 panel-body border">
 				<!--Column right -->
-				<a href="#">Published comments</a>
+				<a href="#">Posted comments</a>
 			</div>
 		</div>
 		<div>
@@ -46,4 +46,5 @@ if($_SESSION['role'] !== 'Admin'){
 </body>
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script src="js/tooltip-call.js"></script>
 </html>
