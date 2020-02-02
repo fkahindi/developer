@@ -17,23 +17,16 @@ if(isset($_POST['create-account'])){
 </head>
 <body>
 		<div id="create-account">
-			<div class="successMsg"><?php echo(empty($form_msg)? '':$form_msg); ?></div>
+			<div class="successMsg"><?php echo(!empty($form_success)? $form_success:''); ?></div>
 			<div class="form_image">
 				<div class="banner-bar"><h2>Developers Pot</h2></div>
-				<div id="error_msg"><?php echo(isset($form_error)? $form_error: '');?></div>
+				<div id="error_msg"><?php echo(!empty($form_error)? $form_error :'');?></div>
 				<h2>Create Account </h2>
 				<p>Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
 			</div>
 		
 		<form  method="POST" action="" id="signup_form" >
-		
-			<div class="group-form">
-				<label for="fullname">Full Name:</label>
-				<input  name="fullname" id="fullname" class="form-control" type="text" 
-				value="<?php echo (empty($fullname)? '': $fullname); ?>" maxlength="50" autocomplete="off" >
-				<span class="errorMsg"> <?php echo(!empty($errors['fullname']) ? $errors['fullname'] : ''); ?></span>
-			</div>
-			
+					
 			<div class="group-form">
 				<label for="username">Username:<span class="red"> &#42;</span></label>
 				<input  name="username" id="username" class="form-control" type="text" 

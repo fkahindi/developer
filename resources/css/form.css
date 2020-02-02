@@ -77,6 +77,11 @@ margin:0 auto;
  color: #6B8E23;
  margin-bottom: 10px;
 }
+#error_msg {
+  text-align: left;
+  margin-left: 10px;
+  color: red;
+}
 .subscribe_error{
 	color:#C04000;
 	font-weight:bold;
@@ -111,11 +116,7 @@ h3,h4{
 .form_success input {
   border: 1px solid green;
 }
-#error_msg {
-  text-align: left;
-  margin-left: 10px;
-  color: red;
-}
+
 @media only screen and (max-width:600px){
 .section,#create-account,#login, #recover,#reset, #upload, #subscribe{
 width: 250px; 

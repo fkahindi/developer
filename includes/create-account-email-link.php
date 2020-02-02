@@ -34,11 +34,8 @@ $mail->Subject = $subject;
 $mail->Body = $body;
 $mail->AddAddress($email_to);
 if(!$mail->Send()){
-	echo 'Message could not be sent.';
-	echo "Mailer Error: " . $mail->ErrorInfo;
+	$email_error = 'Message could not be sent. '.$mail->ErrorInfo;
 }else{
-	$form_msg = "<div class='error'>
-	<p>An email has been sent to ".$email.". You will need to open your  email and confirm  before your account is set.</p>
-	</div><br /><br /><br />";
-	}
+	$email_success = "<p>An email has been sent to ".$email.". You will need to open your  email and confirm  before your account is set.</p>";
+}
  

@@ -18,19 +18,13 @@ $password_pattern = "/^[\w\-.]+$/"; // Matches letters, numbers, underscore, das
 
 //This section handles user account creation
 function createAccount(){
-	global $pdo, $errors,$valid, $gen_pattern;
+	global $pdo, $errors,$valid, $gen_pattern, $form_error, $form_success;
 		
 	//Assign variables
-	$fullname = $_POST['fullname'];
 	$username = $_POST['username'];
 	$email = $_POST['email'];
 		
 	//Incase any field is left blank
-	if(!empty($_POST['fullname'])){
-		$fullname = filter_var($_POST['fullname'], FILTER_SANITIZE_STRING);
-	}else{
-		$fullname = '';
-	}
 	if(empty($_POST['username'])){
 		$valid = false;
 		$errors['username'] = 'Name cannot be blank';
@@ -80,9 +74,7 @@ function createAccount(){
 			if($row['email'] === $email){
 				$errors['email'] = 'You cannot use '.$email;
 			}
-			
 		}else{
-			
 			$curDate = date('Y-m-d H:i:s');			
 			$created_at = new DateTime();	
 			$created_at = $created_at->format('Y-m-d H:i:s');
@@ -99,28 +91,30 @@ function createAccount(){
 				$curDateTimeStamp = strtotime($curDate);
 				$span = $curDateTimeStamp - $createdDateTimeStamp;
 				if($span<= 86400){
-					//If link was sent in less than 48 hrs notify user
+					//If link was sent in less than 24 hrs notify user
 
 					echo 'A link was sent to '.$temp_row['email'].' address in less than 24 hours ago. Check your email inbox.';
 					
 				}else{
 					//Update token, date and fullname (if set) then send email link
-					$fields = ['fullname'=>$fullname, 'token' => $token, 'created_at' => $created_at];
+					$fields = ['token' => $token, 'created_at' => $created_at];
 					$update_usersToken = $users_tempTable->updateRecords($fields,$email);
 					require_once __DIR__ .'/create-account-email-link.php';
-					
 				} 	
 			}else{
 				$fields = [
-				'fullname' => $fullname,
 				'username' => $username,
 				'email' => $email,
 				'token' => $token,
 				'created_at' => $created_at
-				];
-				$insert_tempRecord = $users_tempTable ->insertRecord($fields);
-				
+				];				
 				require_once __DIR__ .'/create-account-email-link.php';	
+				if(isset($email_success)){
+					$insert_tempRecord = $users_tempTable ->insertRecord($fields);
+					$form_success = $email_success;
+				}else{
+					$form_error = $email_error;
+				}
 			}
 		}				
 	}else{
@@ -177,7 +171,6 @@ function setAccountPassword(){
 				
 				
 					$row = $sql->fetch();
-					$fullname = $row['fullname'];
 					$username = $row['username'];
 					$expDateTimestamp = strtotime($row['created_at']);
 					$curDateTimestamp = strtotime($curDate);
@@ -190,7 +183,6 @@ function setAccountPassword(){
 						$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 						$profile_photo = '/spexproject/resources/photos/profile.png';
 						$fields = [
-							'fullname'=> $fullname,
 							'username'=> $username,
 							'profile_photo'=>$profile_photo,
 							'email' => $email,

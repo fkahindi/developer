@@ -1,28 +1,10 @@
 $('document').ready(function(){
-	var name_state = false;
+
 	var email_state = false;
 	/**
 	* Scripts to manage subscription form
-	*/
-	$('#name').on('blur',function(){
-		var name = $('#name').val();
-		var nameFilter = /^[\w\s.\-]*$/; //Check if it's a valid text
-		
-		//Validate text
-		if(!nameFilter.test(name)){
-			name_state = false;
-			$('#name').parent().removeClass();
-			$('#name').parent().addClass("form_error");
-			$('#name').siblings("span").text('Name contains illegal characters');
-		}else{
-			name_state = true;
-			$('#name').parent().removeClass();
-			$('#name').parent().addClass("form_success");
-			$('#name').siblings("span").text('');
-		}
-	});
-		
-	$('#email').on('change',function(){
+	*/		
+	$('#email').on('blur',function(){
 		var email = $('#email').val();
 		var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; //Check if it's valid mail address
 		var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; // Check for illegal characters
@@ -46,22 +28,22 @@ $('document').ready(function(){
 			$('#email').parent().removeClass();
 			$('#email').parent().addClass("form_success");
 			$('#email').siblings("span").text('');
+			$('.subscribe_error').text('');
 		}
 	});
 	$('#submit_subscribe').on('click',function(e){
-		var name = $('#name').val();
+
 		var email = $('#email').val();
 		e.preventDefault();		
-		if(name ==''){
-				name_state = true;
-		}
+	
 		if(email == ''){
-			email_state = false;
+			//email_state = false;
 			$('#email').parent().removeClass();
 			$('#email').parent().addClass("form_error");
 			$('#email').siblings("span").text('Please! Fill email address field');
+			return;
 		}
-		if(name_state == false || email_state == false){
+		if(email_state == false){
 			$('.subscribe_error').text('Fix errors in the form first');
 			
 		}else {
@@ -71,14 +53,12 @@ $('document').ready(function(){
 				type: 'POST',
 				data: {
 				'subscribe':1,
-				'name': name,
 				'email': email
 				},
 				success: function(response){
 				
 				$('#subscribe_response').append(response);
 		
-				$('#name').val('');
 				$('#email').val('');
 				$('.subscribe_error').text('');
 				}

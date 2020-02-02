@@ -1,23 +1,7 @@
 $('document').ready(function(){
-	var fullname_state = false;
 	var username_state = false;
 	var email_state = false;
- $('#fullname').on('change', function(){
-	 var fullnameFilter = /^[\w\s\-.]+$/;
-	 var fullname = $('#fullname').val();
-	 
-	 if(!fullnameFilter.test(fullname)){
-		fullname_state = false;
-		$('#fullname').parent().removeClass();
-		$('#fullname').parent().addClass("form_error");
-		$('#fullname').siblings("span").text('Use letters, space, numbers, dot, underscore or dash'); 
-	 }else{
-		fullname_state = true;
-		$('#fullname').parent().removeClass();
-		$('#fullname').parent().addClass("form_success");
-		$('#fullname').siblings("span").text('');
-	 }
- });
+	
  $('#username').on('blur', function(){
 	var illegalChars = /\W/; // allow at least letters, numbers, and underscores
 	var username = $('#username').val();
@@ -105,9 +89,8 @@ $('document').ready(function(){
  
  $('#submit_btn').on('click', function(e){
 	
- 	if(username_state == false || email_state == false || fullname_state == false)
+ 	if(username_state == false || email_state == false)
 	{	
-		var fullname = $('#fullname').val();
 		var username = $('#username').val();
 		var email = $('#email').val();
 		
@@ -130,7 +113,6 @@ $('document').ready(function(){
 		}		
 	}else{
 		$('#error_msg').text('');
-		$('#fullname').siblings("span").text('');
 		$('#username').siblings("span").text('');
 		$('#email').siblings("span").text('');
 		return true;

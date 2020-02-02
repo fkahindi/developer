@@ -14,16 +14,9 @@ $valid = true;
 //This section handles 1st step of subscription
 if(isset($_POST['subscribe'])){
 	//Assign variables
-	$name = $_POST['name'];
 	$email = $_POST['email'];
 	
 	//Incase email field is left blank
-	if(!empty($_POST['name'])){
-		$name = filter_var($name, FILTER_SANITIZE_STRING);
-		$valid = true;
-	}elseif(empty($_POST['name'])){
-		$valid = true;
-	}
 	if(empty($_POST['email'])){
 		$valid = false;
 		$errors['email'] = 'Type your email address';
@@ -69,7 +62,6 @@ if(isset($_POST['subscribe'])){
 			}
 		}else{
 			$fields = [
-			'name' => $name,
 			'email' => $email,
 			'token' => $token,
 			'created_at' => $created_at

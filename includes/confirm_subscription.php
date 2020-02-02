@@ -20,7 +20,6 @@ try{
 			$created_at = new DateTime();	
 			$created_at = $created_at->format('Y-m-d H:i:s');
 			$fields =[
-				'name' => $row['name'],
 				'email' => $row['email'],
 				'created_at' => $created_at
 			];
