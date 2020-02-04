@@ -285,6 +285,9 @@ main ul{
 .replies-detail .user-info{
 	font-size:90%;
 }
+.pagination .load-prev{
+	display:none;
+}
 .paragraph-snippet{
 	font-family:calibri, sans-serif;
 	font-size:90%;

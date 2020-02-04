@@ -47,7 +47,6 @@ $('document').ready(function(){
 			$('.subscribe_error').text('Fix errors in the form first');
 			
 		}else {
-			
 			$.ajax({
 				url: '/spexproject/includes/subscribeFormFunctions.php', 
 				type: 'POST',
@@ -77,18 +76,19 @@ $('document').ready(function(){
 	switch(target.className.toLowerCase()){
 		case 'submit_comment':
 			submitComment();
-		break;
+			break;
 		case 'reply-btn':
 			showReplyForm(comment_id);
-		break;
+			break;
 		case 'post_reply':
 			postReply(comment_id);
 			return false;
 		case 'reply-thread':
 			displayReplyThread(comment_id);
-		break;
+			break;
 		case 'load-more':
 			loadMoreComments();
+			break;
 		default:
 		//do nothing
 	}
@@ -180,17 +180,18 @@ $('document').ready(function(){
 	function loadMoreComments(){
 		var page_id = $('.pagination').data('id');
 		var page_no = $('.load-more').data('id');
-		var no_of_records_per_page = 5;
+		var no_of_comments_per_view = $('.comments-per-view').data('id');
+		var number_of_pages = $('#num-of-pages').data('id');
 		var offset = 0;
 		var limit = '';
 		
-		if(page_no!=''){
-			var offset = page_no * no_of_records_per_page;
+		if(page_no!=0){
+			offset = (page_no-1) * no_of_comments_per_view;
 		}else{
 			return false;
 		}
-		limit = 'LIMIT '+offset+', '+no_of_records_per_page;
-		
+		limit = 'LIMIT '+offset+', '+ no_of_comments_per_view;
+				
 		$.ajax({
 			url: '/spexproject/includes/comments_functions.php',
 			type: 'POST',
@@ -201,12 +202,16 @@ $('document').ready(function(){
 			},
 			success: function(data){
 	
+				page_no = page_no+1;
 				$('#comments-area').append(data);
-				/* $('.load-more').data('id')= page_no+1; */
+				
+				$('.load-more').data('id',page_no);
+				if(page_no > number_of_pages){
+					$('.load-more').hide();
+				}
 			}
 		});
 	}
-
 	function convertEntities(html){
 		var el = document.createElement("div");
 		el.innerHTML = html;
