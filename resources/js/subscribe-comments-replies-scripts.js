@@ -206,6 +206,7 @@ $('document').ready(function(){
 				$('#comments-area').append(data);
 				
 				$('.load-more').data('id',page_no);
+				window.scrollBy(0,window.innerHeight);
 				if(page_no > number_of_pages){
 					$('.load-more').hide();
 				}
