@@ -1,5 +1,6 @@
 <?php 
 session_start(); 
+require_once __DIR__ .'/../config.php';
 include __DIR__ .'/../admin/includes/posts_functions.php';
 include __DIR__ .'/../admin/includes/admin_functions.php';
 	
@@ -31,7 +32,7 @@ include __DIR__ .'/../admin/includes/admin_functions.php';
 				<?php $published_posts = getPublishedPostsByTopic($topic_id)?>
 				<?php foreach($published_posts as $pub_post):?>
 				<?php $pub_post['author'] = getPostAuthorById($pub_post['user_id'])?>
-				<h3><a href="/spexproject/templates/post.html.php?id=<?php echo $pub_post['post_id'] ?>&title=<?php echo $pub_post['post_slug']?>"><?php echo $pub_post['post_title']?></a></h3>
+				<h3><a href="<?php echo BASE_URL ?>templates/post.html.php?id=<?php echo $pub_post['post_id'] ?>&title=<?php echo $pub_post['post_slug']?>"><?php echo $pub_post['post_title']?></a></h3>
 				<div class="post-acreditation">
 					By <?php echo $pub_post['author'];?><span>  
 					<?php echo isset($pub_post['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($pub_post['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($pub_post['created_at'])) ?></span>
@@ -39,7 +40,7 @@ include __DIR__ .'/../admin/includes/admin_functions.php';
 					
 				<div class="paragraph-snippet">
 					<?php echo getFirstParagraphPostById($pub_post['post_id']) ?>
-					<a href="/spexproject/templates/post.html.php?id=<?php echo $pub_post['post_id'] ?>&title=<?php echo $pub_post['post_slug'] ?>">Read more...</a>
+					<a href="<?php echo BASE_URL ?>templates/post.html.php?id=<?php echo $pub_post['post_id'] ?>&title=<?php echo $pub_post['post_slug'] ?>">Read more...</a>
 				</div><br>
 				<?php endforeach ?>
 				
@@ -70,7 +71,7 @@ include __DIR__ .'/../admin/includes/admin_functions.php';
 				</span>
 		</footer>
 	</body>
-	<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
-	<script src="/spexproject/resources/js/get-meta-keywords.js"></script>
-	<script src="/spexproject/resources/js/menu-profile-controls.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/menu-profile-controls.js"></script>
 </html>

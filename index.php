@@ -1,5 +1,6 @@
 <?php 
 session_start(); 
+require_once __DIR__ .'/config.php';
 include __DIR__ .'/admin/includes/posts_functions.php';
 include __DIR__ .'/admin/includes/admin_functions.php';
 	$published_post_ids = getAllPublishedPostIds();
@@ -72,9 +73,7 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 				</span>
 		</footer>
 	</body>
-	<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
-	<script src="/spexproject/resources/js/get-meta-keywords.js"></script>
-	<script src="/spexproject/resources/js/menu-profile-controls.js"></script>
-	
-	
+	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/menu-profile-controls.js"></script>
 </html>

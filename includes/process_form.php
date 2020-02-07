@@ -121,7 +121,10 @@ function createAccount(){
 }
 
 
-/* This function handles account email verification */
+/* This function handles account email verification 
+** and enables users to set their account password
+** before account can be operational
+*/
 function setAccountPassword(){
 	global $pdo, $password_pattern,$password, $confirm_password, $profile_photo, $valid, $errors;
 	
@@ -165,7 +168,6 @@ function setAccountPassword(){
 			$sql = $selectEmailToken->selectMatchColumnsRecords($token, $email);
 							
 			if($sql->rowCount()==1){
-				
 				
 					$row = $sql->fetch();
 					$username = $row['username'];

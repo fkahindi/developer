@@ -2,6 +2,7 @@
 if(!isset($_SESSION)){
 	session_start();
 }
+require_once __DIR__ .'/../config.php';
 require __DIR__ . '/../includes/loginStatus.php';
 include __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['image-upload'])){
@@ -32,7 +33,7 @@ if(isset($_POST['image-upload'])){
 	
 </body>
 </html>
-<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
+<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
 <script>
 $('document').ready(function(){
 	

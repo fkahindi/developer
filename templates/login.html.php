@@ -2,6 +2,7 @@
 if(!isset($_SESSION)){
 	session_start();
 } 
+require_once __DIR__ .'/../config.php';
 include_once __DIR__ . '/../includes/process_form.php';
 if(isset($_POST['login'])){
 	login();
@@ -39,7 +40,7 @@ if(isset($_POST['login'])){
 		</form>
 	</div>
 	<div class="section">
-		<p class="centered"><a href="../templates/recover-password.html.php">Forgot password</a> | <a href="/spexproject/templates/create-account.html.php"> Create an account.</a></p>
+		<p class="centered"><a href="<?php echo BASE_URL ?>templates/recover-password.html.php">Forgot password</a> | <a href="<?php echo BASE_URL ?>templates/create-account.html.php"> Create an account.</a></p>
 	</div>
 </body>
 </html>

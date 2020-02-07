@@ -7,7 +7,7 @@
 	<div class="navigation-utilities-section">
 		<!--Search & other utilities bar -->
 		<div class="search-container">
-			<?php include __DIR__ .'/search-form.html.php'; ?>
+			<?php //include __DIR__ .'/search-form.html.php'; ?>
 		</div>
 		<!--Navigation bar follows-->
 		<div class="nav-bar dropdown">
@@ -24,8 +24,8 @@
 		<div class="group">
 			<div class="login-signup">
 			<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']== false)? 
-			'<a href="/spexproject/templates/login.html.php">Login </a> <span>&#124;</span>
-			<a href="/spexproject/templates/create-account.html.php">Create Account</a> '
+			'<a href="'.BASE_URL .'templates/login.html.php">Login </a> <span>&#124;</span>
+			<a href="'.BASE_URL.'templates/create-account.html.php">Create Account</a> '
 			: '' ?>
 			</div>	
 			<div class="account-photo-box tooltip ">
@@ -41,14 +41,14 @@
 				<input type="checkbox" id="profile-checkbox-control">
 				<div class="account-display-settings">
 					<ul>
-						<li><a href="/spexproject/templates/change-password.html.php">Change Password </a> 
+						<li><a href="<?php echo BASE_URL ?>templates/change-password.html.php">Change Password </a> 
 						</li>
-						<li><a href="/spexproject/templates/imageupload.html.php">Add Profile Photo</a></li>
-						<li><a href="/spexproject/includes/logout.php">Sign out </a></li>
+						<li><a href="<?php echo BASE_URL ?>templates/imageupload.html.php">Add Profile Photo</a></li>
+						<li><a href="<?php echo BASE_URL ?>includes/logout.php">Sign out </a></li>
 						<?php if($_SESSION['role'] == 'Admin'):?>
-							<li><a href="/spexproject/admin/dashboard.php">Admin Area </a></li>
+							<li><a href="<?php echo BASE_URL ?>admin/dashboard.php">Admin Area </a></li>
 						<?php elseif($_SESSION['role'] == 'Author'): ?>
-							<li><a href="/spexproject/admin/posts.php">Admin Posts </a></li>
+							<li><a href="<?php echo BASE_URL ?>admin/posts.php">Admin Posts </a></li>
 						<?php endif; ?>
 					</ul>
 				</div>

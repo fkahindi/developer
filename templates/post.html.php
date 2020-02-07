@@ -2,6 +2,7 @@
 if(!isset($_SESSION)){
 	session_start();
 }
+	require_once __DIR__ .'/../config.php';
 	include __DIR__ .'/../admin/includes/posts_functions.php';
 	include __DIR__ .'/../admin/includes/admin_functions.php';
 	if(isset($_GET['id'])){
@@ -20,7 +21,7 @@ if(!isset($_SESSION)){
 	<?php include __DIR__ .'/head.html.php';?>
 	
 	<!-- Links for google code prettify both (.css and .js at bottom of page) files -->
-	<link rel="stylesheet" type="text/css" href="/spexproject/resources/css/google-code-prettify/prettify.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.css">
 	<title><?php echo htmlspecialchars_decode($posts['post_title']) ;?> | Developers Pot</title>
 </head>
 <body onload="PR.prettyPrint()">
@@ -82,10 +83,10 @@ if(!isset($_SESSION)){
 				<?php include __DIR__ . '/copyright.html.php';?>
 			</span> 
 	</footer>
-	<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
-<script src="/spexproject/resources/js/get-meta-keywords.js"></script>
-<script src="/spexproject/resources/css/google-code-prettify/prettify.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
+<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
+<script src="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.js"></script>
 <script src="/spexproject/resources/js/menu-profile-controls.js"></script>
-<script src="/spexproject/resources/js/subscribe-comments-replies-scripts.js"></script>
+<script src="<?php echo BASE_URL ?>resources/js/subscribe-comments-replies-scripts.js"></script>
 </body>
 </html>

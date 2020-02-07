@@ -7,7 +7,7 @@ require __DIR__ .'/../includes/comments_functions.php';
 <?php if(!isset($_SESSION['loggedin'])): ?>
 	<!--Display login link  -->
 	<div class="align-left">
-		<h5><b> To comment or participate in conversations, please <a href="/spexproject/templates/login.html.php" class="sign-in" id="sign-in">Sign in</a>  &#124; <a href="/spexproject/templates/create-account.html.php"> Create an account.</a></b></h5>
+		<h5><b> To comment or participate in conversations, please <a href="<?php echo BASE_URL ?>templates/login.html.php" class="sign-in" id="sign-in">Sign in</a>  &#124; <a href="<?php echo BASE_URL ?>templates/create-account.html.php"> Create an account.</a></b></h5>
 	</div>
 <!--**Display the following div container if no session is found**-->
 <div class="comments-container" id="comments-container">

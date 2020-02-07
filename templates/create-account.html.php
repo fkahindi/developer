@@ -2,6 +2,7 @@
 if(!isset($_SESSION)){
 	session_start();
 }
+require_once __DIR__ .'/../config.php';
 include __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['create-account'])){
 	createAccount();
@@ -43,10 +44,10 @@ if(isset($_POST['create-account'])){
 		</form>
 	</div>
 	<div class="section">
-		<p>Aready have an account? <a href="/spexproject/templates/login.html.php">Log in </a>.</p>
+		<p>Aready have an account? <a href="<?php echo BASE_URL ?>templates/login.html.php">Log in </a>.</p>
 	</div>
 </body>
 </html>
 <!-- Scripts -->
-<script src="/spexproject/resources/js/jquery-1.7.2.min.js"></script>
-<script src="/spexproject/resources/js/form_check.js"></script>
+<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
+<script src="<?php echo BASE_URL ?>resources/js/form_check.js"></script>
