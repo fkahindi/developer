@@ -3,7 +3,7 @@ $('document').ready(function(){
 	var email_state = false;
 	
  $('#username').on('blur', function(){
-	var illegalChars = /\W/; // allow at least letters, numbers, and underscores
+	var illegalChars = /\W/; /* // allow at least letters, numbers, and underscores */
 	var username = $('#username').val();
 	
 	if(username == ''){
@@ -29,7 +29,7 @@ $('document').ready(function(){
       	$('#username').parent().addClass("form_success");
       	$('#username').siblings("span").text('');
       }
-	  //---Further username validation---
+	  /* //---Further username validation--- */
 		if(username.match(illegalChars)){
 			username_state = false;
 			$('#username').parent().removeClass();
@@ -46,8 +46,8 @@ $('document').ready(function(){
  });		
   $('#email').on('blur', function(){
  	var email = $('#email').val();
-	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; //Check if it's valid mail address
-	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; // Check for illegal characters
+	var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; /* //Check if it's valid mail address */
+	var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; /* // Check for illegal characters */
  	if (email == '') {
  		email_state = false;
  		return;
@@ -71,7 +71,7 @@ $('document').ready(function(){
       	  $('#email').parent().addClass("form_success");
       	  $('#email').siblings("span").text('');
       	}
-		//Further email validation
+		/* //Further email validation */
 		if(!emailFilter.test(email)){
 			email_state = false;
 			$('#email').parent().removeClass();
@@ -121,5 +121,3 @@ $('document').ready(function(){
  });
  
 });
-
-

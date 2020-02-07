@@ -3,7 +3,7 @@ if(!isset($_SESSION)){
 	session_start();
 }
 
-//include necessary the files
+/* //include necessary the files */
 include __DIR__ .'/../../includes_devspot/DatabaseConnection.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 
@@ -11,12 +11,12 @@ $name = $email = '';
 
 $errors =[];
 $valid = true;
-//This section handles 1st step of subscription
+/* //This section handles 1st step of subscription */
 if(isset($_POST['subscribe'])){
-	//Assign variables
+	/* //Assign variables */
 	$email = $_POST['email'];
 	
-	//Incase email field is left blank
+	/* //Incase email field is left blank */
 	if(empty($_POST['email'])){
 		$valid = false;
 		$errors['email'] = 'Type your email address';
@@ -39,17 +39,17 @@ if(isset($_POST['subscribe'])){
 		
 		$subscribeTempTbl = new DatabaseTable($pdo, 'subscribe_temp_tbl','email');
 		$sql = $subscribeTempTbl->selectColumnRecords($email);
-		//Check if email already exists
+		/* //Check if email already exists */
 		if(!empty($sql->rowCount())){
-			//if email exists check if token is still valid
+			/* //if email exists check if token is still valid */
 			$row=$sql->fetch();
 			$createdDateTimeStamp = strtotime($row['created_at']);
 			$curDateTimeStamp = strtotime($curDate);
 			if($curDateTimeStamp - $createdDateTimeStamp<=3600){
-				//If an hour has not elapsed since record update notify user.
+				/* //If an hour has not elapsed since record update notify user. */
 				echo 'A link was sent to your email in less than 1 hour ago. Check your email inbox.';
 			}else{
-				//Update token and date then send email link
+				/* //Update token and date then send email link */
 				$fields = ['token' => $token, 'created_at' => $created_at];
 				
 				require_once __DIR__ .'/subscribe-email-link.php';
@@ -66,7 +66,7 @@ if(isset($_POST['subscribe'])){
 			'token' => $token,
 			'created_at' => $created_at
 			];
-			//
+		
 			/* Insert record into subscribers' temp table and send mail to user, otherwise display error. */
 			require_once __DIR__ .'/subscribe-email-link.php';
 			if(isset($emil_success)){

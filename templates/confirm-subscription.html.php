@@ -11,4 +11,3 @@ if(isset($_GET['email']) && isset($_GET['key'])){
 }else{
 	echo 'Token was not found';
 }
-

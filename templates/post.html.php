@@ -7,9 +7,9 @@ if(!isset($_SESSION)){
 	if(isset($_GET['id'])){
 		$posts = getPostById($_GET['id']);
 	}
-	//Get page id representing this post 
+	/* //Get page id for this post */ 
 	$page_id = $posts['post_id'];
-	//SESSION variables for page reference 
+	/* //SESSION variables for page reference */ 
 	$post_slug = $posts['post_slug'];
 	$_SESSION['page_id'] = $page_id;
 	$_SESSION['post_slug'] = $post_slug;

@@ -5,13 +5,13 @@ if(isset($_POST['search_term']) && (!empty($_POST['search_term']))){
 	echo htmlspecialchars($_POST['search_term']).'<br>';
 	$query = htmlspecialchars($_POST['search_term']);
 	
-	//Seperating words and appending the metaphone of each word with a space
+	/* //Seperating words and appending the metaphone of each word with a space */
 	$search = explode(' ', $query);
 	$search_term = '';
 	foreach($search as $word){
 		$search_term .= metaphone($word).' ';
 	}
-	//prepare variables for prepared statement
+	/* //prepare variables for prepared statement */
 	$search_term1= $search_term;
 	$search_term2 = '%'.$search_term .'%';
 

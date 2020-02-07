@@ -6,13 +6,13 @@ $('document').ready(function(){
 	*/		
 	$('#email').on('blur',function(){
 		var email = $('#email').val();
-		var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; //Check if it's valid mail address
-		var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; // Check for illegal characters
+		var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; /* Check if it's valid mail address */
+		var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; /* Check for illegal characters */
 		if (email == '') {
 			email_state = false;
 			return;
 		}
-		//Further email validation
+		/* Further email validation */
 		if(!emailFilter.test(email)){
 			email_state = false;
 			$('#email').parent().removeClass();
@@ -37,7 +37,6 @@ $('document').ready(function(){
 		e.preventDefault();		
 	
 		if(email == ''){
-			//email_state = false;
 			$('#email').parent().removeClass();
 			$('#email').parent().addClass("form_error");
 			$('#email').siblings("span").text('Please! Fill email address field');
@@ -90,7 +89,7 @@ $('document').ready(function(){
 			loadMoreComments();
 			break;
 		default:
-		//do nothing
+		/* do nothing */
 	}
   });
   
@@ -117,7 +116,6 @@ $('document').ready(function(){
 
 			$('#comments-area').prepend(response);
 
-			//$('#comment').val('');
 			comment = '';
 			}
 		}); 
@@ -126,7 +124,7 @@ $('document').ready(function(){
   ** The following are:
   ** Scripts to manage replies to comments on articles
   */
-	//When user clicks reply link to add a reply under user's comment
+	/* When user clicks reply link to add a reply under user's comment */
 	function showReplyForm(comment_id){		
 			
 		$('form#comment_reply_form_'+ comment_id).toggle(100);
@@ -134,7 +132,7 @@ $('document').ready(function(){
 		$('#reply_btn_'+comment_id).text($('#reply_btn_'+comment_id).text() == 'Reply' ? 'Cancel' : 'Reply');	
 	}
 	
-	//Posting a reply
+	/* //Posting a reply */
 	function postReply(comment_id){
 		var reply_textarea = $('#post_reply_'+ comment_id).siblings('.reply-textarea');
 		var reply_text = $('#post_reply_'+ comment_id).siblings('#reply_textarea_'+ comment_id).val();
@@ -166,7 +164,7 @@ $('document').ready(function(){
 		});
 	}	
 		
-	//When user clicks Replies link replies of that comment are displayed
+	/* When user clicks Replies link replies of that comment are displayed */
 	function displayReplyThread(comment_id){
 		var thread_reply_id = comment_id;
 		var html1="&#9650;";
@@ -176,7 +174,7 @@ $('document').ready(function(){
 		
 		$('#reply_thread_'+comment_id).text($('#reply_thread_'+comment_id).text() == convertEntities(html1) ? convertEntities(html2) : convertEntities(html1));
 	}
-	//When user clicks Load more...
+	/* When user clicks Load more... */
 	function loadMoreComments(){
 		var page_id = $('.pagination').data('id');
 		var page_no = $('.load-more').data('id');

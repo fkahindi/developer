@@ -58,7 +58,7 @@
 									<th>Views</th>
 									<!--Only Admin can publish/ unpublish posts  -->
 									<?php if($_SESSION['role']=='Admin'): ?>
-									<th>Published</th>
+									<th>Un/Publish</th>
 									<?php endif ?>
 									<th>Edit</th>
 									<th>Delete</th>

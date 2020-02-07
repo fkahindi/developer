@@ -1,13 +1,12 @@
 <?php
 require_once __DIR__ .'/../../includes_devspot/DatabaseConnection.php';
 
-//$page_id = $posts['post_id'];
-//Get post by post_id represented by page_id
+/* Get post by post_id represented by page_id */
 
 function getAllPostComments($page_id, $limit=''){
 	global $pdo;
 	
-	//Get a section of comments related to a particular post and display them on the page of the post 
+	/*Get a section of comments related to a particular post and display them on the page of the post  */
 	$query = "SELECT * FROM `comments` WHERE `post_id` = :page_id ORDER BY created_at DESC ".$limit;
 	
 	$stmt = $pdo->prepare($query);
@@ -18,7 +17,7 @@ function getAllPostComments($page_id, $limit=''){
 	return $stmt->fetchAll();
 }
 
-//Get number of comments in a page
+/* //Get number of comments in a page */
 function getCommentCountByPostId($id){
 	global $pdo;
 	$query = "SELECT COUNT(*) AS total FROM comments WHERE post_id= :id";
@@ -32,7 +31,7 @@ function getCommentCountByPostId($id){
 		
 }
 
-//Get users by id
+/* //Get users by id */
 function getUserById($id){
 	global $pdo;
 	$query = "SELECT user_id, username, profile_photo FROM `users` WHERE user_id= :id";
@@ -45,7 +44,7 @@ function getUserById($id){
 	return $sql->fetch();
 }
 
-//Getting replies by comment_id
+/* //Getting replies by comment_id */
 function getRepliesByCommentId($id){
 	global $pdo;
 	$sql = "SELECT * FROM `replies` WHERE comment_id = :id ORDER BY created_at DESC";
@@ -59,7 +58,7 @@ function getRepliesByCommentId($id){
 	
 }
 
-//Get number of replies in a comment
+/* //Get number of replies in a comment */
 function getRepliesCountByCommentId($id){
 	global $pdo;
 	$query ="SELECT COUNT(*) AS number FROM `replies` WHERE comment_id=:id";
@@ -69,7 +68,7 @@ function getRepliesCountByCommentId($id){
 	$number = $sql->fetchColumn();
 	return $number;
 }
-//Receives values from jQuery for posting comments	
+/* //Receives values from jQuery for posting comments */	
 if(isset($_POST['submit_comment']) && $_POST['body']!==""){
 	$user_id = $_POST['user_id']; 
 	$page_id = $_POST['page_id'];
@@ -97,7 +96,7 @@ if(isset($_POST['submit_comment']) && $_POST['body']!==""){
 	include __DIR__ . '/../comments/comments_output.php';			
 }
 
-//Receives values from jQuery for posting replies
+/* //Receives values from jQuery for posting replies */
 if(isset($_POST['post_reply']) && $_POST['reply_text']!==""){
 	
 	$comment_id = $_POST['comment_id']; 

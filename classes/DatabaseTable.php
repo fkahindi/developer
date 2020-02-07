@@ -1,7 +1,7 @@
 <?php
 class DatabaseTable
 {
-	//Setting class properties (or variables)
+	/* //Setting class properties (or variables) */
 	
 	private $pdo;
 	private $table;
@@ -67,7 +67,6 @@ class DatabaseTable
 	public function selectAllRecords(){ 
 		$sql = 'SELECT * FROM `'.$this->table .'`';
 		
-		
 		$query = $this->query($sql);
 		
 		return $query;
@@ -75,7 +74,6 @@ class DatabaseTable
 	public function selectCountAllRecords(){
 		
 		$sql = 'SELECT COUNT(*) FROM `'.$this->table .'`';
-		
 		
 		$query = $this->query($sql);
 		
@@ -112,7 +110,6 @@ class DatabaseTable
 		
 		$query .= ' WHERE `'.$this->keyfield .'`= :keyfield';
 		
-		//Setting :$keyfield variable
 		$fields ['keyfield'] = $keyfield;
 		
 		$this->query($query, $fields);

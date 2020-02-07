@@ -13,7 +13,7 @@ if($_SESSION['role'] !== 'Admin'){
 include __DIR__ .'/includes/admin_functions.php';
 include __DIR__ .'/includes/posts_functions.php';
 
-//Get all admin and author users
+/* //Get all admin and author users */
 $admins = getAdminUsers();
 $roles = ['Admin', 'Author', 'User'];
 ?>
@@ -107,7 +107,6 @@ $roles = ['Admin', 'Author', 'User'];
 			</div>
 		</div>
 	</div>
-	
 </body>
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

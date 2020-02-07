@@ -1,5 +1,5 @@
 <?php
-//check if user already loged in, if not redirect to login page
+/* check if user already loged in, if not redirect to login page */
 if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin']!= true){
 		header('Location: /spexproject/templates/login.html.php');
 		exit;
@@ -13,12 +13,12 @@ if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin']!= true){
 	$sql = $usersTable->selectColumnRecords($email);
 				
 	if($sql->rowCount() == 1){
-		//The session email is in the database
+		/* //The session email is in the database */
 		if($row = $sql->fetch()){
 			$email = $row['email'];
 			$hashed_password = $row['password'];
 			
-			//Check whether session email and password match the ones in the database
+			/* //Check whether session email and password match the ones in the database */
 			if($_SESSION['email']== $email && $_SESSION['password'] == $hashed_password){
 				
 				$_SESSION['loggedin'] = true;
@@ -28,7 +28,7 @@ if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin']!= true){
 				$_SESSION['role']= $record['role'];
 				
 			}else{
-				//There is a problem, session values mismatch database credentials
+				/* There is a problem, session values mismatch database credentials */
 				include __DIR__ . '/../../includes/logout.php';
 			}
 		}else{

@@ -23,15 +23,15 @@ require __DIR__ .'/../includes/comments_functions.php';
 <?php endif; ?>
 	<div>
 		<h5><?php 
-		//Display total comments so far for every user
-		//totalComments();
+		/* Display total comments so far for every user */
+	
 		 $total_comments = getCommentCountByPostId($page_id);
 		 echo $total_comments;
 		?>&nbsp;Comment(s)
 		</h5><hr>	
 		<?php
 			include __DIR__ .'/comments_pagination.php';
-			//Retrieve comments for this post
+			/* Retrieve comments for this post */
 			$comments = getAllPostComments($page_id, $limit);
 			include __DIR__ .'/comments_display_main_block.php';
 		?>

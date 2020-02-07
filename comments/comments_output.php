@@ -14,4 +14,3 @@ if(!isset($_SESSION)){
 		<div class="comment-text"><?php echo $comment['body']; ?></div>
 	</div>
 </div>
-

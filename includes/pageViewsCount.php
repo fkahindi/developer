@@ -43,10 +43,10 @@ class PHPCount
     * works well. If someone visits a page and comes back in a month, it will be
     * counted as another unique hit.
     */
-    const HIT_OLD_AFTER_SECONDS = 2592000; // default: 30 days.
-    // Don't count hits from search robots and crawlers.
+    const HIT_OLD_AFTER_SECONDS = 2592000; /* // default: 30 days.
+    // Don't count hits from search robots and crawlers. */
     const IGNORE_SEARCH_BOTS = true;
-    // Don't count the hit if the browser sends the DNT: 1 header.
+    /* // Don't count the hit if the browser sends the DNT: 1 header. */
     const HONOR_DO_NOT_TRACK = false;
     private static $IP_IGNORE_LIST = array(
         '127.0.0.1',
@@ -58,11 +58,11 @@ class PHPCount
             return;
         try
         {
-            // TODO: Set the database login credentials.
+            /* // TODO: Set the database login credentials. */
             self::$DB = new PDO(
                 'mysql:host=SET_THIS_TO_HOSTNAME;dbname=SET_THIS_TO_DBNAME',
-                'SET_THIS_TO_THE_USERNAME', // Username
-                'SET_THIS_TO_THE_PASSWORD', // Password
+                'SET_THIS_TO_THE_USERNAME', /* // Username */
+                'SET_THIS_TO_THE_PASSWORD', /* // Password */
                 array(PDO::ATTR_PERSISTENT => true)
             );
         }
@@ -123,7 +123,7 @@ class PHPCount
         }
         else
         {
-            //die("Missing hit count from database!");
+            /* //die("Missing hit count from database!"); */
             return 0;
         }
     }
@@ -157,8 +157,8 @@ class PHPCount
     
     private static function IsSearchBot()
     {
-        // Of course, this is not perfect, but it at least catches the major
-        // search engines that index most often.
+        /* // Of course, this is not perfect, but it at least catches the major
+        // search engines that index most often. */
         $keywords = array(
             'bot',
             'spider',

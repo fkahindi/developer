@@ -21,16 +21,16 @@ require __DIR__ .'/../../includes_devspot/EmailCredentials.php';
 require("PHPMailer/PHPMailerAutoload.php");
 $mail = new PHPMailer();
 $mail->IsSMTP();
-$mail->Host = 'smtp.gmail.com'; // Enter your host here
+$mail->Host = 'smtp.gmail.com'; /* // Enter your host here */
 $mail->SMTPAuth = true;
-$mail->Username = EMAIL; // Enter your email here
-$mail->Password = PASS; //Enter your password here
+$mail->Username = EMAIL; /* // Enter your email here */
+$mail->Password = PASS; /* //Enter your password here */
 $mail->SMTPSecure = 'tls';
 $mail->Port = 587;
 $mail->IsHTML(true);
 $mail->From = EMAIL;
 $mail->FromName = "Developerspot";
-$mail->Sender = $fromserver; // indicates ReturnPath header
+$mail->Sender = $fromserver; /* // indicates ReturnPath header */
 $mail->Subject = $subject;
 $mail->Body = $body;
 $mail->AddAddress($email_to);

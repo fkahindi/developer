@@ -1,12 +1,12 @@
 <?php
-//include necessary files
+/* include necessary files */
 include __DIR__ .'/../../includes_devspot/DatabaseConnection.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 try{
 	$subscribeTempTbl = new DatabaseTable($pdo, 'subscribe_temp_tbl','token','email');
 	$sql = $subscribeTempTbl->selectMatchColumnsRecords($token,$email);
 	
-	//There should be only 1 matching record in database
+	/* //There should be only 1 matching record in database */
 	if($sql->rowCount()==1){
 		
 		$curDate = date('Y-m-d H:i:s');
@@ -15,7 +15,7 @@ try{
 		$createdDateTimeStamp = strtotime($row['created_at']);
 		$curDateTimeStamp = strtotime($curDate);
 		
-		//Token expires after 1 day
+		/* //Token expires after 1 day */
 		if($curDateTimeStamp-$createdDateTimeStamp<=86400){
 			$created_at = new DateTime();	
 			$created_at = $created_at->format('Y-m-d H:i:s');
@@ -38,7 +38,7 @@ try{
 		echo 'Token matching email was not found';
 	}
 }catch(PDOException $e
-	//If user already subscribed, safely handle error.
+	/* //If user already subscribed, safely handle error. */
 	if($e->errorInfo[1]==1062){
 		echo 'Subscriber already exists.';
 	}		

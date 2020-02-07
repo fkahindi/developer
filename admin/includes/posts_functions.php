@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ .'/../../../includes_devspot/DbConnection.php';
 
-//Post variables
+/* //Post variables */
 $post_id ='';
 $isEditingPost = false;
 $published = 0;
@@ -156,21 +156,21 @@ function getFirstParagraphPostById($post_id){
 /*-----------------------
 	--Post Actions--
 ------------------------*/
-//If user clicks Save post button
+/* //If user clicks Save post button */
 if(isset($_POST['create_post'])){
 	createPost($_POST);
 } 
-//If user clicks Edit post
+/* //If user clicks Edit post */
 if(isset($_GET['edit-post'])){
 	$isEditingPost = true;
 	$post_id = $_GET['edit-post'];
 	editPost($post_id);
 }
-//If user clicks Update post button
+/* //If user clicks Update post button */
 if(isset($_POST['update_post'])){
 	updatePost($_POST);
 }
-//If user click Delete button
+/* //If user click Delete button */
 if(isset($_GET['delete-post'])){
 	$post_id = $_GET['delete-post'];
 	deletePost($post_id);
@@ -186,7 +186,7 @@ function createPost($request_values){
 	$body = htmlspecialchars(esc($request_values['body']));
 	$user_id = $_SESSION['user_id'];
 	
-	//Validate form, if $title and $body are not empty create metaphone words
+	/* //Validate form, if $title and $body are not empty create metaphone words */
 	if(empty($title)){
 		array_push($errors, "Post title is required");
 	}else{
@@ -212,22 +212,22 @@ function createPost($request_values){
 		$published = $_POST['publish'];
 	}
 	
-	//Create slug by replacing spaces in title with hyphens
+	/* //Create slug by replacing spaces in title with hyphens */
 	$post_slug = makeSlug($title);
-	//Get image filename
+	/* //Get image filename */
 	$image_file = $_FILES['post_main_image']['name'];
 	if(!empty(getimagesize($_FILES['post_main_image']['tmp_name']))){
 		$target_file = '../resources/images/'.basename($image_file);
 		$imageFileType = strtolower(pathinfo($target, PATHINFO_EXTENSION));
-		//Check if image already exists in target folder, to ensure no image overwriting
+		/* //Check if image already exists in target folder, to ensure no image overwriting */
 		if(file_exists($target_file)){
 			array_push($errors, 'There is already an image with the same name. Try change the name and continue.');
 		}
-		//Check image size
+		/* //Check image size */
 		if($_FILES['post_main_image']['size']>5000000){
 			array_push($errors, 'Sorry, image is too large');
 			
-		// Allow only .jpg, .png and .gif file formats
+		/* // Allow only .jpg, .png and .gif file formats */
 		}else if($imageFileType != 'jpg' && $imageFileType != 'png' && 		$imageFileType != 'gif'){
 			array_push($errors,'Sorry, only JPG, PNG or GIF files are allowed');
 		}
@@ -240,7 +240,7 @@ function createPost($request_values){
 		$image_path = null;
 	}
 					
-	//Make sure no file is saved twice
+	/* //Make sure no file is saved twice */
 	$post_check ="SELECT * FROM `posts` WHERE post_slug='$post_slug' LIMIT 1";
 	
 	$result = mysqli_query($conn, $post_check);
@@ -249,15 +249,15 @@ function createPost($request_values){
 		array_push($errors, 'A post with that name already exists');
 	}
 	
-	//If no errors in the form, insert posts	
+	/* //If no errors in the form, insert posts */	
 	if(!$errors){
 		$query = "INSERT INTO `posts` (user_id, post_title, post_slug, post_body, published, image, created_at, metaphoned) VALUES($user_id, '$title', '$post_slug', '$body', $published, '$image_path', now(), '$sound')";
 		
 		$result = mysqli_query($conn, $query);
-		if($result){ //if post created successful
+		if($result){ /* //if post created successful */
 		
 			$inserted_id = mysqli_insert_id($conn);
-			//Create a relationship between post and topic
+			/* //Create a relationship between post and topic */
 			$sql ="INSERT INTO `post_topic` (topic_id, post_id) VALUES ($topic_id, $inserted_id)";
 			
 			mysqli_query($conn, $sql);
@@ -277,7 +277,7 @@ function editPost($role_id){
 	
 	$result = mysqli_query($conn, $sql);
 	$post = mysqli_fetch_assoc($result);
-	//Set form values to be updated on form
+	/* //Set form values to be updated on form */
 	$title = $post['post_title'];
 	$image_file = $post['image'];
 	$body = $post['post_body'];
@@ -297,9 +297,9 @@ function updatePost($request_values){
 		$published = $_POST['publish'];
 	}
 	
-	//Create slug by replacing spaces in title with hyphens
+	/* //Create slug by replacing spaces in title with hyphens */
 	$post_slug = makeSlug($title);
-	//Validate form
+	/* //Validate form */
 	if(empty($title)){
 		array_push($errors, "Post title is required");
 	}else{
@@ -322,11 +322,11 @@ function updatePost($request_values){
 			$target_file = '../resources/images/'.basename($image_file);
 			$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 		
-			//Check image size
+			/* //Check image size */
 			if($_FILES['post_main_image']['size']>5000000){
 				array_push($errors, 'Sorry, image is too large');
 				
-				// Allow only .jpg, .png and .gif file formats
+				/* // Allow only .jpg, .png and .gif file formats */
 			}else if($imageFileType != 'jpg' && $imageFileType != 'png' && 		$imageFileType != 'gif'){
 				array_push($errors,'Sorry, only JPG, PNG or GIF files are allowed');
 			}
@@ -339,16 +339,16 @@ function updatePost($request_values){
 		$image_path = null;
 		}
 	
-	//Udate if there are no errors
+	/* //Udate if there are no errors */
 	if(!$errors){
 		$query = "UPDATE `posts` SET post_title='$title', post_slug='$post_slug', post_body='$body', published=$published, image='$image_path', updated_at=now(), metaphoned='$sound' WHERE post_id=$post_id";
 		
-		//Attach topic to posts in post_topic table
+		/* //Attach topic to posts in post_topic table */
 		if(mysqli_query($conn, $query)){ 
-		//if query was created successfully
+		/* //if query was created successfully */
 		
 			if(isset($topic_id)){
-				//create relationship between post and topic
+				/* //create relationship between post and topic */
 				$sql = "UPDATE `post_topic` SET topic_id=$topic_id WHERE post_id=$post_id";
 				
 				mysqli_query($conn, $sql);
@@ -363,7 +363,7 @@ function updatePost($request_values){
 	}
 }
 
-//Delete blog post
+/* //Delete blog post */
 function deletePost($post_id){
 	global $conn, $errors;
 	$sql = "DELETE FROM `posts` WHERE post_id=$post_id";
@@ -374,11 +374,10 @@ function deletePost($post_id){
 			exit(0);
 	}else{
 		array_push($errors, 'Delete failed!');
-		
 	}
 }
 
-//If user clicks Publish post button
+/* //If user clicks Publish post button */
 if(isset($_GET['publish']) || isset($_GET['unpublish'])){
 	$message ='';
 	if(isset($_GET['publish'])){
@@ -393,7 +392,7 @@ if(isset($_GET['publish']) || isset($_GET['unpublish'])){
 	togglePublishPost($post_id, $published, $message);
 }
 
-//Publish/ unpublish posts
+/* Publish/ unpublish posts */
 function togglePublishPost($post_id, $published, $message){
 	global $conn;
 	

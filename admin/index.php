@@ -5,5 +5,4 @@ if($_SESSION['role'] !== 'Admin'){
 }else{
 	header('Location: dashboard.php');
 }
-
 ?>
