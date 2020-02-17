@@ -19,7 +19,7 @@ $('document').ready(function(){
 	$('#menu-checkbox-control').on('click', function(){
 		
 		$('.dropdown-content').toggle(100);
-		
+				
 	});
 	
 	/* Monitor browser window size and display normal menu if size is greater than 600px */
