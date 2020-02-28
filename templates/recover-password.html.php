@@ -16,6 +16,8 @@ if(isset($_POST['recover_password'])){
 	<div id="recover">
 		<div class="form_image">
 			<div class="banner-bar"><h2>Developers Pot</h2></div>
+			<?php ?>
+			<div id="error_msg"><?php echo(!empty($email_error)? $email_error :'');?></div>
 			<p class="form-p">Please fill out this form to recover your password.</p>
 			<h2>Recover Password</h2>
 		</div>

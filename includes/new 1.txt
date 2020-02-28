@@ -1,0 +1,2 @@
+mail.developerspot.co.ke 
+SMTP Port: 465 

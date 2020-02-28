@@ -4,7 +4,7 @@ if(!isset($_SESSION)){
 }
 
 /* //include necessary the files */
-
+include __DIR__ . '/../config.php';
 include __DIR__ .'/../../includes_devspot/DatabaseConnection.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 
@@ -75,7 +75,7 @@ function createAccount(){
 			$curDate = date('Y-m-d H:i:s');			
 			$created_at = new DateTime();	
 			$created_at = $created_at->format('Y-m-d H:i:s');
-			$token = bin2hex(random_bytes(50));
+			$token = bin2hex(random_bytes(20));
 			
 			$users_tempTable = new DatabaseTable($pdo, 'users_temp','email');
 			$query = $users_tempTable->selectColumnRecords($email);
@@ -117,10 +117,7 @@ function createAccount(){
 	}else{
 		$form_error = 'Form has errors';		
 	}
-
 }
-
-
 /* This function handles account email verification 
 ** and enables users to set their account password
 ** before account can be operational
@@ -180,7 +177,7 @@ function setAccountPassword(){
 						$created_at = new DateTime();	
 						$created_at = $created_at->format('Y-m-d H:i:s');
 						$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-						$profile_photo = '/spexproject/resources/photos/profile.png';
+						$profile_photo = BASE_URL . 'resources/photos/profile.png';
 						$fields = [
 							'username'=> $username,
 							'profile_photo'=>$profile_photo,
@@ -285,7 +282,7 @@ function login(){
 			/* Check if the password in database matches the one typed by user */
 			if(password_verify($password, $hashed_password)){
 				/* regenerate a new session id for security reasons */
-				session_regenerate_id;
+				session_regenerate_id();
 				
 				/* Store data in session variables */
 				$_SESSION['loggedin'] = true;
@@ -446,7 +443,7 @@ function recoverPassword(){
 	}
 }
 
-/* This function allows the user to reset their password affter successful recovery */
+/* This function allows the user to reset their password after successful recovery */
 function resetPassword(){
 	global $pdo, $password_pattern;
 	$email = $_POST['email'];
@@ -589,7 +586,7 @@ function imageUpload(){
 		$target_file = strtolower($name .'-0'. $id .'.'.$extension);
 		
 		if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'],'../resources/photos/'.$target_file)){
-			$file_path = '/spexproject/resources/photos/'.$target_file;
+			$file_path = BASE_URL  .'resources/photos/'.$target_file;
 										
 			/* Update profile_photo file path in the database */
 			$fields = ['profile_photo' => $file_path];
@@ -615,7 +612,6 @@ function imageUpload(){
 		}		
 	}
 }
-		
 function test_input($data){
 
 $data = stripslashes($data);

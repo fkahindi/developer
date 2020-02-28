@@ -24,18 +24,13 @@ if(isset($_POST['set-account-password'])){
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<h3></h3>
-		
 	<div id="error_msg"></div>
 	<div id="reset">
-		
 		<div class="form_image">
 				<div class="banner-bar"><h2>Developers Pot</h2></div>
 				<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory</p>
 				<h2>Set Account Password</h2>
-		</div>
-		
-								
+		</div>					
 		<form method="POST" name ="set-password" action="">
 		
 			<input type="hidden" name="action" value="set">

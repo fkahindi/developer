@@ -1,7 +1,4 @@
 <?php
-
-
-
 $output='<p>Dear user,</p>';
 $output.='<p>Please click the following link or copy and paste it on a new tab of your browser to reset your password.</p>';
 $output.='<p>---------Developerspot----------------------------------------------------</p>';
@@ -21,7 +18,7 @@ $subject = "Password Recovery";
 $email_to = $email;
 $fromserver = "noreply@developerspot.co.ke"; 
 require __DIR__ .'/../../includes_devspot/EmailCredentials.php';
-require("PHPMailer/PHPMailerAutoload.php");
+require __DIR__ .'/../PHPMailer/PHPMailerAutoload.php';
 $mail = new PHPMailer();
 $mail->IsSMTP();
 $mail->Host = 'smtp.gmail.com'; /* // Enter your host here */
@@ -38,11 +35,8 @@ $mail->Subject = $subject;
 $mail->Body = $body;
 $mail->AddAddress($email_to);
 if(!$mail->Send()){
-	echo 'Message could not be sent.';
-	echo "Mailer Error: " . $mail->ErrorInfo;
+	$email_error = ' <div class="errorMsg"> Message could not be sent. Mailer Error: '. $mail->ErrorInfo .'</div>';
 }else{
-	echo "<div class='error'>
-	<p>An email has been sent to you with instructions on how to reset your password.</p>
-	</div><br><br><br>";
+	header('Location: ../templates/mail-send.html.php');
 	}
  

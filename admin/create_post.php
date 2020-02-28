@@ -6,10 +6,8 @@
 	if($_SESSION['role']!== 'Admin' && $_SESSION['role']!== 'Author'){
 		header('Location: ../index.php');
 	}	
-	
 	include __DIR__ .'/includes/admin_functions.php';
 	include __DIR__ .'/includes/posts_functions.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">	

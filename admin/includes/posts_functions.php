@@ -1,4 +1,5 @@
 <?php
+include_once __DIR__ . '/../../config.php';
 require_once __DIR__ .'/../../../includes_devspot/DbConnection.php';
 
 /* //Post variables */
@@ -59,7 +60,7 @@ function getPublishedPostsByTopic($topic_id) {
 	$posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
 	$final_posts = array();
-	foreach ($posts as $post) {
+	foreach($posts as $post) {
 		$post['topic'] = getPublishedTopics($post['post_id']); 
 		array_push($final_posts, $post);
 	}
@@ -234,7 +235,7 @@ function createPost($request_values){
 		if(!move_uploaded_file($_FILES['post-main-image']['tmp_name'], $target_file)){
 			array_push($errors, 'Post image could not be uploaded, if problem persists try publishing without the image.');
 		}else{
-			$image_path = '/spexproject/resources/images/'.basename($image_file);
+			$image_path = '<?php echo BASE_URL ?>'.'resources/images/'.basename($image_file);
 		}
 	}else{
 		$image_path = null;
@@ -333,7 +334,7 @@ function updatePost($request_values){
 			if(!move_uploaded_file($_FILES['post_main_image']['tmp_name'],$target_file)){
 				array_push($errors, 'Post image could not be uploaded, if problem persists try publishing without the image.');
 			}else{
-				$image_path = '/spexproject/resources/images/'.basename($image_file);
+				$image_path = BASE_URL .'resources/images/'.basename($image_file);
 			}
 		}else{
 		$image_path = null;

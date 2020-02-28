@@ -18,7 +18,7 @@ $subject = "Email Subscription";
 $email_to = $email;
 $fromserver = "noreply@developerspot.co.ke"; 
 require __DIR__ .'/../../includes_devspot/EmailCredentials.php';
-require("PHPMailer/PHPMailerAutoload.php");
+require __DIR__ .'/../PHPMailer/PHPMailerAutoload.php';
 $mail = new PHPMailer();
 $mail->IsSMTP();
 $mail->Host = 'smtp.gmail.com'; /* // Enter your host here */

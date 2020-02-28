@@ -1,6 +1,6 @@
 <?php
 /* include necessary files */
-require_once __DIR__ .'/config.php';
+require_once __DIR__ .'/../config.php';
 include __DIR__ .'/../../includes_devspot/DatabaseConnection.php';
 include __DIR__ . '/../classes/DatabaseTable.php';
 try{
@@ -30,7 +30,7 @@ try{
 			$sql = $subscribeTempTbl->deleteRecords($email);
 			echo '<h2>Subscription confirmed! </h2><br>';
 			echo '<h4>You will be notified when a new post is available.</h3><br>';
-			echo '<p><a href="<?php echo BASE_URL ?>index.php">Continue</a></p>';
+			echo '<p><a href="'.BASE_URL .'index.php">Continue</a></p>';
 		}else{
 			echo 'Token expired';
 		}
@@ -38,10 +38,12 @@ try{
 	}else{
 		echo 'Token matching email was not found';
 	}
-}catch(PDOException $e
-	/* //If user already subscribed, safely handle error. */
+}catch(PDOException $e){
+	/* 1062 - Duplicate entry */
 	if($e->errorInfo[1]==1062){
 		echo 'Subscriber already exists.';
+	}else{
+		throw $e;
 	}		
 }	
 	

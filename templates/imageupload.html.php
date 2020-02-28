@@ -2,7 +2,6 @@
 if(!isset($_SESSION)){
 	session_start();
 }
-require_once __DIR__ .'/../config.php';
 require __DIR__ . '/../includes/loginStatus.php';
 include __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['image-upload'])){
@@ -17,7 +16,6 @@ if(isset($_POST['image-upload'])){
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	
 	<div id="upload">
 		<div class="banner-bar"><h2>Developers Pot</h2></div>
 		<form action="" method="post" enctype="multipart/form-data">
@@ -30,13 +28,11 @@ if(isset($_POST['image-upload'])){
 		<p><ul><li>Only images of size less than 2MB with .jpg, jpeg, .png or .gif formats are allowed.</li></ul> </p>
 		</form>
 	</div>
-	
 </body>
 </html>
 <script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
 <script>
 $('document').ready(function(){
-	
 	$('#image-upload-btn').on('click', function(e){
 		var fileToUpload = $('#fileToUpload').val();
 		

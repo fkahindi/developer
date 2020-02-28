@@ -7,8 +7,8 @@ $('document').ready(function(){
 	$('#email').on('blur',function(){
 		var email = $('#email').val();
 		var emailFilter = /^[^@]+@[^@.]+\.[^@]*\w\w$/ ; /* Check if it's valid mail address */
-		var illegalChars = /[\(\)\<\>\,\;\:\\\"\[\]]/ ; /* Check for illegal characters */
-		if (email == '') {
+		var illegalChars = /[\(\)<>\,\;\:\\\"\[\]]/ ; /* Check for illegal characters */
+		if (email === '') {
 			email_state = false;
 			return;
 		}
@@ -36,13 +36,13 @@ $('document').ready(function(){
 		var email = $('#email').val();
 		e.preventDefault();		
 	
-		if(email == ''){
+		if(email === ''){
 			$('#email').parent().removeClass();
 			$('#email').parent().addClass("form_error");
 			$('#email').siblings("span").text('Please! Fill email address field');
 			return;
 		}
-		if(email_state == false){
+		if(email_state === false){
 			$('.subscribe_error').text('Fix errors in the form first');
 			
 		}else {
@@ -100,7 +100,7 @@ $('document').ready(function(){
 		
 		$('#comment').val('');
 		
-		if(comment == ''){
+		if(comment === ''){
 			return false;
 		}
 		$.ajax({
@@ -140,7 +140,7 @@ $('document').ready(function(){
 		
 		reply_textarea.val('');
 		
-		if(reply_text == ''){
+		if(reply_text === ''){
 			return false;
 		}
 		$.ajax({
@@ -183,7 +183,7 @@ $('document').ready(function(){
 		var offset = 0;
 		var limit = '';
 		
-		if(page_no!=0){
+		if(page_no!==0){
 			offset = (page_no-1) * no_of_comments_per_view;
 		}else{
 			return false;

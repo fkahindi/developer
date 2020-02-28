@@ -1,7 +1,8 @@
 <?php
+include_once __DIR__ . '/../../config.php';
 /* check if user already loged in, if not redirect to login page */
 if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin']!= true){
-		header('Location: /spexproject/templates/login.html.php');
+		header('Location:'. '<?php echo BASE_URL ?>' .'templates/login.html.php');
 		exit;
 }elseif(!empty($_SESSION['email'])){
 	$email = $_SESSION['email'];

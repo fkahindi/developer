@@ -2,7 +2,6 @@
 if(!isset($_SESSION)){
 	session_start();
 } 
-require_once __DIR__ .'/../config.php';
 include_once __DIR__ . '/../includes/process_form.php';
 if(isset($_POST['login'])){
 	login();
@@ -23,9 +22,7 @@ if(isset($_POST['login'])){
 		<div class="form_image">
 			<div class="banner-bar"><h2>Developers Pot</h2></div>
 			<h2>Login</h2>
-		
 		</div>
-	
 		<form method="POST" action="">
 			<label for="email">Email address:</label>
 			 <input type="text" name="email" value="<?php echo (!empty($email)? $email:'');?>" autocomplete="off"> <span class="errorMsg"><?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>
@@ -35,8 +32,7 @@ if(isset($_POST['login'])){
 			<span class="errorMsg"><?php echo (!empty($errors['password'])? $errors['password'] :'');?></span>
 					
 			<input type="submit" name="login" class="button" value="Log in"> 
-			<?php echo(!empty($signup_option)? $signup_option : '');?>
-			
+			<?php echo(!empty($signup_option)? $signup_option : '');?>	
 		</form>
 	</div>
 	<div class="section">

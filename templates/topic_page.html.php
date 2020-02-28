@@ -1,6 +1,5 @@
 <?php 
 session_start(); 
-require_once __DIR__ .'/../config.php';
 include __DIR__ .'/../admin/includes/posts_functions.php';
 include __DIR__ .'/../admin/includes/admin_functions.php';
 	
@@ -70,8 +69,8 @@ include __DIR__ .'/../admin/includes/admin_functions.php';
 					<?php include __DIR__ . '/copyright.html.php';?>
 				</span>
 		</footer>
+		<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
+		<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
+		<script src="<?php echo BASE_URL ?>resources/js/menu-profile-controls.js"></script>
 	</body>
-	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
-	<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
-	<script src="<?php echo BASE_URL ?>resources/js/menu-profile-controls.js"></script>
 </html>

@@ -14,7 +14,6 @@
 	color: #333333; 
 	background: rgb(249,249,249);
 	line-height: 16px;
-	color: #333333;
  }
 form label, form input{
 	display: block;
@@ -75,7 +74,7 @@ margin:0 auto;
 	}
 .successMsg{
  color: #6B8E23;
- margin-bottom: 10px;
+ margin: 10px auto;
 }
 #error_msg {
   text-align: left;
@@ -119,7 +118,9 @@ h3,h4{
 
 @media only screen and (max-width:600px){
 .section,#create-account,#login, #recover,#reset, #upload, #subscribe{
-width: 250px; 
+width: 80%;
+}
+.section,#create-account,#login, #recover,#reset, #upload, #subscribe{
 padding: 0px 5px; 
 line-height: 16px;
 font-size: 14px; 
@@ -130,13 +131,14 @@ margin: 30px auto 20px auto;
 	max-width: 100%;
 }
 #subscribe input[type="submit"]{
-	margin:15px 0 10px 0;
+	margin:15px auto 10px auto;
 }
 form input{ 
 padding: 8px; 
 }
 form input[type="submit"]{
-	margin:15px auto 10px auto;
+	width:95%;
+	margin:15px auto;
 }
 .section{
 	margin:15px auto;
@@ -169,31 +171,35 @@ form input[type="submit"]{
 	height: 20px;
 	font-size: 1em;
 }
-
 .form_success span {
   height: 20px;
   font-size: 1em;
 }
 }
 @media only screen and (min-width:600px){
- .section,#create-account,#login, #recover,#reset, #upload, #subscribe{
-width: 300px; border: 1px solid #d6d7da; 
-padding: 0px 15px 15px 15px; 
+.section,#create-account,#login, #recover,#reset, #upload, #subscribe{
+width: 400px; 
+}
+.section,#create-account,#login, #recover,#reset, #upload, #subscribe{ 
+padding: 0 15px 15px 15px; 
 border-radius: 5px;font-family: arial; 
 font-size: 14px; 
 margin: 35px auto 20px auto;
 }
 .section{
-	margin:20px auto;
+margin:20px auto;
 }
 form input{ 
 padding: 10px;
 
 }
 form input[type="submit"]{
-	margin:20px 0 10px 0;
+	width:90%;
+	margin:20px 0;
 }
-
+#subscribe input[type="submit"]{
+	margin-left:0;
+}
 .right-align{
 	position:relative;
 	left:35%;

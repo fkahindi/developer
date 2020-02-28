@@ -17,7 +17,7 @@ $subject = "Account creation";
 $email_to = $email;
 $fromserver = "noreply@developerspot.co.ke"; 
 require __DIR__ .'/../../includes_devspot/EmailCredentials.php';
-require("PHPMailer/PHPMailerAutoload.php");
+require __DIR__ .'/../PHPMailer/PHPMailerAutoload.php';
 $mail = new PHPMailer();
 $mail->IsSMTP();
 $mail->Host = 'smtp.gmail.com'; /* // Enter your host here */
@@ -36,6 +36,6 @@ $mail->AddAddress($email_to);
 if(!$mail->Send()){
 	$email_error = 'Message could not be sent. '.$mail->ErrorInfo;
 }else{
-	$email_success = "<p>An email has been sent to ".$email.". You will need to open your  email and confirm  before your account is set.</p>";
+	$email_success = "<p>An email has been sent to ".$email.". You will need to open your  email and confirm  that you are the one creating the account.</p>";
 }
  
