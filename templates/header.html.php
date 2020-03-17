@@ -1,7 +1,7 @@
 <div class="group">
 	<!-- Banner bar follows-->
 	<div class="banner-bar">
-		<h1>Developers Pot</h1>
+		Developers Pot
 	</div>
 	<!--Enclosing nav-bar -->
 	<div class="navigation-utilities-section">
@@ -11,7 +11,7 @@
 		</div>
 		<!--Navigation bar follows-->
 		<div class="nav-bar dropdown">
-		<label for="menu-checkbox-control" class="dropdown-button">|||
+		<label for="menu-checkbox-control" class="dropdown-button">&#124;&nbsp;&#124;&nbsp;&#124;
 		<input type="checkbox" id="menu-checkbox-control">
 		</label>
 			<nav class="dropdown-content">
@@ -23,9 +23,8 @@
 	<div class="log-account-section">
 		<div class="group">
 			<div class="login-signup">
-			<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']== false)? 
-			'<a href="'.BASE_URL .'templates/login.html.php">Login </a> <span>&nbsp;&#124;</span>
-			<a href="'.BASE_URL .'templates/create-account.html.php">Create Account</a>'
+			<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']=== false)? 
+			'<a href="'.BASE_URL .'templates/login.html.php">Login </a><span>&nbsp;&#124;&nbsp;</span> <a href="'.BASE_URL .'templates/create-account.html.php">Create Account</a>'
 			: '' ?>
 			</div>	
 			<div class="account-photo-box tooltip ">

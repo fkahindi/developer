@@ -12,6 +12,7 @@ if(isset($_POST['image-upload'])){
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Image Upload</title>
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
@@ -19,7 +20,7 @@ if(isset($_POST['image-upload'])){
 	<div id="upload">
 		<div class="banner-bar"><h2>Developers Pot</h2></div>
 		<form action="" method="post" enctype="multipart/form-data">
-		<h2>Select image to upload:</h2>
+		<h3>Select image to upload:</h3>
 		<div class="group-form">
 		<input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
 		<span class="errorMsg"><?php echo (!empty($errors['fileToUpload'])? $errors['fileToUpload'] :'');?></span>

@@ -26,7 +26,7 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 				</div>
 			</aside><!--
 			--><section class="col-5-10">
-				<h1>Welcome to Developers Pot</h1><hr>
+				<h1 class="align-center">The Developers Pot</h1><hr>
 				<?php foreach($published_post_ids as $post_id): ?>
 				<?php $post = getPostById($post_id['post_id']) ?>
 				<?php $post['author'] = getPostAuthorById($post['user_id'])?>

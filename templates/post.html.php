@@ -87,6 +87,7 @@ if(!isset($_SESSION)){
 	<script src="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.js"></script>
 	<script src="<?php echo BASE_URL ?>/resources/js/menu-profile-controls.js"></script>
 	<script src="<?php echo BASE_URL ?>resources/js/subscribe-comments-replies-scripts.js"></script>
+	<!-- This is for local offline server -->
 	<script>window.onload=function(){prettyPrint()}</script>
 </body>
 </html>

@@ -30,6 +30,13 @@ if(isset($_POST['subscribe'])){
 			$valid = true;
 		}
 	}
+	if(empty($_POST['privacy_prop'])){
+		$valid = false;
+		$errors['privacy']='You need to agree with the privacy policy';
+	}else{
+		$valid = true;
+	}
+	
 	if($valid){
 		
 		$curDate = date('Y-m-d H:i:s');			
@@ -39,7 +46,7 @@ if(isset($_POST['subscribe'])){
 		
 		$subscribeTempTbl = new DatabaseTable($pdo, 'subscribe_temp_tbl','email');
 		$sql = $subscribeTempTbl->selectColumnRecords($email);
-		/* //Check if email already exists */
+		/* Check if email already exists */
 		if(!empty($sql->rowCount())){
 			/* //if email exists check if token is still valid */
 			$row=$sql->fetch();

@@ -21,7 +21,7 @@ if(isset($_POST['login'])){
 		<h5 class="errorMsg"><?php echo(isset($form_error)? $form_error: '');?></h5>
 		<div class="form_image">
 			<div class="banner-bar"><h2>Developers Pot</h2></div>
-			<h2>Login</h2>
+			<h3>Login</h3>
 		</div>
 		<form method="POST" action="">
 			<label for="email">Email address:</label>
@@ -36,7 +36,7 @@ if(isset($_POST['login'])){
 		</form>
 	</div>
 	<div class="section">
-		<p class="centered"><a href="<?php echo BASE_URL ?>templates/recover-password.html.php">Forgot password</a> | <a href="<?php echo BASE_URL ?>templates/create-account.html.php"> Create an account.</a></p>
+		<p class="centered"><a href="<?php echo BASE_URL ?>templates/recover-password.html.php">Forgot password</a> | <a href="<?php echo BASE_URL ?>templates/create-account.html.php"> Create an account</a></p>
 	</div>
 </body>
 </html>

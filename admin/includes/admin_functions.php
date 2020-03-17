@@ -222,18 +222,18 @@ function createTopic($request_values){
 	$topic_name = esc($request_values['topic_name']);
 	/* //create slug */
 	$topic_slug = makeSlug($topic_name);
-	//Validate form 
+	/* //Validate form  */
 	if(empty($topic_name)){
 		array_push($errors, 'Topic name required.');
 	}
 	/* //To ensure that no topic is saved twice */
-	$topic_check_query = "SELECT  * FROM `topis` WHERE topic_slug='$topic_slug' LIMIT 1";
+	$topic_check_query = "SELECT  * FROM `topics` WHERE topic_slug='$topic_slug' LIMIT 1";
 	$result = mysqli_query($conn, $topic_check_query);
 	if(mysqli_num_rows($result)>0){
 		array_push($errors, 'Topic already exist');
 	}
 	/* //Register topic if no errors */
-	if(count($errors) == 0){
+	if(count($errors) === 0){
 		$query = "INSERT INTO `topics`(topic_name, topic_slug) VALUES ('$topic_name', '$topic_slug')";
 		mysqli_query($conn, $query);
 		

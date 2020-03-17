@@ -1,6 +1,7 @@
 $('document').ready(function(){
 
 	var email_state = false;
+	var privacy_state = false;
 	/**
 	* Scripts to manage subscription form
 	*/		
@@ -31,9 +32,21 @@ $('document').ready(function(){
 			$('.subscribe_error').text('');
 		}
 	});
+	$('#privacy-checkbox').on('change',function(){
+		
+		if($(this).is(':checked')){
+			privacy_state = true;
+			$(this).siblings("p").text('');
+		}else{
+			privacy_state = false;
+		}
+	});
+		
 	$('#submit_subscribe').on('click',function(e){
 
 		var email = $('#email').val();
+		var privacy_prop = $('#privacy-checkbox').prop('checked');
+		
 		e.preventDefault();		
 	
 		if(email === ''){
@@ -45,13 +58,20 @@ $('document').ready(function(){
 		if(email_state === false){
 			$('.subscribe_error').text('Fix errors in the form first');
 			
-		}else {
+		}else if(privacy_state === false){
+			
+			$('#privacy-checkbox').parent().removeClass();
+			$('#privacy-checkbox').parent().addClass("errorMsg");
+			$('#privacy-checkbox').siblings("p").text('You need to agree to the privacy policy.');
+			return;
+		}else{
 			$.ajax({
 				url: '/spexproject/includes/subscribeFormFunctions.php', 
 				type: 'POST',
 				data: {
 				'subscribe':1,
-				'email': email
+				'email': email,
+				'privacy_prop':privacy_prop
 				},
 				success: function(response){
 				

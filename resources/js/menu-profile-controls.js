@@ -2,7 +2,7 @@ $('document').ready(function(){
 	
 	$('#tooltip').mouseenter(function(){
 		
-		if($('#profile-checkbox-control').prop('checked')== true){
+		if($('#profile-checkbox-control').prop('checked')=== true){
 			$('.tooltip-text').hide(200);
 		}else{
 			$('.tooltip-text').show(200);

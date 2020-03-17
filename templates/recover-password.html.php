@@ -9,6 +9,7 @@ if(isset($_POST['recover_password'])){
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Recover Password </title>
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
@@ -19,7 +20,7 @@ if(isset($_POST['recover_password'])){
 			<?php ?>
 			<div id="error_msg"><?php echo(!empty($email_error)? $email_error :'');?></div>
 			<p class="form-p">Please fill out this form to recover your password.</p>
-			<h2>Recover Password</h2>
+			<h3>Recover Password</h3>
 		</div>
 		<form method="POST" action="">
 			<label for="email">Enter your email address:</label>

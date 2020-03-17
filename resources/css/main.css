@@ -33,7 +33,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	background:white;
-	line-height: 1.5;
+	line-height: 1.3;
 }
 a{
 	text-decoration:none;
@@ -46,7 +46,6 @@ q:before, q:after {
   content: '';
   content: none;
 }
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -114,6 +113,10 @@ nav ul li a{
 main{
 	margin:0 auto;
 }
+.post-main-image{
+	width:70%;
+	margin:20px auto;
+}
 main table, tr{
 	width:100%;
 	text-align:left;
@@ -133,6 +136,10 @@ main table th, td{
 	border:2px solid rgb(100,200,100);
 	padding:5px;
 	margin:5px 5%;
+}
+.subscribe-section p{
+	text-align:left;
+	line-height:1;
 }
 section{
 	padding:10px;
@@ -157,173 +164,22 @@ aside{
 	clear:both;
 	*zoom:1;
 } 
-/*****************************
-**		TYPOGRAPHY			**
-******************************/
-strong, b{
-	font-weight:bold;
-}
-em, i{
-	font-style:italic;
-}
-main{
-	font-family: calibri, sans-serif;
-}
-header, footer{
-	font-family:Calibri, sans-serif;		
-}
-header  ul{
-	color:rgb(200,200,200);
-}
 
-footer ul span{
-	color:rgb(200,200,200);
-}
-footer a{
-	font-variant:small-caps;
-	text-decoration:none;
-	color:black;
-}
-footer a:hover{
-	color:rgb(240, 240,240);
-}
-.banner-bar h1{
-	font-family: Aladin;
-	color:white;
-	text-align:center;
-}
-nav a{
-	font-variant:small-caps;
-	color:rgb(255, 255,255);
-}
-nav ul li a:hover{
-	background-color: #334F5C;
-	color:rgb( 200, 200, 233);
-}
-.login-signup span{
-	color:rgb(200,200,200);
-}
-.login-signup a{
-	color:rgb( 200, 200, 233);
-}
-.account-display-settings a{
-	font-size:1em;
-	text-align:left;
-	color:rgb( 200, 200, 233);
-}
-.account-display-settings a:hover{
-	color:#fff;
-}
-.search-container input[type=text], .search-container button{
-	font-size: 100%;
-}
-h1, h2, h3{
-	font-weight:bold;
-	padding:5px;
-	text-align:left;
-}
-h1{
-	color:#071418;
-}
-h2{
-	color:#585858;
-}
-main h3{
-	color:maroon;
-}
-main h4{
-	text-align:left;
-	color:purple;
-}
-main p{
-	text-align:justify;
-	padding:10px;
-}
-main .special-p{
-	background:rgba(100,160,100,.5);
-}
-main .special-p code{
-	background:inherit;
-}
-main table td:first-child {
-	font-family:'Courier New', courier;
-	font-weight:bold;
-}
-main ul, ol{
-	text-indent: 10px;
-	padding-left: 30px;
-}
-main ul{
-	list-style:disc;
-}
-.comments-container h3, h4, h5{
-	padding-top:20px ;
-	color:black;
-	text-shadow:none;
-}
-.comments-container p{
-	font-size:100%;
-}
-.comments-section{
-	font-family:"Times New Roman";
-	font-size:100%;
-}
-.comments-detail a{
-	font-family:Arial;	
-}
-.user-info .username{
-	font-family:sans-serif;
-	color:rgb(50,50,50);
-	font-weight:bold;
-	font-size:90%;	
-}
-.user-info .created-date{
-	font-style:italic;
-}
-.replies-detail .user-info{
-	font-size:90%;
-}
-.pagination .load-prev{
-	display:none;
-}
-.paragraph-snippet{
-	font-family:calibri, sans-serif;
-	font-size:90%;
-	line-height:1;
-}
-.recent-posts a,.published-topics a{
-	color:#157DEC;
-}
-.recent-posts a:hover,.published-topics a:hover{
-	text-decoration:underline;
-	color:#0041C2;
-}
-.post-acreditation{
-	color:gray;
-	font-size:14px;
-}
-code{
-	font-family:'Courier New',Courier;
-	font-size:1em;
-	color:#000;
-}
-.subscribe-section p{
-	text-align:left;
-	line-height:1;
-}
 /********************************
 ** STYLING FOR HEADER SECTIONS **
 *********************************/
-.log-account-section a:hover{
-	text-decoration:underline;
-}
 .log-account-section span{
 	color:rgb(256, 256,256);
 }
 .login-signup{
-	display:block;
+	display:inline-block;
 	margin:0;
 	width:100%;
+}
+.login-signup a:hover{
+	text-decoration:underline;
+	font-weight:bold;
+	cursor:pointer;
 }
 .search-container{
 	display:block;
@@ -331,8 +187,10 @@ code{
 	width:100%;
 }
 .search-container input[type=text] {
+     width:100%;
+}
+.search-container input[type=text] {
   padding: 6px;
-  width:100%;
   margin-top: 8px;
   background:inherit;
   color:rgb( 200, 200, 233);
@@ -397,13 +255,11 @@ code{
 .tooltip-text p:first-of-type{
 	color:rgb(240,240,240);
 }
-
 /* Show tooltip when mouse over container */
 .tooltip:hover .tooltip-text{
 	visibility:visible;
 	opacity:1;	
 }
-
 /********************************************
 **STYLING FOR PROFILE SETTINGS AND DISPLAY**
 *********************************************/
@@ -458,8 +314,10 @@ STYLING FOR COMMENTS SECTION
 	margin-top:5px;
 }
 .comments-section .comments-detail{
-	float:right;
+    float:right;
 	width:90%;
+}
+.comments-section .comments-detail{
 	margin-top:5px;
 	padding-left:5px;
 }
@@ -470,6 +328,8 @@ STYLING FOR COMMENTS SECTION
 .replies-detail{
 	float:right;
 	width:85%;
+}
+.replies-detail{
 	margin-top:5px;
 	padding:5px 10px;
 	text-align:left;
@@ -515,7 +375,6 @@ pre{
 	tab-size:1;
 	overflow-x:auto;
 	margin: 0;
-	font-size:.9em;
 }
 code{
 	padding:0 2px;
@@ -546,6 +405,161 @@ HIDE MENU CONTROLS FOR SMALL DEVICES ONLY
 ******************************************/
 #menu-checkbox-control, .dropdown-button{
 	display:none;
+}
+/*****************************************
+	***			TYPOGRAPHY			****
+******************************************/
+strong, b{
+	font-weight:bold;
+}
+em, i{
+	font-style:italic;
+}
+main{
+	font-family:sans-serif,calibri;
+}
+header, footer{
+	font-family:Calibri, sans-serif;		
+}
+header  ul{
+	color:rgb(200,200,200);
+}
+footer ul span{
+	color:rgb(200,200,200);
+}
+footer a{
+	font-variant:small-caps;
+	text-decoration:none;
+	color:black;
+}
+footer a:hover{
+	color:rgb(240, 240,240);
+}
+.banner-bar {
+	font-family: Aladin;
+	color:white;
+}
+nav a{
+	font-variant:small-caps;
+	color:rgb(255, 255,255);
+}
+nav ul li a:hover{
+	background-color: #334F5C;
+	color:rgb( 200, 200, 233);
+}
+.login-signup span{
+	color:rgb(200,200,200);
+}
+.login-signup a{
+	color:rgb( 200, 200, 233);
+}
+.account-display-settings a{
+	font-size:1em;
+	text-align:left;
+	color:rgb( 200, 200, 233);
+}
+.account-display-settings a:hover{
+	color:#fff;
+}
+.search-container input[type=text], .search-container button{
+	font-size: 100%;
+}
+h1, h2, h3,h4{
+	font-weight:bolder;
+	text-align:left;
+	padding-left:10px;
+}
+h1{
+	color:#071418;
+}
+h2{
+	color:#585858;
+}
+h3{
+	color:maroon;
+}
+h4{
+	text-align:left;
+}
+main p{
+	text-align:justify;
+	padding:10px;
+}
+main .special-p{
+    padding:10px;
+    background:rgb(100,160,100);
+	background:rgba(100,160,100,.5);
+}
+main .special-p code{
+	background:inherit;
+}
+main table td:first-child {
+	font-family:'Courier New', courier;
+	font-weight:bold;
+}
+main ul, ol{
+	text-indent: 10px;
+	padding-left: 1.875em;
+}
+main ul{
+	list-style:disc;
+}
+.comments-container h3, h4, h5{
+	padding-top:1.25em;
+	color:black;
+	text-shadow:none;
+}
+.comments-container p{
+	font-size:100%;
+}
+.comments-section{
+	font-family:"Times New Roman";
+	font-size:100%;
+}
+.comments-detail a{
+	font-family:Arial;	
+}
+.user-info .username{
+	font-family:sans-serif;
+	color:rgb(50,50,50);
+	font-weight:bold;
+	font-size:90%;	
+}
+.user-info .created-date{
+	font-style:italic;
+}
+.replies-detail .user-info{
+	font-size:90%;
+}
+.pagination .load-prev{
+	display:none;
+}
+.paragraph-snippet{
+	font-family:sans-serif,calibri;
+	font-size:90%;
+	line-height:1;
+}
+.recent-posts a,.published-topics a{
+	color:#157DEC;
+}
+.recent-posts a:hover,.published-topics a:hover{
+	text-decoration:underline;
+	color:#0041C2;
+}
+.post-acreditation{
+	color:gray;
+	font-size:0.875em;
+}
+code{
+	font-family:'Courier New',Courier;
+	font-size:1em;
+	color:#000;
+}
+pre{
+	font-size:1.2em;
+}
+.subscribe-section p{
+	font-size:.9em;
 }
 @media only screen and (max-width: 600px){
 /* 
@@ -601,50 +615,45 @@ header{
 	padding:0;
 }
 .banner-bar{
-	float:left;
-	width:40%;
-	margin:10px;
-	padding-left:15%;
-	padding-top:10px;
-	text-align:right;
+	width:100%;
 }
-.banner{
+.banner-bar{
+	margin:0;
 	text-align:center;
-	width:90%; 
-	height:50%;
+	padding-left:20%;
 }
 .log-account-section{
-	float:right;
-	width:50%;
-	position:absolute;
-	top:30px;
-	left:40%;
-	padding-right:2%;
-	text-align:right;
+	width:100%;
 }
-.log-account-section span{
-	
+.log-account-section{
+	padding:0 10px;
+	text-align:right;
+	padding-right:10%;
 }
 .account-display-settings{
-	margin-left:-6.5em; 
+	margin-left:-6.8em; 
 }
 .account-display-settings ul li{
 	padding:2px 0px 2px 20px;
 }
 .account-photo-box{
+	width:25%;
+	height:1.875em;
+}
+.account-photo-box{
 	position:absolute;
 	top:0;
-	left:50%;
-	width:25%;
-	height:30px;
+	left:65%;
 	text-align:right;
-	padding:0 5px;
+	padding:5px 5px;
 }
 .image-photo{
-	height:25px;
-	width:25px;
+    height:2.2em;
+	width:2.2em;
+}
+.image-photo{
 	border:3px solid #2b5959;
-	border-radius:25px 25px;
+	border-radius:2.2em 2.2em;
 }
 
 /* 
@@ -659,23 +668,26 @@ NAVIGATION MENU: FOR MOBILE
 	left:0;
 }
 .dropdown-button {
+    height: 100%;
+}
+.dropdown-button {
 	display:block;
     background-color: #293f50;
     color: white;
-    padding: 15px;
-	height: 100%;
+    padding: 1em;
     border: none;
     cursor: pointer;
-	transform: rotate(90deg);
 	-webkit-transform: rotate(90deg);
     -o-transform: rotate(90deg); 
     -moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	transform: rotate(90deg);
 }
 .dropdown-content {
     display: none;
     position: absolute;
 	min-width: 12.5em;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;	
 }
 .dropdown-content a {
@@ -699,7 +711,7 @@ nav a{
 	font-variant:normal;
 }
 nav ul li a:hover{
-	background:rgb( 35, 35, 50);
+	background:rgb(35,35,50);
 }
 nav ul>span{
 	display:none;
@@ -710,32 +722,27 @@ TOOL TIP
 ====================================
  */
 .tooltip .tooltip-text{		
-	margin-left:-100px;
+	margin-left:-4.5em;
 }
 .tooltip-text p{
 	padding:3px 10px;
 }
-
 /* 
 =====================================
 MAIN SECTION
 =====================================
 */
 section, aside{
-	width:100%;
-	padding:5px;
+    width:100%;
 }
-main h1, h2, h3{
-	font-weight:bolder;
+section, aside{
 	padding:5px;
-	text-align:left;
 }
 main p{
 	text-align:left;
 	padding:10px;
 }
 .post-main-image{
-	width:70%;
 	margin:10px auto;
 }
 .post-main-image .article-index-image{
@@ -779,9 +786,8 @@ aside ul, aside ol{
 .published-topics li a{
 	padding-left:0;
 }
-
 pre{
-	padding-left:1em;
+	padding-left:0;
 }
 /* 
 ===================================
@@ -789,8 +795,10 @@ FOOTER SECTION
 ===================================
 */
 footer{
-	width:100%;
+    width:100%;
 	min-height:40px;
+}
+footer{
 	text-align:center;
 	padding:10px;
 }
@@ -813,30 +821,41 @@ footer a:hover{
 footer ul span{
 	color:rgb(200,200,200);
 }
-
 /* 
 ===================================
 TYPOGRAPHY
 ===================================
 */
-.banner-bar h1{
-	font-size:.8em;
+h1{
+	font-size:1.7em;
+}
+h2{
+	font-size:1.5em;
+}
+h3{
+	font-size:1.4em;
+}
+h4{
+	font-size:1.4em;
 }
 .search-container input[type=text],.search-container button {
   font-size: 0.75em;
 }
-.log-account-section{
-	font-size:80%;
+.banner-bar{
+	font-size:1.4em;
+}
+.login-signup{
+	font-size:.9em;
 }
 .dropdown-button {
 	font-family:sans-serif, calibri;
     font-size: 1em;
 }
 main p{
-	font-size:1.3em;
+	font-size:1.1em;
 }
 .post-acreditation{
-	font-size:.7em;
+	font-size:.6em;
 }
 .reply-thread, .reply-btn{
 	font-size:0.9em;
@@ -880,62 +899,59 @@ header{
 .subscribe-section{
 	margin:5px 10%;	
 }
-.post-main-image{
-	width:70%;
-	margin:20px;
-}
 .post-main-image .article-index-image{
-	width:200px;
-	height:200px;
+	width:12.5em;
+	height:12.5em;
 }
 .post-main-image .article-post-image{
 	width:70%;
-	height:300px;
+	height:18.75em;
 }
 footer{
-	font-size:80%;
-	min-height:40px;
+	min-height:2.5em;
 }
 /*
 =================================================
 	HEADER AND SECTIONS
 =================================================
-*/	
-
+*/
 .banner-bar, .navigation-utilities-section, .log-account-section{
-	display:block;
-	height:70px;
+    display:block;
+    height:4.375em;
+}
+.banner-bar, .navigation-utilities-section, .log-account-section{
 	margin:0;
 	padding:0;
 	vertical-align:top;
 }
 .banner-bar{
 	float:left;
-	width:15%;
+	width:25%;
 }
-.banner-bar h1{
-	text-align:right;
+.banner-bar{
+	text-align:center;
 	padding-top:.5em;
-	font-size:1.1em;
+}
+.banner{
+    width:90%; 
+	height:40%;
 }
 .banner{
 	padding-top:0;
 	padding-left:5px;
-	width:90%; 
-	height:40%;
 }
 .navigation-utilities-section{
 	float:left;
-	width:65%;
+	width:45%;
 }
 .search-container, .nav-bar{
 	text-align:center;
 }
 .nav-bar{
-	height:40px;
+	height:2.5em;
 }
 .search-container{
-	height:30px;
+	height:1.875em;
 }
 .search-container input[type=text] {
   padding: 3px;
@@ -948,37 +964,62 @@ footer{
   border-radius:0 5px 5px 0;
 }
 .log-account-section{
-	float:right;
-	width:20%;
-	text-align:left;
+    float:right;
+	width:30%;
+}
+.log-account-section{
+	text-align:right;
+	padding-right:7px;
+	z-index:0;
 }
 .login-signup{
-	padding-top:10px;
+	position:absolute;
+	right:0;
+	z-index:1;
+	padding:10px 5px;
 }
 .account-display-settings{
-	right:100%;
+	position:relative;
+	top:2px;
+	right:0;
 }
 .account-display-settings ul li{
-	padding:2px 0px 2px 20px;
+	padding:2px 0 2px 20px;
 }
-.image-photo{
-	height:30px;
-	width:30px;
-	border:3px solid #2b5959;
-	border-radius:30px 30px;
+.account-photo-box{
+	width:30%;
+	height:2.1875em;
+	position:absolute;
+	top:5px;
+	right:0;
+	z-index:0;
+}
+.account-photo-box{
+    float:right;
 }
 .account-photo-box{
 	display:inline-block;
-	float:none;
-	width:40%;
-	height:35px;
-	margin-right:20%;
-	padding:5px 0;
+	margin-right:0;
+	padding:5px;
+	text-align:right;
+}
+.image-photo{
+    height:2.5em;
+	width:2.5em;
+}
+.image-photo{
+	border:3px solid #2b5959;
+	border-radius:2.5em 2.5em;
+}
+.tooltip .tooltip-text{		
+	margin-left:-2.1em;
+}
+.tooltip-text p{
+	padding:3px 10px;
 }
 .dropdown button{
 	display:none;
 }
-
 /*
 =================================================
 NAVIGATION & LINKS
@@ -1014,7 +1055,6 @@ aside ul, aside ol{
 	padding:2px 0;
 	line-height:.8;
 }
-
 .published-topics ul{
 	padding:0;
 }
@@ -1029,16 +1069,26 @@ FOOTER
 footer li{
 	display:inline-table
 }
-
 ul span{
 	color:rgb(200,200,200);
-}
-	
+}	
 /*
 =================================================
 TYPOGRAPHY
 =================================================
 */
+h1{
+	font-size:2em;
+}
+h2{
+	font-size:1.7em;
+}
+h3{
+	font-size:1.7em;
+}
+h4{
+	font-size:1.5em;
+}
 .search-container input[type=text] {
   font-size: 14px;
 }
@@ -1048,37 +1098,30 @@ TYPOGRAPHY
 .account-display-settings{
 	font-size:.8em;
 }
+.account-display-settings ul li{
+	font-size:1.2em;
+}
 nav{
-	font-size:100%;
+	font-size:1.3em;
 }
 nav ul li a{
-	font-size:80%;
+	font-size:70%;
 }
 main p, li{
-	font-size:1em;
-}
-main h1{
-	font-size:110%;
-	font-weight:800;
-}
-main h2{
-	font-size:90%;
-	font-weight:600;	
-}
-main h3{
-	font-size:80%;
-	font-weight:600;	
-}
-main h4{
-	font-size:70%;
-	font-weight:400;
-}
-.login-signup{
-	font-size:80%;
+	font-size:1.1em;
 }
 
+.banner-bar{
+	font-size:1.5em;
+}
+.login-signup{
+	font-size:.9em;
+}
 .recent-posts a, .published-topics ul li{
 	font-size:90%;
+}
+footer{
+	font-size:80%;
 }
 footer a{
 	color:black;
@@ -1092,7 +1135,7 @@ CODE SECTIONS
 ===================================
  */
  pre{
-	padding-left:1em;
+	padding-left:0;
 }
 }
 @media only screen and (min-width:768px) and (max-width:992px){
@@ -1124,17 +1167,12 @@ section,aside{
 .hide-in-bigger-screens{
 	display:none;
 }
-
 header{
 	height:70px;
 	margin:0;
 }
 .subscribe-section{
-	margin:5px 10%;	
-}
-.post-main-image{
-	width:70%;
-	margin:20px;
+	margin:5px 2.5%;	
 }
 .post-main-image .article-index-image{
 	width:200px;
@@ -1142,44 +1180,46 @@ header{
 }
 .post-main-image .article-post-image{
 	width:80%;
-	height:300px;
+	height:18.75em;
 }
 footer{
-	height:40px;
-	padding:5px 100px;
+    height:2.5em;
 }
-
+footer{
+	padding:5px 6.25em;
+}
 /*
 =================================================
 HEADER AND SECTIONS
 =================================================
 */
-
 .banner-bar, .navigation-utilities-section, .log-account-section{
-	display:block;
+    display:block;
 	height:70px;
+}
+.banner-bar, .navigation-utilities-section, .log-account-section{
 	margin:0;
 	padding:0;
 	vertical-align:top;
 }
 .banner-bar{
 	float:left;
-	width:20%;
+	width:25%;
 }
-.banner-bar h1{
+.banner-bar{
 	text-align:right;
-	padding-top:.5em;
 	font-size:1.5em;
 }
 .banner{
-	padding-top:5px;
-	padding-left:20px;
-	width:80%; 
+    width:80%; 
 	height:60%;
+}
+.banner{
+	padding-left:10px;
 }
 .navigation-utilities-section{
 	float:left;
-	width:50%;
+	width:45%;
 }
 .search-container, .nav-bar{
 	height:35px;
@@ -1198,35 +1238,57 @@ HEADER AND SECTIONS
   border-radius:0 5px 5px 0;
 }
 .log-account-section{
-	float:right;
+    float:right;
 	width:30%;
-	text-align:center;
+}
+.log-account-section{
+	text-align:right;
+	padding-right:7px;
+	z-index:0;
+}
+.login-signup{
+	position:absolute;
+	right:0;
+	z-index:1;
+	padding:10px 5px;
 }
 .login-signup{
 	padding-top:10px;
 }
+.account-photo-box{
+	width:25%;
+	height:2.1875em;
+	position:absolute;
+	top:5px;
+	right:0;
+	z-index:0;
+}
+.account-photo-box{
+	display:inline-block;
+	float:right;
+	margin-right:0;
+	padding:5px;
+	text-align:right;
+}
+.image-photo{
+	height:3em;
+	width:3em;
+	border:3px solid #2b5959;
+	border-radius:2.5em 2.5em;
+}
 .account-display-settings{
-	right:100%;
-	
+	position:relative;
+	top:0;
+	right:0;
 }
 .account-display-settings ul li{
 	padding:2px 0px 2px 20px;
 }
-.image-photo{
-	position:relative;
-	left:0;
-	height:30px;
-	width:30px;
-	border:3px solid #2b5959;
-	border-radius: 30px 30px;
+.tooltip .tooltip-text{		
+	margin-left:-1.9em;
 }
-.account-photo-box{
-	float:right;
-	display:inline-block;
-	width:25%;
-	height:35px;
-	margin-right:25%;
-	padding:5px;
+.tooltip-text p{
+	padding:3px 10px;
 }
 .dropdown button{
 	display:none;
@@ -1265,7 +1327,7 @@ aside ul, aside ol{
 	text-indent: 0;
 	padding: 10px 0;
 }
-.recent-posts,  .published-topics{
+.recent-posts, .published-topics{
 	padding-left:0;
 }
 .recent-posts h5, .published-topics h5{
@@ -1284,35 +1346,36 @@ aside ul, aside ol{
 TYPOGRAPHY
 ===================================
 */
+h1{
+	font-size:1.7em;
+}
+h2{
+	font-size:1.6em;
+}
+h3{
+	font-size:1.5em;
+}
+h4{
+	font-size:1.4em;
+}
 nav{
-	font-size:100%;
+	font-size:1.3em;
 }
 nav ul li a{
 	font-size:80%;
 }
+.login-signup{
+	font-size:1.1em;
+}
 .account-display-settings{
 	font-size:.9em;
+}
+.account-display-settings ul li{
+	font-size:1.2em;
 }
 main p, li{
 	font-size:1em;
 }
-main h1{
-	font-size:110%;
-	font-weight:800;
-}
-main h2{
-	font-size:90%;
-	font-weight:600;	
-}
-main h3{
-	font-size:80%;
-	font-weight:600;	
-}
-main h4{
-	font-size:70%;
-	font-weight:400;
-}
-
 .recent-posts a, .published-topics ul li {
 	font-size:90%;
 }
@@ -1350,22 +1413,33 @@ PAGE GRID
 main{
 	width:95%;
 	padding:5px;
-}
-section,aside{
-	display:inline-block;
+	margin: 0 auto;
 }
 header{
 	width:100%;
 	height:100px;
 	margin:0;
 }
+section,aside{
+	display:inline-block;
+}
+section{
+	padding:0 10px;
+}
+
+aside{
+	text-align:left;
+}
+aside ul, aside ol{
+	text-indent: 0;
+	padding: 10px 0;
+}
+
 .subscribe-section{
-	margin:5px 10%;	
+	margin:5px 5%;	
 }
 .post-main-image{
-	width:60%;
-	margin:20px;
-	
+	width:60%;	
 }
 .post-main-image .article-index-image{
 	width:200px;
@@ -1386,7 +1460,7 @@ HEADER SECTIONS
 */
 .banner-bar, .navigation-utilities-section, .log-account-section{
 	display:block;
-	height:100px;
+	
 	margin:0;
 	padding:0;
 	vertical-align:top;
@@ -1395,16 +1469,18 @@ HEADER SECTIONS
 	float:left;
 	width:20%;
 }
-.banner-bar h1{
+.banner-bar{
 	text-align:right;
 	padding-top:.5em;
 	font-size:1.8em;
 }
 .banner{
-	padding-top:5px;
-	padding-left:20px;
 	width:80%; 
 	height:60%;
+}
+.banner{
+	padding-top:5px;
+	padding-left:20px;
 }
 .navigation-utilities-section{
 	float:left;
@@ -1420,32 +1496,53 @@ HEADER SECTIONS
 .log-account-section{
 	float:right;
 	width:30%;
-	text-align:center;
+	text-align:right;
+	padding-right:7px;
+	z-index:0;
+}
+.login-signup{
+	position:absolute;
+	right:0;
+	z-index:1;
+	padding:10px 5px;
 }
 .login-signup{
 	padding-top:10px;
 }
-.account-display-settings{
-	right:60%;
-}
-.account-display-settings ul li{
-	padding:1px 0px 1px 15px;
-}
-.image-photo{
-	position:relative;
-	left:0;
-	height:35px;
-	width:35px;
-	border:3px solid #2b5959;
-	border-radius: 35px 35px;
+.account-photo-box{
+	width:20%;
+	height:2.1875em;
+	position:absolute;
+	top:5px;
+	right:0;
+	z-index:0;
 }
 .account-photo-box{
-	float:right;
 	display:inline-block;
-	width:25%;
-	height:40px;
-	margin-right:15%;
+	float:right;
+	margin-right:0;
 	padding:5px;
+	text-align:right;
+}
+.image-photo{
+	height:3em;
+	width:3em;
+	border:3px solid #2b5959;
+	border-radius:2.5em 2.5em;
+}
+.account-display-settings{
+	position:relative;
+	top:0;
+	right:0;
+}
+.account-display-settings ul li{
+	padding:2px 0px 2px 20px;
+}
+.tooltip .tooltip-text{		
+	margin-left:-1.45em;
+}
+.tooltip-text p{
+	padding:3px 10px;
 }
 .dropdown button{
 	display:none;
@@ -1472,16 +1569,6 @@ nav li{
 nav ul li a{
 	padding:10px 2px;
 }
-section{
-	padding:0 10px;
-}
-aside{
-	text-align:left;
-}
-aside ul, aside ol{
-	text-indent: 0;
-	padding: 10px 0;
-}
 .recent-posts,  .published-topics{
 	padding-left:5px;
 }
@@ -1500,27 +1587,29 @@ aside ul, aside ol{
 TYPOGRAPHY
 ==========================================
 */
-.account-display-settings a{
-	font-size:.75em;
+h1{
+	font-size:1.7em;
+}
+h2{
+	font-size:1.6em;
+}
+h3{
+	font-size:1.5em;
+}
+h4{
+	font-size:1.4em;
+}
+.login-signup{
+	font-size:1.2em;
+}
+.account-display-settings{
+	font-size:.9em;
+}
+.account-display-settings ul li{
+	font-size:1.2em;
 }
 main p, li{
 	font-size:1.2em;
-}
-main h1{
-	font-size:160%;
-	font-weight:800;	
-}
-main h2{
-	font-size:150%;
-	font-weight:600;
-}
-main h3{
-	font-size:140%;
-	font-weight:600;
-}
-main h4{
-	font-size:120%;
-	font-weight:500;
 }
 .recent-posts a, .published-topics ul li{
 	font-size:95%;
@@ -1562,12 +1651,18 @@ header{
 	height:120px;
 	margin:0;
 }
+section{
+	padding:0 20px;
+}
+aside{
+	padding-left:0;
+	text-align:left;
+}
 .subscribe-section{
 	margin:10px 10%;
 }
 .post-main-image{
-	width:50%;
-	margin:20px;
+	width:60%;
 }
 .post-main-image .article-index-image{
 	width:350px;
@@ -1595,22 +1690,24 @@ HEADER SECTIONS
 }
 .banner-bar{
 	float:left;
-	width:20%;
+	width:25%;
 }
-.banner-bar h1{
+.banner-bar{
 	text-align:right;
 	padding-top:.5em;
 	font-size:2.4em;
 }
 .banner{
-	padding-top:5px;
-	padding-left:20px;
 	width:60%; 
 	height:60%;
 }
+.banner{
+	padding-top:5px;
+	padding-left:20px;
+}
 .navigation-utilities-section{
 	float:left;
-	width:60%;
+	width:55%;
 }
 .search-container, .nav-bar{
 	height:60px;
@@ -1622,28 +1719,53 @@ HEADER SECTIONS
 .log-account-section{
 	float:right;
 	width:20%;
-	text-align:center;
+	text-align:right;
+	padding-right:7px;
+	z-index:0;
+}
+.login-signup{
+	position:absolute;
+	right:0;
+	z-index:1;
+	padding:10px 5px;
 }
 .login-signup{
 	padding-top:10px;
 }
-.account-display-settings{
-	right:35%;
-}
-.account-display-settings ul li{
-	padding:1px 0 1px 20px;
-}
-.image-photo{
-	height:50px;
-	width:50px;
-	border-radius: 50px 50px;
+.account-photo-box{
+	width:18%;
+	height:2.1875em;
+	position:absolute;
+	top:5px;
+	right:0;
+	z-index:0;
 }
 .account-photo-box{
-	width:30%;
-	height:60px;
+	display:inline-block;
+	float:right;
 	margin-right:0;
 	padding:5px;
 	text-align:right;
+}
+.image-photo{
+	height:3em;
+	width:3em;
+	border:3px solid #2b5959;
+	border-radius:2.5em 2.5em;
+}
+.account-display-settings{
+	position:relative;
+	top:0;
+	right:0;
+}
+.account-display-settings ul li{
+	padding:2px 0px 2px 20px;
+}
+.tooltip .tooltip-text{		
+	margin-left:-1em;
+}
+.tooltip-text p{
+	padding:3px 10px;
 }
 .dropdown button{
 	display:none;
@@ -1675,13 +1797,7 @@ main ul, main ol{
 main table {
 	margin:30px 5px;
 }
-section{
-	padding:0 20px;
-}
-aside{
-	padding-left:0;
-	text-align:left;
-}
+
 aside ul, aside ol{
 	text-indent: 0;
 	padding: 0;
@@ -1707,29 +1823,35 @@ aside .published-topics{
 TYPOGRAPHY
 ==========================================
 */
-
-.account-display-settings a{
+.account-display-settings{
 	font-size:.8em;
 }
-
-main h1{
-	font-size:160%;
-	font-weight:800;	
+.account-display-settings ul li{
+	font-size:1.3em;
 }
-main h2{
-	font-size:140%;
-	font-weight:600;	
+h1{
+	font-size:2em;
 }
-main h3{
-	font-size:120%;
-	font-weight:600;
+h2{
+	font-size:1.7em;
 }
-main h4{
-	font-size:120%;
-	font-weight:500;
+h3{
+	font-size:1.7em;
+}
+h4{
+	font-size:1.5em;
 }
 main p, main li{
 	font-size:1.3em;
+}
+.banner-bar{
+	font-size:2.2em;
+}
+.login-signup{
+	font-size:1.2em;
+}
+.navigation-utilities-section{
+	font-size:1.2em;
 }
 .recent-posts a, .published-topics ul li{
 	font-size:95%;

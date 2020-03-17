@@ -20,6 +20,7 @@ if(isset($_POST['set-account-password'])){
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Set Account Password</title>
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
@@ -29,7 +30,7 @@ if(isset($_POST['set-account-password'])){
 		<div class="form_image">
 				<div class="banner-bar"><h2>Developers Pot</h2></div>
 				<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory</p>
-				<h2>Set Account Password</h2>
+				<h3>Set Account Password</h3>
 		</div>					
 		<form method="POST" name ="set-password" action="">
 		
@@ -38,7 +39,7 @@ if(isset($_POST['set-account-password'])){
 			<label for="password">Password:<span class="red"> &#42;</span></label>
 			 <input type="password" id ="password" name="password" value="<?php echo(empty($password)? '': $password); ?>" maxlength="50" autocomplete="off" >
 			<span class="errorMsg"><?php echo (!empty($errors['password'])? $errors['password'] :'');?></span>
-				<ul>
+				<ul class="form-guidelines">
 					<li>Passwords must be at least <strong>6</strong> characters.</li>
 					<li>May contain letters, numbers, underscore, hyphen or dot.</li>
 				</ul>

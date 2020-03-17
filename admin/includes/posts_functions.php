@@ -235,7 +235,7 @@ function createPost($request_values){
 		if(!move_uploaded_file($_FILES['post-main-image']['tmp_name'], $target_file)){
 			array_push($errors, 'Post image could not be uploaded, if problem persists try publishing without the image.');
 		}else{
-			$image_path = '<?php echo BASE_URL ?>'.'resources/images/'.basename($image_file);
+			$image_path = "<?php echo BASE_URL ?>"."resources/images/".basename($image_file);
 		}
 	}else{
 		$image_path = null;

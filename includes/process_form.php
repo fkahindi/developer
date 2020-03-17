@@ -56,7 +56,12 @@ function createAccount(){
 			$errors['email'] = 'Invalid email address';
 		}		
 	}
-	
+	if(empty($_POST['privacy'])){
+		$valid = false;
+		$errors['privacy']='You need to agree with the privacy policy';
+	}else{
+		$valid = true;
+	}
 	if(empty($errors)){
 		
 		/* Check whether the email or username are already in use */
@@ -300,7 +305,7 @@ function login(){
 				if(isset($_SESSION['page_id'])){
 					header('Location: ../templates/post.html.php?id='.$_SESSION['page_id'].'&title='.$_SESSION['post_slug']);
 				}else{
-					header('Location: ../templates/welcome.html.php');
+					header('Location: ../index.php');
 				}					
 			}else{
 				$errors['password'] ='Incorrect email or password';

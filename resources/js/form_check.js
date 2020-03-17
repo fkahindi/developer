@@ -1,6 +1,7 @@
 $('document').ready(function(){
 	var username_state = false;
 	var email_state = false;
+	var privacy_state = false;
 	
 	$('#username').on('blur', function(){
 		var illegalChars = /\W/; /* Allow at least letters, numbers, and underscores */
@@ -84,13 +85,22 @@ $('document').ready(function(){
 	}
  		
  }); 
+ /* $('#privacy-checkbox').on('change',function(){
+	if($(this).is(':checked')){
+		privacy_state === true;
+		$(this).siblings("span").text('');
+	}else{
+		privacy_state === false;
+	}		
+ }); */
  $('#submit_btn').on('click', function(e){
-	
+	 
+	 
  	if(username_state === false || email_state === false)
 	{	
 		e.preventDefault();
 		var username = $('#username').val();
-		var email = $('#email').val();
+		var email = $('#email').val(); 
 				
 		$('#error_msg').text('Fix the errors in the form first');
 				
@@ -103,11 +113,13 @@ $('document').ready(function(){
 			$('#email').parent().removeClass();
 			$('#email').parent().addClass("form_error");
 			$('#email').siblings("span").text('Email is required');
-		}		
+		}
+		
 	}else{
 		$('#error_msg').text('');
 		$('#username').siblings("span").text('');
 		$('#email').siblings("span").text('');
+		$('#privacy-checkbox').siblings("span").text('');
 		return true;
 	}
  });

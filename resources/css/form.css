@@ -1,34 +1,55 @@
-@font-face{
-	font-family: 'Aladin';
-	src:local(Aladin), url('../fonts/Aladin-Regular.ttf') format('opentype');
+@font-face {
+  font-family: 'Aladin';
+  src: url('../fonts/Aladin-Regular.ttf'); /* IE9 Compat Modes */
+  src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Aladin-Regular.ttf') format('opentype'), /* Modern Browsers */
+       url('../fonts/Aladin-Regular.ttf')  format('truetype'); /* Safari, Android, iOS */
 }
 .banner-bar{
-	font-family: Aladin;
-	color:#000;
 	text-align:left;
 }
 .section,#create-account,#login,#recover,#reset, #upload, #subscribe{
 	border: 1px solid #d6d7da;
-	border-radius: 5px;
-	font-family: arial; 
-	color: #333333; 
+	border-radius: 5px; 
 	background: rgb(249,249,249);
-	line-height: 16px;
+	line-height: 1em;
  }
 form label, form input{
-	display: block;
-	margin-bottom: 5px;
-	width: 90%;
-	}
-form label{
-	margin-top:10px;
+	display:block;
+	margin-bottom:5px;
+	width:90%;
 }
-form input{ 
-border: solid 1px #3E606F; 
-border-radius: 5px;
+form input[type="submit"]{
+	padding:.6em 0;
+	margin:1.6em auto;
+	cursor:pointer;
+}
+form label{
+	margin-top:0.9375em;
+}
+form input, form input[type="checkbox"]{ 
+	border: solid 1px #3E606F; 
+	border-radius: 5px;
+	padding:.6em; 
 }
 form input:focus{
 	border:solid thin silver;
+}
+form input[type="checkbox"]{
+	width:1em;
+	height:1em;
+}
+form input[type="checkbox"]{
+	display:inline-block;
+	vertical-align:middle;
+	cursor:pointer;
+}
+form input[type="checkbox"]+p{
+	display:inline;
+	text-align:left;
+}
+form input[type="checkbox"]+a{
+	padding:2em;
 }
 form a, 
 #login +.section a,
@@ -38,11 +59,21 @@ form a,
 #upload +.section a,
 #subscribe +.section a{
 	text-decoration:none;
-	color:blue;
+	color:#2B65EC;
+}
+form a:hover,
+#login +.section a:hover,
+#create-account +.section a:hover,
+#recover +.section a:hover,
+#reset +.section a:hover,
+#upload +.section a:hover,
+#subscribe +.section a:hover{
+	text-decoration:underline;
+	color:#2B65EC;
 }
 form .form_image{
 	text-align:center;
-	padding:10px;
+	padding:.625em;
 }
 .button {
 background-color:#008080;
@@ -86,17 +117,24 @@ margin:0 auto;
 	font-weight:bold;
 	padding:10px 0;
 }
-h3,h4{
+h3{
+	text-align:left;
+}
+h4{
 	text-align:center;
+}
+#create-account ul,#reset ul, #upload ul  {
+	padding-left:10px;
 }
 .form-p{
 	line-height:1;
 	margin:5px auto;
-	padding:10px;
 }
-#create-account ul,#reset ul, #upload ul  {
-	padding-left:10px;
-	font-size:10px;
+.form-guidelines{
+	line-height:1.2;
+	padding:.5em;
+	background:rgb(256,256,0);
+	background:rgba(256,256,0,0.2);
 }
 .form_error span{
 	width: 80%;
@@ -105,6 +143,7 @@ h3,h4{
 }
 .form_error input {
   border: 1px solid #D83D5A;
+  background:rgb(256,256,0);
   background:rgba(256,256,0,0.3);
 }
 .form_success span {
@@ -115,51 +154,63 @@ h3,h4{
 .form_success input {
   border: 1px solid green;
 }
+/*
+*** TYPOGRAPHY ***
+*/
+.banner-bar{
+	font-family: Aladin;
+	color:#000;
+}
+.section,#create-account,#login,#recover,#reset, #upload, #subscribe{
+	font-family: arial; 
+	color: #333333; 
+ }
+.form-p{
+	font-size:.9em;
+}
+form label, form input[type="submit"]{
+	font-size:1em;
+}
 
 @media only screen and (max-width:600px){
 .section,#create-account,#login, #recover,#reset, #upload, #subscribe{
-width: 80%;
+	max-width: 80%;
 }
 .section,#create-account,#login, #recover,#reset, #upload, #subscribe{
 padding: 0px 5px; 
 line-height: 16px;
-font-size: 14px; 
-margin: 30px auto 20px auto;
+margin: 1.875em auto 1.25em auto;
 
 }
 #subscribe{
 	max-width: 100%;
 }
 #subscribe input[type="submit"]{
-	margin:15px auto 10px auto;
-}
-form input{ 
-padding: 8px; 
+	margin:15px auto 10px 0;
 }
 form input[type="submit"]{
 	width:95%;
-	margin:15px auto;
 }
 .section{
-	margin:15px auto;
+	margin:.9375em auto;
+	padding:.6em auto;
 }
 .comment form textarea{
-	width:90%;
+    	width:90%;
+}
+.comment form textarea{
 	border:thin solid #6D7B8D;
 	border-radius:5px;
 }
 .comment form input[type="submit"]{
-	width:80px;
-	height:40px;
+	width:5em;
+	height:2.5em;
 	border-radius:5px;
 	background:#6D7B8D;
-	font-weight:bold;
-	color:black;
 }
-
 .reply form input[type="submit"]{
-	width:80px;
-	height:30px;
+	width:5em;
+	height:1.875em;
 }
 .reply form textarea{
 	width:100%;
@@ -169,36 +220,51 @@ form input[type="submit"]{
 }
 .form_error span{
 	height: 20px;
-	font-size: 1em;
 }
 .form_success span {
   height: 20px;
+}
+/*
+*** TYPOGRAPHY ***
+*/
+.form-guidelines{
+	font-size:.7em;
+}
+.comment form input[type="submit"]{
+	font-weight:bold;
+	color:black;
+}
+.form_error span{
+	font-size: 1em;
+}
+.form_success span {
   font-size: 1em;
 }
 }
-@media only screen and (min-width:600px){
-.section,#create-account,#login, #recover,#reset, #upload, #subscribe{
-width: 400px; 
+@media only screen and (min-width:600px) and (max-width:768px){
+.section,#create-account,#login, #recover,#reset, #upload{
+max-width: 60%; 
 }
-.section,#create-account,#login, #recover,#reset, #upload, #subscribe{ 
-padding: 0 15px 15px 15px; 
-border-radius: 5px;font-family: arial; 
-font-size: 14px; 
+.section,#create-account,#login, #recover,#reset, #upload{ 
+padding: 0 15px 15px 15px;  
 margin: 35px auto 20px auto;
 }
-.section{
-margin:20px auto;
+#subscribe{
+	max-width:80%;
 }
-form input{ 
-padding: 10px;
-
+#subscribe{
+	padding: 0 5px;
+	line-height: 1em;
+	margin: 1.875em auto 1.25em auto;
 }
 form input[type="submit"]{
 	width:90%;
-	margin:20px 0;
 }
 #subscribe input[type="submit"]{
 	margin-left:0;
+}
+.section{
+margin:20px auto;
 }
 .right-align{
 	position:relative;
@@ -230,11 +296,180 @@ form input[type="submit"]{
 }
 .form_error span{
 	height: 30px;
-	font-size: 1.1em;
 }
-
 .form_success span {
   height: 30px;
-  font-size: 1.1em;
 }
+/*
+*** TYPOGRAPHY ***
+*/
+form input{ 
+font-size:1em;
+}
+.form-guidelines{
+	font-size:.8em;
+}
+.comment form input[type="submit"]{
+	font-weight:bold;
+	color:black;
+}
+.form_error span{
+	font-size: 1.1em;
+}
+.form_success span {
+ font-size: 1.1em;
+}
+
+}
+@media only screen and (min-width:768px) and (max-width:992px){
+.section,#create-account,#login, #recover,#reset, #upload{
+	max-width:40%; 
+}
+.section,#create-account,#login, #recover,#reset, #upload{ 
+padding: 0 15px 15px 15px;  
+margin: 35px auto 20px auto;
+}
+#subscribe{
+	max-width:90%;
+}
+#subscribe{
+	padding: 0 5px;
+	line-height: 1em;
+	margin: 1.25em auto 1.25em auto;
+}
+form input[type="submit"]{
+	width:90%;
+}
+#subscribe input[type="submit"]{
+	margin-left:0;
+}
+.section{
+margin:20px auto;
+}
+.right-align{
+	position:relative;
+	left:35%;
+	text-align:right;	
+}
+.comment form textarea{
+	border:thin solid #6D7B8D;
+	border-radius:10px;
+}
+.comment form input[type="submit"]{
+	width:100px;
+	height:40px;
+	border-radius:5px;
+	background:#6D7B8D;
+	font-weight:bold;
+	color:black;
+}
+.reply form input[type="submit"]{
+	width:80px;
+	height:35px;
+	margin-left:70%;
+}
+.reply form textarea{
+	width:90%;
+}
+.reply-textarea{
+	margin-left:5%;
+}
+.form_error span{
+	height: 30px;
+}
+.form_success span {
+  height: 30px;
+}
+/*
+*** TYPOGRAPHY ***
+*/
+form input{ 
+font-size:1em;
+}
+
+.form-guidelines{
+	font-size:.8em;
+}
+.comment form input[type="submit"]{
+	font-weight:bold;
+	color:black;
+}
+.form_error span{
+	font-size: 1.1em;
+}
+.form_success span {
+ font-size: 1.1em;
+}
+}
+
+@media only screen and (min-width:992px){
+#create-account,#login, #recover,#reset, #upload, #subscribe,.section{
+width: 23em; 
+}
+.section,#create-account,#login, #recover,#reset, #upload, #subscribe{ 
+padding: 0 15px 15px 15px;  
+margin: 35px auto 20px auto;
+}
+form input[type="submit"]{
+	width:90%;
+}
+#subscribe input[type="submit"]{
+	margin-left:0;
+}
+.section{
+	margin:20px auto;
+}
+.right-align{
+	position:relative;
+	left:35%;
+	text-align:right;	
+}
+.comment form textarea{
+	border:thin solid #6D7B8D;
+	border-radius:10px;
+}
+.comment form input[type="submit"]{
+	width:100px;
+	height:40px;
+	border-radius:5px;
+	background:#6D7B8D;
+	font-weight:bold;
+	color:black;
+}
+.reply form input[type="submit"]{
+	width:80px;
+	height:35px;
+	margin-left:70%;
+}
+.reply form textarea{
+	width:90%;
+}
+.reply-textarea{
+	margin-left:5%;
+}
+.form_error span{
+	height: 30px;
+}
+.form_success span {
+  height: 30px;
+}
+/*
+*** TYPOGRAPHY ***
+*/
+form input{ 
+font-size:1em;
+}
+.form-guidelines{
+	font-size:.8em;
+}
+.comment form input[type="submit"]{
+	font-weight:bold;
+	color:black;
+}
+.form_error span{
+	font-size: 1.1em;
+}
+.form_success span {
+ font-size: 1.1em;
+}	
 }

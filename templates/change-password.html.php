@@ -13,6 +13,7 @@ changePassword();
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Change Password </title>
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
@@ -24,7 +25,7 @@ changePassword();
 		<div class="form_image">
 			<div class="banner-bar"><h2>Developers Pot</h2></div>
 			<p class="form-p">Fields marked with <span class="red"> &#42;</span> are mandatory. </p>
-			<h2>Change Password</h2>
+			<h3>Change Password</h3>
 		</div>
 	
 	
@@ -39,7 +40,7 @@ changePassword();
 				<label for="new_password">New Password:<span class="red"> &#42;</span></label>
 				 <input type="password" name="new_password" id ="new_password" maxlength="50" autocomplete="off" required>
 				<span class="errorMsg"><?php echo (!empty($errors['new_password'])? $errors['new_password'] :'');?></span>
-				<ul>
+				<ul class="form-guidelines">
 						<li>Passwords must be at least <strong>6</strong> characters.</li>
 						<li>May contain letters, numbers, underscore, hyphen or dot.</li>
 				</ul>
