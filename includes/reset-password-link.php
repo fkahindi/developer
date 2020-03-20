@@ -1,11 +1,11 @@
 <?php
 $output='<p>Dear user,</p>';
 $output.='<p>Please click the following link or copy and paste it on a new tab of your browser to reset your password.</p>';
-$output.='<p>---------Developerspot----------------------------------------------------</p>';
+$output.='<p>------------------------------------------------</p>';
 $output.='<p><a href="localhost/spexproject/templates/reset-password.html.php?
 key='.$token.'&email='.$email.'&action=reset" target="_blank">
 Recover my password</a></p>';		
-$output.='<p>-------------------------------------------------------------</p>';
+$output.='<p>------------------------------------------------</p>';
 $output.='The link will expire after 1 day for security reasons.</p>';
 $output.='<p>If you did not request this forgotten password email, no action 
 is needed, your password will not be reset. However, you may want to log into 

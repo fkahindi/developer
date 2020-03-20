@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /dmin/
+Disallow: /classes/
+Disallow: /comments/
+Disallow: /includes/
+Disallow: /PHPMailer/
+
+Sitemap: https://www.developerspot.co.ke/sitemap.xml

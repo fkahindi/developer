@@ -10,7 +10,9 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 	<!-- head section -->
 	<?php require_once __DIR__ .'/templates/head.html.php'; ?>
 	<!--// head section -->
-	<title>Developers Pot</title> 
+	
+	<title>Developerspot: A blog for developers</title> 
+	
 	</head>
 	<body>
 		<header>
@@ -19,7 +21,7 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 		<main class="group">
 			<aside class="col-2-10 hide-in-mobile">
 				<div class="published-topics">
-				<h2 class="left">Topics</h2>
+				<h2>Topics</h2>
 					
 				<?php include __DIR__ . '/templates/published_posts_by_topics.html.php';?>					
 					
@@ -53,12 +55,12 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 				<h2 class="left">Recent posts</h2>
 				<?php $recent_posts = getMostRecentPosts(); ?>
 				<?php foreach($recent_posts as $latest_post): ?>
-				<h5><a href="templates/post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></h5>
+				<p><a href="templates/post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></p>
 				<?php endforeach; ?>
 				</div>
 			</aside><!--			
 			--><aside class="hide-in-bigger-screens">
-				<div class="published-topics">
+				<div>
 				<h2 class="left">Browse Topics</h2>
 					<?php include __DIR__ . '/templates/published_posts_by_topics.html.php';?>				
 				</div>
@@ -73,7 +75,8 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 				</span>
 		</footer>
 		<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
-		<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
 		<script src="<?php echo BASE_URL ?>resources/js/menu-profile-controls.js"></script>
+		<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
+		
 	</body>
 </html>

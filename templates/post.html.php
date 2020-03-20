@@ -29,8 +29,8 @@ if(!isset($_SESSION)){
 	</header>
 	<main class="group">
 		<aside class="col-2-10 hide-in-mobile">
-				<div class="published-topics">
-				<h2 class="left">Topics</h2>
+				<div>
+				<h2>Topics</h2>
 				<?php include __DIR__ . '/published_posts_by_topics.html.php';?>
 				</div>
 			</aside><!--
@@ -63,7 +63,7 @@ if(!isset($_SESSION)){
 				<h2 class="left">Recent posts</h2>
 				<?php $recent_posts = getMostRecentPosts(); ?>
 				<?php foreach($recent_posts as $latest_post): ?>
-				<h5><a href="post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></h5>
+				<p><a href="post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></p>
 				<?php endforeach; ?>
 			</div>
 		</aside><!--			
@@ -83,10 +83,10 @@ if(!isset($_SESSION)){
 			</span> 
 	</footer>
 	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
-	<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
 	<script src="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.js"></script>
 	<script src="<?php echo BASE_URL ?>/resources/js/menu-profile-controls.js"></script>
 	<script src="<?php echo BASE_URL ?>resources/js/subscribe-comments-replies-scripts.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
 	<!-- This is for local offline server -->
 	<script>window.onload=function(){prettyPrint()}</script>
 </body>

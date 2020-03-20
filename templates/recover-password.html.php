@@ -24,7 +24,7 @@ if(isset($_POST['recover_password'])){
 		</div>
 		<form method="POST" action="">
 			<label for="email">Enter your email address:</label>
-			 <input type="email" name="email" maxlength="50" autocomplete="off" required> <span class="errorMsg">
+			 <input type="email" name="email" maxlength="50" autocomplete="off"> <span class="errorMsg">
 			 <?php echo (!empty($errors['email'])? $errors['email'] :'');?></span>
 			 
 			<input type="submit" name="recover_password" class="button" value="Submit"> 

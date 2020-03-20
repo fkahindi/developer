@@ -1,15 +1,14 @@
 <?php
 $output='<p>Dear user,</p>';
 $output.='<p>Please use the following link to confirm your subscription for new posts notification from Developerspot.</p>';
-$output.='<p>---------Developerspot----------------------------------------------------</p>';
+$output.='<p>------------------------------------------------</p>';
 $output.='<p><a href="localhost/spexproject/templates/confirm-subscription.html.php?
 key='.$token.'&email='.$email.'&action=subscribe" target="_blank">
 Confirm email subscription</a></p>';		
-$output.='<p>-------------------------------------------------------------</p>';
-$output.='<p>Please, if the link does not work, copy and paste it on a new tab on your browser.
-The link will expire after 1 day for security reasons.</p>';
-$output.='<p>If you did not request this subscription, no action 
-is needed, you will not be subscribed.</p>';   	
+$output.='<p>------------------------------------------------</p>';
+$output.='<p>The link will expire after 1 day for security reasons. Please, if the link does not work, copy and paste it on a new tab on your browser.
+</p>';
+$output.='<p>If you did not request this subscription, no action is needed, you will not be subscribed.</p>';   	
 $output.='<p>Thanks,</p>';
 $output.='<p>Developerspot Team</p>';
 $body = $output; 

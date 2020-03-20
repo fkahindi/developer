@@ -56,9 +56,11 @@
 						
 						</div>
 						<div class="form-group form-group-lg">
+							<textarea name="body" id="body" col="30" row="50" class="form-control" placeholder="Article body goes here..."><?php echo $body; ?></textarea>
 							
-							<textarea name="body" id="body" col="30" row="50" class="form-control"><?php echo $body; ?></textarea>
-							
+						</div>
+						<div class="form-group form-group-lg">
+							<input type="text" name="meta_description" value="<?php echo $meta_description; ?>" class="form-control" placeholder="Meta description">
 						</div>
 						<div>
 							<select name="topic_id" class="form-control">

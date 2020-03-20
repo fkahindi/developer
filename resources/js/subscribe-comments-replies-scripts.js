@@ -36,7 +36,7 @@ $('document').ready(function(){
 		
 		if($(this).is(':checked')){
 			privacy_state = true;
-			$(this).siblings("p").text('');
+			
 		}else{
 			privacy_state = false;
 		}
@@ -62,7 +62,7 @@ $('document').ready(function(){
 			
 			$('#privacy-checkbox').parent().removeClass();
 			$('#privacy-checkbox').parent().addClass("errorMsg");
-			$('#privacy-checkbox').siblings("p").text('You need to agree to the privacy policy.');
+			$('#privacy-checkbox').siblings("p").append(' | You need to agree to continue.');
 			return;
 		}else{
 			$.ajax({

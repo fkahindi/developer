@@ -1,10 +1,10 @@
 <?php
 $output='<p>Dear ' .$username .',</p>';
 $output.='<p>Please use following link to verify your email.</p>';
-$output.='<p>---------Developerspot----------------------------------------------------</p>';
+$output.='<p>------------------------------------------------</p>';
 $output.='<p><a href="/spexproject/templates/set-account-password.html.php?key='.$token.'&email='.$email.'&username='.$username.'" target="_blank">
 Confirm account creation </a></p>';		
-$output.='<p>-------------------------------------------------------------</p>';
+$output.='<p>------------------------------------------------</p>';
 $output.='<p>Please click the link above to confirm it is you who requested account creation at Developerspot.
 The link will expire after 1 day for security reasons.</p>';
 $output.='<p>If you did not make this request, no action 

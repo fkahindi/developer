@@ -1,12 +1,12 @@
 /*
-============================================================
+==========================================================
 Browser display reset: Ensure cross-browser consistency
-============================================================
+==========================================================
  http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
   License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
+html,body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -91,6 +91,8 @@ table {
 }
 header, footer{
 	width:100%;
+}
+header, footer{
 	padding:0;		
 }
 header{
@@ -112,6 +114,9 @@ nav ul li a{
 }
 main{
 	margin:0 auto;
+}
+.meta-description{
+	display:none;
 }
 .post-main-image{
 	width:70%;
@@ -148,6 +153,17 @@ section{
 aside{
 	padding:10px;
 	text-align:left;
+}
+hr{
+	border:thin solid rgb(240,240,240);
+}
+.subscribe-section + hr{
+	margin-top:20px;
+	border: thin dashed #ADD8E6;
+}
+.comments-container hr{
+	margin:0;
+	border:thin solid silver;
 }
 /**********************************
 ** 		CLEARFIX				**
@@ -268,10 +284,12 @@ aside{
 }
 .account-display-settings{
 	display:none;
+	min-width:10.625em;
+}
+.account-display-settings{
 	position:relative;
 	top:0;
 	right:-50%;
-	min-width:10.625em;
 	background:rgb( 35, 35, 60);
 	color:#fff;
 	border-radius:5px;
@@ -294,14 +312,6 @@ aside{
 /******************************
 STYLING FOR COMMENTS SECTION
 *******************************/
-.subscribe-section + hr{
-	margin-top:20px;
-	border: thin dashed #ADD8E6;
-}
-.comments-container hr{
-	margin:0;
-	border:thin solid silver;
-}
 .comments-section{
 	margin-top:10px;
 }
@@ -370,8 +380,8 @@ pre, pre code, samp{
 	margin:0;
 }
 pre{
-	-moz-tab-size:4;
-	-o-tab-size:4;
+	-moz-tab-size:1;
+	-o-tab-size:1;
 	tab-size:1;
 	overflow-x:auto;
 	margin: 0;
@@ -379,8 +389,31 @@ pre{
 code{
 	padding:0 2px;
 }
+main p{
+	text-align:justify;
+	padding:10px 0;
+}
 p code{
 	background:rgb(230,230,230);
+}
+main .special-p{
+    padding:10px;
+    background:rgb(100,160,100);
+	background:rgba(100,160,100,.5);
+}
+main .special-p code{
+	background:inherit;
+}
+h1,h3,h4{
+	text-align:left;
+	padding:10px;
+}
+h2{
+	padding-top:10px;
+}
+h5{
+	padding:10px;
+	line-height:1;
 }
 /******************************************
 **STYLING FOR DYNAMIC CONTENT ON INDEX PAGE
@@ -394,12 +427,15 @@ p code{
 /*********************************
 **STYLING FOR SIDEBARS (ASIDE) 	**
 **********************************/
-.recent-posts,.published-topics{
-	padding-left:1em;
-}
 .published-topics ul{
 	list-style:none;
+	text-align:left;
 }
+.published-topics p,.recent-posts p{
+	padding:0;
+	text-align:left;
+}
+
 /***************************************** 
 HIDE MENU CONTROLS FOR SMALL DEVICES ONLY
 ******************************************/
@@ -416,7 +452,7 @@ em, i{
 	font-style:italic;
 }
 main{
-	font-family:sans-serif,calibri;
+	font-family:'Hind Vadodara', sans-serif;
 }
 header, footer{
 	font-family:Calibri, sans-serif;		
@@ -465,33 +501,24 @@ nav ul li a:hover{
 	font-size: 100%;
 }
 h1, h2, h3,h4{
+	font-family: 'Carrois Gothic SC', sans-serif;
 	font-weight:bolder;
-	text-align:left;
-	padding-left:10px;
 }
 h1{
+	font-size:1.5em;
 	color:#071418;
 }
 h2{
-	color:#585858;
+	font-size:1.3em;
+	color:#071418;
 }
 h3{
-	color:maroon;
+	font-size:1.3em;
+	color:rgb(5,10,50);
 }
 h4{
+	font-size:1.2em;
 	text-align:left;
-}
-main p{
-	text-align:justify;
-	padding:10px;
-}
-main .special-p{
-    padding:10px;
-    background:rgb(100,160,100);
-	background:rgba(100,160,100,.5);
-}
-main .special-p code{
-	background:inherit;
 }
 main table td:first-child {
 	font-family:'Courier New', courier;
@@ -504,11 +531,7 @@ main ul, ol{
 main ul{
 	list-style:disc;
 }
-.comments-container h3, h4, h5{
-	padding-top:1.25em;
-	color:black;
-	text-shadow:none;
-}
+
 .comments-container p{
 	font-size:100%;
 }
@@ -535,16 +558,25 @@ main ul{
 	display:none;
 }
 .paragraph-snippet{
-	font-family:sans-serif,calibri;
+	font-family:'Hind Vadodara',sans-serif;
 	font-size:90%;
 	line-height:1;
 }
+.published-topics ul li{
+	font-size:.9em;
+	color:rgb(5,10,50);
+}
+.published-topics ul ul li,.recent-posts p{
+	font-size:.9em;
+}
 .recent-posts a,.published-topics a{
-	color:#157DEC;
+	
+	color:#616D7E;
 }
 .recent-posts a:hover,.published-topics a:hover{
 	text-decoration:underline;
-	color:#0041C2;
+	color:#2B3856;
+	padding-left:5px;
 }
 .post-acreditation{
 	color:gray;
@@ -738,26 +770,35 @@ section, aside{
 section, aside{
 	padding:5px;
 }
+aside{
+	text-align:left;
+}
+aside ul, aside ol{
+	text-indent: 0;
+	padding: 0;
+}
 main p{
 	text-align:left;
 	padding:10px;
+}
+main .special-p{
+    padding:10px;
 }
 .post-main-image{
 	margin:10px auto;
 }
 .post-main-image .article-index-image{
-	width:150px;
-	height:150px;
+	width:9.375em;
+	height:9.375em;
 }
 .post-main-image .article-post-image{
 	width:100%;
-	max-width:250px;
-	height:250px;
+	max-width:15.625em;
+	height:15.625em;
 }
 .comment-text{
 	text-align:left;
 }
-
 .reply-form{
 	margin-left:5px;
 }
@@ -765,27 +806,7 @@ main p{
 	margin-left:10px;
 	
 }
-aside{
-	text-align:left;
-	padding-left:10px;
-}
-aside ul, aside ol{
-	text-indent: 0;
-	padding: 10px 0;
-}
-.recent-posts,  .published-topics{
-	padding-left:0;
-}
-.recent-posts h5, .published-topics h5{
-	padding:2px 0;
-	line-height:.8;
-}
-.published-topics ul{
-	padding:0;
-}
-.published-topics li a{
-	padding-left:0;
-}
+
 pre{
 	padding-left:0;
 }
@@ -826,18 +847,7 @@ footer ul span{
 TYPOGRAPHY
 ===================================
 */
-h1{
-	font-size:1.7em;
-}
-h2{
-	font-size:1.5em;
-}
-h3{
-	font-size:1.4em;
-}
-h4{
-	font-size:1.4em;
-}
+
 .search-container input[type=text],.search-container button {
   font-size: 0.75em;
 }
@@ -860,9 +870,7 @@ main p{
 .reply-thread, .reply-btn{
 	font-size:0.9em;
 }
-.recent-posts a,.published-topics a{
-	font-size:80%;
-}
+
 footer, footer a{
 	font-size:80%;
 }
@@ -882,7 +890,6 @@ SMALL DEVICES (PORTRAIT TABLETS AND LARGE PHONES, 600PX AND ABOVE)
 body{
 	font-size:100%;
 }
-
 [class*="col-"]{
 	width:100%
 }
@@ -894,7 +901,7 @@ main{
 }
 
 header{
-	height:70px;
+	height:4.375em;
 }
 .subscribe-section{
 	margin:5px 10%;	
@@ -1046,21 +1053,9 @@ aside{
 }
 aside ul, aside ol{
 	text-indent: 0;
-	padding: 10px 0;
+	padding: 0;
 }
-.recent-posts,  .published-topics{
-	padding-left:0;
-}
-.recent-posts h5, .published-topics h5{
-	padding:2px 0;
-	line-height:.8;
-}
-.published-topics ul{
-	padding:0;
-}
-.published-topics li a{
-	padding-left:0;
-}
+
 /*
 =================================================
 FOOTER
@@ -1077,18 +1072,6 @@ ul span{
 TYPOGRAPHY
 =================================================
 */
-h1{
-	font-size:2em;
-}
-h2{
-	font-size:1.7em;
-}
-h3{
-	font-size:1.7em;
-}
-h4{
-	font-size:1.5em;
-}
 .search-container input[type=text] {
   font-size: 14px;
 }
@@ -1117,9 +1100,7 @@ main p, li{
 .login-signup{
 	font-size:.9em;
 }
-.recent-posts a, .published-topics ul li{
-	font-size:90%;
-}
+
 footer{
 	font-size:80%;
 }
@@ -1195,7 +1176,7 @@ HEADER AND SECTIONS
 */
 .banner-bar, .navigation-utilities-section, .log-account-section{
     display:block;
-	height:70px;
+	height:4.375em;
 }
 .banner-bar, .navigation-utilities-section, .log-account-section{
 	margin:0;
@@ -1207,15 +1188,13 @@ HEADER AND SECTIONS
 	width:25%;
 }
 .banner-bar{
-	text-align:right;
+	text-align:center;
 	font-size:1.5em;
 }
 .banner{
     width:80%; 
 	height:60%;
-}
-.banner{
-	padding-left:10px;
+	
 }
 .navigation-utilities-section{
 	float:left;
@@ -1318,46 +1297,21 @@ nav ul li a{
 section{
 	padding:0 3%;
 }
-
 aside{
+	padding-left:1.25em;
 	text-align:left;
-	padding-left:10px;
+	
 }
 aside ul, aside ol{
 	text-indent: 0;
-	padding: 10px 0;
-}
-.recent-posts, .published-topics{
-	padding-left:0;
-}
-.recent-posts h5, .published-topics h5{
-	padding:3px 0;
-	line-height:.8;
-}
-.published-topics ul{
 	padding:0;
 }
-.published-topics li a{
-	padding-left:0;
-}
-
 /*
 ===================================
 TYPOGRAPHY
 ===================================
 */
-h1{
-	font-size:1.7em;
-}
-h2{
-	font-size:1.6em;
-}
-h3{
-	font-size:1.5em;
-}
-h4{
-	font-size:1.4em;
-}
+
 nav{
 	font-size:1.3em;
 }
@@ -1376,10 +1330,6 @@ nav ul li a{
 main p, li{
 	font-size:1em;
 }
-.recent-posts a, .published-topics ul li {
-	font-size:90%;
-}
-
 footer a{
 	font-size:.7em;
 }
@@ -1417,7 +1367,7 @@ main{
 }
 header{
 	width:100%;
-	height:100px;
+	height:6.25em;
 	margin:0;
 }
 section,aside{
@@ -1428,13 +1378,13 @@ section{
 }
 
 aside{
+	padding-left:10px;
 	text-align:left;
 }
 aside ul, aside ol{
 	text-indent: 0;
-	padding: 10px 0;
+	padding: 0;
 }
-
 .subscribe-section{
 	margin:5px 5%;	
 }
@@ -1447,7 +1397,7 @@ aside ul, aside ol{
 }
 .post-main-image .article-post-image{
 	width:100%;
-	height:400px;
+	height:25em;
 }
 footer{
 	height:40px;
@@ -1569,36 +1519,12 @@ nav li{
 nav ul li a{
 	padding:10px 2px;
 }
-.recent-posts,  .published-topics{
-	padding-left:5px;
-}
-.recent-posts h5, .published-topics h5{
-	padding:3px 0;
-	line-height:.9;
-}
-.published-topics ul{
-	padding:0;
-}
-.published-topics li a{
-	padding-left:0;
-}
+
 /*
 ===========================================
 TYPOGRAPHY
 ==========================================
 */
-h1{
-	font-size:1.7em;
-}
-h2{
-	font-size:1.6em;
-}
-h3{
-	font-size:1.5em;
-}
-h4{
-	font-size:1.4em;
-}
 .login-signup{
 	font-size:1.2em;
 }
@@ -1611,8 +1537,8 @@ h4{
 main p, li{
 	font-size:1.2em;
 }
-.recent-posts a, .published-topics ul li{
-	font-size:95%;
+.published-topics ul ul li{
+	font-size:.8em;
 }
 footer a{
 	font-size:.7em;
@@ -1665,12 +1591,12 @@ aside{
 	width:60%;
 }
 .post-main-image .article-index-image{
-	width:350px;
-	height:300px;
+	width:21.875em;
+	height:18.75em;
 }
 .post-main-image .article-post-image{
 	width:100%;
-	height:400px;
+	height:25em;
 }
 footer{
 	height:40px;
@@ -1685,6 +1611,8 @@ HEADER SECTIONS
 	display:block;
 	height:120px;
 	margin:0;
+}
+.banner-bar, .navigation-utilities-section, .log-account-section{
 	padding:0;
 	vertical-align:top;
 }
@@ -1719,6 +1647,8 @@ HEADER SECTIONS
 .log-account-section{
 	float:right;
 	width:20%;
+}
+.log-account-section{
 	text-align:right;
 	padding-right:7px;
 	z-index:0;
@@ -1750,6 +1680,8 @@ HEADER SECTIONS
 .image-photo{
 	height:3em;
 	width:3em;
+}
+.image-photo{
 	border:3px solid #2b5959;
 	border-radius:2.5em 2.5em;
 }
@@ -1781,7 +1713,6 @@ nav{
 	text-align:left;
 	padding-top:10px;
 	padding-bottom:10px;
-	
 }
 nav ul{
 	text-align:center;
@@ -1797,26 +1728,9 @@ main ul, main ol{
 main table {
 	margin:30px 5px;
 }
-
 aside ul, aside ol{
 	text-indent: 0;
 	padding: 0;
-}
-aside .recent-posts{
-	padding-left:5px;
-}
-aside .published-topics{
-	padding-left:15px;
-}
-.recent-posts h5, .published-topics h5{
-	padding:4px 0;
-	line-height:.9;
-}
-.published-topics ul{
-	padding:0;
-}
-.published-topics li a{
-	padding-left:0;
 }
 /*
 ===========================================
@@ -1828,18 +1742,6 @@ TYPOGRAPHY
 }
 .account-display-settings ul li{
 	font-size:1.3em;
-}
-h1{
-	font-size:2em;
-}
-h2{
-	font-size:1.7em;
-}
-h3{
-	font-size:1.7em;
-}
-h4{
-	font-size:1.5em;
 }
 main p, main li{
 	font-size:1.3em;
@@ -1853,8 +1755,8 @@ main p, main li{
 .navigation-utilities-section{
 	font-size:1.2em;
 }
-.recent-posts a, .published-topics ul li{
-	font-size:95%;
+.published-topics ul ul li{
+	font-size:.8em;
 }
 footer a{
 	font-size:.7em;
