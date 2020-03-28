@@ -21,7 +21,7 @@ require_once __DIR__ .'/config.php';
 			--><section class="col-5-10">
 				<h1>Developers Pot</h1><hr>
 				<div>	
-					<p>Developers Pot is a blog dedicated to sharing web development knowledge and skills with other web developers. It highlights <span class="key">web development technologies</span> and especially the nifty areas that may be tricky to new developers.  </p>
+					<p>Developerspot is a blog dedicated to sharing web development knowledge and skills with other web developers. It highlights <span class="key">web development technologies</span> and especially the nifty areas that may be tricky to new developers.  </p>
 				</div>
 				
 			</section><!--			

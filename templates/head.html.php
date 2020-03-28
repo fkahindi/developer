@@ -13,6 +13,8 @@
 <meta name="author" content="Francis Kahindi">
 <meta name="keywords" >
 <meta name="description" content="<?php echo (isset($posts['meta_description'])? htmlspecialchars_decode($posts['meta_description']):''); ?>">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
 <link rel="stylesheet" href="<?php echo BASE_URL ?>resources/css/form.css">
 <link rel="stylesheet" href="<?php echo BASE_URL ?>resources/css/main.css">
 <link rel="icon" href="<?php echo BASE_URL ?>resources/icons/logoicon.png" sizes="16x16 32x32" type="image/x-icon">

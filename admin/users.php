@@ -18,10 +18,10 @@ $admins = getAdminUsers();
 $roles = ['Admin', 'Author', 'User'];
 ?>
 <!DOCTYPE html>
-<html lang="en">	
+<html lang="en">
+<title>Admin | Edit User</title>	
 <?php include __DIR__ . '/components/head.php';?>
-
-	<title>Admin | Edit User</title>
+	
 </head>
 <body>
 	<?php include __DIR__ .'/components/navbar.php'; ?>
@@ -108,7 +108,8 @@ $roles = ['Admin', 'Author', 'User'];
 		</div>
 	</div>
 </body>
-<script src="js/jquery-3.4.0.min.js"></script>
+<!--<script src="js/jquery-3.4.0.min.js"></script> 
 <script src="js/bootstrap.min.js"></script>
+-->
 <script src="js/tooltip-call.js"></script>
 </html>

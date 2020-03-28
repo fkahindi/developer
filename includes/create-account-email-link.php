@@ -2,6 +2,14 @@
 $output='<p>Dear ' .$username .',</p>';
 $output.='<p>Please use following link to verify your email.</p>';
 $output.='<p>------------------------------------------------</p>';
+
+/* **FOR ONLINE SERVER **
+
+	$output.='<p><a href="https://www.developerspot.co.ke/templates/confirm-subscription.html.php?
+key='.$token.'&email='.$email.'&action=subscribe" target="_blank">
+
+** */
+/* For Local Server */
 $output.='<p><a href="/spexproject/templates/set-account-password.html.php?key='.$token.'&email='.$email.'&username='.$username.'" target="_blank">
 Confirm account creation </a></p>';		
 $output.='<p>------------------------------------------------</p>';

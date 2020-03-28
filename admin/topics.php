@@ -13,10 +13,9 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">	
+<title><?php echo  $_SESSION['role'] ?> | Create Post</title>
 <?php include __DIR__ . '/components/head.php';?>
-	<title><?php echo  $_SESSION['role'] ?> | Create Post</title>
-	
-	
+		
 	<!--Fetch all posts that apply to the user  -->
 	<?php $topics = getAllTopics(); ?>
 </head>
@@ -105,7 +104,8 @@
 		</div>
 	</div>
 </body>
-<script src="js/jquery-3.4.0.min.js"></script>
+<!--<script src="js/jquery-3.4.0.min.js"></script> 
 <script src="js/bootstrap.min.js"></script>
+-->
 <script src="js/tooltip-call.js"></script>
 </html>

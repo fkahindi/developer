@@ -2,6 +2,14 @@
 $output='<p>Dear user,</p>';
 $output.='<p>Please click the following link or copy and paste it on a new tab of your browser to reset your password.</p>';
 $output.='<p>------------------------------------------------</p>';
+/* ** FOR ONLINE SERVER **
+
+	$output.='<p><a href="https://www.developerspot.co.ke/templates/confirm-subscription.html.php?
+key='.$token.'&email='.$email.'&action=subscribe" target="_blank">
+
+** */
+
+/* For Local Server */
 $output.='<p><a href="localhost/spexproject/templates/reset-password.html.php?
 key='.$token.'&email='.$email.'&action=reset" target="_blank">
 Recover my password</a></p>';		

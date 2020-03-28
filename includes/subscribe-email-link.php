@@ -2,6 +2,14 @@
 $output='<p>Dear user,</p>';
 $output.='<p>Please use the following link to confirm your subscription for new posts notification from Developerspot.</p>';
 $output.='<p>------------------------------------------------</p>';
+/* ** FOR ONLINE SERVER **
+
+	$output.='<p><a href="https://www.developerspot.co.ke/templates/confirm-subscription.html.php?
+key='.$token.'&email='.$email.'&action=subscribe" target="_blank">
+
+** */
+
+/* For Local Server */
 $output.='<p><a href="localhost/spexproject/templates/confirm-subscription.html.php?
 key='.$token.'&email='.$email.'&action=subscribe" target="_blank">
 Confirm email subscription</a></p>';		

@@ -82,7 +82,7 @@ if(!isset($_SESSION)){
 				<?php include __DIR__ . '/copyright.html.php';?>
 			</span> 
 	</footer>
-	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
+	<!--<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script> -->
 	<script src="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.js"></script>
 	<script src="<?php echo BASE_URL ?>/resources/js/menu-profile-controls.js"></script>
 	<script src="<?php echo BASE_URL ?>resources/js/subscribe-comments-replies-scripts.js"></script>

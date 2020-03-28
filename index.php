@@ -77,6 +77,17 @@ include __DIR__ .'/admin/includes/admin_functions.php';
 		<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
 		<script src="<?php echo BASE_URL ?>resources/js/menu-profile-controls.js"></script>
 		<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
+		<script>
+		/* The following function help to generate content for description meta tag.  */
+		function getMetaDescription(){
+			var metaDescription = "Developerspot is a blog for developers, sharing knowledge and skills in the areas of app and web development.";
+			return metaDescription;
+		}
 		
+		/* Get description for meta */
+		var meta_descr = document.getElementsByName('description')[0];
+		var description = getMetaDescription();
+		meta_descr.setAttribute("content",description);
+		</script>
 	</body>
 </html>

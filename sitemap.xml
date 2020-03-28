@@ -9,53 +9,78 @@
 
 <url>
   <loc>https://www.developerspot.co.ke/</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/index.php</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/templates/topic_page.html.php?name=html</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/templates/topic_page.html.php?name=javascript</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/templates/topic_page.html.php?name=php</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/about.php</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/templates/login.html.php</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://www.developerspot.co.ke/templates/create-account.html.php</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/templates/post.html.php?id=1&amp;title=html5-form-validation</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.developerspot.co.ke/templates/post.html.php?id=2&amp;title=regular-expressions-in-javascript</loc>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.developerspot.co.ke/templates/post.html.php?id=3&amp;title=form-validation-in-javascript</loc>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://www.developerspot.co.ke/templates/recover-password.html.php</loc>
-  <lastmod>2020-03-02T13:17:46+00:00</lastmod>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
   <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.developerspot.co.ke/templates/create-account.html.php</loc>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.developerspot.co.ke/policies/privacy-policy.php</loc>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.developerspot.co.ke/templates/post.html.php?id=2</loc>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://www.developerspot.co.ke/policies/cookie-policy.php</loc>
+  <lastmod>2020-03-26T09:07:39+00:00</lastmod>
+  <priority>0.51</priority>
 </url>
 
 
