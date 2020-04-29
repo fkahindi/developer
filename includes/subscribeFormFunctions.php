@@ -54,7 +54,8 @@ if(isset($_POST['subscribe'])){
 			$curDateTimeStamp = strtotime($curDate);
 			if($curDateTimeStamp - $createdDateTimeStamp<=3600){
 				/* //If an hour has not elapsed since record update notify user. */
-				echo 'A link was sent to your email in less than 1 hour ago. Check your email inbox.';
+				echo '<script>$("#subscribe").addClass("hidden");</script>';
+				echo '<div class="successMsg">A link was sent to your email in less than 1 hour ago. Check your email inbox.</div>';
 			}else{
 				/* //Update token and date then send email link */
 				$fields = ['token' => $token, 'created_at' => $created_at];

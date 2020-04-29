@@ -1,8 +1,8 @@
 Options +FollowSymlinks
 RewriteEngine On
 Options  -Indexes
-RewriteCond %{HTTPS} !=on
-RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTP_HOST} !^www.developerspot.co.ke$ [NC]
+RewriteRule ^(.*)$ https://www.developerspot.co.ke/$1 [L,R=301]
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php73” package as the default “PHP” programming language.

@@ -60,6 +60,9 @@
 						
 						</div>
 						<div class="form-group form-group-lg">
+							<input type="text" name="image_caption" value="<?php echo $image_caption; ?>" class="form-control" placeholder="Type image caption">
+						</div>
+						<div class="form-group form-group-lg">
 							<textarea name="body" id="body" col="30" row="50" class="form-control" placeholder="Article body goes here..."><?php echo $body; ?></textarea>
 							
 						</div>
@@ -114,9 +117,9 @@
 		</div>
 	</div>
 </body>
-<!--
+<!-- For local only -->
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
--->
+
 <script src="js/tooltip-call.js"></script>
 </html>

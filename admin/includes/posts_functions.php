@@ -10,6 +10,7 @@ $title ='';
 $image_file ='';
 $post_slug = '';
 $body = '';
+$image_caption ='';
 $meta_description = '';
 $sound ='';
 $feature_image = '';
@@ -182,10 +183,11 @@ if(isset($_GET['delete-post'])){
 	--Post Functions--
 -------------------------*/
 function createPost($request_values){
-	global $conn, $errors, $title, $topic_id, $body,$meta_description, $published, $image_file, $sound;
+	global $conn, $errors, $title, $topic_id, $body,$meta_description, $published, $image_file, $image_caption, $sound;
 	
 	$title = htmlspecialchars(esc($request_values['title']));
 	$meta_description = htmlspecialchars(esc($request_values['meta_description']));
+	$image_caption = htmlspecialchars(esc($request_values['image_caption']));
 	$body = htmlspecialchars(esc($request_values['body']));
 	$user_id = $_SESSION['user_id'];
 	
@@ -216,6 +218,9 @@ function createPost($request_values){
 	}
 	if(isset($_POST['meta_description'])){
 		$meta_description = $_POST['meta_description'];
+	}
+	if(isset($_POST['image_caption'])){
+		$meta_caption = $_POST['image_caption'];
 	}
 	/* //Create slug by replacing spaces in title with hyphens */
 	$post_slug = makeSlug($title);
@@ -256,7 +261,7 @@ function createPost($request_values){
 	
 	/* //If no errors in the form, insert posts */	
 	if(!$errors){
-		$query = "INSERT INTO `posts` (user_id, post_title, post_slug, post_body, meta_description, published, image, created_at, metaphoned) VALUES($user_id, '$title', '$post_slug', '$body','$meta_description', $published, '$image_path', now(), '$sound')";
+		$query = "INSERT INTO `posts` (user_id, post_title, post_slug, post_body, meta_description, published, image,image_caption, created_at, metaphoned) VALUES($user_id, '$title', '$post_slug', '$body','$meta_description', $published, '$image_path','$image_caption', now(), '$sound')";
 		
 		$result = mysqli_query($conn, $query);
 		if($result){ /* //if post created successful */
@@ -277,7 +282,7 @@ function createPost($request_values){
 }
 
 function editPost($role_id){
-	global $conn, $title, $post_slug, $body,$meta_description, $published,$image_file, $isEditingPost, $post_id, $topic_name, $topic_id;
+	global $conn, $title, $post_slug, $body,$meta_description, $published,$image_file, $image_caption, $isEditingPost, $post_id, $topic_name, $topic_id;
 	$sql = "SELECT * FROM `posts` WHERE post_id = $role_id LIMIT 1";
 	
 	$result = mysqli_query($conn, $sql);
@@ -287,15 +292,17 @@ function editPost($role_id){
 	$image_file = $post['image'];
 	$body = $post['post_body'];
 	$meta_description = $post['meta_description'];
+	$image_caption =$post['image_caption'];
 	$published = $post['published'];
 	$topic_name = getPublishedTopics($post['post_id'])['topic_name'];
 	$topic_id = getPublishedTopics($post['post_id'])['topic_id'];
 }
 function updatePost($request_values){
-	global $conn, $title, $post_slug, $body, $meta_description, $published, $isEditingPost, $post_id, $topic_id, $sound, $errors;
+	global $conn, $title, $post_slug, $body, $meta_description,$image_caption, $published, $isEditingPost, $post_id, $topic_id, $sound, $errors;
 	$title = htmlspecialchars(esc($request_values['title']));
 	$body = htmlspecialchars(esc($request_values['body']));
 	$meta_description = htmlspecialchars(esc($request_values['meta_description']));
+	$image_caption = htmlspecialchars(esc($request_values['image_caption']));
 	$post_id = esc($request_values['post_id']);
 	if(isset($request_values['topic_id'])){
 		$topic_id = esc($request_values['topic_id']);
@@ -348,7 +355,7 @@ function updatePost($request_values){
 	
 	/* //Udate if there are no errors */
 	if(!$errors){
-		$query = "UPDATE `posts` SET post_title='$title', post_slug='$post_slug', post_body='$body', meta_description='$meta_description', published=$published, image='$image_path', updated_at=now(), metaphoned='$sound' WHERE post_id=$post_id";
+		$query = "UPDATE `posts` SET post_title='$title', post_slug='$post_slug', post_body='$body', meta_description='$meta_description', published=$published, image='$image_path',image_caption='$image_caption', updated_at=now(), metaphoned='$sound' WHERE post_id=$post_id";
 		
 		/* //Attach topic to posts in post_topic table */
 		if(mysqli_query($conn, $query)){ 

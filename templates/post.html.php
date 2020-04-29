@@ -17,13 +17,16 @@ if(!isset($_SESSION)){
 ?>
 <!DOCTYPE html>
 <html lang="en">
-	<?php include __DIR__ .'/head.html.php';?>
-	
+	<?php include __DIR__ .'/head.html.php';?>	
 	<!-- Links for google code prettify both (.css and .js at bottom of page) files -->
-	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.css" />
 	<title><?php echo htmlspecialchars_decode($posts['post_title']) ;?> | Developers Pot</title>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e81b21589347a0019b87608&product=inline-share-buttons' async='async'></script>
+	
 </head>
 <body>
+<div id="fb-root"></div>
+
 	<header>
 		<?php include __DIR__ .'/header.html.php';?>
 	</header>
@@ -33,19 +36,36 @@ if(!isset($_SESSION)){
 				<h2>Topics</h2>
 				<?php include __DIR__ . '/published_posts_by_topics.html.php';?>
 				</div>
-			</aside><!--
-			--><section class='col-5-10'>
+		</aside><!--
+		--><section class='col-5-10'>
 			<!-- The title will be fetched from database -->
 			<h1><?php echo ucwords(htmlspecialchars_decode($posts['post_title'])) ;?></h1>
 			<div class="post-acreditation">  
 				<?php echo isset($posts['updated_at'])? 'Updated on '. date( 'F j, Y', strtotime($posts['updated_at'])): 'Published on '. date( 'F j, Y', strtotime($posts['created_at'])) ?>
 			</div>
-			<div class="post-main-image">
-				<?php echo (!empty($posts['image'])? '<img src="'.$posts['image'].'" alt="article image" class="article-post-image">':'')?>
+			<div class="social-media hide-in-bigger-screens">
+			<!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <?php include __DIR__ .'/social-icons-links.html.php';?>
+            
 			</div>
+			
+			<div class="post-main-image">
+				<figure>
+				<?php echo (!empty($posts['image'])? '<img src="'.$posts['image'].'" alt="article image" class="article-post-image">':'')?>
+				<figcaption><?php echo (!empty($posts['image_caption'])? $posts['image_caption']:'' ); ?></figcaption>
+				</figure>
+			</div>
+			
 			<div>				
 			<!-- The page content will be fetched from database -->
 			<?php echo htmlspecialchars_decode($posts['post_body']) ;?>
+				<div class="social-media">
+
+                <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                <?php include __DIR__ .'/social-icons-links.html.php';?>
+            
+				</div>
+				
 				<div>
 				<!-- Call to subscribe for notification -->
 				<?php  include __DIR__.'/subscribe.html.php';?>
@@ -66,6 +86,7 @@ if(!isset($_SESSION)){
 				<p><a href="post.html.php?id=<?php echo $latest_post['post_id'] ?>&title=<?php echo $latest_post['post_slug']?>"> <?php echo $latest_post['post_title'] ?></a></p>
 				<?php endforeach; ?>
 			</div>
+			
 		</aside><!--			
 			--><aside class="hide-in-bigger-screens">
 				<div class="published-topics">
@@ -75,19 +96,32 @@ if(!isset($_SESSION)){
 			</aside>
 	</main>
 	<footer class="group">
-			<span class="float-right">
+		<div class="align-center">
+			<p><a href="../policies/privacy-policy.php">Privacy policy</a></p>
+			<p><a href="../policies/terms-conditions.php">Terms & Conditions </a></p>
+			<p><a href="../policies/cookie-policy.php">Cookie policy</a></p>
+		</div>
+		<div class="group">
+			<span class="nav">
 				<?php include  __DIR__ .'/nav.html.php'; ?>	
 			</span>
-			<span class="float-left">
+			<span class="copyright">
 				<?php include __DIR__ . '/copyright.html.php';?>
-			</span> 
+			</span>
+			
+			<!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_follow_toolbox"></div>
+		</div>
 	</footer>
-	<!--<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script> -->
+	<!--for local server-->
+	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script> 
+	<!-- -->
 	<script src="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.js"></script>
-	<script src="<?php echo BASE_URL ?>/resources/js/menu-profile-controls.js"></script>
+	<script src="<?php echo BASE_URL ?>resources/js/page-control.js"></script>
 	<script src="<?php echo BASE_URL ?>resources/js/subscribe-comments-replies-scripts.js"></script>
-	<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>
 	<!-- This is for local offline server -->
 	<script>window.onload=function(){prettyPrint()}</script>
+	<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e8b3d1cdb759869"></script>
+	
 </body>
 </html>

@@ -25,7 +25,7 @@ if(!isset($_SESSION)){
 				</div>
 					<!--If user is logged in, provide a link to display reply textbox -->
 					<?php if(isset($_SESSION['loggedin'])): ?> 
-						<a href="#" data-id="<?php echo $comment['comment_id']; ?>" id="reply_btn_<?php echo $comment['comment_id']; ?>" class="reply-btn">Reply</a>
+						<button><a href="#" data-id="<?php echo $comment['comment_id']; ?>" id="reply_btn_<?php echo $comment['comment_id']; ?>" class="reply-btn">Reply</a></button>
 					<?php endif; ?>
 					<?php if($num_replies>0):?>
 					<a href="#" data-id="<?php echo $comment['comment_id']; ?>" id="reply_thread_<?php echo $comment['comment_id']; ?>" class="reply-thread">&#9660;</a><span><?php echo $num_replies; ?> Replies</span>

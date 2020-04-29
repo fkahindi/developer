@@ -1,0 +1,28 @@
+<div class="fb-share-button" data-href="https://developerspot.co.ke" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdeveloperspot.co.ke%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+
+FB.getLoginStatus(function(response) {
+		statusChangeCallback(response);
+	});
+    
+	{
+		status: 'connected',
+		authResponse: {
+			accessToken: '...',
+			expiresIn:'...',
+			signedRequest:'...',
+			userID:'...'
+		}
+	}
+	
+	
+<fb:login-button 
+  scope="public_profile,email"
+  onlogin="checkLoginState();">
+</fb:login-button>
+
+
+function checkLoginState() {
+  FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+  });
+}

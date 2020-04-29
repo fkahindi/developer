@@ -49,9 +49,9 @@ if($_SESSION['role'] !== 'Admin'){
 	</div>
 	
 </body>
-<!--
+<!-- For local only -->
 <script src="js/jquery-3.4.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
--->
+
 <script src="js/tooltip-call.js"></script>
 </html>

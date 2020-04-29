@@ -24,7 +24,7 @@
 		<div class="group">
 			<div class="login-signup">
 			<?php echo (!isset($_SESSION['loggedin']) || $_SESSION['loggedin']=== false)? 
-			'<a href="'.BASE_URL .'templates/login.html.php">Login </a><span>&nbsp;'
+			'<a href="'.BASE_URL .'templates/login.html.php">Login </a>&nbsp;'
 			: '' ?>
 			</div>	
 			<div class="account-photo-box tooltip ">

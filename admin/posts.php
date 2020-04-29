@@ -11,6 +11,7 @@
 	/* Load necessary functions */
 	include __DIR__ .'/includes/admin_functions.php';
 	include __DIR__ .'/includes/posts_functions.php';
+	include __DIR__ .'/../includes/comments_functions.php';
 
 ?>
 <!DOCTYPE html>
@@ -55,6 +56,7 @@
 									<th>SNo.</th>
 									<th>Author</th>
 									<th>Title</th>
+									<th>Comments</th>
 									<th>Views</th>
 									<!--Only Admin can publish/ unpublish posts  -->
 									<?php if($_SESSION['role']=='Admin'): ?>
@@ -70,6 +72,10 @@
 									<td><?php echo $post['post_id'] ?></td>
 									<td><?php echo $post['author'] ?></td>
 									<td><?php echo $post['post_title'] ?></td>
+									<td><?php
+									echo	getCommentCountByPostId($post['post_id']);
+									?>
+									</td>
 									<td><?php echo $post['views'] ?></td>
 									
 									<!--Only Admin can publish/ unpublish posts  -->

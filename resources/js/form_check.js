@@ -50,7 +50,7 @@ $('document').ready(function(){
 	var illegalChars = /[\(\)<>\,\;\:\\\"\[\]]/ ; /* // Check for illegal characters */
  	if (email === '') {
  		return;
- 	}else if(!!emailFilter.test(email)){
+ 	}else if(!emailFilter.test(email)){
 		email_state = false;
 		$('#email').parent().removeClass();
 		$('#email').parent().addClass("form_error");
@@ -85,14 +85,7 @@ $('document').ready(function(){
 	}
  		
  }); 
- /* $('#privacy-checkbox').on('change',function(){
-	if($(this).is(':checked')){
-		privacy_state === true;
-		$(this).siblings("span").text('');
-	}else{
-		privacy_state === false;
-	}		
- }); */
+ 
  $('#submit_btn').on('click', function(e){
 	 
 	 
