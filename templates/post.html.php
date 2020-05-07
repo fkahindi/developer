@@ -21,7 +21,7 @@ if(!isset($_SESSION)){
 	<!-- Links for google code prettify both (.css and .js at bottom of page) files -->
 	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.css" />
 	<title><?php echo htmlspecialchars_decode($posts['post_title']) ;?> | Developers Pot</title>
-	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e81b21589347a0019b87608&product=inline-share-buttons' async='async'></script>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5e81b21589347a0019b87608&product=inline-share-buttons' defer></script>
 	
 </head>
 <body>
@@ -51,7 +51,7 @@ if(!isset($_SESSION)){
 			
 			<div class="post-main-image">
 				<figure>
-				<?php echo (!empty($posts['image'])? '<img src="'.$posts['image'].'" alt="article image" class="article-post-image">':'')?>
+				<?php echo (!empty($posts['image'])? '<img src="'.$posts['image'].'" loading="lazy" alt="'.(!empty($posts['image_caption'])? $posts['image_caption']:'').'" class="article-post-image">':''); ?>
 				<figcaption><?php echo (!empty($posts['image_caption'])? $posts['image_caption']:'' ); ?></figcaption>
 				</figure>
 			</div>
@@ -95,22 +95,8 @@ if(!isset($_SESSION)){
 				</div>
 			</aside>
 	</main>
-	<footer class="group">
-		<div class="align-center">
-			<p><a href="../policies/privacy-policy.php">Privacy policy</a></p>
-			<p><a href="../policies/terms-conditions.php">Terms & Conditions </a></p>
-			<p><a href="../policies/cookie-policy.php">Cookie policy</a></p>
-		</div>
-		<div class="group">
-			<span class="nav">
-				<?php include  __DIR__ .'/nav.html.php'; ?>	
-			</span>
-			<span class="copyright">
-				<?php include __DIR__ . '/copyright.html.php';?>
-			</span>
-			
-			<!-- Go to www.addthis.com/dashboard to customize your tools --> <div class="addthis_inline_follow_toolbox"></div>
-		</div>
+	<footer>
+		<?php include __DIR__ .'/footer.html.php'?>
 	</footer>
 	<!--for local server-->
 	<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script> 

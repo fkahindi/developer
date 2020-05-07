@@ -92,11 +92,9 @@ figcaption{
 .errors ul{
 	margin-left:1em;
 }
-.nav{
-	float:right;
-}
-.copyright{
-	float:left;
+.nav, .copyright,.policies{
+	display:block;
+	text-align:center;
 }
 header, footer{
 	width:100%;
@@ -111,7 +109,7 @@ header  ul, nav span{
 	color:rgb(200,200,200);
 }
 footer{
-	padding:10px 40px;
+	background:rgb(5,5,5);
 	background:rgba(5,5,5, 0.4);
 }
 footer ul span{
@@ -413,6 +411,7 @@ pre{
 	-o-tab-size:1;
 	tab-size:1;
 	overflow-x:auto;
+	padding:10px 0;
 	margin: 0;
 }
 code{
@@ -436,12 +435,9 @@ p code{
 h1,h3,h4{
 	text-align:left;
 	padding-top:10px;
-	padding-left:10px;
-
 }
 h2{
 	padding-top:10px;
-	padding-left:10px;
 }
 h5{
 	padding:10px;
@@ -508,7 +504,12 @@ footer a{
 }
 .banner-bar {
 	font-family: Aladin;
-	color:white;
+}
+.banner-bar a{
+	color:rgb(255, 255,255);
+}
+.banner-bar a:hover{
+	color:rgb( 200, 200, 233);
 }
 nav a{
 	font-variant:small-caps;
@@ -852,17 +853,11 @@ pre{
 FOOTER SECTION
 ===================================
 */
-.nav, .copyright{
-	float:none;
-	display:block;
-}
 footer{
 	text-align:center;
-	padding:10px;
 }
 footer span{
 	float:none;
-	display:inline-block;
 }
 footer span:first-child{
 	padding-bottom:5px;
@@ -933,11 +928,6 @@ header{
 }
 .article-post-image{
 	height:18.75em;
-}
-.nav, .copyright{
-	float:none;
-	display:block;
-	text-align:center;
 }
 /*
 =================================================
@@ -1045,6 +1035,7 @@ header{
 .dropdown button{
 	display:none;
 }
+
 /*
 =================================================
 NAVIGATION & LINKS
@@ -1160,7 +1151,24 @@ header{
 	height:18.75em;
 }
 footer{
-	padding:5px 6.25em;
+	padding:5px;
+}
+.nav, .copyright, .policies{
+	margin:0;
+	padding:0;
+}
+.nav{
+	width:35%;
+	float:right;
+}
+.copyright{
+	width:25%;
+	float:left;
+}
+.policies{
+	float:right;
+	text-align:center;
+	width:40%;
 }
 /*
 =================================================
@@ -1395,6 +1403,23 @@ aside ul, aside ol{
 .article-post-image{
 	height:25em;
 }
+.nav, .copyright, .policies{
+	margin:0;
+	padding:10px 0;
+}
+.nav{
+	width:35%;
+	float:right;
+}
+.copyright{
+	width:25%;
+	float:left;
+}
+.policies{
+	float:right;
+	text-align:center;
+	width:40%;
+}
 /*
 =================================================
 HEADER SECTIONS
@@ -1592,6 +1617,24 @@ aside{
 }
 .article-post-image{
 	height:25em;
+}
+.nav, .copyright, .policies{
+	display:block;
+	margin:0;
+	padding-top:10px;
+}
+.nav{
+	width:35%;
+	float:right;
+}
+.copyright{
+	width:25%;
+	float:left;
+}
+.policies{
+	float:right;
+	text-align:center;
+	width:40%;
 }
 /*
 =================================================

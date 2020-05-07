@@ -1,23 +1,18 @@
 #
 Options +FollowSymlinks
+
 RewriteEngine On
 #
 # 1. Prevent listing of files in this folder
 #
 Options  -Indexes
 #
-#
+ErrorDocument 403 /spexproject/errors/new403.html
+ErrorDocument 404 /spexproject/errors/filenotfound.html
 # 2. Prevent processing of scripts
 #
 #Order deny,allow
 #Deny from all
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
- 
-RewriteRule ^posts/(\d+)*$ ./post.html.php?id=$1
-RewriteRule ^topics/(\d+)*$ ./topic_page.html.php?name=$1
- 
-RewriteRule ^search/(.*)$ ./search_result.php=$1
 
 
 

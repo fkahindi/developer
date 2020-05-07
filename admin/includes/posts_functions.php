@@ -34,6 +34,19 @@ function getAllPublishedPostIds(){
 		return null;
 	}	
 }
+/* Get 3 latest published posts in the posts table */
+function getThreeLatestPublishedPostIds(){
+	global $conn;
+	
+	$sql ="SELECT post_id FROM `posts` WHERE published =1 ORDER BY created_at DESC LIMIT 3";
+	$result = mysqli_query($conn, $sql);
+	if($result){
+		$published_post_id = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		return $published_post_id;
+	}else{
+		return null;
+	}	
+}
 /* Retrieve published topics using post_id of published posts */
 function getPublishedTopics($published_post_id){
 	global $conn;

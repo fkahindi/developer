@@ -37,6 +37,7 @@
 				<div><a href="posts.php">Manage posts</a></div>
 				<?php if($_SESSION['role']== 'Admin'):?>
 				<div><a href="users.php">manage users</a></div>
+				<div><a href="subscribers.php">manage subscribers</a></div>
 				<div><a href="topics.php">manage topics</a></div>
 				<?php endif ?>
 			</div>

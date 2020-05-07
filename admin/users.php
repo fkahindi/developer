@@ -39,6 +39,7 @@ $roles = ['Admin', 'Author', 'User'];
 				<div><a href="create_post.php">Create posts</a></div>
 				<div><a href="posts.php">Manage posts</a></div>
 				<div><a href="#">manage users</a></div>
+				<div><a href="subscribers.php">manage subscribers</a></div>
 				<div><a href="topics.php">manage topics</a></div>
 			</div>
 			<div class="col-md-3">

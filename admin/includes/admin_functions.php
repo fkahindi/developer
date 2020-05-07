@@ -177,7 +177,20 @@ function getUserRole($role_id){
 		return null;
 	}	
 }
-
+/*******************************************
+*--Returns first 20 subscribers
+********************************************/
+function getSubscribers(){
+	global $conn;
+	$sql ="SELECT * FROM `subscribers` WHERE subscribed=1 LIMIT 20";
+	$result = mysqli_query($conn, $sql);
+	if($result){
+		$subscribers = mysqli_fetch_all($result, MYSQLI_ASSOC);
+		return $subscribers;
+	}else{
+		return null;
+	}
+}
 /**************************************
 *-Escapes from submitted values
 *-to prevent mysql injection

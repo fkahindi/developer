@@ -8,7 +8,7 @@ require_once __DIR__ .'/config.php';
 	<!-- head section -->
 	<?php require_once __DIR__ .'/templates/head.html.php'; ?>
 	<!--// head section -->
-	<title>Developers Pot</title> 
+	<title>About | Who we are</title> 
 	</head>
 	<body>
 		<header>
@@ -19,9 +19,11 @@ require_once __DIR__ .'/config.php';
 				
 			</aside><!--
 			--><section class="col-5-10">
-				<h1>Developers Pot</h1><hr>
+				<h1>About Us</h1><hr>
 				<div>	
-					<p>Developerspot is a blog dedicated to sharing web development knowledge and skills with other web developers. It highlights <span class="key">web development technologies</span> and especially the nifty areas that may be tricky to new developers.  </p>
+					<p><em>Developing something that others find useful is great. But even greater is when what you are passionate about is helping others to be great.</em></p>
+					<p>Developerspot is a blogging site/ app dedicated to sharing web development trends and skills with those who aspire to start their journey in app development or are struggling along the way. On this blog we highlight technical areas that many take for granted but are challenging to the upcoming developers.</p>
+					<p>The comment system at the end of each post is a means to interact, share experiences and solve real problems. Creating a developers ecosystem where the experienced and novice form a symbiotic relationship for the betterment of the community is hard, but we encourage it. Signing up is being part of the ecosystem.</p>
 				</div>
 				
 			</section><!--			
@@ -35,12 +37,7 @@ require_once __DIR__ .'/config.php';
 			</aside>	
 		</main>
 		<footer class="group">
-				<span class="float-right">
-					<?php include  __DIR__ .'/templates/nav.html.php'; ?>	
-				</span>
-				<span class="float-left">
-					<?php include __DIR__ . '/templates/copyright.html.php';?>
-				</span>
+			<?php include __DIR__ .'/templates/footer.html.php'?>
 		</footer>
 		<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
 		<script src="<?php echo BASE_URL ?>resources/js/get-meta-keywords.js"></script>

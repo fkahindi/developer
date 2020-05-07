@@ -62,12 +62,7 @@ include __DIR__ .'/../admin/includes/admin_functions.php';
 			</aside>	
 		</main>
 		<footer class="group">
-				<span class="float-right">
-					<?php include  __DIR__ .'/nav.html.php'; ?>	
-				</span>
-				<span class="float-left">
-					<?php include __DIR__ . '/copyright.html.php';?>
-				</span>
+			<?php include __DIR__ .'/footer.html.php'?>
 		</footer>
 		<!--
 		<script src="<?php echo BASE_URL ?>resources/js/jquery-1.7.2.min.js"></script>
