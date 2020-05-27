@@ -18,8 +18,6 @@ changePassword();
 	<link rel="stylesheet" href="../resources/css/form.css">
 </head>
 <body>
-	<h4 class="errorMsg">You are about to change your password. </h4>
-	
 	<div id="reset">
 		
 		<div class="form_image">

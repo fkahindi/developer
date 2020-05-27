@@ -117,12 +117,6 @@ margin:0 auto;
 	font-weight:bold;
 	padding:10px 0;
 }
-h3{
-	text-align:left;
-}
-h4{
-	text-align:center;
-}
 #create-account ul,#reset ul, #upload ul  {
 	padding-left:10px;
 }
@@ -171,8 +165,7 @@ h4{
 form label, form input[type="submit"]{
 	font-size:1em;
 }
-
-@media only screen and (max-width:600px){
+@media only screen and (max-width:480px){
 .section,#create-account,#login, #recover,#reset, #upload, #subscribe{
 	max-width: 80%;
 }
@@ -241,16 +234,85 @@ form input[type="submit"]{
   font-size: 1em;
 }
 }
-@media only screen and (min-width:600px) and (max-width:768px){
+@media only screen and (min-width:480px)and (max-width:600px){
+.section,#create-account,#login, #recover,#reset, #upload, #subscribe{
+	max-width: 60%;
+}
+.section,#create-account,#login, #recover,#reset, #upload, #subscribe{
+padding: 0px 5px; 
+line-height: 16px;
+margin: 1.875em auto 1.25em auto;
+
+}
+#subscribe{
+	max-width: 80%;
+}
+#subscribe input[type="submit"]{
+	margin:15px auto 10px 0;
+}
+form input[type="submit"]{
+	width:95%;
+}
+.section{
+	margin:.9375em auto;
+	padding:.6em auto;
+}
+.comment form textarea{
+    	width:90%;
+}
+.comment form textarea{
+	border:thin solid #6D7B8D;
+	border-radius:5px;
+}
+.comment form input[type="submit"]{
+	width:5em;
+	height:2.5em;
+	border-radius:5px;
+	background:#6D7B8D;
+}
+.reply form input[type="submit"]{
+	width:5em;
+	height:1.875em;
+}
+.reply form textarea{
+	width:100%;
+}
+.reply .reply-text{
+	margin-left:1%;
+}
+.form_error span{
+	height: 20px;
+}
+.form_success span {
+  height: 20px;
+}
+/*
+*** TYPOGRAPHY ***
+*/
+.form-guidelines{
+	font-size:.7em;
+}
+.comment form input[type="submit"]{
+	font-weight:bold;
+	color:black;
+}
+.form_error span{
+	font-size: 1em;
+}
+.form_success span {
+  font-size: 1em;
+}
+}
+@media only screen and (min-width:600px){
 .section,#create-account,#login, #recover,#reset, #upload{
-max-width: 60%; 
+max-width: 23em; 
 }
 .section,#create-account,#login, #recover,#reset, #upload{ 
 padding: 0 15px 15px 15px;  
 margin: 35px auto 20px auto;
 }
 #subscribe{
-	max-width:80%;
+	max-width:90%;
 }
 #subscribe{
 	padding: 0 5px;
@@ -319,157 +381,4 @@ font-size:1em;
 .form_success span {
  font-size: 1.1em;
 }
-
-}
-@media only screen and (min-width:768px) and (max-width:992px){
-.section,#create-account,#login, #recover,#reset, #upload{
-	max-width:40%; 
-}
-.section,#create-account,#login, #recover,#reset, #upload{ 
-padding: 0 15px 15px 15px;  
-margin: 35px auto 20px auto;
-}
-#subscribe{
-	max-width:90%;
-}
-#subscribe{
-	padding: 0 5px;
-	line-height: 1em;
-	margin: 1.25em auto 1.25em auto;
-}
-form input[type="submit"]{
-	width:90%;
-}
-#subscribe input[type="submit"]{
-	margin-left:0;
-}
-.section{
-margin:20px auto;
-}
-.right-align{
-	position:relative;
-	left:35%;
-	text-align:right;	
-}
-.comment form textarea{
-	border:thin solid #6D7B8D;
-	border-radius:10px;
-}
-.comment form input[type="submit"]{
-	width:100px;
-	height:40px;
-	border-radius:5px;
-	background:#6D7B8D;
-	font-weight:bold;
-	color:black;
-}
-.reply form input[type="submit"]{
-	width:80px;
-	height:35px;
-	margin-left:70%;
-}
-.reply form textarea{
-	width:90%;
-}
-.reply-textarea{
-	margin-left:5%;
-}
-.form_error span{
-	height: 30px;
-}
-.form_success span {
-  height: 30px;
-}
-/*
-*** TYPOGRAPHY ***
-*/
-form input{ 
-font-size:1em;
-}
-
-.form-guidelines{
-	font-size:.8em;
-}
-.comment form input[type="submit"]{
-	font-weight:bold;
-	color:black;
-}
-.form_error span{
-	font-size: 1.1em;
-}
-.form_success span {
- font-size: 1.1em;
-}
-}
-
-@media only screen and (min-width:992px){
-#create-account,#login, #recover,#reset, #upload, #subscribe,.section{
-width: 23em; 
-}
-.section,#create-account,#login, #recover,#reset, #upload, #subscribe{ 
-padding: 0 15px 15px 15px;  
-margin: 35px auto 20px auto;
-}
-form input[type="submit"]{
-	width:90%;
-}
-#subscribe input[type="submit"]{
-	margin-left:0;
-}
-.section{
-	margin:20px auto;
-}
-.right-align{
-	position:relative;
-	left:35%;
-	text-align:right;	
-}
-.comment form textarea{
-	border:thin solid #6D7B8D;
-	border-radius:10px;
-}
-.comment form input[type="submit"]{
-	width:100px;
-	height:40px;
-	border-radius:5px;
-	background:#6D7B8D;
-	font-weight:bold;
-	color:black;
-}
-.reply form input[type="submit"]{
-	width:80px;
-	height:35px;
-	margin-left:70%;
-}
-.reply form textarea{
-	width:90%;
-}
-.reply-textarea{
-	margin-left:5%;
-}
-.form_error span{
-	height: 30px;
-}
-.form_success span {
-  height: 30px;
-}
-/*
-*** TYPOGRAPHY ***
-*/
-form input{ 
-font-size:1em;
-}
-.form-guidelines{
-	font-size:.8em;
-}
-.comment form input[type="submit"]{
-	font-weight:bold;
-	color:black;
-}
-.form_error span{
-	font-size: 1.1em;
-}
-.form_success span {
- font-size: 1.1em;
-}	
 }

@@ -2,7 +2,6 @@ $('document').ready(function(){
 	var username_state = false;
 	var email_state = false;
 	var privacy_state = false;
-	
 	$('#username').on('blur', function(){
 		var illegalChars = /\W/; /* Allow at least letters, numbers, and underscores */
 		var username = $('#username').val();

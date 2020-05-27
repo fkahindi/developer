@@ -3,21 +3,12 @@
 	<div class="banner-bar">
 		<a href="<?php echo BASE_URL ?>index.php">Developers Pot</a>
 	</div>
-	<!--Enclosing nav-bar -->
-	<div class="navigation-utilities-section">
-		<!--Search & other utilities bar -->
-		<div class="search-container">
-			<?php //include __DIR__ .'/search-form.html.php'; ?>
-		</div>
 		<!--Navigation bar follows-->
-		<div class="nav-bar dropdown">
-		<label for="menu-checkbox-control" class="dropdown-button">&#124;&nbsp;&#124;&nbsp;&#124;
-		<input type="checkbox" id="menu-checkbox-control">
-		</label>
-			<nav class="dropdown-content">
-			<?php require_once __DIR__ .'/nav.html.php'; ?>	
-			</nav>
-		</div>
+	<div class="nav-bar">
+		<div id="dropdown-menu-btn">&#9776;</div>
+		<nav class="dropdown-content">
+		<?php require_once __DIR__ .'/nav.html.php'; ?>	
+		</nav>
 	</div>
 		<!--Login and Search bars follows -->
 	<div class="log-account-section">

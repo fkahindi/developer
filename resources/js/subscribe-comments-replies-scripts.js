@@ -84,7 +84,6 @@ $('document').ready(function(){
 		}	
 	});
   /*
-  * The following are:
   *	Scripts to manage user comments on articles
   * Using the parent comments-container for events delegation
   */
@@ -112,7 +111,6 @@ $('document').ready(function(){
 		/* do nothing */
 	}
   });
-  
 	function submitComment(){
 		var user_id = $('#user_id').val();
 		var page_id = $('#page_id').val();
@@ -141,10 +139,8 @@ $('document').ready(function(){
 		}); 
 	}
   /*
-  ** The following are:
-  ** Scripts to manage replies to comments on articles
-  */
-	/* When user clicks reply link to add a reply under user's comment */
+  * Scripts to manage replies to comments on articles
+  * When user clicks reply link to add a reply under user's comment */
 	function showReplyForm(comment_id){		
 			
 		$('form#comment_reply_form_'+ comment_id).toggle(100);
@@ -152,7 +148,7 @@ $('document').ready(function(){
 		$('#reply_btn_'+comment_id).text($('#reply_btn_'+comment_id).text() == 'Reply' ? 'Cancel' : 'Reply');	
 	}
 	
-	/* //Posting a reply */
+	/*Posting a reply */
 	function postReply(comment_id){
 		var reply_textarea = $('#post_reply_'+ comment_id).siblings('.reply-textarea');
 		var reply_text = $('#post_reply_'+ comment_id).siblings('#reply_textarea_'+ comment_id).val();
@@ -183,7 +179,6 @@ $('document').ready(function(){
 			}
 		});
 	}	
-		
 	/* When user clicks Replies link replies of that comment are displayed */
 	function displayReplyThread(comment_id){
 		var thread_reply_id = comment_id;

@@ -4,7 +4,7 @@ if(!isset($_SESSION)){
 }
 include __DIR__ .'/../includes/process_form.php';
 if(isset($_POST['create-account'])){
-	createAccount();
+	//createAccount();
 }
 ?>
 <!doctype html>

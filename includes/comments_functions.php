@@ -30,7 +30,6 @@ function getCommentCountByPostId($id){
 	return $total;
 		
 }
-
 /* //Get users by id */
 function getUserById($id){
 	global $pdo;
@@ -43,7 +42,6 @@ function getUserById($id){
 	
 	return $sql->fetch();
 }
-
 /* //Getting replies by comment_id */
 function getRepliesByCommentId($id){
 	global $pdo;
@@ -57,7 +55,6 @@ function getRepliesByCommentId($id){
 	return $query->fetchAll();
 	
 }
-
 /* //Get number of replies in a comment */
 function getRepliesCountByCommentId($id){
 	global $pdo;

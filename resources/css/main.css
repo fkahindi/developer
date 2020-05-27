@@ -1,43 +1,3 @@
-/*
-==========================================================
-Browser display reset: Ensure cross-browser consistency
-==========================================================
- http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
-  License: none (public domain)
-*/
-
-html,body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-body {
-	background:white;
-	line-height: 1.3;
-}
-a{
-	text-decoration:none;
-}
 blockquote, q {
   quotes: none;
 }
@@ -45,23 +5,6 @@ blockquote:before, blockquote:after,
 q:before, q:after {
   content: '';
   content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-figcaption{
-	text-align:left;
-}
-/**********************
-** GENERAL STYLES	**
-**********************/
-*,
-*::before,
-*::after {
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
 }
 .errors{
 	padding:1em;
@@ -83,48 +26,18 @@ figcaption{
 .align-right{
 	text-align:right;
 }
-.align-center{
-	text-align:center;
-}
 .hidden{
 	display:none;
 }
 .errors ul{
 	margin-left:1em;
 }
-.nav, .copyright,.policies{
-	display:block;
-	text-align:center;
-}
-header, footer{
-	width:100%;
-}
-header, footer{
-	padding:0;		
-}
-header{
-	background:#293f50;
-}
+.banner-bar a:hover{color:rgb( 200, 200, 233);}
 header  ul, nav span{
 	color:rgb(200,200,200);
 }
-footer{
-	background:rgb(5,5,5);
-	background:rgba(5,5,5, 0.4);
-}
-footer ul span{
-	color:rgb(200,200,200);
-}
-footer a{
-	font-variant:small-caps;
-	text-decoration:none;
-	color:black;
-}
 footer a:hover{
 	color:rgb(240, 240,240);
-}
-footer li{
-	display:inline-table;
 }
 nav ul, .account-display-settings ul{
 	list-style:none;
@@ -133,15 +46,8 @@ nav ul li a{
 	padding:15px 10px;
 	color:rgb(250, 250,250);
 }
-main{
-	margin:0 auto;
-}
 .meta-description{
 	display:none;
-}
-main table, tr{
-	width:100%;
-	text-align:left;
 }
 main table th{
 	font-weight:bold;
@@ -150,9 +56,9 @@ main table th{
 main tbody tr:nth-child(even){
 	 background: #f0f0f2;
 }
-main table th, td{
-	padding:3px 10px;
-	border:thin solid rgb(200,200,200);
+main table td:first-child {
+	font-family:'Courier New', courier;
+	font-weight:bold;
 }
 .subscribe-section{
 	border:2px solid rgb(100,200,100);
@@ -163,17 +69,6 @@ main table th, td{
 	text-align:left;
 	line-height:1;
 }
-section{
-	padding:10px;
-	text-align:justify;
-}
-aside{
-	padding:10px;
-	text-align:left;
-}
-hr{
-	border:thin solid rgb(240,240,240);
-}
 .subscribe-section + hr{
 	margin-top:20px;
 	border: thin dashed #ADD8E6;
@@ -182,65 +77,17 @@ hr{
 	margin:0;
 	border:thin solid silver;
 }
-/**********************************
-** 		CLEARFIX				**
-***********************************/
-.group:before,
-.group:after{
-	content:"";
-	display: table;
-}
-.group:after{
-	clear:both;
-} 
-.group{
-	clear:both;
-	*zoom:1;
-} 
+
 /********************************
 ** STYLING FOR HEADER SECTIONS **
 *********************************/
 .log-account-section span{
 	color:rgb(256, 256,256);
 }
-.login-signup{
-	display:inline-block;
-	margin:0;
-	width:100%;
-}
 .login-signup a:hover{
 	text-decoration:underline;
 	font-weight:bold;
 	cursor:pointer;
-}
-.search-container{
-	display:block;
-	margin:0;
-	width:100%;
-}
-.search-container input[type=text] {
-     width:100%;
-}
-.search-container input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
-  background:inherit;
-  color:rgb( 200, 200, 233);
-  border:thin solid gray;
-}
-.search-container button {
-  padding: 6px 9px;
-  margin-top: 7px;
-  background:gray;
-  border:thin solid gray;
-  border-radius:0 5px 5px 0;
-  cursor: pointer;
-}
-.search-container button:hover {
-  background: #ccc;
-}
-.search-container span{
-	display:inline-block;
 }
 .image-photo{
 	border:3px solid #2b5959;
@@ -252,17 +99,10 @@ hr{
 /*************************
 ** STYLING FOR TOOLTIP	**
 **************************/
-
-/* Tooltip container */
-.tooltip{
-	position:relative;
-	display:inline-block;
-	top:10px;
-}
 /* Tooltip text */
 .tooltip .tooltip-text{
 	visibility:hidden;
-	width:140px;
+	width:8.75em;
 	background:rgb( 35, 35, 60);
 	color:#fff;
 	padding:5px 0;
@@ -282,7 +122,7 @@ hr{
 	font-size:90%;
 	line-height:1;
 	text-align:left;
-	padding:3px 5px;
+	padding:3px 10px;
 	color:rgb( 200, 200, 233);
 }
 .tooltip-text p:first-of-type{
@@ -398,118 +238,11 @@ button{
 div[class^="group replies_container_"] {
 	display:none;
 }
-
-/***************************************
-** STYLING FOR CODE DISPLAY SECTIONS  **
-****************************************/
-pre, pre code, samp{
-	display:block;
-	margin:0;
-}
-pre{
-	-moz-tab-size:1;
-	-o-tab-size:1;
-	tab-size:1;
-	overflow-x:auto;
-	padding:10px 0;
-	margin: 0;
-}
-code{
-	padding:0 2px;
-}
-main p{
-	text-align:justify;
-	padding:10px 0;
-}
-p code{
-	background:rgb(230,230,230);
-}
-.special-p{
-    padding:10px;
-    background:rgb(100,160,100);
-	background:rgba(100,160,100,.5);
-}
-.special-p code{
-	background:inherit;
-}
-h1,h3,h4{
-	text-align:left;
-	padding-top:10px;
-}
-h2{
-	padding-top:10px;
-}
-h5{
-	padding:10px;
-	line-height:1;
-}
-/******************************************
-**STYLING FOR DYNAMIC CONTENT ON INDEX PAGE
-******************************************/
-.paragraph-snippet{
-	padding:5px;
-	border:0 solid;
-	box-shadow:0 5px 5px grey; 
-}
-.post-acreditation{
-	padding-left:10px;
-	padding-bottom:10px;
-}
-.post-main-image{
-	width:80%;
-	margin:1.25em auto;
-}
-.article-index-image,.article-post-image{
-	width:100%;
-}
-
-/*********************************
-**STYLING FOR SIDEBARS (ASIDE) 	**
-**********************************/
-.published-topics ul{
-	list-style:none;
-	text-align:left;
-}
-.published-topics p,.recent-posts p{
-	padding:0;
-	text-align:left;
-}
-/*********************************
-**STYLING FOR SLIDESHOW 	**
-**********************************/
-
-/***************************************** 
-HIDE MENU CONTROLS FOR SMALL DEVICES ONLY
-******************************************/
-#menu-checkbox-control, .dropdown-button{
-	display:none;
-}
 /*****************************************
 	***			TYPOGRAPHY			****
 ******************************************/
 strong, b{
 	font-weight:bold;
-}
-em, i{
-	font-style:italic;
-}
-main{
-	font-family:'Hind Vadodara', sans-serif;
-}
-header, footer{
-	font-family:Calibri, sans-serif;		
-}
-footer a{
-	font-size:.8em;
-}
-.banner-bar {
-	font-family: Aladin;
-}
-.banner-bar a{
-	color:rgb(255, 255,255);
-}
-.banner-bar a:hover{
-	color:rgb( 200, 200, 233);
 }
 nav a{
 	font-variant:small-caps;
@@ -522,9 +255,6 @@ nav ul li a:hover{
 .login-signup span{
 	color:rgb(200,200,200);
 }
-.login-signup a{
-	color:rgb( 200, 200, 233);
-}
 .account-display-settings a{
 	font-size:1em;
 	text-align:left;
@@ -533,44 +263,6 @@ nav ul li a:hover{
 .account-display-settings a:hover{
 	color:#fff;
 }
-.search-container input[type=text], .search-container button{
-	font-size: 100%;
-}
-h1, h2, h3,h4{
-	font-family: 'Carrois Gothic SC', sans-serif;
-	font-weight:bolder;
-}
-h1{
-	font-size:1.5em;
-	color:#071418;
-}
-h2{
-	font-size:1.3em;
-	color:#071418;
-}
-h3{
-	font-size:1.3em;
-	color:rgb(5,10,50);
-}
-h3 a{
-	color:rgb(5,10,50);
-}
-h4{
-	font-size:1.2em;
-	text-align:left;
-}
-main table td:first-child {
-	font-family:'Courier New', courier;
-	font-weight:bold;
-}
-main ul, ol{
-	text-indent: 10px;
-	padding-left: 1.875em;
-}
-main ul{
-	list-style:disc;
-}
-
 .comments-container p{
 	font-size:100%;
 }
@@ -596,188 +288,57 @@ main ul{
 .pagination .load-prev{
 	display:none;
 }
-.paragraph-snippet{
-	font-family:'Hind Vadodara',sans-serif;
-	font-size:90%;
-	line-height:1;
-}
-.published-topics ul li{
-	font-size:.9em;
-	color:rgb(5,10,50);
-}
-.published-topics ul ul li,.recent-posts p{
-	font-size:.9em;
-}
-.recent-posts a,.published-topics a{
-	color:#616D7E;
-}
 .recent-posts a:hover,.published-topics a:hover{
 	text-decoration:underline;
 	color:#2B3856;
 	padding-left:5px;
 }
-.post-acreditation{
-	color:gray;
-	font-size:0.875em;
-}
-code{
-	font-family:'Courier New',Courier;
-	font-size:1em;
-	color:#000;
-}
-pre{
-	font-size:1.2em;
-}
 .subscribe-section p{
 	font-size:.9em;
 }
-
+h3 a{color:rgb(5,10,50);}
 @media only screen and (max-width: 600px){
-/* 
---------------------------------------------
+/*--------------------------------------------
 EXTRA SMALL DEVICES (PHONES 600PX AND DOWN) 
---------------------------------------------
-*/
-
-/* 
-================================================
-LAYOUT
-================================================
- */
-[class*="col-"]{
-	width:100%
-}
-.hide-in-mobile{
-	display:none;
-}
-/* 
-===================================================
+--------------------------------------------*/
+/*===================================================
 HEADER AND SECTIONS
-===================================================
-*/
-header{
-	width:100%;
-	height:60px;
-	}
-header{
-	position:sticky;
-	top:0;
-	}
-.banner-bar {
-	text-align:left;
-	padding-top:.5em;
+===================================================*/
+.tooltip .tooltip-text{
+	left:60%;
 }
-.search-container{
-	position:absolute;
-	top:0;
-	display:block;
-	text-align:center;
-	height:20px;
-}
-.search-container input[type=text] {
-  padding: 3px;
-  margin-top: 3px;
-}
-.search-container button {
-  padding: 3px 9px;
-  margin-left:-25px;
-  margin-top: 3px;
-  border-radius:0 5px 5px 0;
-}
-.banner-bar, .log-account-section{
-	display:block;
-	height:30px;
-	padding:0;
-}
-.banner-bar{
-	width:100%;
-}
-.banner-bar{
-	margin:0;
-	text-align:left;
-	padding-top:0.625em;
-	padding-left:35%;
-}
-.log-account-section{
-	width:100%;
-}
-.log-account-section{
-	padding:0 0.625em;
-	text-align:right;
-	padding-right:10%;
+.tooltip .tooltip-text{		
+	margin-left:-5.5em;
 }
 .account-display-settings{
-	margin-left:-6.8em; 
+	position:relative;
+	top:2px;
+	right:2.8125em;
 }
 .account-display-settings ul li{
-	padding:2px 0px 2px 20px;
-}
-.account-photo-box{
-	width:25%;
-	height:1.875em;
-}
-.account-photo-box{
-	position:absolute;
-	top:0;
-	left:65%;
-	text-align:right;
-	padding:5px 5px;
+	padding:2px 0 2px 20px;
 }
 .image-photo{
     height:2.2em;
 	width:2.2em;
 }
-
-/* 
-===========================================
+/*===========================================
 NAVIGATION MENU: FOR MOBILE 
-===========================================
-*/
-.dropdown {
-    position: absolute;
-    display: inline-block;
-	top:0;
-	left:0;
-}
-.dropdown-button {
-    height: 100%;
-}
-.dropdown-button {
-	display:block;
-    background-color: #293f50;
-    color: white;
-    padding: 1em;
-    border: none;
-    cursor: pointer;
-	-webkit-transform: rotate(90deg);
-    -o-transform: rotate(90deg); 
-    -moz-transform: rotate(90deg);
-	-ms-transform: rotate(90deg);
-	transform: rotate(90deg);
-}
-.dropdown-content {
-    display: none;
-    position: absolute;
-	min-width: 12.5em;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index: 1;	
-}
+===========================================*/
 .dropdown-content a {
     color:rgb( 200, 200, 233);
-    padding: 5px 10px;
     text-decoration: none;
     display: block;
 	text-align:left;
 }
 .dropdown-content li{
 	background:rgb( 35, 35, 60);
+	font-size:1.2em;
+	padding: 5px 10px;
 	}
 .dropdown-content a:hover {
 	color:rgb( 200, 200, 233);
 	}
-.dropdown-button:hover{
-	background:rgb( 35, 35, 60);
-}
 nav a{
 	font-variant:normal;
 }
@@ -787,54 +348,20 @@ nav ul li a:hover{
 nav ul>span{
 	display:none;
 }
-/* 
-====================================
-TOOL TIP
-====================================
- */
-.tooltip .tooltip-text{		
-	margin-left:-4.5em;
+#dropdown-menu-btn{
+		font-size: 1.625em;
+	}
+.closebtn{
+	font-size:1.75em;
 }
-.tooltip-text p{
-	padding:3px 10px;
-}
-/* 
-=====================================
+/*=====================================
 MAIN SECTION
-=====================================
-*/
-section, aside{
-    width:100%;
-}
-section, aside{
-	padding:5px;
-}
-aside{
-	text-align:left;
-}
-aside ul, aside ol{
-	text-indent: 0;
-	padding: 0;
-}
+=====================================*/
 .social-media{
 	padding-left:10px;
 }
-main p{
-	text-align:left;
-	padding:10px;
-}
 main .special-p{
     padding:10px;
-}
-.post-main-image{
-	width:70%;
-	margin:10px auto;
-}
-.article-index-image{
-	height:9.375em;
-}
-.article-post-image{
-	height:15.625em;
 }
 .comment-text{
 	text-align:left;
@@ -848,233 +375,61 @@ main .special-p{
 pre{
 	padding-left:0;
 }
-/* 
-===================================
+/*===================================
 FOOTER SECTION
-===================================
-*/
-footer{
-	text-align:center;
-}
-footer span{
-	float:none;
-}
+===================================*/
 footer span:first-child{
 	padding-bottom:5px;
 }
-/* 
-===================================
-TYPOGRAPHY
-===================================
-*/
-.search-container input[type=text],.search-container button {
-  font-size: 0.75em;
-}
-.banner-bar{
-	font-size:1.4em;
-}
-.login-signup{
-	font-size:.9em;
-}
-.dropdown-button {
-	font-family:sans-serif, calibri;
-    font-size: 1em;
-}
-main p{
-	font-size:1.1em;
-}
-.post-acreditation{
-	font-size:.7em;
+footer ul li{
+	padding-top:5px;
+	padding-bottom:10px;
 }
 .reply-thread, .reply-btn{
 	font-size:0.9em;
 }
 }
-
-@media only screen and (min-width:600px) and (max-width:768px) {
-/*
-----------------------------------------------------------
+@media only screen and (min-width:601px) and (max-width:768px){
+/*----------------------------------------------------------
 SMALL DEVICES (PORTRAIT TABLETS AND LARGE PHONES, 600PX AND ABOVE)
-----------------------------------------------------------
-*/
-/*
-=====================================
+----------------------------------------------------------*/
+/*=====================================
 	GENERAL LAYOUT
-=====================================
-*/
-body{
-	font-size:100%;
-}
-[class*="col-"]{
-	width:100%
-}
-main{
-	width:90%
-}
-.hide-in-mobile{
-	display:none;
-}
-header{
-	height:4.375em;
-}
+=====================================*/
 .subscribe-section{
 	margin:5px 10%;	
 }
-.post-main-image{
-	width:60%;
-}
-.article-index-image{
-	height:12.5em;
-}
-.article-post-image{
-	height:18.75em;
-}
-/*
-=================================================
+/*=================================================
 	HEADER AND SECTIONS
-=================================================
-*/
-.banner-bar, .navigation-utilities-section, .log-account-section{
-    display:block;
-    height:4.375em;
+==================================================*/
+/* Position the tooltip text */
+.tooltip .tooltip-text{
+	left:50%;
 }
-.banner-bar, .navigation-utilities-section, .log-account-section{
-	margin:0;
-	padding:0;
-	vertical-align:top;
-}
-.banner-bar{
-	float:left;
-	width:25%;
-}
-.banner-bar{
-	text-align:center;
-	padding-top:.5em;
-}
-.banner{
-    width:90%; 
-	height:40%;
-}
-.banner{
-	padding-top:0;
-	padding-left:5px;
-}
-.navigation-utilities-section{
-	float:left;
-	width:45%;
-}
-.search-container, .nav-bar{
-	text-align:center;
-}
-.nav-bar{
-	height:2.5em;
-}
-.search-container{
-	height:1.875em;
-}
-.search-container input[type=text] {
-  padding: 3px;
-  margin-top: 5px;
-}
-.search-container button {
-  padding: 3px 9px;
-  margin-left:-25px;
-  margin-top: 5px;
-  border-radius:0 5px 5px 0;
-}
-.log-account-section{
-    float:right;
-	width:30%;
-}
-.log-account-section{
-	text-align:right;
-	padding-right:7px;
-	z-index:0;
-}
-.login-signup{
-	position:absolute;
-	right:0;
-	z-index:1;
-	padding:10px 5px;
+.tooltip .tooltip-text{		
+	margin-left:-2.1em;
 }
 .account-display-settings{
 	position:relative;
 	top:2px;
 	right:0;
+	left:15%;
 }
 .account-display-settings ul li{
 	padding:2px 0 2px 20px;
-}
-.account-photo-box{
-	width:30%;
-	height:2.1875em;
-	position:absolute;
-	top:5px;
-	right:0;
-	z-index:0;
-}
-.account-photo-box{
-    float:right;
-}
-.account-photo-box{
-	display:inline-block;
-	margin-right:0;
-	padding:5px;
-	text-align:right;
 }
 .image-photo{
     height:2.5em;
 	width:2.5em;
 }
-.tooltip .tooltip-text{		
-	margin-left:-2.1em;
-}
-.tooltip-text p{
-	padding:3px 10px;
-}
-.dropdown button{
-	display:none;
-}
-
-/*
-=================================================
-NAVIGATION & LINKS
-=================================================
-*/
-nav{
-	text-align:center;
-	margin: 0;
-	padding: 5px 0;
-}
-nav ul{
-	text-align:center;
-}
-nav li{
-	display:inline-block;
-	padding:0;
-}
-nav ul li a{
-	padding:8px 2px;
-}
-aside{
-	text-align:left;
-	padding-left:10px;
-}
-aside ul, aside ol{
-	text-indent: 0;
-	padding: 0;
-}
-	
-/*
-=================================================
+/*=================================================
 TYPOGRAPHY
-=================================================
-*/
-.search-container input[type=text] {
-  font-size: 14px;
+=================================================*/
+.banner-bar{
+	font-size:1.3em;
 }
-.search-container button {
-  font-size: 14px;
+.nav-bar{
+	font-size:1.1em;
 }
 .account-display-settings{
 	font-size:.8em;
@@ -1082,167 +437,20 @@ TYPOGRAPHY
 .account-display-settings ul li{
 	font-size:1.2em;
 }
-nav{
-	font-size:1.3em;
-}
-nav ul li a{
-	font-size:70%;
-}
-main p, li{
-	font-size:1.1em;
-}
-
-.banner-bar{
-	font-size:1.5em;
-}
-.login-signup{
-	font-size:.9em;
-}
-
-/* 
-===================================
-CODE SECTIONS
-===================================
- */
  pre{
 	padding-left:0;
 }
 }
-@media only screen and (min-width:768px) and (max-width:992px){
-/*
-------------------------------------------------
+@media only screen and (min-width:769px) and (max-width:992px){
+/*------------------------------------------------
 MEDIUM DEVICES (LANDSCAPE TABLETS, 768px and up)
--------------------------------------------------
-*/
-
-/*
-===========================================
-PAGE GRID
-==========================================
-*/
-.col-1-10,.col-2-10,.col-3-10,.col-4-10,.col-5-10,.col-6-10,.col-7-10,.col-8-10,
-.col-9-10{
-	display: inline-block;
-	vertical-align: top;
-	float:left;
-}
-.col-1-10{width:10%;}.col-2-10{width:20%;}.col-3-10{width:30%;}.col-4-10{width:40%
-}.col-5-10{width:50%;}.col-6-10{width:60%;}.col-7-10{width:70%;}.col-8-10{width:80%;}.col-9-10{width:90%;}
-main{
-	width:100%;
-}
-section,aside{
-	display:inline-block;
-}
-.hide-in-bigger-screens{
-	display:none;
-}
-header{
-	height:70px;
-	margin:0;
-}
+-------------------------------------------------*/
 .subscribe-section{
 	margin:5px 2.5%;	
 }
-.article-index-image{
-	height:12.5em;
-}
-.article-post-image{
-	height:18.75em;
-}
-footer{
-	padding:5px;
-}
-.nav, .copyright, .policies{
-	margin:0;
-	padding:0;
-}
-.nav{
-	width:35%;
-	float:right;
-}
-.copyright{
-	width:25%;
-	float:left;
-}
-.policies{
-	float:right;
-	text-align:center;
-	width:40%;
-}
-/*
-=================================================
+/*=================================================
 HEADER AND SECTIONS
-=================================================
-*/
-.banner-bar, .navigation-utilities-section, .log-account-section{
-    display:block;
-	height:4.375em;
-}
-.banner-bar, .navigation-utilities-section, .log-account-section{
-	margin:0;
-	padding:0;
-	vertical-align:top;
-}
-.banner-bar{
-	float:left;
-	width:25%;
-}
-.banner-bar{
-	text-align:center;
-	font-size:1.5em;
-}
-.banner{
-    width:80%; 
-	height:60%;
-	
-}
-.navigation-utilities-section{
-	float:left;
-	width:45%;
-}
-.search-container, .nav-bar{
-	height:35px;
-	text-align:center;
-}
-.search-container input[type=text] {
-  padding: 3px;
-  margin-top: 5px;
-  font-size: 14px;
-}
-.search-container button {
-  padding: 3px 9px;
-  margin-left:-25px;
-  margin-top: 5px;
-  font-size: 14px;
-  border-radius:0 5px 5px 0;
-}
-.log-account-section{
-    float:right;
-	width:30%;
-}
-.log-account-section{
-	text-align:right;
-	padding-right:7px;
-	z-index:0;
-}
-.login-signup{
-	position:absolute;
-	right:0;
-	z-index:1;
-	padding:10px 5px;
-}
-.login-signup{
-	padding-top:10px;
-}
-.account-photo-box{
-	width:25%;
-	height:2.1875em;
-	position:absolute;
-	top:5px;
-	right:0;
-	z-index:0;
-}
+=================================================*/
 .account-photo-box{
 	display:inline-block;
 	float:right;
@@ -1265,73 +473,11 @@ HEADER AND SECTIONS
 .tooltip .tooltip-text{		
 	margin-left:-1.9em;
 }
-.tooltip-text p{
-	padding:3px 10px;
-}
-.dropdown button{
-	display:none;
-}
-
-/*
-===================================
-NAVIGATION & LINKS
-===================================
-*/
-nav{
-	margin:0 ;
-	text-align:left;
-	padding-top:0;
-	padding-bottom:5px;
-}
-nav ul{
-	text-align:center;
-}
-nav li{
-	display:inline-block;
-	padding:0;
-}
-nav ul li a{
-	padding:8px 2px;
-}
-section{
-	padding:0 3%;
-}
-aside{
-	padding-left:1.25em;
-	text-align:left;
-}
-aside ul, aside ol{
-	text-indent: 0;
-	padding:0;
-}
-.icon-bar {
-  position: fixed;
-  top: 60%;
-  right:0;
-  -webkit-transform: translateY(-50%);
-   -moz-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-.icon-bar a {
-  display: block;
-  transition: all 0.3s ease;
-}
-/*
-===================================
+/*===================================
 TYPOGRAPHY
-===================================
-*/
-
-nav{
-	font-size:1.3em;
-}
-nav ul li a{
-	font-size:80%;
-}
-.login-signup{
-	font-size:1.1em;
+====================================*/
+.banner-bar{
+		font-size:1.8em;
 }
 .account-display-settings{
 	font-size:.9em;
@@ -1339,378 +485,20 @@ nav ul li a{
 .account-display-settings ul li{
 	font-size:1.2em;
 }
-main p, li{
-	font-size:1em;
-}
 pre{
 	padding-left:1em;
 }
 }
-
-@media only screen and (min-width:992px) and (max-width:1200px){
-/*
-----------------------------------------------------
+@media only screen and (min-width:993px) and (max-width:1200px){
+/*--------------------------------------------------
 LARGE DEVICES (LAPTOPS AND DESKTOPS 992PX AND ABOVE)  
----------------------------------------------------
-*/
-/*
-===========================================
-PAGE GRID 
-==========================================
-*/
-.col-1-10,.col-2-10,.col-3-10,.col-4-10,.col-5-10,.col-6-10,.col-7-10,.col-8-10,
-.col-9-10{
-	display: inline-block;
-	vertical-align: top;
-	float:left;
-}
-.col-1-10{width:10%;}.col-2-10{width:20%;}.col-3-10{width:30%;}.col-4-10{width:40%
-}.col-5-10{width:50%;}.col-6-10{width:60%;}.col-7-10{width:70%;}.col-8-10{width:80%;}.col-9-10{width:90%;}
-.hide-in-bigger-screens{
-	display:none;
-}
-main{
-	width:95%;
-	padding:5px;
-	margin: 0 auto;
-}
-header{
-	width:100%;
-	height:6.25em;
-	margin:0;
-}
-section,aside{
-	display:inline-block;
-}
-section{
-	padding:0 10px;
-}
-
-aside{
-	padding-left:10px;
-	text-align:left;
-}
-aside ul, aside ol{
-	text-indent: 0;
-	padding: 0;
-}
+---------------------------------------------------*/
 .subscribe-section{
 	margin:5px 5%;	
 }
-.article-index-image{
-	height:12.5em;
-}
-.article-post-image{
-	height:25em;
-}
-.nav, .copyright, .policies{
-	margin:0;
-	padding:10px 0;
-}
-.nav{
-	width:35%;
-	float:right;
-}
-.copyright{
-	width:25%;
-	float:left;
-}
-.policies{
-	float:right;
-	text-align:center;
-	width:40%;
-}
-/*
-=================================================
+/*=================================================
 HEADER SECTIONS
-=================================================
-*/
-.banner-bar, .navigation-utilities-section, .log-account-section{
-	display:block;
-	margin:0;
-	padding:0;
-	vertical-align:top;
-}
-.banner-bar{
-	float:left;
-	width:20%;
-}
-.banner-bar{
-	text-align:right;
-	padding-top:.5em;
-	font-size:1.8em;
-}
-.banner{
-	width:80%; 
-	height:60%;
-}
-.banner{
-	padding-top:5px;
-	padding-left:20px;
-}
-.navigation-utilities-section{
-	float:left;
-	width:50%;
-}
-.search-container, .nav-bar{
-	height:50px;
-	text-align:center;
-}
-.search-container button {
-	margin-left:-25px;
-}
-.log-account-section{
-	float:right;
-	width:30%;
-	text-align:right;
-	padding-right:7px;
-	z-index:0;
-}
-.login-signup{
-	position:absolute;
-	right:0;
-	z-index:1;
-	padding:10px 5px;
-}
-.login-signup{
-	padding-top:10px;
-}
-.account-photo-box{
-	width:20%;
-	height:2.1875em;
-	position:absolute;
-	top:5px;
-	right:0;
-	z-index:0;
-}
-.account-photo-box{
-	display:inline-block;
-	float:right;
-	margin-right:0;
-	padding:5px;
-	text-align:right;
-}
-.image-photo{
-	height:3em;
-	width:3em;
-}
-.account-display-settings{
-	position:relative;
-	top:0;
-	right:0;
-}
-.account-display-settings ul li{
-	padding:2px 0px 2px 20px;
-}
-.tooltip .tooltip-text{		
-	margin-left:-1.45em;
-}
-.tooltip-text p{
-	padding:3px 10px;
-}
-.dropdown button{
-	display:none;
-}
-
-/*
-=================================================
-NAVIGATION & LINKS
-=================================================
-*/
-nav{
-	margin:0 ;
-	text-align:left;
-	padding-top:10px;
-	padding-bottom:5px;
-	font-size:90%;
-}
-nav ul{
-	text-align:center;
-}
-nav li{
-	display:inline-block;
-}
-nav ul li a{
-	padding:10px 2px;
-}
-.icon-bar {
-  position: fixed;
-  top: 60%;
-  right:0;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-.icon-bar a {
-  display: block;
-  transition: all 0.3s ease;
-  color: white;
-}
-/*
-===========================================
-TYPOGRAPHY
-==========================================
-*/
-.login-signup{
-	font-size:1.2em;
-}
-.account-display-settings{
-	font-size:.9em;
-}
-.account-display-settings ul li{
-	font-size:1.2em;
-}
-main p, li{
-	font-size:1.2em;
-}
-.published-topics ul ul li{
-	font-size:.8em;
-}
-pre{
-	padding-left:1em;
-}
-}
-@media only screen and (min-width:1200px) {
-/*
-----------------------------------------------------------------
-EXTRA LARGE DEVICES (LARGE LAPTOPS AND DESKTOPS, 1200PX AND UP)
------------------------------------------------------------------
-*/
-/*
-===========================================
-PAGE GRID 
-==========================================
-*/
-.col-1-10,.col-2-10,.col-3-10,.col-4-10,.col-5-10,.col-6-10,.col-7-10,.col-8-10,
-.col-9-10{
-	display: inline-block;
-	vertical-align: top;
-	float:left;
-}
-.col-1-10{width:10%;}.col-2-10{width:20%;}.col-3-10{width:30%;}.col-4-10{width:40%
-}.col-5-10{width:50%;}.col-6-10{width:60%;}.col-7-10{width:70%;}.col-8-10{width:80%;}.col-9-10{width:90%;}
-.hide-in-bigger-screens{
-	display:none;
-}
-main{
-	width:90%;
-	margin: 0 auto;
-}
-header{
-	height:120px;
-	margin:0;
-}
-section{
-	padding:0 20px;
-}
-aside{
-	padding-left:0;
-	text-align:left;
-}
-.subscribe-section{
-	margin:10px 10%;
-}
-.article-index-image{
-	height:18.75em;
-}
-.article-post-image{
-	height:25em;
-}
-.nav, .copyright, .policies{
-	display:block;
-	margin:0;
-	padding-top:10px;
-}
-.nav{
-	width:35%;
-	float:right;
-}
-.copyright{
-	width:25%;
-	float:left;
-}
-.policies{
-	float:right;
-	text-align:center;
-	width:40%;
-}
-/*
-=================================================
-HEADER SECTIONS
-=================================================
-*/	
-.banner-bar, .navigation-utilities-section, .log-account-section{
-	display:block;
-	height:120px;
-	margin:0;
-}
-.banner-bar, .navigation-utilities-section, .log-account-section{
-	padding:0;
-	vertical-align:top;
-}
-.banner-bar{
-	float:left;
-	width:25%;
-}
-.banner-bar{
-	text-align:right;
-	padding-top:.5em;
-	font-size:2.4em;
-}
-.banner{
-	width:60%; 
-	height:60%;
-}
-.banner{
-	padding-top:5px;
-	padding-left:20px;
-}
-.navigation-utilities-section{
-	float:left;
-	width:55%;
-}
-.search-container, .nav-bar{
-	height:60px;
-	text-align:center;
-}
-.search-container button {
-	margin-left:-25px;
-}
-.log-account-section{
-	float:right;
-	width:20%;
-}
-.log-account-section{
-	text-align:right;
-	padding-right:7px;
-	z-index:0;
-}
-.login-signup{
-	position:absolute;
-	right:0;
-	z-index:1;
-	padding:10px 5px;
-}
-.login-signup{
-	padding-top:10px;
-}
-.account-photo-box{
-	width:18%;
-	height:2.1875em;
-	position:absolute;
-	top:5px;
-	right:0;
-	z-index:0;
-}
-.account-photo-box{
-	display:inline-block;
-	float:right;
-	margin-right:0;
-	padding:5px;
-	text-align:right;
-}
+==================================================*/
 .image-photo{
 	height:3em;
 	width:3em;
@@ -1726,31 +514,57 @@ HEADER SECTIONS
 .tooltip .tooltip-text{		
 	margin-left:-1em;
 }
-.tooltip-text p{
-	padding:3px 10px;
+/*===========================================
+TYPOGRAPHY
+==========================================*/
+.banner-bar{
+	font-size:1.8em;
 }
-.dropdown button{
-	display:none;
+.account-display-settings{
+	font-size:.9em;
+}
+.account-display-settings ul li{
+	font-size:1.2em;
+}
+.published-topics ul ul li{
+	font-size:.8em;
+}
+pre{
+	padding-left:1em;
+}
+}
+@media only screen and (min-width:1200px) {
+/*------------------------------------------------------------
+EXTRA LARGE DEVICES (LARGE LAPTOPS AND DESKTOPS, 1200PX AND UP)
+-------------------------------------------------------------*/
+/*===========================================
+PAGE GRID 
+==========================================*/
+.subscribe-section{
+	margin:10px 10%;
 }
 
-/*
-=================================================
+/*=================================================
+HEADER SECTIONS
+=================================================*/	
+.image-photo{
+	height:3em;
+	width:3em;
+}
+.account-display-settings{
+	position:relative;
+	top:0;
+	right:0;
+}
+.account-display-settings ul li{
+	padding:2px 0px 2px 20px;
+}
+.tooltip .tooltip-text{		
+	margin-left:-1em;
+}
+/*=================================================
 NAVIGATION & LINKS
-=================================================
-*/
-nav{
-	margin:0 auto;
-	text-align:left;
-	padding-top:10px;
-	padding-bottom:10px;
-}
-nav ul{
-	text-align:center;
-}
-nav li{
-	display:inline-block;
-}
-
+==================================================*/
 main ul, main ol{
 	text-indent: 20px;
 	padding: 10px 40px;
@@ -1762,43 +576,19 @@ aside ul, aside ol{
 	text-indent: 0;
 	padding: 0;
 }
-.icon-bar {
-  position: fixed;
-  top: 60%;
-  right:0;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-.icon-bar a {
-  display: block;
-  transition: all 0.3s ease;
-  color: white;
-  
-}
-/*
-===========================================
+/*===========================================
 TYPOGRAPHY
-==========================================
-*/
+============================================*/
 .account-display-settings{
 	font-size:.8em;
 }
 .account-display-settings ul li{
 	font-size:1.3em;
 }
-main p, main li{
-	font-size:1.3em;
-}
 .banner-bar{
 	font-size:2.2em;
 }
-.login-signup{
-	font-size:1.2em;
-}
-.navigation-utilities-section{
+.nav-bar{
 	font-size:1.2em;
 }
 .published-topics ul ul li{

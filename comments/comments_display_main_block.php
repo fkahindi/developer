@@ -66,7 +66,6 @@ if(!isset($_SESSION)){
 			</div>
 		</div>
 		<?php endforeach; ?>
-		<!--Display form comments using AJAX below here -->
-				
+		<!--Display form comments using AJAX below here -->	
 	</div>
 	<?php endif ?>
