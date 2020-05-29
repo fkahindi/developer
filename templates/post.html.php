@@ -254,7 +254,6 @@ main ul{
 		top: 0;
 		right: 10px;
 		color:white;
-		
 	}	
 	header{
 		position:sticky;
@@ -312,7 +311,7 @@ main p{
 	padding:10px;
 }
 .post-main-image{
-	width:70%;
+	width:60%;
 	margin:10px auto;
 }
 .article-index-image{
@@ -795,7 +794,7 @@ main p, main li{
 	<meta name="description" content="<?php echo (isset($posts['meta_description'])? htmlspecialchars_decode($posts['meta_description']):''); ?>" />
 	<?php include __DIR__ .'/head.html.php';?>	
 	<!-- Links for google code prettify both (.css and .js at bottom of page) files -->
-	<link rel="stylesheet" type="text/css" href="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.css" />
+	<link rel="stylesheet" rel="preload" as="style" href="<?php echo BASE_URL ?>resources/css/google-code-prettify/prettify.css" />
 	<title><?php echo htmlspecialchars_decode($posts['post_title']) ;?> | Developers Pot</title>
 	
 </head>
@@ -819,7 +818,7 @@ main p, main li{
 			</div>
 			<div class="social-media hide-in-bigger-screens">
 			<!-- Go to www.addthis.com/dashboard to customize your tools -->
-                <?php include __DIR__ .'/social-icons-links.html.php';?>
+               <div class="addthis_inline_share_toolbox"></div>
             
 			</div>
 			
@@ -834,7 +833,6 @@ main p, main li{
 			<!-- The page content will be fetched from database -->
 			<?php echo htmlspecialchars_decode($posts['post_body']) ;?>
 				<div class="social-media">
-
                 <!-- Go to www.addthis.com/dashboard to customize your tools -->
                 <div class="addthis_inline_share_toolbox"></div>
             

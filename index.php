@@ -272,7 +272,7 @@ main p{
 	padding:10px;
 }
 .post-main-image{
-	width:70%;
+	width:60%;
 	margin:10px auto;
 }
 .article-index-image{
@@ -761,9 +761,7 @@ main p, main li{
 	<body>
 		<header>
 		<?php require_once __DIR__ . '/templates/header.html.php';?>
-		
-		<!-- Go to www.addthis.com/dashboard to customize your tools -->
-		<div class="addthis_inline_share_toolbox"></div>  
+		  
 		</header>
 		
 		<main class="group">
@@ -771,8 +769,7 @@ main p, main li{
 				<div class="published-topics">
 				<h2>Topics</h2>
 					
-				<?php include __DIR__ . '/templates/published_posts_by_topics.html.php';?>					
-					
+				<?php include __DIR__ . '/templates/published_posts_by_topics.html.php';?>										
 				</div>
 			</aside><!--
 			--><section class="col-5-10">
@@ -815,7 +812,9 @@ main p, main li{
 				<h2 class="left">Browse Topics</h2>
 					<?php include __DIR__ . '/templates/published_posts_by_topics.html.php';?>				
 				</div>
-			</aside>	
+			</aside>
+			<!-- Go to www.addthis.com/dashboard to customize your tools -->
+		<div class="addthis_inline_share_toolbox"></div>
 		</main>
 		<footer>
 			<?php include __DIR__ .'/templates/footer.html.php'?>
