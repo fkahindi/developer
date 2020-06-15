@@ -1,4 +1,4 @@
-# spexdata
+# Developerspot
 #A repository for fkahindi personal blogging app intended for DevelopersPot as a testing case.
 
 #The app consists of the following sections:
